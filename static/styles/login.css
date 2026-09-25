@@ -1,3 +1,5 @@
+@import url(/static/styles/variables.css);
+
 body{
     height: 100vh;
     display: flex;
@@ -15,7 +17,7 @@ body{
 .login--card{
     display: flex;
     flex-direction: column;
-    background-color: #DDE0F3;
+    background-color:  rgb(from var(--color-blue) r g b / 0.2);;
     width: 100%;
     height: 280px;
     padding: 20px;
@@ -28,7 +30,7 @@ body{
     all: unset;
     align-self: center;
     font-size: 24px;
-    color: #5066CA;
+    color: var(--color-blue);
 }
 
 .login-group{
@@ -44,7 +46,7 @@ body{
 }
 
 .login__label{
-    color: #5066CA;
+    color: var(--color-blue);
     font-size: 16px;
 }
 
@@ -65,20 +67,20 @@ body{
 
     cursor: pointer;
     padding: 10px;
-    background-color: #5AAF90;
+    background-color: var(--color-green);
     border-radius: 35px;
     text-align: center;
-    color: white;
+    color: var(--bg-card);
 }
 .login__link--forgot{
-    color: #5066CA;
+    color: var(--color-blue);
     align-self: center;
     font-weight: bold;
     text-decoration: none;
 }
 .login__link--register{
     margin-top: 5px;
-    color: #FF601C;
+    color: var(--color-orange);
     align-self: center;
     font-weight: bold;
     text-decoration: none;

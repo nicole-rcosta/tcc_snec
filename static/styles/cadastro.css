@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('variables.css');
+
+body{
+    background-color: rgb(230, 229, 229) ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.register{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.384);
+    justify-content: center;
+}
+
+.register__form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register__title{
+    font-family: "Inter", sans-serif;
+    color: var(--color-blue);
+    font-size: 50px;
+}
+
+.register__field{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 20px;
+}
+
+.register__label{
+    color: var(--color-blue);
+    font-family: "Inter", sans-serif;
+    font-size: 25px;
+}
+
+.register__input{
+    border: none;
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    border-radius: 10px;
+    height: 35px;
+    font-size: 20px;
+    color: var(--color-blue);
+}
+
+.register__input::selection{
+    border:none;
+}
+
+.logo_snec{
+    height:150px;
+}
+
+.register__grid{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,1fr);
+}
+
+
+.register__input--dropdown {
+    height: 27px;
+    padding: 0 8px;
+    color: var(--color-blue);
+    font-family: "Inter", sans-serif;
+    cursor: pointer;
+    height: 35px;
+    font-size: 18px;
+}
+
+
+.register__input--dropdown option {
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    color: var(--color-blue);
+    padding: 10px;
+    font-family: "Inter", sans-serif;
+    transition: 0.3s;
+}
+
+.register__input--dropdown option:hover {
+    background-color: rgb(from var(--color-blue) r g b / 0.5);
+}
+
+
+.register__button--submit{
+    border: none;
+    padding: 10px 20px;
+    background-color: var(--color-green);
+    color: white;
+    border-radius: 10px;
+    width: 25%;
+    font-size: 20px;
+    margin-top: 20px;
+
+}
+
+.icone_sair{
+    color: var(--color-orange);
+    font-size: 32px;
+    margin-left: auto;
+}

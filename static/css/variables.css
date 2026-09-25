@@ -1,0 +1,23 @@
+:root {
+  --color-orange: #FF601C;
+  --color-yellow: #FBC754;
+  --color-green:  #5AAF90;
+  --color-blue:   #5066CA;
+
+  --bg-main: #F8F9FA;
+  --bg-card: #FFFFFF;
+  --text-main: #212529;
+  --text-secondary: #6C757D;
+}
+
+[data-theme="dark"] {
+  --color-orange: #FF601C;
+  --color-yellow: #FBC754;
+  --color-green:  #5AAF90;
+  --color-blue:   #5066CA;
+
+  --bg-main: #121214;
+  --bg-card: #1E1E24;
+  --text-main: #F8F9FA;
+  --text-secondary: #A0A0B0;
+}

@@ -7,6 +7,7 @@ body{
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background: linear-gradient(140deg,rgba(255, 96, 28, 0.49) 0%, rgba(80, 102, 202, 0.52) 25%, rgba(90, 175, 144, 0.49) 50%, rgba(251, 199, 84, 0.5) 75%);
 }
 
 .register{
@@ -30,7 +31,7 @@ body{
 .register__title{
     font-family: "Inter", sans-serif;
     color: var(--color-blue);
-    font-size: 50px;
+    font-size: 40px;
 }
 
 .register__field{
@@ -44,6 +45,7 @@ body{
     color: var(--color-blue);
     font-family: "Inter", sans-serif;
     font-size: 25px;
+    font-weight: 500;
 }
 
 .register__input{
@@ -53,6 +55,8 @@ body{
     height: 35px;
     font-size: 20px;
     color: var(--color-blue);
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .register__input::selection{
@@ -76,7 +80,7 @@ body{
     color: var(--color-blue);
     font-family: "Inter", sans-serif;
     cursor: pointer;
-    height: 35px;
+    height: 38px;
     font-size: 18px;
 }
 
@@ -103,11 +107,41 @@ body{
     width: 25%;
     font-size: 20px;
     margin-top: 20px;
+    font-weight: 600;
+}
 
+.register__field--dropdown{
+    width: 40%;
 }
 
 .icone_sair{
     color: var(--color-orange);
     font-size: 32px;
     margin-left: auto;
+}
+
+@media (max-width: 700px) {
+  body{
+    height: 110vh;
+  }
+  .register{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 75%;
+  }
+  .register__grid{
+    display: flex;
+    flex-direction: column;
+    padding: 0; 
+  }
+  .register__field{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .register__field--dropdown{
+    width: 100%;
+  }
+  .register__button--submit{
+    width: 60%;
+  }
 }

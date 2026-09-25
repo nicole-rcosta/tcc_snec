@@ -71,14 +71,14 @@ body{
     border-radius: 35px;
     text-align: center;
     color: var(--bg-card);
-    margin-top: 10px;
+    margin-top: 15px;
 }
 .login__link--forgot{
     color: var(--color-blue);
     align-self: center;
-    font-weight: bold;
     text-decoration: none;
     margin-bottom: 10px;
+    font-style: italic;
 }
 .login__link--register{
     margin-top: 5px;

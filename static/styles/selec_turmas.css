@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-.body{
+body{
+    font-family: "Inter", sans-serif;
     margin: 0;
 }
 
@@ -8,7 +10,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #d9d9d9;
+    background-color: var(--color-blue);
+    
     
 }
 
@@ -16,7 +19,7 @@
     margin: 0;
     font-size: 22px;
     font-weight: bold;
-    color: #aaa;
+    color: var(--text-main);
 }
 
 
@@ -24,7 +27,8 @@
     margin: 0;
     font-size: 24px;
     font-weight: bold;
-    color: #aaa;
+    font-family: Inter;
+    color: var(--color-orange);
     margin-top: 20px;
 }
 
@@ -32,7 +36,7 @@
     margin: 0;
     font-size: 15px;
     font-weight: bold;
-    color: #aaa;
+    color: var(--color-green);
 }
 
 .classes__logout-button{
@@ -59,7 +63,7 @@
     height: 100%;
     padding: 0;
     border: none;
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(244, 244, 248);
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -72,7 +76,7 @@
     margin: 0;
     font-weight: bold;
     font-size: 40px;
-    color: rgb(128, 128, 128);
+    color: var(--color-blue);
 }
 
 

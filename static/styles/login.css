@@ -19,7 +19,7 @@ body{
     flex-direction: column;
     background-color:  rgb(from var(--color-blue) r g b / 0.2);;
     width: 100%;
-    height: 280px;
+    height: 290px;
     padding: 20px;
     border-radius: 15px;
     justify-content: space-between;
@@ -71,12 +71,14 @@ body{
     border-radius: 35px;
     text-align: center;
     color: var(--bg-card);
+    margin-top: 10px;
 }
 .login__link--forgot{
     color: var(--color-blue);
     align-self: center;
     font-weight: bold;
     text-decoration: none;
+    margin-bottom: 10px;
 }
 .login__link--register{
     margin-top: 5px;

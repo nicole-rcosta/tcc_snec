@@ -1,0 +1,154 @@
+@import url(/static/styles/variables.css);
+
+body{
+    margin: 40px 0;
+}
+
+.admin-register{
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+
+
+}
+.admin-register__back-button{
+    color: var(--color-orange);
+    font-size: 30px;
+    align-self: flex-end;
+    margin-top: 5px;
+
+}
+
+.admin-register__header{
+    display: flex;
+    background-color: var(--color-orange);
+    color: white;
+    padding: 25px;
+
+    align-items: center;
+    justify-content: center;
+    
+}
+.admin-register__header p{
+    font-size: large;
+    font-weight: bold;
+    
+}
+.admin-register__greeting{
+    align-self: center;
+    color: var(--color-blue);
+}
+
+.admin-register__form{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    gap: 20px;
+}
+.admin-register__field--name{
+    display: flex;
+    flex-direction: column;
+}
+.admin-register__label--name{
+    color: var(--color-blue);
+}
+.admin-register__input--name{
+    width: 100%;
+    height: 32px;
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 16px;
+    color: var(--color-blue);
+}
+.admin-register__field--email{
+    display: flex;
+    flex-direction: column;
+}
+.admin-register__label--email{
+    color: var(--color-blue);
+}
+.admin-register__input--email{
+    width: 100%;
+    height: 32px;
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 16px;
+    color: var(--color-blue);
+}
+.admin-register__field--cpf{
+    display: flex;
+    flex-direction: column;
+}
+.admin-register__label--cpf{
+    color: var(--color-blue);
+}
+.admin-register__input--cpf{
+    width: 100%;
+    height: 32px;
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 16px;
+    color: var(--color-blue);
+}
+
+.admin-register__field--password{
+    display: flex;
+    flex-direction: column;
+}
+.admin-register__label--password{
+    color: var(--color-blue);
+}
+.admin-register__input--password{
+    width: 100%;
+    height: 32px;
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 16px;
+    color: var(--color-blue);
+}
+.admin-register__field--confirm-password{
+    display: flex;
+    flex-direction: column;
+}
+.admin-register__label--confirm-password{
+    color: var(--color-blue);
+}
+.admin-register__input--confirm-password{
+    width: 100%;
+    height: 32px;
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 16px;
+    color: var(--color-blue);
+}
+.admin-register__actions{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.admin-register__button--submit{
+    all: unset;
+    background-color: var(--color-green);
+    color: white;
+    padding: 10px ;
+    border-radius: 15px;
+    
+}
+
+h2{
+    margin-top: 10px;
+    color: var(--color-blue);
+    align-self: center;
+}

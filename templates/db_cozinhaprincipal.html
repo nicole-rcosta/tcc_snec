@@ -7,20 +7,27 @@
     <link rel="stylesheet" href="../static/styles/db_cozinhaprincipal.css">
 </head>
 <body>
+    <header class="dashboard__top-bar">
+        <h1>DashBoard Cozinha</h1>
+    </header>
+    
     <main class="dashboard">
-        <header>
-            <h1 class="dashboard__greeting">Olá, Fulano!</h1>
-            <p class="dashboard__status-title">Status das turmas</p>
-        </header>
 
-        <section class="">
+        <div class="dashboard__user">
+            <div class="dashboard__user-info">
+                <h1 class="dashboard__greeting">Olá, Fulano!</h1>
+                <p class="dashboard__status-title">Status das turmas</p>
+            </div>
+        </div>
+
+        <section class="dashboard__table-section">
             <table class="dashboard__class-table">
             <!-- Cabeçalho invisível visualmente se quiser manter o design do Figma, mas essencial para leitores de tela -->
             
             <tbody>
                 <tr class="dashboard__class-row">
                     <td class="dashboard__class-name">9º ano A</td>
-                    <td class="dashboard__class-icon" aria-label="Status: Pendente"></td>
+                    <td class="dashboard__class-status-icon fa-solid fa-check" aria-label="Status: Pendente"></td>
                     <td class="dashboard__class-count">...</td>
                 </tr>
 
@@ -38,7 +45,7 @@
 
                 <tr class="dashboard__class-row">
                     <td class="dashboard__class-name">1º ano A</td>
-                    <td class="dashboard__class-icon fa-solid fa-hourglass-half" aria-label="Status: Concluído"></td>
+                    <td class="dashboard__class-icon fa-solid fa-check" aria-label="Status: Concluído"></td>
                     <td class="dashboard__class-count">24</td>
                 </tr>
 
@@ -60,7 +67,7 @@
                 </tr>
                 <tr class="dashboard__class-row">
                     <td class="dashboard__class-name">2º ano B</td>
-                    <td class="dashboard__class-icon fa-solid fa-hourglass-half" aria-label="Status: Pendente"></td>
+                    <td class="dashboard__class-icon fa-solid fa-check" aria-label="Status: Pendente"></td>
                     <td class="dashboard__class-count">...</td>
                 </tr>
                 <tr class="dashboard__class-row">
@@ -75,7 +82,7 @@
                 </tr>
                 <tr class="dashboard__class-row">
                     <td class="dashboard__class-name">3º ano B</td>
-                    <td class="dashboard__class-icon fa-solid fa-hourglass-half" aria-label="Status: Pendente"></td>
+                    <td class="dashboard__class-icon fa-solid fa-check" aria-label="Status: Pendente"></td>
                     <td class="dashboard__class-count">...</td>
                 </tr>
                 <tr class="dashboard__class-row">

@@ -274,64 +274,144 @@ body {
 /* ==========================================================================
    RESPONSIVIDADE (MOBILE)
    ========================================================================== */
+/* ==========================================================================
+   ADAPTAÇÃO COMPLETA PARA CELULARES (Telas abaixo de 640px)
+   ========================================================================== */
 @media (max-width: 640px) {
+
+  /* 1. Ajuste de margens do container principal */
   .activities {
-    padding: 16px 12px;
+    width: 100%;
+    margin: 12px auto;
+    padding: 0 12px;
+    gap: 16px;
   }
 
+  /* 2. Cabeçalho de Saudação */
+  .classes__title {
+    font-size: 1.35rem;
+  }
+
+  .progress--step-2 {
+    width: 140px;
+  }
+
+  /* 3. Container da Seção Contraturno */
+  .activities__section--counter-shift {
+    padding: 14px 10px;
+    border-radius: 14px;
+    gap: 12px;
+  }
+
+  .activities__section-title {
+    font-size: 1.15rem;
+  }
+
+  /* 4. Transformação da Tabela em Lista de Cards Rápidos */
   .table-wrapper {
     background: transparent;
     box-shadow: none;
     padding: 0;
+    overflow: visible;
   }
 
   .activities__table, 
-  .activities__table thead, 
-  .activities__table tbody, 
-  .activities__table th, 
-  .activities__table td, 
-  .activities__table tr {
-    display: block;
+  .activities__table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
   }
 
+  /* Esconde o cabeçalho original da tabela no celular */
   .activities__table-header {
     display: none;
   }
 
+  /* Cada linha vira um Card individual moderno */
   .activities__table-row {
-    background-color: var(--bg-card);
-    border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 12px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      "rm check"
-      "student check"
-      "activity activity";
+    display: flex;
     align-items: center;
-    gap: 4px 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    justify-content: space-between;
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
 
-  .activities__table-cell--rm { grid-area: rm; font-size: 0.85rem; color: var(--text-secondary); }
-  .activities__table-cell--student { grid-area: student; font-size: 0.95rem; font-weight: 700; }
-  .activities__table-cell--activity { grid-area: activity; width: 100%; }
-  .activities__table-cell--check { grid-area: check; }
-
+  /* Esconde colunas menos relevantes no celular para dar espaço ao que importa */
   .activities__table-cell--year,
   .activities__table-cell--shift {
     display: none;
   }
 
+  /* Bloco da Esquerda (RM, Nome do Aluno e Badge da Atividade) */
+  .activities__table-row td:not(.activities__table-cell--check) {
+    display: inline-block;
+    padding: 0;
+    border: none;
+  }
+
+  /* Organização interna das informações no Card */
+  .activities__table-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "rm check"
+      "student check"
+      "activity check";
+    row-gap: 4px;
+  }
+
+  .activities__table-cell--rm {
+    grid-area: rm;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  .activities__table-cell--student {
+    grid-area: student;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.2;
+    margin-bottom: 2px;
+  }
+
+  .activities__table-cell--activity {
+    grid-area: activity;
+    margin-top: 2px;
+  }
+
+  /* Caixa de Seleção / Checkbox à direita */
+  .activities__table-cell--check {
+    grid-area: check;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 0 12px !important;
+    border: none;
+  }
+
+  .activities__table-cell--check input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* 5. Botões de Ação na parte inferior do Celular */
   .activities__actions {
-    flex-direction: column-reverse;
+    flex-direction: column-reverse; /* "Continuar" fica no topo para fácil clique */
     gap: 10px;
+    margin-top: 12px;
   }
 
   .activities__button--back,
   .activities__button--continue {
     width: 100%;
+    padding: 14px;
+    font-size: 1rem;
     text-align: center;
   }
 }

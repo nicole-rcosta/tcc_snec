@@ -42,7 +42,9 @@ body {
   color: var(--color-orange);
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  
 }
 
 /* 4. progress--step-3 */
@@ -97,6 +99,10 @@ body {
   font-weight: 800;
   color: var(--color-orange);
   margin-bottom: 12px;
+  background-color: #ffd0b5;
+  padding: 5px;
+  border-radius: 10%;
+  margin: 10px;
 }
 
 .confirmation__card-divider {
@@ -113,6 +119,7 @@ body {
   color: var(--color-blue);
   text-align: center;
   margin-bottom: 12px;
+  padding: 10px;
 }
 
 /* 10. confirmation__list */
@@ -131,6 +138,7 @@ body {
   color: var(--text-main);
   padding: 4px 0;
   border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+  margin-top: 5px;
 }
 
 .confirmation__list-item:last-child {

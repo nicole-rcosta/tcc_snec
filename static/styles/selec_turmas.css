@@ -34,7 +34,7 @@ body {
 .classes-container {
     padding: 20px 16px;
     width: 100%;
-    max-width: 800px; /* Expande até 800px */
+    max-width: 800px; 
     margin: 0 auto;
 }
 
@@ -114,7 +114,7 @@ body {
 .class-card {
     width: 160px;
     height: 160px;
-    aspect-ratio: 1 / 1; /* Garante o formato quadrado proporcional */
+    aspect-ratio: 1 / 1; /* Deixa ele em formato quadrado proporcional */
 }
 
 .class-card button {

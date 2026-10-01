@@ -1,0 +1,45 @@
+
+*{
+    box-sizing: border-box;
+}
+
+.admin-panel__greeting{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.admin-panel__menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.admin-panel__button--rooms{
+    width: 200px;
+    height: 50px;
+}
+
+.admin-panel__button--activities{
+    width: 200px;
+    height: 50px;
+}
+
+.admin-panel__button--students{
+    width: 200px;
+    height: 50px;
+}
+
+.admin-panel__button--access{
+    width: 200px;
+    height: 50px;
+}
+
+.admin-panel__divider{
+    width: 300px;
+}
+
+
+

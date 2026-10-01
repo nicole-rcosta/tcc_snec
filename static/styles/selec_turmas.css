@@ -1,41 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+/* Reset*/
+* {
+    box-sizing: border-box;
+}
+
 body{
     font-family: "Inter", sans-serif;
     margin: 0;
+    padding: 0;
 }
 
 .header--classes {
-    height: 40px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--color-blue);
     
-    
 }
 
 .header--classes p {
     margin: 0;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
-    color: var(--text-main);
+    color: #ffffff;
 }
 
+/* --- Seção de Status / Topo --- */
+.classes-status {
+    margin-bottom: 24px;
+}
+
+/* --- Main Container --- */
+.classes-container {
+    padding: 20px 24px;
+    max-width: 400px;
+    margin: 0 auto;
+}
 
 .classes__greting p{
     margin: 0;
     font-size: 24px;
     font-weight: bold;
-    font-family: Inter;
     color: var(--color-orange);
-    margin-top: 20px;
+   
 }
 
-.progress-label p{
-    margin: 0;
-    font-size: 15px;
-    font-weight: bold;
+
+/* Barra de Progresso Estilizada */
+.progress-container {
+    width: 150px;
+    margin-top: 10PX;
+}
+
+
+
+.progress-label {
+    margin: 4px 0 0 0;
+    font-size: 12px;
+    font-weight: 600;
     color: var(--color-green);
 }
 

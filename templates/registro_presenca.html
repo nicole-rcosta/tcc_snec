@@ -1,157 +1,136 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atividades Extracurriculares</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atividades Extracurriculares</title>
+  <!-- Lembre-se de importar o seu CSS global (com o :root) antes ou junto com este -->
+  <link rel="stylesheet" href="/static/styles/global.css">
+  <link rel="stylesheet" href="/static/styles/variables.css">
+  <link rel="stylesheet" href="/static/styles/registro_presenca.css">
 </head>
-
 <body>
 
-    <main class="container">
-        <header class="titulo">
-            <h1>Atividades Extracurriculares</h1>
-        </header>
+  <!-- Header principal -->
+  <header class="header--classes">
+    Turmas
+  </header>
 
+  <!-- Container da página -->
+  <main class="activities">
 
-        <section class="etapa">
-            <h2>Lorem Ipsum dolor?</h2>
-            <div class="progresso">
-                <div class="barra-progresso"></div>
-            </div>
-            <span>Etapa 2 de 3</span>
-        </section>
+    <!-- Saudação e Ícone de Sair -->
+    <div class="user-greeting">
+      <div>
+        <h1 class="classes__title">Olá, Professor(a)!</h1>
+        <div class="progress--step-2">
+          <div class="progress-bar"></div>
+        </div>
+        <span class="progress-label">Etapa 2 de 3</span>
+      </div>
+      
 
+    <!-- Campo de Alunos -->
+    <div class="activities__field--students">
+      <label class="activities__label--students" for="students-count">Quantos alunos vieram hoje?</label>
+      <input type="number" id="students-count" class="activities__input--students" value="32">
+    </div>
 
-        <section class="quantidade">
-            <h2>Quantos alunos vieram hoje?</h2>
-            <input
-                type="number"
-                value="0"
-                class="campo-quantidade"
-            >
-        </section>
+    <hr class="divider">
 
+    <!-- Seção Contraturno (Tabela e Cards) -->
+    <section class="activities__section--counter-shift">
+      <h2 class="activities__section-title">Contraturno</h2>
 
-        <section class="alunos">
-            <div class="cabecalho-alunos">
-                <h2>Contraturno</h2>
-            </div>
+      <div class="table-wrapper">
+        <table class="activities__table">
+          <thead>
+            <tr class="activities__table-header">
+              <th class="activities__table-cell--rm">RM</th>
+              <th class="activities__table-cell--student">Aluno</th>
+              <th class="activities__table-cell--year">Ano</th>
+              <th class="activities__table-cell--activity">Atividade</th>
+              <th class="activities__table-cell--shift">Turno</th>
+              <th class="activities__table-cell--check">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="activities__table-row">
+              <td class="activities__table-cell--rm">7087</td>
+              <td class="activities__table-cell--student">Fulana Lorenzo Morales</td>
+              <td class="activities__table-cell--year">3º-C</td>
+              <td class="activities__table-cell--activity"><span class="badge">Comitê</span></td>
+              <td class="activities__table-cell--shift">Tarde</td>
+              <td class="activities__table-cell--check"><input type="checkbox" checked></td>
+            </tr>
+            <tr class="activities__table-row">
+              <td class="activities__table-cell--rm">7068</td>
+              <td class="activities__table-cell--student">Fulana Giovani de Andrade</td>
+              <td class="activities__table-cell--year">3º-C</td>
+              <td class="activities__table-cell--activity"><span class="badge">Grêmio</span></td>
+              <td class="activities__table-cell--shift">Tarde</td>
+              <td class="activities__table-cell--check"><input type="checkbox" checked></td>
+            </tr>
+            <tr class="activities__table-row">
+              <td class="activities__table-cell--rm">7009</td>
+              <td class="activities__table-cell--student">Fulana Marques Luiz Gaspar</td>
+              <td class="activities__table-cell--year">3º-C</td>
+              <td class="activities__table-cell--activity"><span class="badge">Personalizado</span></td>
+              <td class="activities__table-cell--shift">Tarde</td>
+              <td class="activities__table-cell--check"><input type="checkbox" checked></td>
+            </tr>
+            <tr class="activities__table-row">
+              <td class="activities__table-cell--rm">7070</td>
+              <td class="activities__table-cell--student">Fulana Gonçalves</td>
+              <td class="activities__table-cell--year">3º-C</td>
+              <td class="activities__table-cell--activity"><span class="badge">Natação</span></td>
+              <td class="activities__table-cell--shift">Tarde</td>
+              <td class="activities__table-cell--check"><input type="checkbox" checked></td>
+            </tr>
+            <tr class="activities__table-row">
+              <td class="activities__table-cell--rm">7071</td>
+              <td class="activities__table-cell--student">Fulana Fernanda Gili Cândido</td>
+              <td class="activities__table-cell--year">3º-C</td>
+              <td class="activities__table-cell--activity"><span class="badge">Dança</span></td>
+              <td class="activities__table-cell--shift">Tarde</td>
+              <td class="activities__table-cell--check"><input type="checkbox" checked></td>
+            </tr>
+            <tr class="activities__table-row">
+              <td class="activities__table-cell--rm">7072</td>
+              <td class="activities__table-cell--student">Fulana Ramos Costa</td>
+              <td class="activities__table-cell--year">3º-C</td>
+              <td class="activities__table-cell--activity"><span class="badge">Teatro</span></td>
+              <td class="activities__table-cell--shift">Tarde</td>
+              <td class="activities__table-cell--check"><input type="checkbox" checked></td>
+            </tr>
+            <tr class="activities__table-row">
+              <td class="activities__table-cell--rm">7073</td>
+              <td class="activities__table-cell--student">Fulana Conceição Neto</td>
+              <td class="activities__table-cell--year">3º-C</td>
+              <td class="activities__table-cell--activity"><span class="badge">Grêmio</span></td>
+              <td class="activities__table-cell--shift">Tarde</td>
+              <td class="activities__table-cell--check"><input type="checkbox" checked></td>
+            </tr>
+            <tr class="activities__table-row">
+              <td class="activities__table-cell--rm">7074</td>
+              <td class="activities__table-cell--student">Fulano Stocco</td>
+              <td class="activities__table-cell--year">3º-C</td>
+              <td class="activities__table-cell--activity"><span class="badge">Robótica</span></td>
+              <td class="activities__table-cell--shift">Tarde</td>
+              <td class="activities__table-cell--check"><input type="checkbox" checked></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
+    <!-- Botões de Ação -->
+    <div class="activities__actions">
+      <button class="activities__button--back" type="button">Voltar</button>
+      <button class="activities__button--continue" type="button">Continuar</button>
+    </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>RM</th>
-                        <th>Aluno</th>
-                        <th>Ano</th>
-                        <th>Atividade</th>
-                        <th>Turno</th>
-                        <th></th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>7087</td>
-                        <td>Fulano Lorenzo Morales</td>
-                        <td>3º - C</td>
-                        <td>Centro</td>
-                        <td>Tarde</td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>7086</td>
-                        <td>Fulano Giovani de Andrade</td>
-                        <td>3º - C</td>
-                        <td>Centro</td>
-                        <td>Tarde</td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>7069</td>
-                        <td>Fulano Marques Luiz Gaspar</td>
-                        <td>1º - C</td>
-                        <td>Robótica</td>
-                        <td>Tarde</td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>7070</td>
-                        <td>Fulano Gonçalves</td>
-                        <td>1º - C</td>
-                        <td>Natação</td>
-                        <td>Tarde</td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>7071</td>
-                        <td>Fulano Fernanda Gil Cândido</td>
-                        <td>3º - C</td>
-                        <td>Dança</td>
-                        <td>Tarde</td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>7072</td>
-                        <td>Fulano Ramos Costa</td>
-                        <td>3º - C</td>
-                        <td>Teatro</td>
-                        <td>Tarde</td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>7073</td>
-                        <td>Fulano Conceição Neto</td>
-                        <td>1º - C</td>
-                        <td>Futsal</td>
-                        <td>Tarde</td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>7046</td>
-                        <td>Fulano Stecco</td>
-                        <td>1º - C</td>
-                        <td>Robótica</td>
-                        <td>Tarde</td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-
-        <footer class="navegacao">
-            <a href="#" class="voltar">Voltar</a>
-            <button type="button" class="continuar">
-                Continuar
-            </button>
-        </footer>
-    </main>
+  </main>
 
 </body>
 </html>

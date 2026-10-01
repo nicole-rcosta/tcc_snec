@@ -1,10 +1,24 @@
 @import url(variables.css);
 
-body.dahsboard {
+/* Helper de acessibilidade */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+body.dashboard {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
   min-height: 100vh;
+  margin: 0;
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -22,6 +36,7 @@ header {
   color: #FFFFFF;
   font-size: 1.6rem;
   font-weight: 700;
+  margin: 0;
 }
 
 /* ==========================================
@@ -54,10 +69,10 @@ main {
   font-weight: 700;
   max-width: 200px;
   line-height: 1.2;
+  margin: 0;
 }
 
 .dashboard__total-number {
-  /* Transparência calculada dinamicamente sobre a variável da cor laranja */
   background-color: rgb(from var(--color-orange) r g b / 0.12);
   color: var(--color-orange);
   font-size: 2.8rem;
@@ -66,7 +81,7 @@ main {
   border-radius: 12px;
   text-align: center;
   min-width: 70px;
-  margin: 10px;
+  margin: 0;
 }
 
 .dashboard__list-section {
@@ -82,21 +97,26 @@ main {
   text-align: center;
   font-size: 1.3rem;
   font-weight: 700;
+  margin-top: 0;
   margin-bottom: 1.5rem;
 }
 
+/* Tabela Desktop */
 .dashboard__table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
   background-color: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.04);
 }
 
 .dashboard__table-header th {
   color: var(--color-blue);
   font-size: 0.9rem;
   font-weight: 700;
-  padding: 1rem 0.2rem;
+  padding: 1rem 0.8rem;
   border-bottom: 2px solid rgb(from var(--color-blue) r g b / 0.15);
 }
 
@@ -105,7 +125,7 @@ main {
 }
 
 .dashboard__table-body td {
-  padding: 0.85rem 0.5rem;
+  padding: 0.85rem 0.8rem;
   font-size: 0.95rem;
   color: var(--text-main);
   vertical-align: middle;
@@ -117,26 +137,80 @@ main {
 .dashboard__table-cell--activity {
   color: var(--color-blue);
   font-weight: 600;
-  flex-wrap: wrap;
 }
 
 .dashboard__table-footer td {
-  padding-top: 1.25rem;
+  padding: 1rem;
   color: var(--text-secondary);
   font-size: 0.85rem;
   text-align: center;
+  background-color: rgb(from var(--text-main) r g b / 0.02);
 }
 
+/* ==========================================
+   4. CHECKBOX ESTILIZADO
+   ========================================== */
+.dashboard__checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dashboard__checkbox-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.dashboard__checkbox-custom {
+  height: 22px;
+  width: 22px;
+  background-color: transparent;
+  border: 2px solid var(--color-blue);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.dashboard__checkbox-input:focus-visible + .dashboard__checkbox-custom {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+.dashboard__checkbox-input:checked + .dashboard__checkbox-custom {
+  background-color: var(--color-green);
+  border-color: var(--color-green);
+}
+
+.dashboard__checkbox-input:checked + .dashboard__checkbox-custom::after {
+  content: "";
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+}
+
+/* ==========================================
+   5. RESPONSIVIDADE (MOBILE CARD LAYOUT)
+   ========================================== */
 @media (max-width: 600px) {
   main {
     margin: 1rem auto;
-    padding: 0 0.75rem;
+    padding: 0 0.5rem;
   }
 
   .dashboard__total-card {
     flex-direction: column;
-    gap: 0.1rem;
+    gap: 0.5rem;
     text-align: center;
+    padding: 1.25rem 1rem;
   }
 
   .dashboard__total-label {
@@ -144,10 +218,65 @@ main {
   }
 
   .dashboard__list-section {
-    overflow-x: auto;
+    padding: 1rem 0.75rem;
   }
 
-  .dashboard__table {
-    min-width: 480px; 
+  /* Oculta o elemento thead mantendo a acessibilidade */
+  .dashboard__table-header {
+    display: none;
+  }
+
+  .dashboard__table, 
+  .dashboard__table-body, 
+  .dashboard__table-row, 
+  .dashboard__table-body td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Cada linha vira um Card separado */
+  .dashboard__table-body .dashboard__table-row {
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 6px rgb(from var(--text-main) r g b / 0.05);
+    border: 1px solid rgb(from var(--text-main) r g b / 0.08);
+  }
+
+  .dashboard__table-body td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed rgb(from var(--text-main) r g b / 0.1);
+    text-align: right;
+  }
+
+  .dashboard__table-body td:last-child {
+    border-bottom: none;
+  }
+
+  /* Insere o rótulo da coluna à esquerda */
+  .dashboard__table-body td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--color-blue);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 1rem;
+  }
+
+  .dashboard__table-footer,
+  .dashboard__table-footer tr,
+  .dashboard__table-footer td {
+    display: block;
+  }
+
+  .dashboard__table-footer td {
+    padding: 0.75rem;
+    background-color: transparent;
   }
 }

@@ -33,12 +33,7 @@ body{
 
     margin: auto;      
 }
-.insert-code__header{
 
-}
-.insert-code__back-button{
-
-}
 .insert-code__title{
     all: unset;
     color: var(--color-blue);

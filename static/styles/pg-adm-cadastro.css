@@ -44,6 +44,8 @@ body{
 .admin-register__form{
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    gap: 20px;
 }
 .admin-register__field--name{
     display: flex;
@@ -140,12 +142,13 @@ body{
     all: unset;
     background-color: var(--color-green);
     color: white;
-    padding: 2px 35px;
-    height: 25px;
-    border-radius: 100px;
+    padding: 10px ;
+    border-radius: 15px;
+    
 }
 
 h2{
+    margin-top: 10px;
     color: var(--color-blue);
     align-self: center;
 }

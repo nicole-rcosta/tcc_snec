@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/styles/global.css">
+    <link rel="stylesheet" href="/static/styles/cadastrar-alunos.css">
+</head>
+<body>
+
+    <header class="admin-class__header">
+        <h1 class="admin-class__header--title">Administração</h1>
+    </header>
+
+    <button class="admin-class__prev_button"><i class="fa-solid fa-arrow-left-long"></i></button>
+
+    <h1 class="admin-class__title">Cadastrar Aluno - Extracurricular:</h1>
+
+    <form action="" class="admin-class__form">
+        <div class="admin-class__form--organization">
+            <div class="admin-class__form--field">
+                <label class="admin-class__form--label">Nome Completo:</label>
+                <input type="text" class="admin-class__form--input">
+            </div>
+            <div class="admin-class__form--field">
+                <label class="admin-class__form--label">RM:</label>
+                <input type="text" class="admin-class__form--input">
+            </div>
+            <div class="admin-class__form--field">
+                <label class="admin-class__form--label">Turma:</label>
+                <input type="text" class="admin-class__form--input">
+            </div>
+            <div class="admin-class__form--field">
+                <label class="admin-class__form--label">Curso:</label>
+                <input type="text" class="admin-class__form--input">
+            </div>
+            <div class="admin-class__form--field">
+                <label class="admin-class__form--label">Período:</label>
+                <input type="text" class="admin-class__form--input">
+            </div>
+        </div>
+
+        <button type="submit" class="admin-class__form--submit">Cadastrar</button>
+    </form> 
+
+    <section class="admin-students__list-section">
+            <h2 class="admin-students__list-title">Alunos cadastrados:</h2>
+            <table class="admin-students__table">
+                <thead class="admin-students__table-header">
+                    <tr class="admin-students__table-row">
+                        <th class="admin-students__table-cell--name">Nome</th>
+                        <th class="admin-students__table-cell--code">RM</th>
+                        <th class="admin-students__table-cell--class">Turma</th>
+                        <th class="admin-students__table-cell--course">Curso</th>
+                        <th class="admin-students__table-cell--period">Período</th>
+                        <th class="admin-students__table-cell--button"></th>
+                    </tr>
+                </thead>
+                <tbody class="admin-students__table--body">
+                    <tr class="admin-students__table-row">
+                        <td class="admin-students__table-cell--name">Fulana Lorenzo Morales</td>
+                        <td class="admin-students__table-cell--code">7041</td>
+                        <td class="admin-students__table-cell--class">3ºB</td>
+                        <td class="admin-students__table-cell--course">Basquete</td>
+                        <td class="admin-students__table-cell--period">Manhã</td>
+                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr class="admin-students__table-row">
+                        <td class="admin-students__table-cell--name">Fulano Giovani de Andrade</td>
+                        <td class="admin-students__table-cell--code">7042</td>
+                        <td class="admin-students__table-cell--class">3ºC</td>
+                        <td class="admin-students__table-cell--course">Natação</td>
+                        <td class="admin-students__table-cell--period">Manhã</td>
+                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr class="admin-students__table-row">
+                        <td class="admin-students__table-cell--name">Fulana Gonçalves</td>
+                        <td class="admin-students__table-cell--code">7043</td>
+                        <td class="admin-students__table-cell--class">3ºA</td>
+                        <td class="admin-students__table-cell--course">Dança</td>
+                        <td class="admin-students__table-cell--period">Manhã</td>
+                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr class="admin-students__table-row">
+                        <td class="admin-students__table-cell--name">Fulana Marques Luiz Gaspar</td>
+                        <td class="admin-students__table-cell--code">7044</td>
+                        <td class="admin-students__table-cell--class">3ºC</td>
+                        <td class="admin-students__table-cell--course">Natação</td>
+                        <td class="admin-students__table-cell--period">Manhã</td>
+                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr class="admin-students__table-row">
+                        <td class="admin-students__table-cell--name">Fulana Fernanda Gili Cândido</td>
+                        <td class="admin-students__table-cell--code">7045</td>
+                        <td class="admin-students__table-cell--class">3ºA</td>
+                        <td class="admin-students__table-cell--course">Dança</td>
+                        <td class="admin-students__table-cell--period">Manhã</td>
+                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr class="admin-students__table-row">
+                        <td class="admin-students__table-cell--name">Fulana Ramos Costa</td>
+                        <td class="admin-students__table-cell--code">7046</td>
+                        <td class="admin-students__table-cell--class">3ºA</td>
+                        <td class="admin-students__table-cell--course">Natação</td>
+                        <td class="admin-students__table-cell--period">Manhã</td>
+                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+</body>
+
+<script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+
+</html>

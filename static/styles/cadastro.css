@@ -2,12 +2,17 @@
 @import url('variables.css');
 
 body{
-    background-color: rgb(230, 229, 229) ;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: linear-gradient(140deg,rgba(255, 96, 28, 0.49) 0%, rgba(80, 102, 202, 0.52) 25%, rgba(90, 175, 144, 0.49) 50%, rgba(251, 199, 84, 0.5) 75%);
+    background: linear-gradient(rgba(255, 255, 255, 0.3)), url(../img/fundo_snec.png);
+    background-position: center;
+    background-repeat:repeat;
+    background-attachment: fixed;
+    background-color: #eaebea ;
+    backdrop-filter: blur(2.5px);
+    
 }
 
 .register{

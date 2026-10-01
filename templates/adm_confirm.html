@@ -5,25 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração: Controle de Acesso</title>
+    <link rel="stylesheet" href="../static/styles/adm_confirm.css">
+    <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous" defer></script>
 </head>
 
-<body>
+<body class="admin">
 
-    <header class="admin-class__header">
-        <h1 class="admin-class__header--title">Administração</h1>
+    <header class="admin-header">
+        <h1 class="admin-header__title">Administração</h1>
     </header>
 
-    <section class="admin-confirm">
-        <h2 class="admin-confirm__title">Confirme que você é o administrador:</h2>
-        <form action="" class="admin-confirm__actions">
-            <div class="admin-confirm__field--password">
-                <label class="admin-confirm__label--password">Insira a sua senha:</label>
-                <input type="text" class="admin-confirm__input--password">
-            </div>
-            <button type="submit" class="admin-confirm__button--submit">Confirmar</button>
-        </form>
-    </section>
+    <main class="admin-main">
+        <section class="admin-card">
+            <h2 class="admin-card__title">Confirme que você é o administrador:</h2>
 
-    <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+            <form action="" method="POST" class="admin-card__form">
+                <div class="admin-card__field">
+                    <label for="admin-password" class="admin-card__label">Insira a sua senha:</label>
+                    <input type="password" id="admin-password" name="password" class="admin-card__input"
+                        placeholder="••••••••" required>
+                </div>
+
+                <div class="admin-card__actions">
+                    <button type="submit" class="admin-card__button">Confirmar</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+</body>
 
 </html>

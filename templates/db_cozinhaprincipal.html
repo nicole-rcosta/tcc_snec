@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBoard Principal Cozinha</title>
+    <link rel="stylesheet" href="../static/styles/db_cozinhaprincipal.css">
+</head>
+<body>
+    <main class="dashboard">
+        <header>
+            <h1 class="dashboard__greeting">Olá, Fulano!</h1>
+            <p class="dashboard__status-title">Status das turmas</p>
+        </header>
+
+        <section class="">
+            <table class="dashboard__class-table">
+            <!-- Cabeçalho invisível visualmente se quiser manter o design do Figma, mas essencial para leitores de tela -->
+            
+            <tbody>
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">9º ano A</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Pendente"></td>
+                    <td class="dashboard__class-count">...</td>
+                </tr>
+
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">9º ano B</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Concluído">✔️</td>
+                    <td class="dashboard__class-count">30</td>
+                </tr>
+
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">9º ano C</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Concluído">✔️</td>
+                    <td class="dashboard__class-count">23</td>
+                </tr>
+
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">1º ano A</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Concluído">✔️</td>
+                    <td class="dashboard__class-count">24</td>
+                </tr>
+
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">1º ano B</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Concluído">✔️️</td>
+                    <td class="dashboard__class-count">25</td>
+                </tr>
+
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">1º ano C</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Pendente">⏳</td>
+                    <td class="dashboard__class-count">...</td>
+                </tr>
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">2º ano A</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Pendente">⏳</td>
+                    <td class="dashboard__class-count">...</td>
+                </tr>
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">2º ano B</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Pendente">⏳</td>
+                    <td class="dashboard__class-count">...</td>
+                </tr>
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">2º ano C</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Pendente">⏳</td>
+                    <td class="dashboard__class-count">25</td>
+                </tr>
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">3º ano A</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Pendente">⏳</td>
+                    <td class="dashboard__class-count">32</td>
+                </tr>
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">3º ano B</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Pendente">⏳</td>
+                    <td class="dashboard__class-count">...</td>
+                </tr>
+                <tr class="dashboard__class-row">
+                    <td class="dashboard__class-name">3º ano C</td>
+                    <td class="dashboard__class-icon" aria-label="Status: Pendente">⏳</td>
+                    <td class="dashboard__class-count">...</td>
+                </tr>
+            </tbody>
+        </table>
+        </section>
+
+        <section class="dashboard__meals">
+            <article class="dashboard__meal--lunch">
+                <h2 class="dashboard__meal-title">Lanche</h2>
+                <p class="dashboard__meal-count">300</p>
+            </article>
+
+            <article class="dashboard__meal--dinner">
+                <h2 class="dashboard__meal-title">Almoço</h2>
+                <p class="dashboard__meal-count">26</p>
+                <button class="dashboard__button--see-more">Ver mais</button>
+            </article>
+        </section>
+
+       <footer class="dashboard__footer-status">
+            <h3>Contando...</h3>
+       </footer>
+
+    </main>
+</body>
+</html>

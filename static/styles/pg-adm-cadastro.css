@@ -1,4 +1,5 @@
 @import url(/static/styles/variables.css);
+@import url(global.css);
 
 body{
     margin: 40px 0;
@@ -34,6 +35,7 @@ body{
 .admin-register__header p{
     font-size: large;
     font-weight: bold;
+    font-family: var(--font-primary);
     
 }
 .admin-register__greeting{

@@ -1,7 +1,7 @@
 @import url('variables.css');
+@import url(global.css);
 
 .admin-activity {
-    font-family: "Inter", "Segoe UI", Arial, sans-serif;
     background-color: #ffffff;
     color: #a6a6a6;
     display: flex;
@@ -16,13 +16,13 @@
     margin-top: 40px;
     width: 100%;
     text-align: center;
-    
 }
 
 .admin-activity__header--title {
     font-size: 25px;
     font-weight: bold;
     color: white;
+    font-family: var(--font-primary);
 }
 
 .admin-class__prev_button{
@@ -147,6 +147,7 @@
     color: var(--color-blue);
     font-weight: bold;
     text-align: center;
+    font-family: var(--font-primary);
 }
 
 /* Tabela */

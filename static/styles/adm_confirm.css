@@ -1,7 +1,7 @@
 @import url(variables.css);
+@import url(global.css);
 
 body.admin {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
   min-height: 100vh;
@@ -23,6 +23,7 @@ body.admin {
   font-size: 1.6rem;
   font-weight: 700;
   margin: 0;
+  font-family: var(--font-primary);
 }
 
 .admin-main {

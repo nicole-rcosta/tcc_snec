@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('variables.css');
+@import url(global.css);
 
 body{
     display: flex;
@@ -12,7 +12,6 @@ body{
     background-attachment: fixed;
     background-color: #eaebea ;
     backdrop-filter: blur(2.5px);
-    
 }
 
 .register{
@@ -34,7 +33,7 @@ body{
 }
 
 .register__title{
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-primary);
     color: var(--color-blue);
     font-size: 40px;
 }
@@ -48,7 +47,6 @@ body{
 
 .register__label{
     color: var(--color-blue);
-    font-family: "Inter", sans-serif;
     font-size: 25px;
     font-weight: 500;
 }
@@ -83,7 +81,6 @@ body{
     height: 27px;
     padding: 0 8px;
     color: var(--color-blue);
-    font-family: "Inter", sans-serif;
     cursor: pointer;
     height: 38px;
     font-size: 18px;
@@ -94,7 +91,6 @@ body{
     background-color: rgb(from var(--color-blue) r g b / 0.1);
     color: var(--color-blue);
     padding: 10px;
-    font-family: "Inter", sans-serif;
     transition: 0.3s;
 }
 

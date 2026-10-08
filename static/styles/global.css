@@ -110,9 +110,7 @@
 }
 
 
-/* =========================================
-   ESTILO DOS ALERTAS DE ERRO
-========================================= */
+/* ESTILO DOS ALERTAS DE ERRO */
 
 .alert-container-error {
   display: flex;

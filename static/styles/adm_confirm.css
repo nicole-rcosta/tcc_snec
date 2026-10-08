@@ -1,7 +1,41 @@
 @import url('variables.css');
 @import url('global.css');
 
-body.admin {
+/* Visually Hidden Helper (Acessibilidade) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================
+   Header Global (Dicionário BEM)
+   ========================================== */
+.header {
+  background-color: var(--color-orange);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.header__title {
+  font-size: 1.5625rem; /* 25px */
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+/* ==========================================
+   Bloco: admin-confirm
+   ========================================== */
+body.admin-confirm {
   background-color: var(--bg-main);
   color: var(--text-main);
   min-height: 100vh;
@@ -11,142 +45,125 @@ body.admin {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.admin-header {
-  background-color: var(--color-orange);
-  padding: 1.25rem 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.1);
-}
-
-.admin-header__title {
-  color: #FFFFFF;
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 0;
-  font-family: var(--font-primary);
-}
-
-.admin-main {
+.admin-confirm__main {
   flex: 1;
   max-width: 500px;
   width: 100%;
   margin: 3rem auto;
   padding: 0 1rem;
-  box-sizing: border-border-box;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.admin-card {
+.admin-confirm__card {
   position: relative;
   width: 100%;
   background-color: var(--bg-card);
   border-radius: 16px;
   padding: 2.5rem 2rem 2rem 2rem;
-  box-shadow: 0 4px 16px rgb(from var(--text-main) r g b / 0.08);
-  border: 1px solid rgb(from var(--text-main) r g b / 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
-.admin-card__back-button {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  color: var(--text-secondary);
-  font-size: 1.4rem;
-  transition: color 0.2s, transform 0.2s;
-  text-decoration: none;
+[data-theme="dark"] .admin-confirm__card {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
-.admin-card__back-button:hover {
-  color: var(--color-orange);
-  transform: translateX(-3px);
-}
-
-.admin-card__title {
+.admin-confirm__title {
   color: var(--color-blue);
   font-size: 1.5rem;
   font-weight: 700;
   text-align: left;
   line-height: 1.3;
-  margin-top: 0.5rem;
+  margin-top: 0;
   margin-bottom: 2rem;
 }
 
-.admin-card__form {
+.admin-confirm__form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.admin-card__field {
+.admin-confirm__field {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.admin-card__label {
+.admin-confirm__label {
   color: var(--color-blue);
   font-size: 0.95rem;
   font-weight: 600;
 }
 
-.admin-card__input {
+.admin-confirm__input {
   width: 100%;
   padding: 0.85rem 1rem;
   font-size: 1rem;
   border-radius: 10px;
   border: none;
-  background-color: rgb(from var(--color-blue) r g b / 0.1);
+  background-color: rgba(80, 102, 202, 0.1);
   color: var(--text-main);
   box-sizing: border-box;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: box-shadow 0.2s, background-color 0.2s;
 }
 
-.admin-card__actions {
+.admin-confirm__input:focus {
+  box-shadow: 0 0 0 2px var(--color-blue);
+}
+
+.admin-confirm__actions {
   display: flex;
   justify-content: flex-end;
   margin-top: 0.5rem;
 }
 
-.admin-card__button {
+.admin-confirm__button {
   background-color: var(--color-green);
   color: #FFFFFF;
   border: none;
   font-size: 1rem;
   font-weight: 700;
   padding: 0.75rem 2rem;
-  border-radius: 25px;
+  border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgb(from var(--color-green) r g b / 0.25);
-  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 4px 10px rgba(90, 175, 144, 0.25);
+  transition: background-color 0.2s, filter 0.2s, transform 0.1s, box-shadow 0.2s;
 }
 
-.admin-card__button:hover {
+.admin-confirm__button:hover {
   filter: brightness(0.95);
-  box-shadow: 0 6px 14px rgb(from var(--color-green) r g b / 0.35);
+  box-shadow: 0 6px 14px rgba(90, 175, 144, 0.35);
 }
 
-.admin-card__button:active {
+.admin-confirm__button:active {
   transform: scale(0.98);
 }
 
+/* ==========================================
+   Responsividade: Mobile First Breakpoint
+   ========================================== */
 @media (max-width: 600px) {
-  .admin-main {
+  .admin-confirm__main {
     margin: 1.5rem auto;
     padding: 0 0.75rem;
   }
 
-  .admin-card {
+  .admin-confirm__card {
     padding: 2rem 1.25rem 1.5rem 1.25rem;
   }
 
-  .admin-card__title {
+  .admin-confirm__title {
     font-size: 1.2rem;
   }
 
-  .admin-card__button {
+  .admin-confirm__button {
     width: 100%;
     text-align: center;
   }

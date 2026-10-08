@@ -11,8 +11,8 @@
 
 <body class="admin-access">
 
-    <header class="admin-access__header">
-        <h1 class="admin-access__header-title">Administração</h1>
+    <header class="header header--admin">
+        <h1 class="header__title">Administração</h1>
     </header>
 
     <main class="admin-access__main">
@@ -22,27 +22,27 @@
             <table class="admin-access__table">
                 <thead class="admin-access__table-header">
                     <tr class="admin-access__table-row">
-                        <th class="admin-access__table-cell--code">Código</th>
-                        <th class="admin-access__table-cell--name">Nome</th>
-                        <th class="admin-access__table-cell--role">Cargo</th>
-                        <th class="admin-access__table-cell--actions">Permissão</th>
+                        <th class="admin-access__table-cell admin-access__table-cell--code" scope="col">Código</th>
+                        <th class="admin-access__table-cell admin-access__table-cell--name" scope="col">Nome</th>
+                        <th class="admin-access__table-cell admin-access__table-cell--role" scope="col">Cargo</th>
+                        <th class="admin-access__table-cell admin-access__table-cell--actions" scope="col">Permissão</th>
                     </tr>
                 </thead>
                 <tbody class="admin-access__table-body">
                     <tr class="admin-access__table-row">
-                        <td class="admin-access__table-cell--code" data-label="Código">7030</td>
-                        <td class="admin-access__table-cell--name" data-label="Nome">Fulano Silva</td>
-                        <td class="admin-access__table-cell--role" data-label="Cargo">Professor</td>
-                        <td class="admin-access__table-cell--actions" data-label="Permissão">
+                        <td class="admin-access__table-cell admin-access__table-cell--code" data-label="Código">7030</td>
+                        <td class="admin-access__table-cell admin-access__table-cell--name" data-label="Nome">Fulano Silva</td>
+                        <td class="admin-access__table-cell admin-access__table-cell--role" data-label="Cargo">Professor</td>
+                        <td class="admin-access__table-cell admin-access__table-cell--actions" data-label="Permissão">
                             <div class="admin-access__action-buttons">
                                 <button type="button" class="admin-access__button admin-access__button--approve"
                                     title="Aprovar pedido" aria-label="Aprovar pedido de Fulano Silva">
-                                    <i class="fa-solid fa-check"></i>
+                                    <i class="fa-solid fa-check admin-access__button-icon" aria-hidden="true"></i>
                                     <span>Aprovar</span>
                                 </button>
                                 <button type="button" class="admin-access__button admin-access__button--reject"
                                     title="Rejeitar pedido" aria-label="Rejeitar pedido de Fulano Silva">
-                                    <i class="fa-solid fa-xmark"></i>
+                                    <i class="fa-solid fa-xmark admin-access__button-icon" aria-hidden="true"></i>
                                     <span>Rejeitar</span>
                                 </button>
                             </div>

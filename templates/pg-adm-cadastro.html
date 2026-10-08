@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,13 +12,11 @@
     <header class="admin-register__header">
         <p>Administração</p>
     </header>
+
     <main class="admin-register">
-        <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 recover-password__back-button admin-register__back-button"></i>
+        <i class="fa-solid fa-arrow-right-from-bracket recover-password__back-button admin-register__back-button"></i>
 
-        <h2 class="admin-register__greeting">
-            Olá, Administrador!
-        </h2>
-
+        <h2 class="admin-register__greeting">Olá, Administrador!</h2>
 
         <form class="admin-register__form" action="" method="POST">
 
@@ -26,86 +24,46 @@
                 <label class="admin-register__label--name" for="name">
                     Nome:
                 </label>
-
-                <input
-                    class="admin-register__input--name"
-                    type="text"
-                    id="name"
-                    name="name"
-                >
+                <input class="admin-register__input--name" type="text" id="name" name="name" required>
             </div>
-
 
             <div class="admin-register__field--email">
                 <label class="admin-register__label--email" for="email">
-                    E-mail
+                    E-mail:
                 </label>
-
-                <input
-                    class="admin-register__input--email"
-                    type="email"
-                    id="email"
-                    name="email"
-                >
+                <input class="admin-register__input--email" type="email" id="email" name="email" required>
             </div>
-
 
             <div class="admin-register__field--cpf">
                 <label class="admin-register__label--cpf" for="cpf">
-                    CPF
+                    CPF:
                 </label>
-
-                <input
-                    class="admin-register__input--cpf"
-                    type="text"
-                    id="cpf"
-                    name="cpf"
-                >
+                <input class="admin-register__input--cpf" type="text" id="cpf" name="cpf" required>
             </div>
 
-
-            <h2>Nova senha:</h2>
-
+            <h2>Nova senha</h2>
 
             <div class="admin-register__field--password">
                 <label class="admin-register__label--password" for="password">
                     Senha:
                 </label>
-
-                <input
-                    class="admin-register__input--password"
-                    type="password"
-                    id="password"
-                    name="password"
-                >
+                <input class="admin-register__input--password" type="password" id="password" name="password" required>
             </div>
-
 
             <div class="admin-register__field--confirm-password">
                 <label class="admin-register__label--confirm-password" for="confirm-password">
                     Confirmar Senha:
                 </label>
-
-                <input
-                    class="admin-register__input--confirm-password"
-                    type="password"
-                    id="confirm-password"
-                    name="confirm-password"
-                >
+                <input class="admin-register__input--confirm-password" type="password" id="confirm-password" name="confirm-password" required>
             </div>
 
-
             <div class="admin-register__actions">
-                <button
-                    class="admin-register__button--submit"
-                    type="submit"
-                >
+                <button class="admin-register__button--submit" type="submit">
                     Cadastrar
                 </button>
             </div>
 
         </form>
-
     </main>
 </body>
 </html>

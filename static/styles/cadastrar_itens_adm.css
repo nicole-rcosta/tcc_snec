@@ -1,9 +1,8 @@
-@import url('variables.css');
 @import url('global.css');
 
 body {
-    background-color: #f8f9fa;
-    color: #8c8c8c;
+    background-color: var(--bg-main);
+    color: rgb(from var(--text-secondary) r g b / 0.2);
 }
 
 /* Header */
@@ -13,7 +12,7 @@ header {
     text-align: center;
     font-size: 20px;
     font-weight: 700;
-    color: #FFFFFF;
+    color: var(--bg-card);
     font-family: var(--font-primary);
 }
 
@@ -60,7 +59,7 @@ header {
 .admin-panel__divider {
     width: 100%;
     border: none;
-    border-top: 1.5px solid #8c8c8c;
+    border-top: 1.5px solid rgb(from var(--text-secondary) r g b / 0.2);
     margin: 25px 0;
 }
 
@@ -76,7 +75,7 @@ header {
     display: flex;
     justify-content: center;
     padding: 20px 0;
-    border-bottom: 1.5px solid #8c8c8c; /* Cria o efeito do <hr> no mobile */
+    border-bottom: 1.5px solid rgb(from var(--text-secondary) r g b / 0.2); /* Cria o efeito do <hr> no mobile */
 }
 
 .admin-panel__item:first-child {
@@ -134,12 +133,12 @@ header {
 .admin-panel__button--rooms,
 .admin-panel__button--activities,
 .admin-panel__button--students {
-    background-color: #5aaf903b;
+    background-color: rgb(from var(--color-green) r g b / 0.2);
     color: var(--color-green);
 }
 
 .admin-panel__button--access {
-    background-color: #5066ca3b;
+    background-color: rgb(from var(--color-blue) r g b / 0.2);
     color: var(--color-blue);
 }
 

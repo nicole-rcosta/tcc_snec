@@ -1,4 +1,4 @@
-@import url('variables.css');
+@import url('global.css');
 
 body{
     height: 100vh;
@@ -74,7 +74,7 @@ body{
 .insert-code__button--submit{
     all: unset;
     background-color: var(--color-green);
-    color: white;
+    color: var(--bg-card);
     padding: 2px 35px;
     height: 25px;
     border-radius: 100px;

@@ -1,4 +1,3 @@
-@import url('variables.css');
 @import url('global.css');
 
 body {
@@ -96,7 +95,7 @@ body {
   font-weight: 800;
   color: var(--color-orange);
   margin-bottom: 12px;
-  background-color: #ffd0b5;
+  background-color: rgb(from var(--color-orange) r g b / 0.12);
   padding: 5px;
   border-radius: 10%;
   margin: 10px;
@@ -170,7 +169,7 @@ body {
 /* 14. confirmation__button--continue */
 .confirmation__button--continue {
   background-color: var(--color-green);
-  color: #FFFFFF;
+  color: var(--bg-card);
   border: none;
   padding: 12px 32px;
   font-size: 1rem;

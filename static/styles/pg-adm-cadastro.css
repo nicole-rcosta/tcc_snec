@@ -1,4 +1,3 @@
-@import url('variables.css');
 @import url('global.css');
 
 body{
@@ -25,7 +24,7 @@ body{
 .admin-register__header{
     display: flex;
     background-color: var(--color-orange);
-    color: white;
+    color: var(--bg-card);
     padding: 25px;
 
     align-items: center;
@@ -143,7 +142,7 @@ body{
 .admin-register__button--submit{
     all: unset;
     background-color: var(--color-green);
-    color: white;
+    color: var(--bg-card);
     padding: 10px ;
     border-radius: 15px;
     

@@ -1,4 +1,3 @@
-@import url('variables.css');
 @import url('global.css');
 
 .visually-hidden {
@@ -29,7 +28,7 @@ body.admin-access {
 }
 
 .admin-access__header-title {
-  color: #FFFFFF;
+  color: var(--bg-card);
   font-size: 1.6rem;
   font-weight: 700;
   margin: 0;
@@ -127,18 +126,18 @@ body.admin-access {
 
 .admin-access__button--approve:hover {
   background-color: var(--color-green);
-  color: #FFFFFF;
+  color: var(--bg-card);
   box-shadow: 0 2px 8px rgb(from var(--color-green) r g b / 0.3);
 }
 
 .admin-access__button--reject {
-  background-color: rgb(220 53 69 / 0.12);
+  background-color: rgb(from var(--color-orange) r g b / 0.12);
   color: #dc3545;
 }
 
 .admin-access__button--reject:hover {
   background-color: #dc3545;
-  color: #FFFFFF;
+  color: var(--bg-card);
   box-shadow: 0 2px 8px rgb(220 53 69 / 0.3);
 }
 

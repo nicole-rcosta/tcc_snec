@@ -19,7 +19,7 @@ body.admin {
 }
 
 .admin-header__title {
-  color: #FFFFFF;
+  color: var(--bg-card);
   font-size: 1.6rem;
   font-weight: 700;
   margin: 0;
@@ -112,7 +112,7 @@ body.admin {
 
 .admin-card__button {
   background-color: var(--color-green);
-  color: #FFFFFF;
+  color: var(--bg-card);
   border: none;
   font-size: 1rem;
   font-weight: 700;

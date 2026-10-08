@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="../static/styles/variables.css">
     <link rel="stylesheet" href="../static/styles/layout.css">
 
-{% endblock %}
+    {% block extra_css %}{% endblock %}
+
 </head>
 <body>
 
@@ -31,7 +32,7 @@
         </a>
     </div>
 
-    <script src="../static/js/tema.js"></script>
+    
     </header>
 
 
@@ -40,6 +41,11 @@
         {% endblock %}
     </main>
 
-{% endblock %}
+
+<script src="../static/js/tema.js"></script>
+
+
+{% block extra_js %}{% endblock %}
+
 </body>
 </html>

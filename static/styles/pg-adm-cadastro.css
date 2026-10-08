@@ -1,5 +1,5 @@
-@import url(/static/styles/variables.css);
-@import url(global.css);
+@import url('variables.css');
+@import url('global.css');
 
 body{
     margin: 40px 0;

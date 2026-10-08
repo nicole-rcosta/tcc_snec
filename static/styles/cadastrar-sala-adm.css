@@ -1,5 +1,5 @@
 @import url('variables.css');
-@import url(global.css);
+@import url('global.css');
 
 body {
     background-color: #ffffff;

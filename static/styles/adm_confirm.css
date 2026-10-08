@@ -1,5 +1,5 @@
-@import url(variables.css);
-@import url(global.css);
+@import url('variables.css');
+@import url('global.css');
 
 body.admin {
   background-color: var(--bg-main);

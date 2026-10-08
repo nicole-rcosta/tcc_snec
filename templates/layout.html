@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SNEC{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../static/styles/layout.css">
+
+{% endblock %}
+</head>
+<body>
+
+
+    <header class="app-header">
+        <a href="/login" class="header-logo">
+            <img src="../static/img/logo_snec.png" alt="Logo">
+        </a>
+
+        <button class="header-btn btn-theme" title="Alternar tema">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+
+
+        <a href="/logout" class="btn-logout" title="Sair / Encerrar sessão">
+            <i class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i>
+        </a>
+    </header>
+
+
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+{% endblock %}
+</body>
+</html>

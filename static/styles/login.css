@@ -93,15 +93,50 @@ body{
 
 }
 
+.background{
+    height: 200px;
+    position:absolute;
+    z-index: -1;
+}
+
+.background-inf-dir{
+    bottom: 0;
+    right: 0;
+}
+
+.background-inf-esq{
+    bottom: 0;
+    left: 0;
+}
+
+.background-sup-dir{
+    top: 0;
+    right: 0;
+}
+
+.background-sup-esq{
+    top: 0;
+    left: 0;
+}   
+
 @media (min-width: 700px) {
   .login--card{
     width: 50%;
   }
+  .background{
+    height: 300px;
+    z-index: -1;
+    }
 }
 
 @media (min-width: 1200px) {
   .login--card{
     width: 30%;
   }
+  .background{
+    height: 400px;
+    z-index: -1;
+    }
+
 }
 

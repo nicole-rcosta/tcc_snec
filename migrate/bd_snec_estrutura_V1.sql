@@ -1,16 +1,19 @@
-CREATE TABLE tb_atividades (
+CREATE DATABASE IF NOT EXISTS db_snec;
+USE db_snec;
+
+CREATE TABLE IF NOT EXISTS tb_atividades (
  id_atividade INT PRIMARY KEY AUTO_INCREMENT,
  atividade VARCHAR(50) NOT NULL,
  periodo VARCHAR(10)
 );
 
-CREATE TABLE tb_turmas (
+CREATE TABLE IF NOT EXISTS tb_turmas (
  id_turma INT PRIMARY KEY AUTO_INCREMENT,
  turma VARCHAR(10) NOT NULL UNIQUE,
  periodo VARCHAR(10)
 );
 
-CREATE TABLE tb_usuarios (
+CREATE TABLE IF NOT EXISTS tb_usuarios (
   id_usuario INT PRIMARY KEY AUTO_INCREMENT,
   nome_usuario VARCHAR(100) NOT NULL,
   email VARCHAR(100) UNIQUE NOT NULL,
@@ -20,7 +23,7 @@ CREATE TABLE tb_usuarios (
   status VARCHAR(20) DEFAULT 'pendente'
 );
 
-CREATE TABLE tb_alunos (
+CREATE TABLE IF NOT EXISTS tb_alunos (
  rm_aluno INT PRIMARY KEY,
  nome_aluno VARCHAR(100) NOT NULL,
  id_turma INT,
@@ -28,7 +31,7 @@ CREATE TABLE tb_alunos (
  FOREIGN KEY (id_turma) REFERENCES tb_turmas(id_turma)
 );
 
-CREATE TABLE tb_his_almoco (
+CREATE TABLE IF NOT EXISTS tb_his_almoco (
  rm_aluno INT,
  data DATE DEFAULT (CURRENT_DATE),
  id_usuario INT,
@@ -40,7 +43,7 @@ CREATE TABLE tb_his_almoco (
  PRIMARY KEY(rm_aluno, data)
 );
 
-CREATE TABLE tb_his_lanche (
+CREATE TABLE IF NOT EXISTS tb_his_lanche (
  id_turma INT,
  data DATE DEFAULT (CURRENT_DATE),
  id_usuario INT,
@@ -52,7 +55,7 @@ CREATE TABLE tb_his_lanche (
  PRIMARY KEY (id_turma, data)
 );
 
-CREATE TABLE tb_aluno_atividade (
+CREATE TABLE IF NOT EXISTS tb_aluno_atividade (
  rm_aluno INT,
  id_atividade INT,
  dia_semana ENUM('SEG', 'TER', 'QUA', 'QUI', 'SEX') NOT NULL,	-- DAYOFWEEK(data)

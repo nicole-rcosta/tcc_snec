@@ -1,4 +1,4 @@
-function mostrarAlerta(estado) {
+function mostrarAlerta(mensagem,estado) {
   const alertOverlay = document.createElement("div");
   alertOverlay.classList.add("alert-overlay");
 
@@ -7,7 +7,7 @@ function mostrarAlerta(estado) {
     <div class="alert-container-success">
       <div class="alert-content-success">
         <img class="alert-icon-wrapper-success" src="/static/img/icons/check_icon.png" alt="">
-        <p class="alert-message-success">Senha alterada <br> com sucesso</p>
+        <p class="alert-message-success">${mensagem}</p>
         <button class="alert-button-success">Voltar</button>
       </div>
     </div>
@@ -25,10 +25,7 @@ function mostrarAlerta(estado) {
     <div class="alert-container-error">
     <div class="alert-content-error">
         <img class="alert-icon-wrapper-error" src="/static/img/icons/error_icon.png" alt="">
-        <p class="alert-message-error">
-            Todos os campos<br>
-            obrigatórios
-        </p>
+        <p class="alert-message-error">${mensagem}</p>
         <button class="alert-button-error">Voltar</button>
     </div>
 </div>

@@ -1,4 +1,5 @@
-@import url("variables.css");
+@import url('variables.css');
+@import url('global.css');
 
 /* Visually Hidden Helper (Acessibilidade) */
 .visually-hidden {
@@ -35,12 +36,26 @@
    Bloco: admin-access
    ========================================== */
 body.admin-access {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
   min-height: 100vh;
   margin: 0;
   transition: background-color 0.3s, color 0.3s;
+}
+
+.admin-access__header {
+  background-color: var(--color-orange);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.1);
+}
+
+.admin-access__header-title {
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+  font-family: var(--font-primary);
 }
 
 .admin-access__main {
@@ -70,6 +85,7 @@ body.admin-access {
   font-weight: 700;
   margin-top: 0;
   margin-bottom: 1.5rem;
+  font-family: var(--font-primary);
 }
 
 /* Tabela de Pedidos */

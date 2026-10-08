@@ -1,74 +1,33 @@
 @import url('variables.css');
+@import url('global.css');
 
-/* Helper para acessibilidade */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.admin-activity {
+    background-color: #ffffff;
+    color: #a6a6a6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-/* ==========================================
-   Header Global (Dicionário BEM)
-   ========================================== */
-.header {
-  background-color: var(--color-orange);
-  padding: 1.25rem 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
+.admin-activity__header {
+    background-color: var(--color-orange);
+    padding: 25px;
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
 }
 
-.header__title {
-  font-size: 1.5625rem; /* 25px */
-  font-weight: 700;
-  color: #FFFFFF;
-  margin: 0;
+.admin-activity__header--title {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    font-family: var(--font-primary);
 }
 
-/* ==========================================
-   Bloco Principal: admin-activity
-   ========================================== */
-body.admin-activity {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  min-height: 100vh;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.admin-activity__main {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 1.5rem 1rem 3rem 1rem;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Botão de Navegação / Voltar */
-.admin-activity__navigation {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
-}
-
-.admin-activity__back-button {
-  background: none;
-  border: none;
-  padding: 0.5rem;
-  cursor: pointer;
+.admin-class__prev_button{
+    all: unset;
+    margin: 15px 30px 15px auto;
 }
 
 .admin-activity__back-icon {
@@ -207,6 +166,7 @@ body.admin-activity {
   color: var(--color-blue);
   font-weight: 700;
   text-align: center;
+    font-family: var(--font-primary);
   margin: 0;
 }
 

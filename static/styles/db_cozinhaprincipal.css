@@ -1,11 +1,5 @@
-@import url(variables.css);
-
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@import url('variables.css');
+@import url('global.css');
 
 body {
   min-height: 100vh;
@@ -13,7 +7,6 @@ body {
   flex-direction: column;
   align-items: center;
   padding-bottom: 30px;
-  font-family: 'Poppins', 'Segoe UI', Roboto, system-ui, sans-serif;
 }
 
 /* Header Faixa */
@@ -31,6 +24,7 @@ body {
   font-size: 1.5rem;
   font-weight: 500;
   letter-spacing: 0.5px;
+  font-family: var(--font-primary);
 }
 
 /* Container Principal */
@@ -42,7 +36,6 @@ body {
   flex-direction: column;
   gap: 20px;
 }
-
 
 .dashboard__user {
   display: flex;

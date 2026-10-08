@@ -1,5 +1,6 @@
-@import url(variables.css);
+@import url("variables.css");
 
+/* Visually Hidden Helper (Acessibilidade) */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -12,6 +13,27 @@
   border: 0;
 }
 
+/* ==========================================
+   Header Global
+   ========================================== */
+.header {
+  background-color: var(--color-orange);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.header__title {
+  font-size: 1.5625rem; /* 25px */
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+/* ==========================================
+   Bloco: admin-access
+   ========================================== */
 body.admin-access {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-main);
@@ -19,20 +41,6 @@ body.admin-access {
   min-height: 100vh;
   margin: 0;
   transition: background-color 0.3s, color 0.3s;
-}
-
-.admin-access__header {
-  background-color: var(--color-orange);
-  padding: 1.25rem 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.1);
-}
-
-.admin-access__header-title {
-  color: #FFFFFF;
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 0;
 }
 
 .admin-access__main {
@@ -43,11 +51,16 @@ body.admin-access {
 }
 
 .admin-access__card-container {
-  background-color: rgb(from var(--color-orange) r g b / 0.12);
+  background-color: var(--bg-card);
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgb(from var(--text-main) r g b / 0.05);
-  transition: background-color 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+[data-theme="dark"] .admin-access__card-container {
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .admin-access__main-title {
@@ -59,6 +72,7 @@ body.admin-access {
   margin-bottom: 1.5rem;
 }
 
+/* Tabela de Pedidos */
 .admin-access__table {
   width: 100%;
   border-collapse: collapse;
@@ -66,26 +80,26 @@ body.admin-access {
   background-color: var(--bg-card);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.admin-access__table-header th {
+.admin-access__table-header .admin-access__table-cell {
   color: var(--color-blue);
   font-size: 0.9rem;
   font-weight: 700;
   padding: 1rem 0.8rem;
-  border-bottom: 2px solid rgb(from var(--color-blue) r g b / 0.15);
+  border-bottom: 2px solid rgba(80, 102, 202, 0.2);
 }
 
-.admin-access__table-body tr {
-  border-bottom: 1px solid rgb(from var(--text-main) r g b / 0.08);
+.admin-access__table-body .admin-access__table-row {
+  border-bottom: 1px solid rgba(108, 117, 125, 0.15);
 }
 
-.admin-access__table-body tr:last-child {
+.admin-access__table-body .admin-access__table-row:last-child {
   border-bottom: none;
 }
 
-.admin-access__table-body td {
+.admin-access__table-cell {
   padding: 0.85rem 0.8rem;
   font-size: 0.95rem;
   color: var(--text-main);
@@ -99,6 +113,7 @@ body.admin-access {
   font-weight: 600;
 }
 
+/* Botões de Ação */
 .admin-access__action-buttons {
   display: flex;
   gap: 0.5rem;
@@ -118,33 +133,45 @@ body.admin-access {
   transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
 }
 
+.admin-access__button-icon {
+  font-size: 0.9em;
+}
+
 .admin-access__button--approve {
-  background-color: rgb(from var(--color-green) r g b / 0.15);
+  background-color: rgba(90, 175, 144, 0.15);
   color: var(--color-green);
 }
 
 .admin-access__button--approve:hover {
   background-color: var(--color-green);
   color: #FFFFFF;
-  box-shadow: 0 2px 8px rgb(from var(--color-green) r g b / 0.3);
+  box-shadow: 0 2px 8px rgba(90, 175, 144, 0.3);
 }
 
 .admin-access__button--reject {
-  background-color: rgb(220 53 69 / 0.12);
-  color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.12);
+  color: #DC3545;
 }
 
 .admin-access__button--reject:hover {
-  background-color: #dc3545;
+  background-color: #DC3545;
   color: #FFFFFF;
-  box-shadow: 0 2px 8px rgb(220 53 69 / 0.3);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
 }
 
 .admin-access__button:active {
   transform: scale(0.96);
 }
 
-
+.admin-access__table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background-color: transparent; /* em vez de var(--bg-card) */
+  box-shadow: none;               /* remove a sombra interna */
+  border-radius: 0;
+}
+/* ---------------------------------------------------------- */
 @media (max-width: 600px) {
   .admin-access__main {
     margin: 1rem auto;
@@ -162,7 +189,7 @@ body.admin-access {
   .admin-access__table, 
   .admin-access__table-body, 
   .admin-access__table-row, 
-  .admin-access__table-body td {
+  .admin-access__table-body .admin-access__table-cell {
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -173,24 +200,24 @@ body.admin-access {
     border-radius: 12px;
     padding: 0.8rem 1rem;
     margin-bottom: 0.75rem;
-    box-shadow: 0 2px 6px rgb(from var(--text-main) r g b / 0.05);
-    border: 1px solid rgb(from var(--text-main) r g b / 0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(108, 117, 125, 0.15);
   }
 
-  .admin-access__table-body td {
+  .admin-access__table-body .admin-access__table-cell {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 0;
-    border-bottom: 1px dashed rgb(from var(--text-main) r g b / 0.1);
+    border-bottom: 1px dashed rgba(108, 117, 125, 0.2);
     text-align: right;
   }
 
-  .admin-access__table-body td:last-child {
+  .admin-access__table-body .admin-access__table-cell:last-child {
     border-bottom: none;
   }
 
-  .admin-access__table-body td::before {
+  .admin-access__table-body .admin-access__table-cell::before {
     content: attr(data-label);
     font-weight: 700;
     color: var(--color-blue);

@@ -16,13 +16,13 @@ body.admin {
   padding: 1.25rem 1rem;
   text-align: center;
   box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.1);
+  width: 100%;
 }
 
 .admin-header__title {
-  color: #FFFFFF;
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 0;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
 }
 
 .admin-main {

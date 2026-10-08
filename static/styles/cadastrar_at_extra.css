@@ -12,10 +12,10 @@
 
 .admin-activity__header {
     background-color: var(--color-orange);
-    padding: 25px;
-    margin-top: 40px;
-    width: 100%;
+    padding: 1.25rem 1rem;
     text-align: center;
+    box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.1);
+    width: 100%;
     
 }
 

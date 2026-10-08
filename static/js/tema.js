@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeIcon = document.getElementById('themeIcon');
     const htmlElement = document.documentElement;
 
-    // 1. Função para aplicar o tema e atualizar o ícone
+    // Função para aplicar o tema e atualizar o ícone
     function applyTheme(theme) {
         htmlElement.setAttribute('data-theme', theme);
         localStorage.setItem('app-theme', theme);
@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 2. Carrega o tema salvo ou usa o padrão ('light')
+    // Carrega o tema salvo ou usa o padrão ('light')
     const savedTheme = localStorage.getItem('app-theme') || 'light';
     applyTheme(savedTheme);
 
-    // 3. Evento do clique no botão
+    // Evento do clique no botão
     if (themeBtn) {
         themeBtn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');

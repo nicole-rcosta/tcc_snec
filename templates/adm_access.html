@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administração: Controle de Acesso</title>
+    <title>Administração - Controle de Acesso</title>
     <link rel="stylesheet" href="../static/styles/adm_access.css">
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous" defer></script>
+    <script src="/static/js/alerts.js"></script>
 </head>
 
 <body class="admin-access">
@@ -35,7 +36,7 @@
                         <td class="admin-access__table-cell admin-access__table-cell--role" data-label="Cargo">Professor</td>
                         <td class="admin-access__table-cell admin-access__table-cell--actions" data-label="Permissão">
                             <div class="admin-access__action-buttons">
-                                <button type="button" class="admin-access__button admin-access__button--approve"
+                                <button onclick="mostrarAlerta('check_icon.png','Senha alterada <br> com sucesso')" type="button" class="admin-access__button admin-access__button--approve"
                                     title="Aprovar pedido" aria-label="Aprovar pedido de Fulano Silva">
                                     <i class="fa-solid fa-check admin-access__button-icon" aria-hidden="true"></i>
                                     <span>Aprovar</span>
@@ -54,5 +55,4 @@
     </main>
 
 </body>
-
 </html>

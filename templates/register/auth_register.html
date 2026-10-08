@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/static/styles/register/auth_register.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles/global.css">
+
+</head>
+<body>
+    
+
+    <div class="register">
+
+        <i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180 icone_sair"></i>
+
+        <img class="logo_snec" src="/static/img/logo_snec.png" alt="">
+        
+
+        <h1 class="register__title">Cadastre-se</h1>
+
+        <form action="" class="register__form">
+
+            <div class="register__grid">
+                <div class="register__field">
+                    <label class="register__label">Nome Completo</label>
+                    <input type="text" class="register__input">
+                </div>
+                <div class="register__field">
+                    <label class="register__label">CPF</label>
+                    <input type="text" class="register__input">
+                </div>
+                <div class="register__field">
+                    <label class="register__label">E-mail</label>
+                    <input type="text" class="register__input">
+                </div>
+                <div class="register__field">
+                    <label class="register__label">Senha</label>
+                    <input type="text" class="register__input">
+                </div>
+            </div>
+
+            <div class="register__field register__field--dropdown">
+                <label class="register__label register__label--dropdown">Cargo</label>
+                <select class="register__input register__input--dropdown">
+                    <option value=""selected>Selecione um cargo</option>
+                    <option value="admin">Administrador(a)</option>
+                    <option value="nutri">Nutricionista</option>
+                    <option value="prof">Professor(a)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="register__button--submit">Cadastrar</button>
+        </form>
+    </div>
+    
+</body>
+<script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+</html>

@@ -1,13 +1,7 @@
 @import url(/static/styles/variables.css);
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import url(global.css);
 
 body {
-    font-family: 'Inter', sans-serif;
     background-color: #f8f9fa;
     color: #8c8c8c;
 }
@@ -20,6 +14,7 @@ header {
     font-size: 20px;
     font-weight: 700;
     color: #FFFFFF;
+    font-family: var(--font-primary);
 }
 
 /* Painel Principal (Mobile) */

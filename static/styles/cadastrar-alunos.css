@@ -1,4 +1,5 @@
 @import url('variables.css');
+@import url(global.css);
 
 body {
     font-family: "Inter", "Segoe UI", Arial, sans-serif;
@@ -23,6 +24,7 @@ body {
     font-size: 25px;
     font-weight: bold;
     color: white;
+    font-family: var(--font-primary);
 }
 
 .admin-class__prev_button{
@@ -137,6 +139,7 @@ body {
     color: var(--color-blue);
     font-weight: bold;
     text-align: center;
+    font-family: var(--font-primary);
 }
 
 /* Tabela */

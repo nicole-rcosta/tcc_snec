@@ -14,8 +14,8 @@ body{
 }
 
 .logo_snec{
-    height: 15vh;
-    justify-self: flex-start;
+    height: 120px;
+
 }
 
 .login--card{
@@ -26,6 +26,7 @@ body{
     padding: 20px;
     border-radius: 15px;
     justify-content: space-between;
+    align-items: center;
 
     gap: 10px;
 }
@@ -33,23 +34,19 @@ body{
 .login__title{
     all: unset;
     align-self: center;
-    font-size: 24px;
+    font-size: 30px;
     color: var(--color-blue);
     font-family: var(--font-primary);
     font-weight: bold;
 }
 
-.login-group{
+.login-field{
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 80%;
 }
 
-.password-group{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
 
 .login__label{
     color: var(--color-blue);
@@ -68,7 +65,7 @@ body{
 
 .login__button--submit{
     all: unset;
-    width: 20vw;
+    width: 60%;
     height: 2vh;
     align-self: center;
 
@@ -86,6 +83,7 @@ body{
     align-self: center;
     text-decoration: none;
     font-style: italic;
+    margin-top: 15px;
 }
 
 .login__link--register{
@@ -93,7 +91,7 @@ body{
     color: var(--color-orange);
     align-self: center;
     text-decoration: none;
-
+    margin-top: 15px;
 }
 
 .background{

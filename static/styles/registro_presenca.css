@@ -1,0 +1,412 @@
+@import url('variables.css');
+@import url('global.css');
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   1. HEADER
+   ========================================================================== */
+.header--classes {
+  width: 100%;
+  background-color: var(--color-blue);
+  color: #FFFFFF;
+  text-align: center;
+  padding: 14px 16px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-primary);
+}
+
+/* ==========================================================================
+   2. CONTAINER PRINCIPAL (activities)
+   ========================================================================== */
+.activities {
+  width: 100%;
+  max-width: 600px; /* Alinhado e centrado no desktop */
+  margin: 0 auto;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column; /* Força tudo a ficar na vertical (de cima para baixo) */
+  gap: 16px;
+}
+
+/* Header de Saudação e Logout */
+.user-greeting {
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.classes__title {
+  font-size: 1.6rem;
+  color: var(--color-orange);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.progress--step-2 {
+  width: 180px;
+  height: 6px;
+  background-color: #E2E8F0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress--step-2 .progress-bar {
+  width: 66.6%;
+  height: 100%;
+  background-color: var(--color-green);
+  border-radius: 4px;
+}
+
+.progress-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  color: var(--color-orange);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   3. CAMPO DE ALUNOS
+   ========================================================================== */
+.activities__field--students {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.activities__label--students {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.activities__input--students {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 1px solid rgba(80, 102, 202, 0.2);
+  background-color: #E8ECF8;
+  color: var(--color-orange);
+  border-radius: 10px;
+  outline: none;
+}
+
+[data-theme="dark"] .activities__input--students {
+  background-color: #1E2338;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 4px 0;
+}
+
+[data-theme="dark"] .divider {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   4. SEÇÃO CONTRATURNO & TABELA DE ATIVIDADES
+   ========================================================================== */
+.activities__section--counter-shift {
+  background-color: #EFF2F9;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+[data-theme="dark"] .activities__section--counter-shift {
+  background-color: #181A20;
+}
+
+.activities__section-title {
+  font-size: 1.3rem;
+  color: #2D3748;
+  font-weight: 700;
+  text-align: center;
+  
+  font-family: var(--font-primary);
+}
+
+[data-theme="dark"] .activities__section-title {
+  color: var(--text-main);
+}
+
+/* Tabela Wrappers */
+.table-wrapper {
+  width: 100%;
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow-x: auto;
+}
+
+.activities__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.activities__table-header th {
+  padding: 10px 6px;
+  color: var(--color-orange);
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.activities__table-row td {
+  padding: 10px 6px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--text-main);
+  vertical-align: middle;
+}
+
+.activities__table-row:last-child td {
+  border-bottom: none;
+}
+
+.activities__table-cell--rm {
+  font-weight: bold;
+}
+
+.activities__table-cell--student {
+  font-weight: 500;
+}
+
+.activities__table-cell--year,
+.activities__table-cell--shift {
+  color: var(--text-secondary);
+}
+
+.activities__table-cell--check {
+  text-align: center;
+}
+
+.badge {
+  background-color: #E2E8F0;
+  color: #4A5568;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+[data-theme="dark"] .badge {
+  background-color: #2D3748;
+  color: #E2E8F0;
+}
+
+.activities__table-cell--check input[type="checkbox"] {
+  accent-color: var(--color-green);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   5. BOTÕES DE AÇÃO
+   ========================================================================== */
+.activities__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.activities__button--back {
+  background-color: #E2E8F0;
+  color: var(--color-blue);
+  border: none;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.activities__button--continue {
+  background-color: var(--color-blue);
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 36px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(80, 102, 202, 0.25);
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (MOBILE)
+   ========================================================================== */
+/* ==========================================================================
+   ADAPTAÇÃO COMPLETA PARA CELULARES (Telas abaixo de 640px)
+   ========================================================================== */
+@media (max-width: 640px) {
+
+  /* 1. Ajuste de margens do container principal */
+  .activities {
+    width: 100%;
+    margin: 12px auto;
+    padding: 0 12px;
+    gap: 16px;
+  }
+
+  /* 2. Cabeçalho de Saudação */
+  .classes__title {
+    font-size: 1.35rem;
+  }
+
+  .progress--step-2 {
+    width: 140px;
+  }
+
+  /* 3. Container da Seção Contraturno */
+  .activities__section--counter-shift {
+    padding: 14px 10px;
+    border-radius: 14px;
+    gap: 12px;
+  }
+
+  .activities__section-title {
+    font-size: 1.15rem;
+  }
+
+  /* 4. Transformação da Tabela em Lista de Cards Rápidos */
+  .table-wrapper {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .activities__table, 
+  .activities__table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  /* Esconde o cabeçalho original da tabela no celular */
+  .activities__table-header {
+    display: none;
+  }
+
+  /* Cada linha vira um Card individual moderno */
+  .activities__table-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  /* Esconde colunas menos relevantes no celular para dar espaço ao que importa */
+  .activities__table-cell--year,
+  .activities__table-cell--shift {
+    display: none;
+  }
+
+  /* Bloco da Esquerda (RM, Nome do Aluno e Badge da Atividade) */
+  .activities__table-row td:not(.activities__table-cell--check) {
+    display: inline-block;
+    padding: 0;
+    border: none;
+  }
+
+  /* Organização interna das informações no Card */
+  .activities__table-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "rm check"
+      "student check"
+      "activity check";
+    row-gap: 4px;
+  }
+
+  .activities__table-cell--rm {
+    grid-area: rm;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  .activities__table-cell--student {
+    grid-area: student;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.2;
+    margin-bottom: 2px;
+  }
+
+  .activities__table-cell--activity {
+    grid-area: activity;
+    margin-top: 2px;
+  }
+
+  /* Caixa de Seleção / Checkbox à direita */
+  .activities__table-cell--check {
+    grid-area: check;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 0 12px !important;
+    border: none;
+  }
+
+  .activities__table-cell--check input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* 5. Botões de Ação na parte inferior do Celular */
+  .activities__actions {
+    flex-direction: column-reverse; /* "Continuar" fica no topo para fácil clique */
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .activities__button--back,
+  .activities__button--continue {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    text-align: center;
+  }
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/styles/global.css">
+    <link rel="stylesheet" href="/static/styles/cadastrar-sala-adm.css">
+</head>
+<body>
+
+    <header class="admin-class__header">
+        <h1 class="admin-class__header--title">Administração</h1>
+    </header>
+
+    <button class="admin-class__prev_button"><i class="fa-solid fa-arrow-left-long"></i></button>
+
+    <h1 class="admin-class__title">Cadastrar Sala:</h1>
+
+    <form action="" class="admin-class__form">
+        <div class="admin-class__form--organization">
+            <div class="admin-class__form--field">
+                <label class="admin-class__form--label">Turma:</label>
+                <input type="text" class="admin-class__form--input">
+            </div>
+            <div class="admin-class__form--field">
+                <label class="admin-class__form--label">Período:</label>
+                <input type="text" class="admin-class__form--input">
+            </div>
+            <div class="admin-class__form--field">
+                <label class="admin-class__form--label">Quantidade de Alunos:</label>
+                <input type="number" class="admin-class__form--input" value="32">
+            </div>
+        </div>
+
+        <button type="submit" class="admin-class__form--submit">Cadastrar</button>
+    </form>
+
+    <section class="admin-class__list-section">
+            <h2 class="admin-class__list-title">Turmas já cadastradas:</h2>
+            <table class="admin-class__table">
+                <thead class="admin-class__table-header">
+                    <tr class="admin-class__table-row">
+                        <th class="admin-class__table-cell--class">Turma</th>
+                        <th class="admin-class__table-cell--period">Período</th>
+                        <th class="admin-class__table-cell--qt-students">Qtde. de alunos.</th>
+                        <th class="admin-class__table-cell--button"></th>
+                    </tr>
+                </thead>
+                <tbody class="admin-class__table--body">
+                    <tr class="admin-class__table-row">
+                        <td class="admin-class__table-cell--class">3°C</td>
+                        <td class="admin-class__table-cell--period">Manhã</td>
+                        <td class="admin-class__table-cell--qt-students">32</td>
+                        <td class="admin-class__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr class="admin-class__table-row">
+                        <td class="admin-class__table-cell--class">9°A</td>
+                        <td class="admin-class__table-cell--period">Tarde</td>
+                        <td class="admin-class__table-cell--qt-students">31</td>
+                        <td class="admin-class__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr class="admin-class__table-row">
+                        <td class="admin-class__table-cell--class">9°A</td>
+                        <td class="admin-class__table-cell--period">Tarde</td>
+                        <td class="admin-class__table-cell--qt-students">31</td>
+                        <td class="admin-class__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr class="admin-class__table-row">
+                        <td class="admin-class__table-cell--class">9°A</td>
+                        <td class="admin-class__table-cell--period">Tarde</td>
+                        <td class="admin-class__table-cell--qt-students">31</td>
+                        <td class="admin-class__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr class="admin-class__table-row">
+                        <td class="admin-class__table-cell--class">9°A</td>
+                        <td class="admin-class__table-cell--period">Tarde</td>
+                        <td class="admin-class__table-cell--qt-students">31</td>
+                        <td class="admin-class__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr class="admin-class__table-row">
+                        <td class="admin-class__table-cell--class">9°A</td>
+                        <td class="admin-class__table-cell--period">Tarde</td>
+                        <td class="admin-class__table-cell--qt-students">31</td>
+                        <td class="admin-class__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+</body>
+<script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+</html>

@@ -24,7 +24,7 @@ body {
 }
 
 /* --- Main Container Responsivo --- */
-.classes-container {
+.classes {
     padding: 20px 16px;
     width: 100%;
     max-width: 800px; 
@@ -43,7 +43,7 @@ body {
     margin-bottom: 8px;
 }
 
-.classes__greting p {
+.classes__greeting p {
     font-size: 22px; 
     font-weight: 700;
     color: var(--color-orange);
@@ -80,7 +80,7 @@ body {
 }
 
 /* --- Grid de Turmas Responsivo --- */
-.classes-grid {
+.classes__grid {
     display: grid;
     /* Adapta automaticamente o número de colunas conforme o espaço livre */
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -125,7 +125,7 @@ body {
 
 /* --- Media Queries para Ecreãs Maiores (Tablets e Computadores) --- */
 @media (min-width: 768px) {
-    .classes-container {
+    .classes {
         padding: 40px 32px;
     }
 
@@ -154,7 +154,7 @@ body {
         height: 10px;
     }
 
-    .classes-grid {
+    .classes__grid {
         /* Aumenta o tamanho mínimo dos cards no computador */
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         gap: 28px;

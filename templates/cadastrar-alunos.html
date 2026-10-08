@@ -1,116 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Administração: Cadastrar Aluno Extracurricular</title>
     <link rel="stylesheet" href="/static/styles/global.css">
     <link rel="stylesheet" href="/static/styles/cadastrar-alunos.css">
+    <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous" defer></script>
 </head>
-<body>
 
-    <header class="admin-class__header">
-        <h1 class="admin-class__header--title">Administração</h1>
+<body class="admin-student">
+
+    <header class="header">
+        <h1 class="header__title">Administração</h1>
     </header>
 
-    <button class="admin-class__prev_button"><i class="fa-solid fa-arrow-left-long"></i></button>
-
-    <h1 class="admin-class__title">Cadastrar Aluno - Extracurricular:</h1>
-
-    <form action="" class="admin-class__form">
-        <div class="admin-class__form--organization">
-            <div class="admin-class__form--field">
-                <label class="admin-class__form--label">Nome Completo:</label>
-                <input type="text" class="admin-class__form--input">
-            </div>
-            <div class="admin-class__form--field">
-                <label class="admin-class__form--label">RM:</label>
-                <input type="text" class="admin-class__form--input">
-            </div>
-            <div class="admin-class__form--field">
-                <label class="admin-class__form--label">Turma:</label>
-                <input type="text" class="admin-class__form--input">
-            </div>
-            <div class="admin-class__form--field">
-                <label class="admin-class__form--label">Curso:</label>
-                <input type="text" class="admin-class__form--input">
-            </div>
-            <div class="admin-class__form--field">
-                <label class="admin-class__form--label">Período:</label>
-                <input type="text" class="admin-class__form--input">
-            </div>
+    <main class="admin-student__main">
+        <div class="admin-student__navigation">
+            <button type="button" class="admin-student__back-button" aria-label="Voltar para a página anterior">
+                <i class="fa-solid fa-arrow-left-long admin-student__back-icon" aria-hidden="true"></i>
+            </button>
         </div>
 
-        <button type="submit" class="admin-class__form--submit">Cadastrar</button>
-    </form> 
+        <h1 class="admin-student__title">Cadastrar Aluno - Extracurricular:</h1>
 
-    <section class="admin-students__list-section">
-            <h2 class="admin-students__list-title">Alunos cadastrados:</h2>
-            <table class="admin-students__table">
-                <thead class="admin-students__table-header">
-                    <tr class="admin-students__table-row">
-                        <th class="admin-students__table-cell--name">Nome</th>
-                        <th class="admin-students__table-cell--code">RM</th>
-                        <th class="admin-students__table-cell--class">Turma</th>
-                        <th class="admin-students__table-cell--course">Curso</th>
-                        <th class="admin-students__table-cell--period">Período</th>
-                        <th class="admin-students__table-cell--button"></th>
+        <form action="" method="POST" class="admin-student__form">
+            <div class="admin-student__form-group">
+                <div class="admin-student__field admin-student__field--name">
+                    <label for="student-name" class="admin-student__label">Nome Completo:</label>
+                    <input type="text" id="student-name" name="student_name" class="admin-student__input" required>
+                </div>
+                <div class="admin-student__field admin-student__field--rm">
+                    <label for="student-rm" class="admin-student__label">RM:</label>
+                    <input type="text" id="student-rm" name="student_rm" class="admin-student__input" required>
+                </div>
+                <div class="admin-student__field admin-student__field--class">
+                    <label for="student-class" class="admin-student__label">Turma:</label>
+                    <input type="text" id="student-class" name="student_class" class="admin-student__input" required>
+                </div>
+                <div class="admin-student__field admin-student__field--course">
+                    <label for="student-course" class="admin-student__label">Curso:</label>
+                    <input type="text" id="student-course" name="student_course" class="admin-student__input" required>
+                </div>
+                <div class="admin-student__field admin-student__field--period">
+                    <label for="student-period" class="admin-student__label">Período:</label>
+                    <input type="text" id="student-period" name="student_period" class="admin-student__input" required>
+                </div>
+            </div>
+
+            <button type="submit" class="admin-student__button admin-student__button--submit">Cadastrar</button>
+        </form>
+
+        <section class="admin-student__list-section">
+            <h2 class="admin-student__list-title">Alunos cadastrados:</h2>
+            <table class="admin-student__table">
+                <thead class="admin-student__table-header">
+                    <tr class="admin-student__table-row">
+                        <th class="admin-student__table-cell admin-student__table-cell--name" scope="col">Nome</th>
+                        <th class="admin-student__table-cell admin-student__table-cell--rm" scope="col">RM</th>
+                        <th class="admin-student__table-cell admin-student__table-cell--class" scope="col">Turma</th>
+                        <th class="admin-student__table-cell admin-student__table-cell--course" scope="col">Curso</th>
+                        <th class="admin-student__table-cell admin-student__table-cell--period" scope="col">Período</th>
+                        <th class="admin-student__table-cell admin-student__table-cell--actions" scope="col">
+                            <span class="visually-hidden">Ações</span>
+                        </th>
                     </tr>
                 </thead>
-                <tbody class="admin-students__table--body">
-                    <tr class="admin-students__table-row">
-                        <td class="admin-students__table-cell--name">Fulana Lorenzo Morales</td>
-                        <td class="admin-students__table-cell--code">7041</td>
-                        <td class="admin-students__table-cell--class">3ºB</td>
-                        <td class="admin-students__table-cell--course">Basquete</td>
-                        <td class="admin-students__table-cell--period">Manhã</td>
-                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                <tbody class="admin-student__table-body">
+                    <tr class="admin-student__table-row">
+                        <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">Fulana Lorenzo Morales</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">7041</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">3ºB</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--course" data-label="Curso">Basquete</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--period" data-label="Período">Manhã</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--actions">
+                            <button type="button" class="admin-student__button admin-student__button--delete" aria-label="Excluir aluno Fulana Lorenzo Morales">
+                                <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
+                            </button>
+                        </td>
                     </tr>
-                    <tr class="admin-students__table-row">
-                        <td class="admin-students__table-cell--name">Fulano Giovani de Andrade</td>
-                        <td class="admin-students__table-cell--code">7042</td>
-                        <td class="admin-students__table-cell--class">3ºC</td>
-                        <td class="admin-students__table-cell--course">Natação</td>
-                        <td class="admin-students__table-cell--period">Manhã</td>
-                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    <tr class="admin-student__table-row">
+                        <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">Fulano Giovani de Andrade</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">7042</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">3ºC</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--course" data-label="Curso">Natação</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--period" data-label="Período">Manhã</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--actions">
+                            <button type="button" class="admin-student__button admin-student__button--delete" aria-label="Excluir aluno Fulano Giovani de Andrade">
+                                <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
+                            </button>
+                        </td>
                     </tr>
-                    <tr class="admin-students__table-row">
-                        <td class="admin-students__table-cell--name">Fulana Gonçalves</td>
-                        <td class="admin-students__table-cell--code">7043</td>
-                        <td class="admin-students__table-cell--class">3ºA</td>
-                        <td class="admin-students__table-cell--course">Dança</td>
-                        <td class="admin-students__table-cell--period">Manhã</td>
-                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
-                    </tr>
-                    <tr class="admin-students__table-row">
-                        <td class="admin-students__table-cell--name">Fulana Marques Luiz Gaspar</td>
-                        <td class="admin-students__table-cell--code">7044</td>
-                        <td class="admin-students__table-cell--class">3ºC</td>
-                        <td class="admin-students__table-cell--course">Natação</td>
-                        <td class="admin-students__table-cell--period">Manhã</td>
-                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
-                    </tr>
-                    <tr class="admin-students__table-row">
-                        <td class="admin-students__table-cell--name">Fulana Fernanda Gili Cândido</td>
-                        <td class="admin-students__table-cell--code">7045</td>
-                        <td class="admin-students__table-cell--class">3ºA</td>
-                        <td class="admin-students__table-cell--course">Dança</td>
-                        <td class="admin-students__table-cell--period">Manhã</td>
-                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
-                    </tr>
-                    <tr class="admin-students__table-row">
-                        <td class="admin-students__table-cell--name">Fulana Ramos Costa</td>
-                        <td class="admin-students__table-cell--code">7046</td>
-                        <td class="admin-students__table-cell--class">3ºA</td>
-                        <td class="admin-students__table-cell--course">Natação</td>
-                        <td class="admin-students__table-cell--period">Manhã</td>
-                        <td class="admin-students__table-cell--button"><button class="admin-class__table--button"><i class="fa-regular fa-trash-can"></i></button></td>
+                    <tr class="admin-student__table-row">
+                        <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">Fulana Gonçalves</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">7043</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">3ºA</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--course" data-label="Curso">Dança</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--period" data-label="Período">Manhã</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--actions">
+                            <button type="button" class="admin-student__button admin-student__button--delete" aria-label="Excluir aluna Fulana Gonçalves">
+                                <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </section>
-</body>
+    </main>
 
-<script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+</body>
 
 </html>

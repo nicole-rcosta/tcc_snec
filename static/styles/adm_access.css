@@ -15,7 +15,7 @@
 }
 
 /* ==========================================
-   Header Global
+   Header Global (Dicionário BEM)
    ========================================== */
 .header {
   background-color: var(--color-orange);
@@ -43,23 +43,8 @@ body.admin-access {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.admin-access__header {
-  background-color: var(--color-orange);
-  padding: 1.25rem 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.1);
-}
-
-.admin-access__header-title {
-  color: #FFFFFF;
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 0;
-  font-family: var(--font-primary);
-}
-
 .admin-access__main {
-  max-width: 800px;
+  max-width: 850px; /* Padronizado com as demais telas do painel admin */
   margin: 2rem auto;
   padding: 0 1rem;
   box-sizing: border-box;
@@ -85,7 +70,6 @@ body.admin-access {
   font-weight: 700;
   margin-top: 0;
   margin-bottom: 1.5rem;
-  font-family: var(--font-primary);
 }
 
 /* Tabela de Pedidos */
@@ -93,10 +77,9 @@ body.admin-access {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  background-color: var(--bg-card);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .admin-access__table-header .admin-access__table-cell {
@@ -179,15 +162,9 @@ body.admin-access {
   transform: scale(0.96);
 }
 
-.admin-access__table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  background-color: transparent; /* em vez de var(--bg-card) */
-  box-shadow: none;               /* remove a sombra interna */
-  border-radius: 0;
-}
-/* ---------------------------------------------------------- */
+/* ==========================================
+   Responsividade: Mobile First Breakpoint
+   ========================================== */
 @media (max-width: 600px) {
   .admin-access__main {
     margin: 1rem auto;

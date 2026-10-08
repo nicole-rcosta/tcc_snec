@@ -1,7 +1,7 @@
 @import url('variables.css');
 @import url('global.css');
 
-/* Class Auxiliar para Acessibilidade */
+/* Visually Hidden Helper (Acessibilidade) */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -14,7 +14,9 @@
   border: 0;
 }
 
-/* Header */
+/* ==========================================
+   Header Global (Dicionário BEM)
+   ========================================== */
 .header {
   background-color: var(--color-orange);
   padding: 1.25rem 1rem;
@@ -30,9 +32,10 @@
   margin: 0;
 }
 
-/* container admin */
+/* ==========================================
+   Bloco: admin-student
+   ========================================== */
 body.admin-student {
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
   min-height: 100vh;
@@ -44,7 +47,7 @@ body.admin-student {
 
 .admin-student__main {
   width: 100%;
-  max-width: 900px;
+  max-width: 850px; /* Padronizado exatamente com as demais telas do painel admin */
   margin: 0 auto;
   padding: 1.5rem 1rem 3rem 1rem;
   box-sizing: border-box;
@@ -53,13 +56,12 @@ body.admin-student {
   align-items: center;
 }
 
-/* Navegação e Botão Voltar */
+/* Navegação */
 .admin-student__navigation {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1rem;
-    font-family: var(--font-primary);
 }
 
 .admin-student__back-button {
@@ -80,7 +82,7 @@ body.admin-student {
   transform: translateX(-3px);
 }
 
-/* Título da Página */
+/* Título */
 .admin-student__title {
   font-size: 1.75rem;
   font-weight: 700;
@@ -90,14 +92,13 @@ body.admin-student {
   text-align: center;
 }
 
-/* Formulário de Cadastro */
+/* Formulário */
 .admin-student__form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
   width: 100%;
-  max-width: 800px;
   margin-bottom: 2.5rem;
 }
 
@@ -139,7 +140,7 @@ body.admin-student {
   box-shadow: 0 0 0 2px var(--color-blue);
 }
 
-/* Botões da Tela */
+/* Botões do Bloco */
 .admin-student__button {
   border: none;
   border-radius: 12px;
@@ -182,7 +183,7 @@ body.admin-student {
   color: #FFFFFF;
 }
 
-/* Seção de Listagem e Tabela */
+/* Seção de Listagem */
 .admin-student__list-section {
   background-color: rgba(255, 96, 28, 0.08);
   padding: 1.5rem;
@@ -191,7 +192,6 @@ body.admin-student {
   flex-direction: column;
   gap: 1.25rem;
   width: 100%;
-  max-width: 850px;
   box-sizing: border-box;
 }
 
@@ -205,10 +205,10 @@ body.admin-student {
   color: var(--color-blue);
   font-weight: 700;
   text-align: center;
-    font-family: var(--font-primary);
   margin: 0;
 }
 
+/* Tabela Unificada */
 .admin-student__table {
   width: 100%;
   border-collapse: collapse;
@@ -249,7 +249,9 @@ body.admin-student {
   color: var(--text-secondary);
 }
 
-/* Responsividade */
+/* ==========================================
+   Responsividade: Mobile First Breakpoint
+   ========================================== */
 @media (max-width: 768px) {
   .admin-student__button--submit {
     width: 100%;

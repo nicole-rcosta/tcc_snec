@@ -95,7 +95,7 @@ def receber_email():
 
     session["codigo_recuperacao"] = codigo
     # coloca um limite de 3 minutos pra expirar
-    session["expiracao_codigo"] = time.time() + 60
+    session["expiracao_codigo"] = time.time() + 180
 
     email = request.form.get("email")
     # Dados da sua conta
@@ -164,7 +164,7 @@ def pagina_recuperar_senha_codigo_validar():
 
     # Verifica se o código está correto
     if codigo_digitado == codigo:
-        return "<h2>Código validado com sucesso!</h2>"
+        return render_template("password/auth_password_reset.html")
 
     return "<h2>Código incorreto! Tente novamente.</h2>"
 

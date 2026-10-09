@@ -5,6 +5,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     height: 100vh;
     width: 100vw;
     background-position: center;
@@ -48,7 +49,7 @@ body{
     padding: 30px;
     border-radius: 30px;
     justify-content: center;
-    width: 40%;
+    width: 35%;
     z-index: 100;
 }
 
@@ -71,7 +72,7 @@ body{
 .register__field{
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 90%;
     gap: 10px;
 }
 
@@ -98,7 +99,7 @@ body{
 }
 
 .logo_snec{
-    height:150px;
+    height:120px;
 }
 
 .register__input--dropdown {
@@ -136,7 +137,7 @@ body{
 }
 
 .register__field--dropdown{
-    width: 75%;
+    width: 90%;
 }
 
 .icone_sair{
@@ -145,12 +146,21 @@ body{
     margin-left: auto;
 }
 
+.link--login{
+    margin-top: 5px;
+    color: var(--color-orange);
+    align-self: center;
+    text-decoration: none;
+    margin-top: 20px;
+    z-index: 100;
+}
+
 @media (max-width: 1500px) {
   body{
     height: 100vh;
   }
   .register{
-    width: 60%;
+    max-width: 40%;
   }
 
   .register__field{
@@ -170,12 +180,13 @@ body{
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   body{
     height: 100vh;
   }
   .register{
     width: 85%;
+    max-width: 450px;
   }
 
   .register__field{

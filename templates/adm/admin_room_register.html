@@ -26,7 +26,7 @@
 
         <h1 class="admin-room__title">Cadastrar Sala:</h1>
 
-        <form action="" method="POST" class="admin-room__form">
+        <form action="/adm/reg_class/post" method="POST" class="admin-room__form">
             <div class="admin-room__form-group">
                 <div class="admin-room__field admin-room__field--class">
                     <label for="room-class" class="admin-room__label">Turma:</label>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="admin-room__field admin-room__field--quantity">
                     <label for="room-quantity" class="admin-room__label">Quantidade de Alunos:</label>
-                    <input type="number" id="room-quantity" name="room_quantity" class="admin-room__input" value="32" required>
+                    <input type="number" id="room-quantity" name="class_quantity" class="admin-room__input" value="32" required>
                 </div>
             </div>
 
@@ -59,26 +59,24 @@
                     </tr>
                 </thead>
                 <tbody class="admin-room__table-body">
+
+
+                    {% for sala in salas: %}
                     <tr class="admin-room__table-row">
-                        <td class="admin-room__table-cell admin-room__table-cell--class" data-label="Turma">3°C</td>
-                        <td class="admin-room__table-cell admin-room__table-cell--period" data-label="Período">Manhã</td>
-                        <td class="admin-room__table-cell admin-room__table-cell--qt-students" data-label="Qtde. de alunos">32</td>
+                        <td class="admin-room__table-cell admin-room__table-cell--class" data-label="Turma">{{sala.turma}}</td>
+                        <td class="admin-room__table-cell admin-room__table-cell--period" data-label="Período">{{sala.periodo}}</td>
+                        <td class="admin-room__table-cell admin-room__table-cell--qt-students" data-label="Qtde. de alunos">{{sala.quantidade_alunos}}</td>
                         <td class="admin-room__table-cell admin-room__table-cell--actions">
-                            <button type="button" class="admin-room__button admin-room__button--delete" aria-label="Excluir turma 3°C">
-                                <i class="fa-regular fa-trash-can admin-room__button-icon" aria-hidden="true"></i>
-                            </button>
+                            <a href="/adm/reg_class/delete/{{sala.id_turma}}">
+                                <button type="button" class="admin-room__button admin-room__button--delete" aria-label="Excluir turma 9°A Tarde">
+                                    <i class="fa-regular fa-trash-can admin-room__button-icon" aria-hidden="true"></i>
+                                </button>
+                            </a>
                         </td>
                     </tr>
-                    <tr class="admin-room__table-row">
-                        <td class="admin-room__table-cell admin-room__table-cell--class" data-label="Turma">9°A</td>
-                        <td class="admin-room__table-cell admin-room__table-cell--period" data-label="Período">Tarde</td>
-                        <td class="admin-room__table-cell admin-room__table-cell--qt-students" data-label="Qtde. de alunos">31</td>
-                        <td class="admin-room__table-cell admin-room__table-cell--actions">
-                            <button type="button" class="admin-room__button admin-room__button--delete" aria-label="Excluir turma 9°A Tarde">
-                                <i class="fa-regular fa-trash-can admin-room__button-icon" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    {% endfor %}
+
+                    
                 </tbody>
             </table>
         </section>

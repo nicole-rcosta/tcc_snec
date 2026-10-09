@@ -171,6 +171,7 @@ body {
   gap: 1.25rem;
   width: 100%;
   box-sizing: border-box;
+  margin-bottom: 20px;
 }
 
 [data-theme="dark"] .admin-room__list-section {

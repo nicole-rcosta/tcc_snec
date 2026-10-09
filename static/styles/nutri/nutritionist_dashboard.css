@@ -8,24 +8,6 @@
   padding-bottom: 30px;
 }
 
-/* Header Faixa */
-.dashboard__header {
-  background-color: var(--color-green);
-  width: 100%;
-  padding: 1.25rem 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 24px;
-  color: var(--bg-card);
-}
-
-.dashboard__header--title {
-  color: var(--bg-card);
-  font-size: 1.5rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  font-family: var(--font-primary);
-}
 
 /* Container Principal */
 .dashboard__content{
@@ -116,17 +98,18 @@
   padding-left: 10px;
 }
 
-/* Parte Article */
+/* Parte de Refeições Atualizada */
 .dashboard__meals {
+  background-color: #ffffff;
   border-radius: 20px;
   padding: 24px 16px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(208, 223, 213, 0.6);
   display: flex;
   align-items: stretch;
 }
 
-.dashboard__meal--lunch,
-.dashboard__meal--dinner {
+.dashboard__meal-item {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -135,8 +118,8 @@
   padding: 0 10px;
 }
 
-.dashboard__meal--lunch {
-  border-right: 1px solid var(--border-line); /* Linha divisória entre as refeições */
+.dashboard__meal-item:first-child {
+  border-right: 1.5px solid #D0DFD5;
 }
 
 .dashboard__meal-title {

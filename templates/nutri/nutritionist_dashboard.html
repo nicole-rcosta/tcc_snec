@@ -1,18 +1,17 @@
 
 {% extends "layout.html" %}
 
-<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
 {% set page_type = 'nutri' %}
 
-<!-- Título que vai aparecer dentro da barra azul -->
 {% block page_title %}Dashboard Principal da Cozinha{% endblock %}
 
 {% block content %}
 
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/nutri/nutritionist_dashboard.css') }}">  
- 
 
-    <main class="dashboard">
+<main class="dashboard">
+    <!-- Adicionada a div wrapper que faltava -->
+    <div class="dashboard__content">
 
         <div class="dashboard__user">
             <div class="dashboard__user-info">
@@ -23,125 +22,128 @@
 
         <section class="dashboard__table-section">
             <table class="dashboard__class-table">
-            <!-- Cabeçalho invisível visualmente se quiser manter o design do Figma, mas essencial para leitores de tela -->
-            
-            <tbody>
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">9º ano A</td>
-                    <td class="dashboard__class-status-icon concluded " aria-label="Status: Concluído">
-                        <i class="fa-solid fa-check"></i>
-                    </td>
-                    <td class="dashboard__class-count">...</td>
-                </tr>
+                <tbody>
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">9º ano A</td>
+                        <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
+                            <i class="fa-solid fa-check"></i>
+                        </td>
+                        <td class="dashboard__class-count">...</td>
+                    </tr>
 
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">9º ano B</td>
-                    <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
-                        <i class="fa-solid fa-check"></i>
-                    </td>
-                    <td class="dashboard__class-count">30</td>
-                </tr>
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">9º ano B</td>
+                        <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
+                            <i class="fa-solid fa-check"></i>
+                        </td>
+                        <td class="dashboard__class-count">30</td>
+                    </tr>
 
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">9º ano C</td>
-                    <td class="dashboard__class-status-icon waiting" aria-label="Status: Pendente">
-                        <i class="fa-solid fa-hourglass-half"></i>
-                    </td>
-                    <td class="dashboard__class-count">23</td>
-                </tr>
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">9º ano C</td>
+                        <td class="dashboard__class-status-icon waiting" aria-label="Status: Pendente">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                        </td>
+                        <td class="dashboard__class-count">23</td>
+                    </tr>
 
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">1º ano A</td>
-                    <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
-                        <i class="fa-solid fa-check"></i>
-                    </td>
-                    <td class="dashboard__class-count">24</td>
-                </tr>
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">1º ano A</td>
+                        <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
+                            <i class="fa-solid fa-check"></i>
+                        </td>
+                        <td class="dashboard__class-count">24</td>
+                    </tr>
 
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">1º ano B</td>
-                    <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
-                        <i class="fa-solid fa-check"></i>
-                    </td>
-                    <td class="dashboard__class-count">25</td>
-                </tr>
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">1º ano B</td>
+                        <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
+                            <i class="fa-solid fa-check"></i>
+                        </td>
+                        <td class="dashboard__class-count">25</td>
+                    </tr>
 
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">1º ano C</td>
-                    <td class="dashboard__class-status-icon waiting" aria-label="Status: Pendente">
-                        <i class="fa-solid fa-hourglass-half"></i>
-                    </td>
-                    <td class="dashboard__class-count">...</td>
-                </tr>
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">2º ano A</td>
-                    <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
-                        <i class="fa-solid fa-check"></i>
-                    </td>
-                    <td class="dashboard__class-count">...</td>
-                </tr>
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">2º ano B</td>
-                    <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
-                        <i class="fa-solid fa-check"></i>
-                    </td>
-                    <td class="dashboard__class-count">...</td>
-                </tr>
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">1º ano C</td>
+                        <td class="dashboard__class-status-icon waiting" aria-label="Status: Pendente">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                        </td>
+                        <td class="dashboard__class-count">...</td>
+                    </tr>
 
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">2º ano C</td>
-                    <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluido">
-                        <i class="fa-solid fa-check"></i>
-                    </td>
-                    <td class="dashboard__class-count">25</td>
-                </tr>
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">2º ano A</td>
+                        <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
+                            <i class="fa-solid fa-check"></i>
+                        </td>
+                        <td class="dashboard__class-count">...</td>
+                    </tr>
 
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">3º ano A</td>
-                    <td class="dashboard__class-status-icon waiting" aria-label="Status: Pendente">
-                         <i class="fa-solid fa-hourglass-half"></i>
-                    </td>
-                    <td class="dashboard__class-count">32</td>
-                </tr>
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">2º ano B</td>
+                        <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
+                            <i class="fa-solid fa-check"></i>
+                        </td>
+                        <td class="dashboard__class-count">...</td>
+                    </tr>
 
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">3º ano B</td>
-                    <td class="dashboard__class-status-icon concluded" aria-label="Status: Pendente">
-                        <i class="fa-solid fa-check"></i>
-                    </td>
-                    <td class="dashboard__class-count">...</td>
-                </tr>
-                <tr class="dashboard__class-row">
-                    <td class="dashboard__class-name">3º ano C</td>
-                    <td class="dashboard__class-status-icon waiting" aria-label="Status: Pendente">
-                        <i class="fa-solid fa-hourglass-half"></i>
-                    </td>
-                    <td class="dashboard__class-count">...</td>
-                </tr>
-            </tbody>
-        </table>
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">2º ano C</td>
+                        <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
+                            <i class="fa-solid fa-check"></i>
+                        </td>
+                        <td class="dashboard__class-count">25</td>
+                    </tr>
+
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">3º ano A</td>
+                        <td class="dashboard__class-status-icon waiting" aria-label="Status: Pendente">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                        </td>
+                        <td class="dashboard__class-count">32</td>
+                    </tr>
+
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">3º ano B</td>
+                        <td class="dashboard__class-status-icon concluded" aria-label="Status: Concluído">
+                            <i class="fa-solid fa-check"></i>
+                        </td>
+                        <td class="dashboard__class-count">...</td>
+                    </tr>
+
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__class-name">3º ano C</td>
+                        <td class="dashboard__class-status-icon waiting" aria-label="Status: Pendente">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                        </td>
+                        <td class="dashboard__class-count">...</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
         <section class="dashboard__meals">
-            <article class="dashboard__meal--lunch">
+            <article class="dashboard__meal-item">
                 <h2 class="dashboard__meal-title">Lanche</h2>
                 <p class="dashboard__meal-count">300</p>
             </article>
 
-            <article class="dashboard__meal--dinner">
+            <article class="dashboard__meal-item">
                 <h2 class="dashboard__meal-title">Almoço</h2>
                 <p class="dashboard__meal-count">26</p>
-                <a href="/nutri_dashboard/report"><button class="dashboard__button--see-more">Ver mais</button></a>
+                <a href="/nutri_dashboard/report">
+                    <button class="dashboard__button--see-more">Ver mais</button>
+                </a>
             </article>
         </section>
 
-       <footer class="dashboard__footer-status">
+        <footer class="dashboard__footer-status">
             <h3>Contando...</h3>
-       </footer>
+        </footer>
 
-    </main>
+    </div> <!-- Fim da div .dashboard__content -->
+</main>
 
-    <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
 
-
- {% endblock %}
+{% endblock %}

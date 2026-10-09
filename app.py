@@ -1,3 +1,5 @@
+from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
+from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
 from flask import Flask, render_template, request, redirect, session, jsonify, flash
 from model.usuarios import cadastrar
 from model.salas import recuperar_salas
@@ -44,7 +46,26 @@ def pagina_adm_register():
 
 @app.route("/adm/reg_activity")
 def pagina_cad_atividade():
-    return render_template("adm/admin_extra_activity_register.html")
+    atividades = ra()
+    return render_template("adm/admin_extra_activity_register.html", atividades=atividades)
+
+@app.route("/adm/reg_activity/post", methods=["POST"])
+def pagina_cad_atividades():
+    ativid = request.form.get("activity_name")
+    periodo = request.form.get("activity_period")
+
+    if ativid and periodo:
+        ca(ativid, periodo)
+
+    return redirect(url_for("pagina_cad_atividade"))
+        
+
+@app.route("/adm/exc_activity/<id_atividade>", methods=["POST"])
+def excluir_atividades(id_atividade):
+    
+    ea(id_atividade)
+    return redirect(url_for("pagina_cad_atividade"))
+
 
 @app.route("/adm/reg_student")
 def pagina_cad_aluno():

@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layout.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administração: Cadastrar Aluno Extracurricular</title>
-    <link rel="stylesheet" href="/static/styles/global.css">
-    <link rel="stylesheet" href="/static/styles/adm/admin_extra_student_register.css">
-</head>
+<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
+{% set page_type = 'adm' %}
 
-<body class="admin-student">
+<!-- Título que vai aparecer dentro da barra azul -->
+{% block page_title %}Administração{% endblock %}
 
-    <header class="admin-student__header">
-        <h1 class="admin-student__header--title">Administração</h1>
-    </header>
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/adm/admin_extra_student_register.css') }}">  
+
+
 
     <main class="admin-student__main">
         <div class="admin-student__navigation">
@@ -110,6 +107,6 @@
         </section>
     </main>
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
-</body>
 
-</html>
+    
+{% endblock %}

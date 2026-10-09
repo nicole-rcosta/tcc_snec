@@ -1,5 +1,12 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
+from flask import Flask, render_template, request, redirect, session, jsonify, flash
+from model.usuarios import cadastrar
+from model.salas import recuperar_salas
+from model.salas import adicionar_sala
+from model.salas import deletar_sala
+import mysql
+import mysql.connector
 
 app = Flask(__name__)
 
@@ -12,8 +19,19 @@ def pagina_login():
 @app.route("/cadastro")
 def pagina_cadastro():
     return render_template("register/auth_register.html")
+@app.route("/cadastro/post", methods=["POST"])
+def cadastrar_usuario():
+    nome = request.form.get("name")
+    cpf = request.form.get("cpf")
+    email = request.form.get("email")
+    cargo = request.form.get("register")
+    senha = request.form.get("password")
 
-
+    if cadastrar(nome, email, cargo, senha, cpf):
+        return render_template("login/auth_login.html")
+    else:
+        return redirect("/")
+    
 # ---------------------------
 # Paginas de Administrador
 # ---------------------------
@@ -53,9 +71,28 @@ def excluir_atividades(id_atividade):
 def pagina_cad_aluno():
     return render_template("adm/admin_extra_student_register.html")
 
+
+
+
 @app.route("/adm/reg_class")
 def pagina_cad_sala():
-    return render_template("adm/admin_room_register.html")
+    salas = recuperar_salas()
+    return render_template("adm/admin_room_register.html", salas = salas)
+
+@app.route("/adm/reg_class/post", methods=["POST"])
+def pagina_cad_sala_post():
+    turma= request.form.get("room_class")
+    periodo= request.form.get("room_period")
+    qnt_aluno= request.form.get("class_quantity")
+    adicionar_sala(turma=turma,periodo=periodo,qnt_alunos=qnt_aluno)
+    return redirect("/adm/reg_class")
+
+@app.route("/adm/reg_class/delete/<int:id>")
+def pagina_cad_sala_del(id):
+    deletar_sala(id)
+    return redirect("/adm/reg_class")
+
+
 
 
 @app.route("/adm/conf_panel")

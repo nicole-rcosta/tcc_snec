@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash
+from model.usuarios import cadastrar
 
 app = Flask(__name__)
 
@@ -11,8 +12,19 @@ def pagina_login():
 @app.route("/cadastro")
 def pagina_cadastro():
     return render_template("register/auth_register.html")
+@app.route("/cadastro/post", methods=["POST"])
+def cadastrar_usuario():
+    nome = request.form.get("name")
+    cpf = request.form.get("cpf")
+    email = request.form.get("email")
+    cargo = request.form.get("register")
+    senha = request.form.get("password")
 
-
+    if cadastrar(nome, email, cargo, senha, cpf):
+        return render_template("login/auth_login.html")
+    else:
+        return redirect("/")
+    
 # ---------------------------
 # Paginas de Administrador
 # ---------------------------

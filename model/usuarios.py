@@ -1,7 +1,7 @@
 from database.conexao import conectar
 import bcrypt
 
-def cadastrar(nome_usuario, email, cargo, senha, cpf):
+def cadastrar(nome, email, cargo, senha, cpf):
     conexao = None
     cursor = None
     try:
@@ -16,7 +16,7 @@ def cadastrar(nome_usuario, email, cargo, senha, cpf):
             VALUES (%s, %s, %s, %s, %s);
         """
         
-        cursor.execute(sql, (nome_usuario, email, cargo, senha_hash, cpf))
+        cursor.execute(sql, (nome, email, cargo, senha_hash, cpf))
         conexao.commit()
         return True
 

@@ -9,25 +9,25 @@
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous" defer></script>
 </head>
 
-<body class="admin">
+<body class="admin-confirm">
 
-    <header class="admin-header">
-        <h1 class="admin-header__title">Administração</h1>
+    <header class="header">
+        <h1 class="header__title">Administração</h1>
     </header>
 
-    <main class="admin-main">
-        <section class="admin-card">
-            <h2 class="admin-card__title">Confirme que você é o administrador:</h2>
+    <main class="admin-confirm__main">
+        <section class="admin-confirm__card">
+            <h2 class="admin-confirm__title">Confirme que você é o administrador:</h2>
 
-            <form action="" method="POST" class="admin-card__form">
-                <div class="admin-card__field">
-                    <label for="admin-password" class="admin-card__label">Insira a sua senha:</label>
-                    <input type="password" id="admin-password" name="password" class="admin-card__input"
+            <form action="" method="POST" class="admin-confirm__form">
+                <div class="admin-confirm__field admin-confirm__field--password">
+                    <label for="admin-password" class="admin-confirm__label admin-confirm__label--password">Insira a sua senha:</label>
+                    <input type="password" id="admin-password" name="password" class="admin-confirm__input admin-confirm__input--password"
                         placeholder="••••••••" required>
                 </div>
 
-                <div class="admin-card__actions">
-                    <button type="submit" class="admin-card__button">Confirmar</button>
+                <div class="admin-confirm__actions">
+                    <button type="submit" class="admin-confirm__button admin-confirm__button--submit">Confirmar</button>
                 </div>
             </form>
         </section>

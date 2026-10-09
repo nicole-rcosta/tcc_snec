@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,46 +10,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <title>Cadastrar Itens na Página Admin</title>
 </head>
-<body>
-    <header class="admin-header">
-        Administração
+
+<body class="admin-panel">
+
+    <header class="header">
+        <h1 class="header__title">Administração</h1>
     </header>
 
-    <main class="admin-panel">
+    <main class="admin-panel__main">
         <section class="admin-panel__greeting">
-            <h1>Olá, Lorem Ipsum!</h1>
+            <h1 class="admin-panel__user-title">Olá, Lorem Ipsum!</h1>
             <h2 class="admin-panel__title">Cadastrar Itens:</h2>
         </section>
 
         <section class="admin-panel__menu">
-            <hr class="admin-panel__divider">
+            <hr class="admin-panel__divider" aria-hidden="true">
 
             <div class="admin-panel__grid">
                 <div class="admin-panel__item">
-                    <button class="admin-panel__button--rooms">
-                        <span>Salas</span>
+                    <button type="button" class="admin-panel__button admin-panel__button--rooms">
+                        <span class="admin-panel__button-text">Salas</span>
                     </button>
                 </div>
 
                 <div class="admin-panel__item">
-                    <button class="admin-panel__button--activities">
-                        <span>Atividade-Extracurricular</span>
+                    <button type="button" class="admin-panel__button admin-panel__button--activities">
+                        <span class="admin-panel__button-text">Atividade-Extracurricular</span>
                     </button>
                 </div>
 
                 <div class="admin-panel__item">
-                    <button class="admin-panel__button--students">
-                        <span>Alunos</span>
+                    <button type="button" class="admin-panel__button admin-panel__button--students">
+                        <span class="admin-panel__button-text">Alunos</span>
                     </button>
                 </div>
             </div>
 
-            <hr class="admin-panel__divider">
+            <hr class="admin-panel__divider" aria-hidden="true">
 
-            <button class="admin-panel__button--access">
-                <span>Controle de Acesso</span>
+            <button type="button" class="admin-panel__button admin-panel__button--access">
+                <span class="admin-panel__button-text">Controle de Acesso</span>
             </button>
         </section>
     </main>
+
 </body>
+
 </html>

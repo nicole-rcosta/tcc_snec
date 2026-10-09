@@ -1,4 +1,5 @@
-@import url(/static/styles/variables.css);
+@import url('variables.css');
+@import url('global.css');
 
 body{
     height: 100vh;
@@ -6,48 +7,51 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: white ;
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
 
     margin: 0 20px;
 }
 
 .logo_snec{
-    height: 15vh;
-    justify-self: flex-start;
+    height: 100px;
+
 }
+
 .login--card{
     display: flex;
     flex-direction: column;
-    background-color:  rgb(from var(--color-blue) r g b / 0.2);;
+    background-color: var(--bg-card);
     width: 100%;
-    height: 290px;
     padding: 20px;
     border-radius: 15px;
     justify-content: space-between;
+    align-items: center;
 
     gap: 10px;
+    max-width: 500px;
 }
+
 .login__title{
     all: unset;
     align-self: center;
-    font-size: 24px;
+    font-size: 30px;
     color: var(--color-blue);
+    font-family: var(--font-primary);
+    font-weight: bold;
 }
 
-.login-group{
+.login-field{
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 80%;
 }
 
-.password-group{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
 
 .login__label{
     color: var(--color-blue);
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .login__input{
@@ -55,36 +59,115 @@ body{
     padding: 10px;
     width: 100%;
     border-radius: 10px;
+    background-color: rgb(from var(--color-blue) r g b / 0.1);;
 
     
 }
 
 .login__button--submit{
-    all: unset;
-    width: 20vw;
-    height: 2vh;
-    align-self: center;
-
-    cursor: pointer;
-    padding: 10px;
+    border: none;
+    padding: 10px 20px;
     background-color: var(--color-green);
-    border-radius: 35px;
-    text-align: center;
-    color: var(--bg-card);
-    margin-top: 15px;
+    color: white;
+    border-radius: 10px;
+    width: 30%;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 600;
 }
+
 .login__link--forgot{
     color: var(--color-blue);
     align-self: center;
     text-decoration: none;
-    margin-bottom: 10px;
     font-style: italic;
+    margin-top: 15px;
 }
+
 .login__link--register{
     margin-top: 5px;
     color: var(--color-orange);
     align-self: center;
-    font-weight: bold;
     text-decoration: none;
+    margin-top: 15px;
+}
 
+.background{
+    height: 200px;
+    position:absolute;
+    z-index: -1;
+}
+
+.background-inf-dir{
+    bottom: 0;
+    right: 0;
+}
+
+.background-inf-esq{
+    bottom: 0;
+    left: 0;
+}
+
+.background-sup-dir{
+    top: 0;
+    right: 0;
+}
+
+.background-sup-esq{
+    top: 0;
+    left: 0;
+}   
+
+@media (min-width: 600px) {
+  .login--card{
+    width: 50%;
+  }
+  .background{
+    height: 300px;
+    z-index: -1;
+    }
+  .login__label{
+    font-size:20px ;
+  }
+  .logo_snec{
+    height: 120px;
+
+    }
+}
+
+@media (min-width: 800px) {
+  .login--card{
+    width: 50%;
+  }
+  .background{
+    height: 300px;
+    z-index: -1;
+    }
+    .login__label{
+    font-size:20px ;
+  }
+  .logo_snec{
+    height: 120px;
+
+    }
+}
+
+@media (min-width: 1200px) {
+  .login--card{
+    width: 30%;
+  }
+  .background{
+    height: 400px;
+    z-index: -1;
+  }
+  .login__title{
+    font-size: 35px;
+  }
+  .login__label{
+    font-size:20px ;
+  }
+  .logo_snec{
+    height: 120px;
+
+    }
 }

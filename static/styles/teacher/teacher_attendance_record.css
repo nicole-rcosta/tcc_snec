@@ -1,4 +1,4 @@
-@import url(/static/styles/variables.css);
+@import url(/static/styles/global.css);
 
 
 * {
@@ -29,6 +29,7 @@ body {
   font-size: 1.25rem;
   font-weight: 700;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-primary);
 }
 
 /* ==========================================================================
@@ -155,6 +156,8 @@ body {
   color: #2D3748;
   font-weight: 700;
   text-align: center;
+  
+  font-family: var(--font-primary);
 }
 
 [data-theme="dark"] .activities__section-title {

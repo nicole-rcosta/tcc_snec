@@ -1,6 +1,6 @@
 @import url(/static/styles/global.css);
 
-body.admin {
+.admin-confirm{
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
@@ -11,14 +11,14 @@ body.admin {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.admin-header {
+.header {
   background-color: var(--color-orange);
   padding: 1.25rem 1rem;
   text-align: center;
   box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.1);
 }
 
-.admin-header__title {
+.header__title {
   color: var(--bg-card);
   font-size: 1.6rem;
   font-weight: 700;
@@ -26,7 +26,7 @@ body.admin {
   font-family: var(--font-primary);
 }
 
-.admin-main {
+.admin-confirm__main{
   flex: 1;
   max-width: 500px;
   width: 100%;
@@ -36,6 +36,7 @@ body.admin {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .admin-confirm__card {
@@ -125,6 +126,18 @@ body.admin {
 
 .admin-confirm__button:active {
   transform: scale(0.98);
+}
+
+
+.admin-confirm__back-button{
+    color: var(--color-orange);
+    font-size: 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.admin-confirm__back-button:hover{
+    transform: translateX(-4px);
 }
 
 /* ==========================================

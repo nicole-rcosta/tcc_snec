@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash
+import smtplib
+from email.message import EmailMessage
 
 app = Flask(__name__)
 
@@ -86,8 +88,35 @@ def pagina_recuperar_senha():
 @app.route("/receber_email", methods=["POST"])
 def receber():
     email = request.form.get("email")
+    # Dados da conta
+    EMAIL_REMETENTE = "pablolorenzomoralez@gmail.com"
+    # tomar cuidado com isso
+    SENHA_APP = "mtls ntmg kxxn aquu" 
+    DESTINATARIO = email
 
-    print(email)
+    # Criando o e-mail
+    email = EmailMessage()
+    email["Subject"] = "Seu código SNEC: 661484"
+    email["From"] = EMAIL_REMETENTE
+    email["To"] = DESTINATARIO
+
+    email.set_content(f'''
+Confirme seu e-mail
+
+Use este código no jogo pra confirmar que este e-mail é seu:
+
+12345
+
+''')
+
+    # Conectando ao Gmail e enviando
+    with smtplib.SMTP("smtp.gmail.com", 587) as servidor:
+        servidor.starttls()
+        servidor.login(EMAIL_REMETENTE, SENHA_APP)
+        servidor.send_message(email)
+
+    print("E-mail enviado com sucesso!")
+    
     return  render_template("password/auth_password_insert.html")
 
 @app.route("/password_recover/code")

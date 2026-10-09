@@ -36,3 +36,25 @@ const inputs = document.querySelectorAll('.insert-code__input--digit');
     // foca no próximo campo vazio, ou no último se completou
     inputs[Math.min(digits.length, inputs.length - 1)].focus();
   });
+
+// faz com que os 5 inputs retornem apenas 1 código 
+
+const form = document.querySelector('.insert-code__container');
+const codigoCompleto = document.querySelector('#codigo-completo');
+
+form.addEventListener('submit', (event) => {
+    const codigo = Array.from(inputs)
+        .map(input => input.value)
+        .join('');
+
+    // impede o envio se não houver cinco dígitos
+    if (codigo.length !== 5) {
+        event.preventDefault();
+        alert('Digite os 5 dígitos do código.');
+        return;
+    }
+
+    // junta os cinco inputs em um único valor
+    codigoCompleto.value = codigo;
+    alert(codigo)
+});

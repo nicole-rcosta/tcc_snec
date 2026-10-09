@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layout.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styles/adm/admin_item_register.css">
-    <link rel="stylesheet" href="../static/styles/variables.css">
+<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
+{% set page_type = 'adm' %}
+
+<!-- Título que vai aparecer dentro da barra azul -->
+{% block page_title %}Administração{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/adm/admin_item_register.css') }}">  
+
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <title>Administração: Cadastrar Itens na Página Admin</title>
-</head>
-
-<body class="admin-panel">
-
-    <header class="admin-painel__header">
-        <h1 class="admin-painel__header--title">Administração</h1>
-    </header>
 
     <main class="admin-panel__main">
         <section class="admin-panel__greeting">
@@ -62,6 +59,4 @@
         </section>
     </main>
 
-</body>
-
-</html>
+{% endblock %}

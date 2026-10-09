@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS tb_atividades (
 CREATE TABLE IF NOT EXISTS tb_turmas (
  id_turma INT PRIMARY KEY AUTO_INCREMENT,
  turma VARCHAR(10) NOT NULL UNIQUE,
- periodo VARCHAR(10)
+ periodo VARCHAR(10),
+ quantidade_alunos INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS tb_usuarios (

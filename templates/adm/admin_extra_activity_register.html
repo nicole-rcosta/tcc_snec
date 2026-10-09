@@ -22,7 +22,7 @@
 
         <h1 class="admin-activity__title">Cadastrar Atividade Extracurricular:</h1>
 
-        <form action="" method="POST" class="admin-activity__form">
+        <form action="/adm/reg_activity/post" method="POST" class="admin-activity__form">
             <div class="admin-activity__form-group">
                 <div class="admin-activity__field">
                     <label for="activity-name" class="admin-activity__label">Atividade:</label>
@@ -50,24 +50,22 @@
                     </tr>
                 </thead>
                 <tbody class="admin-activity__table-body">
-                    <tr class="admin-activity__table-row">
-                        <td class="admin-activity__table-cell admin-activity__table-cell--activity" data-label="Atividade">Personaliza</td>
-                        <td class="admin-activity__table-cell admin-activity__table-cell--period" data-label="Período">Manhã</td>
-                        <td class="admin-activity__table-cell admin-activity__table-cell--actions">
-                            <button type="button" class="admin-activity__button admin-activity__button--delete" aria-label="Excluir atividade Personaliza">
-                                <i class="fa-regular fa-trash-can admin-activity__button-icon" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="admin-activity__table-row">
-                        <td class="admin-activity__table-cell admin-activity__table-cell--activity" data-label="Atividade">Personaliza</td>
-                        <td class="admin-activity__table-cell admin-activity__table-cell--period" data-label="Período">Manhã</td>
-                        <td class="admin-activity__table-cell admin-activity__table-cell--actions">
-                            <button type="button" class="admin-activity__button admin-activity__button--delete" aria-label="Excluir atividade Personaliza">
-                                <i class="fa-regular fa-trash-can admin-activity__button-icon" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
+
+                    {% if atividades %}
+                        {% for item in atividades %}
+                        <tr class="admin-activity__table-row">
+                            <td class="admin-activity__table-cell admin-activity__table-cell--activity" data-label="Atividade">{{ item.atividade }}</td>
+                            <td class="admin-activity__table-cell admin-activity__table-cell--period" data-label="Período">{{ item.periodo }}</td>
+                            <td class="admin-activity__table-cell admin-activity__table-cell--actions">
+                                <form action="/adm/exc_activity/{{ item.id_atividade }}" method="POST">
+                                    <button type="submit" class="admin-activity__button admin-activity__button--delete" aria-label="Excluir atividade Personaliza">
+                                        <i class="fa-regular fa-trash-can admin-activity__button-icon" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </section>

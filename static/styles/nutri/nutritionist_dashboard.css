@@ -1,6 +1,6 @@
 @import url(/static/styles/global.css);
 
-body {
+.dashboard {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,9 +16,10 @@ body {
   text-align: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   margin-bottom: 24px;
+  color: var(--bg-card);
 }
 
-.dashboard__top-bar h1 {
+.dashboard__header--title {
   color: var(--bg-card);
   font-size: 1.5rem;
   font-weight: 500;
@@ -27,7 +28,7 @@ body {
 }
 
 /* Container Principal */
-.dashboard {
+.dashboard__content{
   width: 100%;
   max-width: 480px;
   padding: 0 16px;
@@ -202,7 +203,7 @@ body {
 }
 
 @media (min-width: 768px) {
-  .dashboard {
+  .dashboard__content{
     max-width: 520px;
   }
 }

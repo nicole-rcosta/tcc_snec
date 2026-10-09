@@ -83,6 +83,13 @@ def pagina_confirmacao_prof():
 def pagina_recuperar_senha():
     return render_template("password/auth_password_recover.html")
 
+@app.route("/receber_email", methods=["POST"])
+def receber():
+    email = request.form.get("email")
+
+    print(email)
+    return  render_template("password/auth_password_insert.html")
+
 @app.route("/password_recover/code")
 def pagina_recuperar_senha_codigo():
     return render_template("password/auth_password_insert.html")

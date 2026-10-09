@@ -49,43 +49,29 @@ def buscar_alunos_almoco_hoje():
     }
 
 
-def registrar_almoco_aluno(rm_aluno, atendido, id_usuario=None):
+def atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario=None):
     """
-    Registra o almoço do aluno apenas se ele ainda não tiver sido marcado hoje.
-    Utiliza INSERT IGNORE para impedir qualquer tentativa de reescrever/desmarcar.
+    Insere ou atualiza o status de atendimento do almoço (True/False)
+    para o aluno no dia de hoje.
     """
-    # Bloqueio prévio no Python caso a requisição venha como False (tentativa de desmarcar)
-    if not atendido:
-        return {
-            "sucesso": False, 
-            "mensagem": "O almoço deste aluno já foi marcado e não pode ser desmarcado!"
-        }
-
     conexao, cursor = conectar()
 
     try:
-        # INSERT IGNORE insere o registro na 1ª vez. 
-        # Se já existir um registro hoje (rm_aluno + CURRENT_DATE), o MySQL ignora silenciosamente.
         query = """
-            INSERT IGNORE INTO tb_his_almoco (rm_aluno, data, id_usuario, atendido)
-            VALUES (%s, CURRENT_DATE(), %s, TRUE);
+            INSERT INTO tb_his_almoco (rm_aluno, data, id_usuario, atendido)
+            VALUES (%s, CURRENT_DATE(), %s, %s)
+            ON DUPLICATE KEY UPDATE
+                atendido = VALUES(atendido),
+                id_usuario = VALUES(id_usuario);
         """
         
-        cursor.execute(query, (rm_aluno, id_usuario))
+        cursor.execute(query, (rm_aluno, id_usuario, atendido))
         conexao.commit()
-
-        # cursor.rowcount > 0 indica que uma nova linha foi realmente inserida
-        if cursor.rowcount > 0:
-            return {"sucesso": True, "mensagem": "Almoço registrado com sucesso!"}
-        else:
-            return {
-                "sucesso": False, 
-                "mensagem": "O almoço deste aluno já havia sido registrado hoje!"
-            }
+        return {"sucesso": True, "mensagem": "Status do almoço atualizado com sucesso!"}
 
     except Exception as err:
         conexao.rollback()
-        print(f"Erro ao registrar almoço: {err}")
+        print(f"Erro ao atualizar status do almoço: {err}")
         return {"sucesso": False, "mensagem": f"Erro no banco de dados: {err}"}
 
     finally:

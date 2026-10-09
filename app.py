@@ -95,7 +95,7 @@ def receber_email():
 
     session["codigo_recuperacao"] = codigo
     # coloca um limite de 3 minutos pra expirar
-    session["expiracao_codigo"] = time.time() + 180
+    session["expiracao_codigo"] = time.time() + 60
 
     email = request.form.get("email")
     # Dados da sua conta
@@ -143,6 +143,30 @@ def receber_email():
 def pagina_recuperar_senha_codigo():
     return render_template("password/auth_password_insert.html")
 
+@app.route("/password_recover/code/validate", methods=["POST"])
+def pagina_recuperar_senha_codigo_validar():
+    codigo = session.get("codigo_recuperacao")
+    expiracao = session.get("expiracao_codigo", 0)
+
+    # Verifica se existe um código gerado
+    if not codigo:
+        return "<h2>Nenhum código foi gerado!</h2>"
+
+    # Verifica se o código expirou
+    if time.time() >= expiracao:
+        session.pop("codigo_recuperacao", None)
+        session.pop("expiracao_codigo", None)
+
+        return "<h2>O código expirou! Solicite outro.</h2>"
+
+    # Recebe o código completo enviado pelo JavaScript
+    codigo_digitado = request.form.get("codigo", "")
+
+    # Verifica se o código está correto
+    if codigo_digitado == codigo:
+        return "<h2>Código validado com sucesso!</h2>"
+
+    return "<h2>Código incorreto! Tente novamente.</h2>"
 
 @app.route("/password_recover/code/password_reset")
 def pagina_recuperar_senha_redefinicao():

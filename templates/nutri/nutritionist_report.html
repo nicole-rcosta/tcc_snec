@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard da Cozinha - Almoço</title>
+    <link rel="stylesheet" href="/static/styles/nutri/nutritionist_report.css">
+</head>
+<body class="dashboard">
+    <header>
+        <h1 class="dashboard__header-title">Dashboard da Cozinha</h1>
+    </header>
+    <main>
+        <section class="dashboard__total-card">
+            <h2 class="dashboard__total-label">Total do almoço do dia:</h2>
+            <p class="dashboard__total-number">20</p>
+        </section>
+
+        <section class="dashboard__list-section">
+            <h2 class="dashboard__list-title">Lista de Nomes</h2>
+            <table class="dashboard__table">
+                <thead class="dashboard__table-header">
+                    <tr class="dashboard__table-row">
+                        <th class="dashboard__table-cell--rm">RM</th>
+                        <th class="dashboard__table-cell--student">Aluno</th>
+                        <th class="dashboard__table-cell--year">Ano</th>
+                        <th class="dashboard__table-cell--activity">Atividade</th>
+                        <th class="dashboard__table-cell--status">Estado</th>
+                    </tr>
+                </thead>
+                <tbody class="dashboard__table-body">
+                    <tr class="dashboard__table-row">
+                        <td class="dashboard__table-cell--rm" data-label="RM">7050</td>
+                        <td class="dashboard__table-cell--student" data-label="Aluno">Fulano Silva</td>
+                        <td class="dashboard__table-cell--year" data-label="Ano">3°C</td>
+                        <td class="dashboard__table-cell--activity" data-label="Atividade">Comitê</td>
+                        <td class="dashboard__table-cell--status" data-label="Estado">
+                            <label class="dashboard__checkbox-label">
+                                <input type="checkbox" class="dashboard__checkbox-input">
+                                <span class="dashboard__checkbox-custom" aria-hidden="true"></span>
+                                <span class="visually-hidden">Marcar presença de Fulano Silva</span>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="dashboard__table-footer">
+                    <tr class="dashboard__table-row">
+                        <td colspan="5">Data Referente ao dia: 01/10/2026</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

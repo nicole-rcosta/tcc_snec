@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DashBoard Principal Cozinha</title>
-    <link rel="stylesheet" href="/static/styles/nutri/nutritionist_dashboard.css">
-</head>
-<body>
-    <header class="dashboard__header">
-        <h1 class="dashboard__header--title">DashBoard Cozinha</h1>
-    </header>
-    
+
+{% extends "layout.html" %}
+
+<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
+{% set page_type = 'nutri' %}
+
+<!-- Título que vai aparecer dentro da barra azul -->
+{% block page_title %}Dashboard Principal da Cozinha{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/nutri/nutritionist_dashboard.css') }}">  
+ 
+
     <main class="dashboard">
 
         <div class="dashboard__user">
@@ -141,5 +142,6 @@
     </main>
 
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
-</body>
-</html>
+
+
+ {% endblock %}

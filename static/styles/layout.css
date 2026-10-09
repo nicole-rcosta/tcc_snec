@@ -96,6 +96,7 @@
   font-weight: 600;
   margin: 0;
   text-align: center;
+  font-family: var(--font-primary);
 }
 
 /* --- VARIANTES DE COR (Consumindo do variables.css) --- */

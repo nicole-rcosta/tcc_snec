@@ -123,16 +123,16 @@ label {
 }
 
 
-/* h2 {
+h2 {
     margin: 15px 0 5px 0;
     color: var(--color-blue);
     font-size: 20px;
     /* align-self: flex-start; */
-    /* width: 100%; */
-    /* padding-bottom: 8px; */
-    /* align-items: center;
+    width: 100%;
+    padding-bottom: 8px;
+    align-items: center;
     justify-content: center;
-} */ 
+}  
 
 
 .admin-register__actions {

@@ -1,7 +1,7 @@
 from database.conexao import conectar
 import bcrypt
 
-def cadastrar(nome, email, cargo, senha, cpf):
+def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str) -> bool:
     conexao = None
     cursor = None
     try:

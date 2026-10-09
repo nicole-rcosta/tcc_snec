@@ -1,0 +1,165 @@
+@import url(/static/styles/global.css);
+
+body {
+    background-color: var(--bg-card);
+    min-height: 100vh;
+}
+
+/* --- Header "Turmas" --- */
+.header--classes {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-blue);
+    width: 100%;
+}
+
+.header--classes p {
+    font-size: 22px; 
+    font-weight: 700;
+    color: var(--bg-card);
+    font-family: var(--font-primary);
+}
+
+/* --- Main Container Responsivo --- */
+.classes-container {
+    padding: 20px 16px;
+    width: 100%;
+    max-width: 800px; 
+    margin: 0 auto;
+}
+
+/* --- Seção de Status / Topo --- */
+.classes-status {
+    margin-bottom: 24px;
+}
+
+.classes__greeting-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.classes__greting p {
+    font-size: 22px; 
+    font-weight: 700;
+    color: var(--color-orange);
+}
+
+
+
+/* --- Barra de Progresso Responsiva --- */
+.progress-container {
+    width: 100%;
+    max-width: 160px; /* Limita o tamanho no mobile */
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: rgb(from var(--color-green) r g b / 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress--step-1 {
+    width: 33.33%;
+    height: 100%;
+    background-color: var(--color-green);
+    border-radius: 10px;
+}
+
+.progress-label {
+    margin: 4px 0 0 0;
+    font-size: 12px; 
+    font-weight: 600;
+    color: var(--color-green);
+}
+
+/* --- Grid de Turmas Responsivo --- */
+.classes-grid {
+    display: grid;
+    /* Adapta automaticamente o número de colunas conforme o espaço livre */
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.class-card {
+    width: 160px;
+    height: 160px;
+    aspect-ratio: 1 / 1; /* Deixa ele em formato quadrado proporcional */
+}
+
+.class-card button {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.class-card button:hover {
+    background-color: rgb(from var(--color-blue) r g b / 0.2);
+}
+
+.class-card button:active {
+    transform: scale(0.96);
+}
+
+.class-card__title {
+    margin: 0;
+    font-weight: 760;
+    font-size: 40px; 
+    color: var(--color-blue);
+}
+
+/* --- Media Queries para Ecreãs Maiores (Tablets e Computadores) --- */
+@media (min-width: 768px) {
+    .classes-container {
+        padding: 40px 32px;
+    }
+
+    .header--classes {
+        height: 60px;
+    }
+
+    .header--classes p {
+        font-size: 1.625rem;
+    }
+
+    .classes__greting p {
+        font-size: 1.75rem;
+    }
+
+    .classes__logout-button svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    .progress-container {
+        max-width: 220px;
+    }
+
+    .progress-bar {
+        height: 10px;
+    }
+
+    .classes-grid {
+        /* Aumenta o tamanho mínimo dos cards no computador */
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 28px;
+    }
+
+    .class-card__title {
+        font-size: 2.75rem;
+    }
+}

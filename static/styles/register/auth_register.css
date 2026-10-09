@@ -1,0 +1,217 @@
+@import url(/static/styles/global.css);
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-position: center;
+    background-repeat:repeat;
+    background-attachment: fixed;
+    background-color: white ;
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+}
+
+.background{
+    height: 300px;
+    position:absolute;
+}
+
+.background-inf-dir{
+    bottom: 0;
+    right: 0;
+}
+
+.background-inf-esq{
+    bottom: 0;
+    left: 0;
+}
+
+.background-sup-dir{
+    top: 0;
+    right: 0;
+}
+
+.background-sup-esq{
+    top: 0;
+    left: 0;
+}   
+
+
+.register{
+    background-color: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    border-radius: 30px;
+    justify-content: center;
+    width: 35%;
+    z-index: 100;
+}
+
+.register__form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+.register__title{
+    font-family: var(--font-primary);
+    color: var(--color-blue);
+    font-size: 35px;
+}
+
+.register__field{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    gap: 10px;
+}
+
+.register__label{
+    color: var(--color-blue);
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.register__input{
+    border: none;
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    border-radius: 10px;
+    height: 35px;
+    font-size: 20px;
+    color: var(--color-blue);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.register__input::selection{
+    border:none;
+}
+
+.logo_snec{
+    height:120px;
+}
+
+.register__input--dropdown {
+    height: 27px;
+    padding: 0 8px;
+    color: var(--color-blue);
+    cursor: pointer;
+    height: 38px;
+    font-size: 18px;
+}
+
+
+.register__input--dropdown option {
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    color: var(--color-blue);
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.register__input--dropdown option:hover {
+    background-color: rgb(from var(--color-blue) r g b / 0.5);
+}
+
+
+.register__button--submit{
+    border: none;
+    padding: 10px 20px;
+    background-color: var(--color-green);
+    color: var(--bg-card);
+    border-radius: 10px;
+    width: 30%;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.register__field--dropdown{
+    width: 90%;
+}
+
+.icone_sair{
+    color: var(--color-orange);
+    font-size: 32px;
+    margin-left: auto;
+}
+
+.link--login{
+    margin-top: 5px;
+    color: var(--color-orange);
+    align-self: center;
+    text-decoration: none;
+    margin-top: 20px;
+    z-index: 100;
+}
+
+@media (max-width: 1500px) {
+  body{
+    height: 100vh;
+  }
+  .register{
+    max-width: 40%;
+  }
+
+  .register__field{
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  .register__field--dropdown{
+    width: 100%;
+  }
+  .register__button--submit{
+    width: 60%;
+    font-size: 15px;
+  }
+  .background{
+    height: 200px;
+  }
+}
+
+@media (max-width: 900px) {
+  body{
+    height: 100vh;
+  }
+  .register{
+    width: 85%;
+    max-width: 450px;
+  }
+
+  .register__field{
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  .register__field--dropdown{
+    width: 100%;
+  }
+  .register__button--submit{
+    width: 60%;
+  }
+  .register__title{
+    font-size: 30px;
+  }
+  .background{
+    height: 150px;
+  }
+  .register__input--dropdown {
+    font-size: 15px;
+  }
+  .register__input{
+    font-size: 15px;
+  }
+  .logo_snec{
+    height:120px;
+    }
+}

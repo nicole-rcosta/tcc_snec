@@ -176,6 +176,19 @@ body.admin-access {
   transform: scale(0.96);
 }
 
+
+
+.admin-access__back-button{
+  color: var(--color-orange);
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.admin-access__back-button:hover {
+    transform: translateX(-4px);
+}
+
 /* ==========================================
    Responsividade: Mobile First Breakpoint
    ========================================== */

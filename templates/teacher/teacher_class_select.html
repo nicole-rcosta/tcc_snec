@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layout.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styles/teacher/teacher_class_select.css">
-    <link rel="stylesheet" href="../static/styles/variables.css">
-    <link rel="stylesheet" href="/static/styles/global.css">
-    <title>Seleção de Turmas</title>
-</head>
+<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
+{% set page_type = 'professor' %}
 
-<body>
-    <!-- Header Turmas -->
-    <header class="header--classes">
-        <p>Turmas</p>
-    </header>
+<!-- Título que vai aparecer dentro da barra azul -->
+{% block page_title %}Seleção de Turmas{% endblock %}
 
+{% block content %}
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/teacher/teacher_class_select.css') }}">
+     
     <main class="classes">
         <section class="classes-status">
             <div class="classes__greeting-wrapper">
@@ -72,9 +67,6 @@
         </section>
     </main>
 
-</body>
-
-</html>
-
+ {% endblock %}
 
 

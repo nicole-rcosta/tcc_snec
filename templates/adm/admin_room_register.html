@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layout.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administração: Cadastrar Salas</title>
-    <link rel="stylesheet" href="/static/styles/global.css">
-    <link rel="stylesheet" href="/static/styles/adm/admin_room_register.css">
-</head>
+<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
+{% set page_type = 'adm' %}
 
-<body class="admin-room">
+<!-- Título que vai aparecer dentro da barra azul -->
+{% block page_title %}Administração{% endblock %}
 
-    <header class="admin-room__header">
-        <h1 class="admin-room__header--title">Administração</h1>
-    </header>
+{% block content %}
 
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/adm/admin_room_register.css') }}">  
+
+ 
     <main class="admin-room__main">
         <div class="admin-room__navigation">
             <a href="/adm">
@@ -84,6 +80,6 @@
         </section>
     </main>
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
-</body>
 
-</html>
+
+{% endblock %}

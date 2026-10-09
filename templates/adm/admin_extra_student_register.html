@@ -33,9 +33,19 @@
                 <label for="student-rm" class="admin-student__label">RM:</label>
                 <input type="text" id="student-rm" name="student_rm" class="admin-student__input" required>
             </div>
-            <div class="admin-student__field admin-student__field--class">
-                <label for="student-class" class="admin-student__label">Turma:</label>
-                <input type="text" id="student-class" name="student_class" class="admin-student__input" required>
+            <div class="admin-student__field admin-student__field--activity">
+                <label for="student-activity" class="admin-student__label">
+                    Turma:
+                </label>
+
+                <select class="admin-student__input admin-student__input--dropdown" id="admin-student__table-cell--class"
+                    name="student_activity" required>
+                    <option value="" selected disabled>Selecione uma turma:</option>
+                    {% for sala in salas %}
+                        <option value="{{sala.id_sala}}" >{{sala.turma}}</option>
+                    {% endfor %}
+
+                </select>
             </div>
             <div class="admin-student__field admin-student__field--activity">
                 <label for="student-activity" class="admin-student__label">
@@ -46,7 +56,7 @@
                     name="student_activity" required>
                     <option value="" selected disabled>Selecione uma atividade:</option>
                     {% for atividade in atividades %}
-                        <option value="{{atividade.id_atividade}}" data-periodo="">{{atividade.atividade}}</option>
+                        <option value="{{atividade.id_atividade}}" data-periodo="{{atividade.periodo}}">{{atividade.atividade}}</option>
                     {% endfor %}
 
                 </select>
@@ -129,6 +139,6 @@
     </section>
 </main>
 <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
-
+<script src="/static/js/auto_input.js"></script>
 
 {% endblock %}

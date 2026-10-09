@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
-from flask import Flask, render_template, request, redirect, session, jsonify, flash
 from model.usuarios import cadastrar
+from model.usuarios import atualizar_senha
 from model.salas import recuperar_salas
 from model.salas import adicionar_sala
 from model.salas import deletar_sala
@@ -221,6 +221,8 @@ def pagina_recuperar_senha_codigo_validar():
 
     # Verifica se o código está correto
     if codigo_digitado == codigo:
+        session.pop("codigo_recuperacao", None)
+        session.pop("expiracao_codigo", None)
         return render_template("password/auth_password_reset.html")
 
     return "<h2>Código incorreto! Tente novamente.</h2>"
@@ -228,6 +230,7 @@ def pagina_recuperar_senha_codigo_validar():
 @app.route("/password_recover/code/password_reset")
 def pagina_recuperar_senha_redefinicao():
     return render_template("password/auth_password_reset.html")
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)

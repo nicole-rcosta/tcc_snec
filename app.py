@@ -21,6 +21,10 @@ def pagina_cadastro():
 def pagina_adm():
     return render_template("adm/admin_item_register.html")
 
+@app.route("/adm_register")
+def pagina_adm_register():
+    return render_template("adm/admin_register.html")
+
 @app.route("/adm/reg_activity")
 def pagina_cad_atividade():
     return render_template("adm/admin_extra_activity_register.html")

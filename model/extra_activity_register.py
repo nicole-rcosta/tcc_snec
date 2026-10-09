@@ -17,7 +17,7 @@ def recuperar_atividade():
 def cadastrar_atividade(atividade, periodo):
     try:
         conexao, cursor = conectar()
-        cursor.execute("INSERT INTO tb_atividades (atividade, periodo) VALUES (%s, %s);", atividade, periodo)
+        cursor.execute("INSERT INTO tb_atividades (atividade, periodo) VALUES (%s, %s);", (atividade, periodo))
         conexao.commit()
         conexao.close()
         return True
@@ -30,7 +30,7 @@ def cadastrar_atividade(atividade, periodo):
 def excluir_atividade(id_atividade):
     try:
         conexao, cursor = conectar()
-        cursor.execute("DELETE FROM tb_atividades WHERE id_atividade = %s;", id_atividade)
+        cursor.execute("DELETE FROM tb_atividades WHERE id_atividade = %s;", (id_atividade, ))
         conexao.commit()
         conexao.close()
         return True

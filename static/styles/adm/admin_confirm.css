@@ -11,7 +11,22 @@ body.admin {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.admin-confirm__main {
+.admin-header {
+  background-color: var(--color-orange);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.1);
+}
+
+.admin-header__title {
+  color: var(--bg-card);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+  font-family: var(--font-primary);
+}
+
+.admin-main {
   flex: 1;
   max-width: 500px;
   width: 100%;
@@ -92,7 +107,7 @@ body.admin {
 
 .admin-confirm__button {
   background-color: var(--color-green);
-  color: #FFFFFF;
+  color: var(--bg-card);
   border: none;
   font-size: 1rem;
   font-weight: 700;

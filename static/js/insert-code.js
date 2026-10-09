@@ -55,6 +55,6 @@ form.addEventListener('submit', (event) => {
     }
 
     // junta os cinco inputs em um único valor
-    codigoCompleto.value = codigo;
-    alert(codigo)
+    codigoCompleto.value = codigo; 
+
 });

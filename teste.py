@@ -1,24 +1,37 @@
-import smtplib
-from email.message import EmailMessage
+import secrets
+import time
+from flask import Flask, session, request
 
-# Dados da sua conta
-EMAIL_REMETENTE = email
-# tomar cuidado com isso
-SENHA_APP = "mtls ntmg kxxn aquu" 
-DESTINATARIO = "pablo.moralez@aluno.senai.br"
+app = Flask(__name__)
+app.secret_key = "chave_teste"
 
-# Criando o e-mail
-email = EmailMessage()
-email["Subject"] = "Código de Recuperação de senha"
-email["From"] = EMAIL_REMETENTE
-email["To"] = DESTINATARIO
+@app.route("/")
+def gerar_codigo():
+    codigo = f"{secrets.randbelow(100000):05d}"
 
-email.set_content("seu Código é 123")
+    session["codigo_recuperacao"] = codigo
+    # coloca um limite de 3 minutos pra expirar
+    session["expiracao_codigo"] = time.time() + 180
 
-# Conectando ao Gmail e enviando
-with smtplib.SMTP("smtp.gmail.com", 587) as servidor:
-    servidor.starttls()
-    servidor.login(EMAIL_REMETENTE, SENHA_APP)
-    servidor.send_message(email)
+    return f"""
+        <h2>Código gerado: {codigo}</h2>
+        <p>Validade: 180 segundos</p>
+        <a href="/validar">Testar código</a>
+    """
 
-print("E-mail enviado com sucesso!")
+@app.route("/validar")
+def validar_codigo():
+    codigo = session.get("codigo_recuperacao")
+    expiracao = session.get("expiracao_codigo", 0)
+
+    if not codigo:
+        return "Nenhum código gerado. <a href='/'>Gerar código</a>"
+
+    if time.time() >= expiracao:
+        session.pop("codigo_recuperacao", None)
+        session.pop("expiracao_codigo", None)
+        return "Código expirado! <a href='/'>Gerar outro</a>"
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

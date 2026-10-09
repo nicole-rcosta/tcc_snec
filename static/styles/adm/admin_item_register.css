@@ -81,6 +81,11 @@ body {
     border-bottom: 1.5px solid rgb(from var(--text-secondary) r g b / 0.2); /* Cria o efeito do <hr> no mobile */
 }
 
+.admin-panel__menu a{
+    all: unset;
+    width: 100%;
+}
+
 .admin-panel__item:first-child {
     padding-top: 0;
 }

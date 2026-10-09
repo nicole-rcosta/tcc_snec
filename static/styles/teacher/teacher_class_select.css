@@ -120,6 +120,12 @@ body {
     font-weight: 760;
     font-size: 40px; 
     color: var(--color-blue);
+    
+}
+
+.class-card a{
+    text-decoration: none;
+    
 }
 
 /* --- Media Queries para Ecreãs Maiores (Tablets e Computadores) --- */

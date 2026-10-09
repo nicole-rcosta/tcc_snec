@@ -70,8 +70,50 @@
 }
 
 
+/* Espaçamento do conteúdo (como a barra fica abaixo do header, o margin-top do main diminui) */
 .main-content {
-  margin-top: 68px;
+  margin-top: 0;
   padding: 2rem;
-  min-height: calc(100vh - 68px);
+  min-height: calc(100vh - 116px);
+}
+
+/* ==========================================================================
+   BARRA SUPERIOR DE TÍTULO
+   ========================================================================== */
+.page-top-bar {
+  margin-top: 68px; /* Altura exata do header para ficar colado nele */
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.page-top-bar h2 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
+
+/* --- VARIANTES DE COR (Consumindo do variables.css) --- */
+
+/* Professor / Padrão (Azul) */
+.page-top-bar.azul,
+.page-top-bar.professor {
+  background-color: var(--color-blue);
+}
+
+/* Nutricionista (Verde) */
+.page-top-bar.verde,
+.page-top-bar.nutri {
+  background-color: var(--color-green);
+}
+
+/* Administração (Laranja) */
+.page-top-bar.laranja,
+.page-top-bar.adm {
+  background-color: var(--color-orange);
 }

@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirmação - SNEC</title>
-  <link rel="stylesheet" href="/static/styles/global.css">
-  <link rel="stylesheet" href="/static/styles/variables.css">
-  <link rel="stylesheet" href="/static/styles/teacher/teacher_attendance_confirm.css">
-</head>
-<body>
 
-  <!-- Header principal -->
-  <header class="header--classes">
-    <p>Confirmação</p>
-  </header>
+{% extends "layout.html" %}
 
+<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
+{% set page_type = 'professor' %}
+
+<!-- Título que vai aparecer dentro da barra azul -->
+{% block page_title %}Confirmação{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/teacher/teacher_attendance_confirm.css') }}">  
   <!-- Container principal -->
   <main class="confirmation">
 
@@ -56,5 +51,4 @@
 
   </main>
 
-</body>
-</html>
+  {% endblock %}

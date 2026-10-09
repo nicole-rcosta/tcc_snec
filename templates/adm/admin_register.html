@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administração: Cadastros Administração</title>
-    <link rel="stylesheet" href="/static/styles/adm/admin_register.css">
-    <link rel="stylesheet" href="/static/styles/global.css">
+{% extends "layout.html" %}
+
+<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
+{% set page_type = 'adm' %}
+
+<!-- Título que vai aparecer dentro da barra azul -->
+{% block page_title %}Administração{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/adm/admin_register.css') }}">  
+
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <header class="admin-register__header">
-        <p>Administração</p>
-    </header>
+
 
     <main class="admin-register">
         <i class="fa-solid fa-arrow-right-from-bracket recover-password__back-button admin-register__back-button"></i>
@@ -65,5 +65,6 @@
 
         </form>
     </main>
-</body>
-</html>
+
+
+{% endblock %}

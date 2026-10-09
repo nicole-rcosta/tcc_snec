@@ -198,6 +198,17 @@ main {
   margin-bottom: 2px;
 }
 
+.dashboard__back-button {
+    color: var(--color-orange);
+    font-size: 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.dashboard__back-button:hover {
+    transform: translateX(-4px);
+}
+
 /* ==========================================
    5. RESPONSIVIDADE (MOBILE CARD LAYOUT)
    ========================================== */

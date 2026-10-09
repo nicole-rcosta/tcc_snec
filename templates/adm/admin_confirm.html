@@ -14,12 +14,13 @@
     <header class="header">
         <h1 class="header__title">Administração</h1>
     </header>
-
+    
     <main class="admin-confirm__main">
+        <a href="/adm"><i class="fa-solid fa-arrow-left-long admin-confirm__back-button"></i></a>
         <section class="admin-confirm__card">
             <h2 class="admin-confirm__title">Confirme que você é o administrador:</h2>
 
-            <form action="" method="POST" class="admin-confirm__form">
+            <form action="/adm/adm_panel" class="admin-confirm__form">
                 <div class="admin-confirm__field admin-confirm__field--password">
                     <label for="admin-password" class="admin-confirm__label admin-confirm__label--password">Insira a sua senha:</label>
                     <input type="password" id="admin-password" name="password" class="admin-confirm__input admin-confirm__input--password"
@@ -32,7 +33,7 @@
             </form>
         </section>
     </main>
-
+    <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - Cadastrar Atividade Extracurricular</title>
+    <link rel="stylesheet" href="/static/styles/global.css">
+    <link rel="stylesheet" href="/static/styles/adm/admin_extra_activity_register.css">
+</head>
+
+<body class="admin-activity">
+
+    <header class="header">
+        <h1 class="header__title">Administração</h1>
+    </header>
+
+    <main class="admin-activity__main">
+        <div class="admin-activity__navigation">
+            <button type="button" class="admin-activity__back-button" aria-label="Voltar para a página anterior">
+                <i class="fa-solid fa-arrow-left-long admin-activity__back-icon" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <h1 class="admin-activity__title">Cadastrar Atividade Extracurricular:</h1>
+
+        <form action="" method="POST" class="admin-activity__form">
+            <div class="admin-activity__form-group">
+                <div class="admin-activity__field">
+                    <label for="activity-name" class="admin-activity__label">Atividade:</label>
+                    <input type="text" id="activity-name" name="activity_name" class="admin-activity__input" required>
+                </div>
+                <div class="admin-activity__field">
+                    <label for="activity-period" class="admin-activity__label">Período:</label>
+                    <input type="text" id="activity-period" name="activity_period" class="admin-activity__input" required>
+                </div>
+            </div>
+
+            <button type="submit" class="admin-activity__button admin-activity__button--submit">Cadastrar</button>
+        </form>
+
+        <section class="admin-activity__list-section">
+            <h2 class="admin-activity__list-title">Atividades cadastradas:</h2>
+            <table class="admin-activity__table">
+                <thead class="admin-activity__table-header">
+                    <tr class="admin-activity__table-row">
+                        <th class="admin-activity__table-cell admin-activity__table-cell--activity" scope="col">Atividade</th>
+                        <th class="admin-activity__table-cell admin-activity__table-cell--period" scope="col">Período</th>
+                        <th class="admin-activity__table-cell admin-activity__table-cell--actions" scope="col">
+                            <span class="visually-hidden">Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="admin-activity__table-body">
+                    <tr class="admin-activity__table-row">
+                        <td class="admin-activity__table-cell admin-activity__table-cell--activity" data-label="Atividade">Personaliza</td>
+                        <td class="admin-activity__table-cell admin-activity__table-cell--period" data-label="Período">Manhã</td>
+                        <td class="admin-activity__table-cell admin-activity__table-cell--actions">
+                            <button type="button" class="admin-activity__button admin-activity__button--delete" aria-label="Excluir atividade Personaliza">
+                                <i class="fa-regular fa-trash-can admin-activity__button-icon" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="admin-activity__table-row">
+                        <td class="admin-activity__table-cell admin-activity__table-cell--activity" data-label="Atividade">Personaliza</td>
+                        <td class="admin-activity__table-cell admin-activity__table-cell--period" data-label="Período">Manhã</td>
+                        <td class="admin-activity__table-cell admin-activity__table-cell--actions">
+                            <button type="button" class="admin-activity__button admin-activity__button--delete" aria-label="Excluir atividade Personaliza">
+                                <i class="fa-regular fa-trash-can admin-activity__button-icon" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+</body>
+
+</html>

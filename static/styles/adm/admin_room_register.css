@@ -10,6 +10,30 @@ body {
     align-items: center;
 }
 
+.admin-room {
+    background-color: var(--bg-card);
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-room__header {
+    background-color: var(--color-orange);
+    padding: 25px;
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.admin-room__header--title {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    font-family: var(--font-primary);
+}
+
 /* Navegação */
 .admin-room__navigation {
   width: 100%;

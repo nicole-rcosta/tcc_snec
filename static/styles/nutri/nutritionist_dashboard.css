@@ -1,12 +1,5 @@
 @import url(/static/styles/global.css);
 
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
   min-height: 100vh;
   display: flex;
@@ -25,11 +18,12 @@ body {
   margin-bottom: 24px;
 }
 
-.dashboard__header--title{
-  font-size: 1.5625rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  margin: 0;
+.dashboard__top-bar h1 {
+  color: var(--bg-card);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-family: var(--font-primary);
 }
 
 /* Container Principal */
@@ -172,7 +166,7 @@ body {
 
 .dashboard__button--see-more:hover {
   background-color: var(--color-orange);
-  color: #FFFFFF;
+  color: var(--bg-card);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 107, 74, 0.25);
 }

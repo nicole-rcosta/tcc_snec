@@ -1,187 +1,175 @@
-@import url('variables.css');
-@import url('global.css');
+@import url('/static/styles/global.css');
 
-/* Visually Hidden Helper (Acessibilidade) */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+body {
+    background-color: var(--bg-main);
+    color: rgb(from var(--text-secondary) r g b / 0.2);
 }
 
-/* ==========================================
-   Header Global (Dicionário BEM)
-   ========================================== */
-.header {
-  background-color: var(--color-orange);
-  padding: 1.25rem 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
+/* Header */
+.admin-painel {
+    background-color: var(--bg-card);
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.header__title {
-  font-size: 1.5625rem; /* 25px */
-  font-weight: 700;
-  color: #FFFFFF;
-  margin: 0;
+.admin-painel__header {
+    background-color: var(--color-orange);
+    padding: 25px;
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
 }
 
-/* ==========================================
-   Bloco: admin-panel
-   ========================================== */
-body.admin-panel {
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  min-height: 100vh;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  transition: background-color 0.3s, color 0.3s;
+.admin-painel__header--title {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    font-family: var(--font-primary);
 }
 
-.admin-panel__main {
-  max-width: 400px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1.25rem 1rem 2.5rem 1rem;
-  box-sizing: border-box;
-}
-
-/* Saudação e Títulos */
 .admin-panel__greeting {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
-.admin-panel__user-title {
-  font-size: 1.125rem; /* 18px */
-  font-weight: 700;
-  color: var(--color-blue);
-  margin: 0;
+.admin-panel__greeting h1 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-blue);
 }
 
 .admin-panel__title {
-  font-size: 1.875rem; /* 30px */
-  font-weight: 700;
-  color: var(--color-blue);
-  margin-top: 0.75rem;
-  margin-bottom: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--color-blue);
+    margin-top: 12px;
 }
 
-/* Seção de Menu e Divisores */
+/* Seção do Menu */
 .admin-panel__menu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
+/* Linhas divisorias topo e base */
 .admin-panel__divider {
-  width: 100%;
-  border: none;
-  border-top: 1.5px solid var(--text-secondary);
-  margin: 1.5rem 0;
-  opacity: 0.5;
+    width: 100%;
+    border: none;
+    border-top: 1.5px solid rgb(from var(--text-secondary) r g b / 0.2);
+    margin: 25px 0;
 }
 
-/* Grade de Atalhos (Grid Mobile) */
+/* Container e linhas divisórias internas no Mobile */
 .admin-panel__grid {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .admin-panel__item {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 1.25rem 0;
-  border-bottom: 1.5px solid var(--text-secondary);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    border-bottom: 1.5px solid rgb(from var(--text-secondary) r g b / 0.2); /* Cria o efeito do <hr> no mobile */
 }
 
 .admin-panel__item:first-child {
-  padding-top: 0;
+    padding-top: 0;
 }
 
 .admin-panel__item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
+    border-bottom: none; /* Remove a linha do último item para não duplicar com a <hr> inferior */
+    padding-bottom: 0;
 }
 
-/* Botões do Painel (Estilo Base) */
-.admin-panel__button {
-  width: 80%;
-  min-height: 100px;
-  border: none;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  padding: 0.75rem 1rem;
-  background-color: rgba(80, 102, 202, 0.23);
-  color: var(--color-blue);
-  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, filter 0.2s ease;
-}
-
-.admin-panel__button:hover {
-  filter: brightness(0.95);
-}
-
-.admin-panel__button:active {
-  transform: scale(0.98);
-}
-
-.admin-panel__button-text {
-  font-size: 1.5rem; /* 24px */
-  font-weight: 700;
-  text-align: center;
-  line-height: 1.2;
-}
-
-/* Modificador do Botão de Acesso */
+/* Estilo Base dos Botões */
+.admin-panel__button--rooms,
+.admin-panel__button--activities,
+.admin-panel__button--students,
 .admin-panel__button--access {
-  width: 80%;
+    width: 80%;
+    min-height: 100px;
+    border: none;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 16px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-/* ==========================================
-   Responsividade: Desktop Breakpoint
-   ========================================== */
+.admin-panel__button--rooms:hover,
+.admin-panel__button--activities:hover,
+.admin-panel__button--students:hover,
+.admin-panel__button--access:hover {
+    filter: brightness(0.95);
+}
+
+.admin-panel__button--rooms:active,
+.admin-panel__button--activities:active,
+.admin-panel__button--students:active,
+.admin-panel__button--access:active {
+    transform: scale(0.98);
+}
+
+.admin-panel__button--rooms span,
+.admin-panel__button--activities span,
+.admin-panel__button--students span,
+.admin-panel__button--access span {
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Cores dos Botões */
+.admin-panel__button--rooms,
+.admin-panel__button--activities,
+.admin-panel__button--students {
+    background-color: rgb(from var(--color-green) r g b / 0.2);
+    color: var(--color-green);
+}
+
+.admin-panel__button--access {
+    background-color: rgb(from var(--color-blue) r g b / 0.2);
+    color: var(--color-blue);
+}
+
+/* --- RESPONSIVIDADE: TABLET (iPad) E DESKTOP --- */
 @media (min-width: 768px) {
-  .admin-panel__main {
-    max-width: 850px;
-    padding-top: 2rem;
-  }
+    .admin-panel {
+        max-width: 850px;
+    }
 
-  .admin-panel__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-  }
+    .admin-panel__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
 
-  .admin-panel__item {
-    border-bottom: none;
-    padding: 0;
-  }
+    .admin-panel__item {
+        border-bottom: none;
+        padding: 0;
+    }
 
-  .admin-panel__button {
-    width: 100%;
-  }
+    .admin-panel__button--rooms,
+    .admin-panel__button--activities,
+    .admin-panel__button--students {
+        width: 100%;
+    }
 
-  .admin-panel__button--access {
-    width: 100%;
-  }
+    /* Altere de width: calc(33.33% - 14px) para 100% */
+    .admin-panel__button--access {
+        width: 100%;
+    }
 }

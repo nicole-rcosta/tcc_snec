@@ -1,9 +1,9 @@
 const inputs = document.querySelectorAll('.insert-code__input--digit');
 
   inputs.forEach((input, index) => {
-    // Digitou algo → vai pro próximo
+    // digitou algo vai pro próximo
     input.addEventListener('input', () => {
-      // mantém só números
+      // permite só números
       input.value = input.value.replace(/\D/g, '');
 
       if (input.value && index < inputs.length - 1) {
@@ -11,18 +11,18 @@ const inputs = document.querySelectorAll('.insert-code__input--digit');
       }
     });
 
-    // Backspace em campo vazio → volta pro anterior
+    // backspace em campo vazio  volta pro anterior
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Backspace' && !input.value && index > 0) {
         inputs[index - 1].focus();
       }
     });
 
-    // Seleciona o conteúdo ao focar (facilita sobrescrever)
+    // seleciona o conteúdo ao focar (facilita sobrescrever)
     input.addEventListener('focus', () => input.select());
   });
 
-  // Colar o código inteiro (ex: "12345") distribui pelos campos
+  // permite control v
   inputs[0].addEventListener('paste', (e) => {
     e.preventDefault();
     const digits = (e.clipboardData.getData('text') || '')

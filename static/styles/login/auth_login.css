@@ -1,5 +1,4 @@
-@import url('variables.css');
-@import url('global.css');
+@import url('/static/styles/global.css');
 
 body{
     height: 100vh;

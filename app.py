@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash
 from model.usuarios import cadastrar
-from model.salas import recuperar_salas
-from model.salas import adicionar_sala
-from model.salas import deletar_sala
+from model.class_register import recuperar_salas
+from model.class_register import adicionar_sala
+from model.class_register import deletar_sala
 import mysql
 import mysql.connector
 
@@ -56,6 +56,7 @@ def pagina_cad_aluno():
 @app.route("/adm/reg_class")
 def pagina_cad_sala():
     salas = recuperar_salas()
+    print(salas)
     return render_template("adm/admin_room_register.html", salas = salas)
 
 @app.route("/adm/reg_class/post", methods=["POST"])

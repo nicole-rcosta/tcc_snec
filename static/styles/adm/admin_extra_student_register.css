@@ -227,6 +227,41 @@ body {
   color: var(--text-secondary);
 }
 
+/* Campo específico do dropdown */
+.admin-student__field--activity {
+    width: 90%;
+}
+
+/* Formatação do select */
+.admin-student__input--dropdown {
+    height: 38px;
+    padding: 0 8px;
+    color: var(--color-blue);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Opções do dropdown */
+.admin-student__input--dropdown option {
+    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    color: var(--color-blue);
+    padding: 10px;
+    transition: 0.3s;
+}
+
+/* Responsividade do dropdown */
+@media (max-width: 1500px) {
+    .admin-student__field--activity {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .admin-student__input--dropdown {
+        font-size: 15px;
+    }
+}
+
 /* ==========================================
    Responsividade: Mobile First Breakpoint
    ========================================== */

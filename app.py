@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
-from flask import Flask, render_template, request, redirect, session, jsonify, flash
-from model.usuarios import cadastrar
+from model.usuarios import cadastrar, logar
 from model.salas import recuperar_salas
 from model.salas import adicionar_sala
 from model.salas import deletar_sala
@@ -9,12 +8,32 @@ import mysql
 import mysql.connector
 
 app = Flask(__name__)
+app.secret_key = "snec_tcc_chave"
 
 @app.route("/")
 
 @app.route("/login")
 def pagina_login():
     return render_template("login/auth_login.html")
+@app.route("/login/post", methods=["POST"])
+def logar_usuario():
+    cpf = request.form.get("cpf")
+    senha = request.form.get("password")
+
+    resultado = logar(cpf, senha)
+
+    if resultado['sucesso']:
+        session['usuario'] = resultado['usuario']
+        cargo = resultado['usuario']['cargo']
+        if cargo == 'prof':
+            return redirect('/teacher')
+        elif cargo == 'nutri':
+            return redirect('/nutri_dashboard')
+        elif cargo == 'adm':
+            return redirect('/adm')
+        return render_template()
+    else:
+        return redirect("/cadastro")
 
 @app.route("/cadastro")
 def pagina_cadastro():
@@ -30,7 +49,7 @@ def cadastrar_usuario():
     if cadastrar(nome, email, cargo, senha, cpf):
         return render_template("login/auth_login.html")
     else:
-        return redirect("/")
+        return redirect("/cadastro")
     
 # ---------------------------
 # Paginas de Administrador
@@ -73,7 +92,6 @@ def pagina_cad_aluno():
 
 
 
-
 @app.route("/adm/reg_class")
 def pagina_cad_sala():
     salas = recuperar_salas()
@@ -91,8 +109,6 @@ def pagina_cad_sala_post():
 def pagina_cad_sala_del(id):
     deletar_sala(id)
     return redirect("/adm/reg_class")
-
-
 
 
 @app.route("/adm/conf_panel")

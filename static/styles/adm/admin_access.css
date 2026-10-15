@@ -1,7 +1,10 @@
 @import url(/static/styles/global.css);
 
 /* Visually Hidden Helper (Acessibilidade) */
-.visually-hidden {
+
+/* Na revisão, excluindo esta parte, visualmente nada foi alterado (não sei para que serve) */
+
+/* .visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -11,54 +14,11 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
+} */
 
-/* ==========================================
-   Header Global (Dicionário BEM)
-   ========================================== */
-.header {
-  background-color: var(--color-orange);
-  padding: 1.25rem 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-}
 
-.header__title {
-  font-size: 1.5625rem; /* 25px */
-  font-weight: 700;
-  color: #FFFFFF;
-  margin: 0;
-}
-
-/* ==========================================
-   Bloco: admin-access
-   ========================================== */
-body.admin-access {
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  min-height: 100vh;
-  margin: 0;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.admin-access__header {
-  background-color: var(--color-orange);
-  padding: 1.25rem 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.1);
-}
-
-.admin-access__header-title {
-  color: var(--bg-card);
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 0;
-  font-family: var(--font-primary);
-}
-
-.admin-access__main {
-  max-width: 850px; /* Padronizado com as demais telas do painel admin */
+.admin-access {
+  max-width: 850px; 
   margin: 2rem auto;
   padding: 0 1rem;
   box-sizing: border-box;
@@ -86,7 +46,7 @@ body.admin-access {
   margin-bottom: 1.5rem;
 }
 
-/* Tabela de Pedidos */
+
 .admin-access__table {
   width: 100%;
   border-collapse: collapse;
@@ -126,7 +86,7 @@ body.admin-access {
   font-weight: 600;
 }
 
-/* Botões de Ação */
+
 .admin-access__action-buttons {
   display: flex;
   gap: 0.5rem;
@@ -177,7 +137,6 @@ body.admin-access {
 }
 
 
-
 .admin-access__back-button{
   color: var(--color-orange);
   font-size: 30px;
@@ -189,9 +148,10 @@ body.admin-access {
     transform: translateX(-4px);
 }
 
-/* ==========================================
-   Responsividade: Mobile First Breakpoint
-   ========================================== */
+
+
+
+
 @media (max-width: 600px) {
   .admin-access__main {
     margin: 1rem auto;

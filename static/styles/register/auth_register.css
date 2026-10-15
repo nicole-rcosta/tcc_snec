@@ -10,7 +10,7 @@ body{
     background-position: center;
     background-repeat:repeat;
     background-attachment: fixed;
-    background-color: white ;
+    background-color: var(--bg-main) ;
     background-color: rgb(from var(--color-blue) r g b / 0.1);
 }
 

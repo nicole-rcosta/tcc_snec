@@ -1,5 +1,7 @@
 @import url('/static/styles/global.css');
 
+
+.admin-panel {
 .admin-panel {
     background-color: var(--bg-card);
     color: var(--text-secondary);
@@ -29,12 +31,14 @@
     margin-top: 12px;
 }
 
+
 .admin-panel__menu {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
+
 
 .admin-panel__divider {
     width: 100%;
@@ -58,11 +62,18 @@
     border-bottom: 1.5px solid rgb(from var(--text-secondary) r g b / 0.2); 
 }
 
+.admin-panel__menu a{
+    all: unset;
+    width: 100%;
+    border-bottom: 1.5px solid rgb(from var(--text-secondary) r g b / 0.2); 
+}
+
 .admin-panel__item:first-child {
     padding-top: 0;
 }
 
 .admin-panel__item:last-child {
+    border-bottom: none; 
     border-bottom: none; 
     padding-bottom: 0;
 }
@@ -139,6 +150,7 @@
 @media (min-width: 768px) {
     .admin-panel {
         max-width: 850px;
+        margin: 0 auto;
         margin: 0 auto;
     }
 

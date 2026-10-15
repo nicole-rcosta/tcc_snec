@@ -86,6 +86,10 @@ def excluir_atividades(id_atividade):
     return redirect(url_for("pagina_cad_atividade"))
 
 
+@app.route("/adm/reg_student")
+def pagina_cad_aluno():
+    return render_template("adm/admin_extra_student_register.html")
+
 
 
 @app.route("/adm/reg_class")
@@ -105,20 +109,6 @@ def pagina_cad_sala_post():
 def pagina_cad_sala_del(id):
     deletar_sala(id)
     return redirect("/adm/reg_class")
-
-
-
-
-@app.route("/adm/reg_student")
-def pagina_cad_aluno():
-    return render_template("adm/admin_student_register.html")
-
-
-
-@app.route("/adm/reg_student_extra")
-def pagina_cad_aluno_ativ():
-    return render_template("adm/admin_student_extra_register.html")
-
 
 
 @app.route("/adm/conf_panel")

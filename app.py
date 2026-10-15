@@ -166,8 +166,8 @@ def pagina_confirmacao_prof():
 def pagina_recuperar_senha():
     return render_template("password/auth_password_recover.html")
 
-@app.route("/password_receive", methods=["POST"])
-def receber_email():
+@app.route("/password_receive/post", methods=["POST"])
+def receber_email_post():
     # linha que gera o código
     codigo = f"{secrets.randbelow(100000):05d}"
 
@@ -232,8 +232,8 @@ def receber_email():
 def pagina_recuperar_senha_codigo():
     return render_template("password/auth_password_insert.html")
 
-@app.route("/password_recover/code/validate", methods=["POST"])
-def pagina_recuperar_senha_codigo_validar():
+@app.route("/password_recover/code/post", methods=["POST"])
+def pagina_recuperar_senha_codigo_post():
     codigo = session.get("codigo_recuperacao")
     expiracao = session.get("expiracao_codigo", 0)
 
@@ -265,9 +265,12 @@ def pagina_recuperar_senha_codigo_validar():
                         erro_codigo=True
                     )
     
-
-@app.route("/password_recover/code/password_reset", methods=["POST"])
+@app.route("/password_recover/code/password_reset")
 def pagina_recuperar_senha_redefinicao():
+    return render_template("password/auth_password_reset.html")
+
+@app.route("/password_recover/code/password_reset/post", methods=["POST"])
+def pagina_recuperar_senha_redefinicao_post():
 
     nova_senha = request.form.get("new-password")
     nova_senha_confirm = request.form.get("confirm-password")

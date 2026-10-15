@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
+{% set page_type = 'adm' %}
+
+<!-- Título que vai aparecer dentro da barra azul -->
+{% block page_title %}Administração{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/adm/admin_student_extra_register.css') }}">  
+
+    <main class="admin-student-extra__main">
+        <div class="admin-student-extra__navigation">
+            <a href="/adm">
+                <button type="button" class="admin-student-extra__back-button" aria-label="Voltar para a página anterior">
+                    <i class="fa-solid fa-arrow-left-long admin-student-extra__back-icon" aria-hidden="true"></i>
+                </button>
+            </a>
+        </div>
+
+        <h1 class="admin-student-extra__title">Cadastrar Aluno:</h1>
+
+        <form action="" method="POST" class="admin-student-extra__form">
+            <div class="admin-student-extra__form-group">
+                <div class="admin-student-extra__field admin-student-extra__field--name">
+                    <label for="student-name" class="admin-student-extra__label">Nome Completo:</label>
+                    <input type="text" id="student-name" name="student_name" class="admin-student-extra__input" required>
+                </div>
+                <div class="admin-student-extra__field admin-student-extra__field--rm">
+                    <label for="student-rm" class="admin-student-extra__label">RM:</label>
+                    <input type="text" id="student-rm" name="student_rm" class="admin-student-extra__input" required>
+                </div>
+                <div class="admin-student-extra__field admin-student-extra__field--class">
+                    <label for="student-class" class="admin-student-extra__label">Turma:</label>
+                    <input type="text" id="student-class" name="student_class" class="admin-student-extra__input" required>
+                </div>
+            </div>
+
+            <button type="submit" class="admin-student-extra__button admin-student-extra__button--submit">Cadastrar</button>
+        </form>
+
+        <section class="admin-student-extra__list-section">
+            <h2 class="admin-student-extra__list-title">Alunos cadastrados:</h2>
+            <table class="admin-student-extra__table">
+                <thead class="admin-student-extra__table-header">
+                    <tr class="admin-student-extra__table-row">
+                        <th class="admin-student-extra__table-cell admin-student-extra__table-cell--name" scope="col">Nome</th>
+                        <th class="admin-student-extra__table-cell admin-student-extra__table-cell--rm" scope="col">RM</th>
+                        <th class="admin-student-extra__table-cell admin-student-extra__table-cell--class" scope="col">Turma</th>
+                        <th class="admin-student-extra__table-cell admin-student-extra__table-cell--actions" scope="col">
+                            <span class="visually-hidden">Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="admin-student-extra__table-body">
+                    <tr class="admin-student-extra__table-row">
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--name" data-label="Nome">Fulana Lorenzo Morales</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--rm" data-label="RM">7041</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--class" data-label="Turma">3ºB</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--actions">
+                            <button type="button" class="admin-student-extra__button admin-student-extra__button--delete" aria-label="Excluir aluno Fulana Lorenzo Morales">
+                                <i class="fa-regular fa-trash-can admin-student-extra__button-icon" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="admin-student-extra__table-row">
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--name" data-label="Nome">Fulano Giovani de Andrade</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--rm" data-label="RM">7042</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--class" data-label="Turma">3ºC</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--actions">
+                            <button type="button" class="admin-student-extra__button admin-student-extra__button--delete" aria-label="Excluir aluno Fulano Giovani de Andrade">
+                                <i class="fa-regular fa-trash-can admin-student-extra__button-icon" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="admin-student-extra__table-row">
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--name" data-label="Nome">Fulana Gonçalves</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--rm" data-label="RM">7043</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--class" data-label="Turma">3ºA</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--actions">
+                            <button type="button" class="admin-student-extra__button admin-student-extra__button--delete" aria-label="Excluir aluna Fulana Gonçalves">
+                                <i class="fa-regular fa-trash-can admin-student-extra__button-icon" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+
+{% endblock %}

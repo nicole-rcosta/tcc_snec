@@ -1,0 +1,260 @@
+@import url(/static/styles/global.css);
+
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background-color: #ffffff;
+    color: #a6a6a6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Navegação */
+.admin-student-extra__navigation {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.admin-student-extra__back-button {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.admin-student-extra__back-icon {
+    font-size: 1.75rem;
+    color: var(--color-orange);
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.admin-student-extra__back-button:hover .admin-student-extra__back-icon {
+    filter: brightness(0.9);
+    transform: translateX(-3px);
+}
+
+/* Título */
+.admin-student-extra__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-blue);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Formulário */
+.admin-student-extra__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+
+.admin-student-extra__form-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.admin-student-extra__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.admin-student-extra__label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-blue);
+}
+
+.admin-student-extra__input {
+    width: 100%;
+    height: 42px;
+    background-color: rgba(80, 102, 202, 0.1);
+    border: none;
+    border-radius: 12px;
+    padding: 0 1rem;
+    font-size: 1rem;
+    color: var(--text-main);
+    box-sizing: border-box;
+    outline: none;
+    transition: box-shadow 0.2s, background-color 0.2s;
+}
+
+.admin-student-extra__input:focus {
+    box-shadow: 0 0 0 2px var(--color-blue);
+}
+
+/* Botões */
+.admin-student-extra__button {
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, filter 0.2s, transform 0.1s;
+}
+
+.admin-student-extra__button--submit {
+    background-color: var(--color-green);
+    color: #FFFFFF;
+    font-size: 0.95rem;
+    padding: 0.6rem 2.5rem;
+    min-height: 40px;
+    box-shadow: 0 4px 10px rgba(90, 175, 144, 0.25);
+}
+
+.admin-student-extra__button--submit:hover {
+    filter: brightness(0.95);
+    box-shadow: 0 6px 14px rgba(90, 175, 144, 0.35);
+}
+
+.admin-student-extra__button--submit:active {
+    transform: scale(0.98);
+}
+
+.admin-student-extra__button--delete {
+    background-color: rgba(220, 53, 69, 0.12);
+    color: #DC3545;
+    padding: 0.5rem 0.65rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-student-extra__button--delete:hover {
+    background-color: #DC3545;
+    color: #FFFFFF;
+}
+
+/* Seção de listagem */
+.admin-student-extra__list-section {
+    background-color: rgba(255, 96, 28, 0.08);
+    padding: 1.5rem;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+[data-theme="dark"] .admin-student-extra__list-section {
+    background-color: rgba(255, 96, 28, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-student-extra__list-title {
+    font-size: 1.3rem;
+    color: var(--color-blue);
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+}
+
+/* Tabela */
+.admin-student-extra__table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.admin-student-extra__table-header .admin-student-extra__table-cell {
+    padding: 0.75rem 0.5rem;
+    color: var(--color-blue);
+    font-weight: 700;
+    border-bottom: 2px solid rgba(80, 102, 202, 0.2);
+}
+
+.admin-student-extra__table-body .admin-student-extra__table-row {
+    border-bottom: 1px solid rgba(108, 117, 125, 0.15);
+}
+
+.admin-student-extra__table-body .admin-student-extra__table-row:last-child {
+    border-bottom: none;
+}
+
+.admin-student-extra__table-cell {
+    padding: 0.75rem 0.5rem;
+    color: var(--text-main);
+    vertical-align: middle;
+}
+
+.admin-student-extra__table-cell--name {
+    font-weight: 600;
+    text-align: left;
+}
+
+.admin-student-extra__table-cell--rm,
+.admin-student-extra__table-cell--class {
+    color: var(--text-secondary);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .admin-student-extra__button--submit {
+        width: 100%;
+    }
+
+    .admin-student-extra__list-section {
+        padding: 1rem;
+    }
+
+    .admin-student-extra__table-header {
+        display: none;
+    }
+
+    .admin-student-extra__table,
+    .admin-student-extra__table-body,
+    .admin-student-extra__table-row,
+    .admin-student-extra__table-cell {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .admin-student-extra__table-body .admin-student-extra__table-row {
+        background-color: var(--bg-card);
+        border-radius: 12px;
+        padding: 0.8rem 1rem;
+        margin-bottom: 0.75rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(108, 117, 125, 0.15);
+    }
+
+    .admin-student-extra__table-cell {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px dashed rgba(108, 117, 125, 0.2);
+        text-align: right;
+    }
+
+    .admin-student-extra__table-cell:last-child {
+        border-bottom: none;
+    }
+
+    .admin-student-extra__table-cell::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: var(--color-blue);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+    }
+
+    .admin-student-extra__table-cell--actions::before {
+        content: "Ações";
+    }
+}

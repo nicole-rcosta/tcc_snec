@@ -37,14 +37,14 @@ def logar_usuario():
         elif cargo == 'nutri':
             return redirect('/nutri_dashboard')
         elif cargo == 'adm':
-            return redirect('/adm')
+            return render_template("/adm/admin_item_register.html")
         return render_template()
     else:
         return redirect("/cadastro")
 
 @app.route("/cadastro")
 def pagina_cadastro():
-    return render_template("register/auth_register.html")
+    return render_template("/register/auth_register.html")
 @app.route("/cadastro/post", methods=["POST"])
 def cadastrar_usuario():
     nome = request.form.get("name")
@@ -52,9 +52,10 @@ def cadastrar_usuario():
     email = request.form.get("email")
     cargo = request.form.get("register")
     senha = request.form.get("password")
+    status = "pendente"
 
-    if cadastrar(nome, email, cargo, senha, cpf):
-        return render_template("login/auth_login.html")
+    if cadastrar(nome, email, cargo, senha, cpf, status):
+        return render_template("/login/auth_login.html")
     else:
         return redirect("/cadastro")
     
@@ -64,12 +65,12 @@ def cadastrar_usuario():
 
 @app.route("/adm")
 def pagina_adm():
-    return render_template("adm/admin_item_register.html")
+    return render_template("/adm/admin_item_register.html")
 
 @app.route("/adm_register")
 def pagina_adm_register():
-    return render_template("adm/admin_register.html")
-@app.route("/adm_register/post")
+    return render_template("/adm/admin_register.html")
+@app.route("/adm_register/post", methods=["POST"])
 def cadastrar_adm():
     nome = request.form.get("name")
     cpf = request.form.get("cpf")
@@ -77,10 +78,11 @@ def cadastrar_adm():
     senha = request.form.get("password")
     confirmar_senha = request.form.get("confirm-password")
     cargo = "adm"
+    status = "aprovado"
 
     if senha == confirmar_senha:
-        if cadastrar(nome, email, cargo, senha, cpf):
-            return render_template("login/auth_login.html")
+        if cadastrar(nome, email, cargo, senha, cpf, status):
+            return render_template("/login/auth_login.html")
         else:
             return redirect("/adm_register")
     else:

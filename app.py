@@ -49,7 +49,7 @@ def cadastrar_usuario():
     if cadastrar(nome, email, cargo, senha, cpf):
         return render_template("login/auth_login.html")
     else:
-        return redirect("/")
+        return redirect("/cadastro")
     
 # ---------------------------
 # Paginas de Administrador

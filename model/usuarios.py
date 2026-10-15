@@ -66,36 +66,46 @@ def verificar_email(email: str) -> bool:
         if conexao:
             conexao.close()
 
-   
+def atualizar_senha(email: str, nova_senha: str) -> bool:
+    conexao = None
+    cursor = None
 
-# def atualizar_senha(email: str, nova_senha: str) -> bool:
-#     conexao = None
-#     cursor = None
-#     try:
-        
-#         senha_bytes = nova_senha.encode('utf-8')
-#         salt = bcrypt.gensalt()
-#         senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
+    try:
+       senha_bytes = nova_senha.encode('utf-8')
+       salt = bcrypt.gensalt()
+       senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
+       
+       conexao, cursor = conectar()
 
-#         conexao, cursor = conectar()
+       # Atualiza a senha do usuário
+       sql = """
+           UPDATE tb_usuarios
+           SET senha = %s
+           WHERE email = %s;
+       """
 
-#         sql = """
-#             UPDATE tb_usuarios 
-#             SET senha = %s 
-#             WHERE email = %s;
-#         """
-#         cursor.execute(sql, (senha_hash, email))
-#         conexao.commit()
-#         return True
+       cursor.execute(
+           sql,
+           (senha_hash, email)
+       )
 
-#     except Exception as erro:
-#         print(f"Erro ao redefinir senha do usuário: {erro}")
-#         if conexao:
-#             conexao.rollback()
-#         return False
+       conexao.commit()
 
-#     finally:
-#         if cursor:
-#             cursor.close()
-#         if conexao:
-#             conexao.close()
+       return True
+
+    except Exception as erro:
+
+        print(f"Erro ao atualizar senha: {erro}")
+
+        if conexao:
+            conexao.rollback()
+
+        return False
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if conexao:
+            conexao.close()

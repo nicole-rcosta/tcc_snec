@@ -2,9 +2,11 @@ from flask import Flask, render_template, request, redirect, session, jsonify, f
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
 from model.usuarios import cadastrar
 from model.usuarios import verificar_email
+from model.usuarios import atualizar_senha
 from model.salas import recuperar_salas
 from model.salas import adicionar_sala
 from model.salas import deletar_sala
+
 import mysql
 import mysql.connector
 import secrets
@@ -155,6 +157,7 @@ def receber_email():
     session["expiracao_codigo"] = time.time() + 100 
 
     email = request.form.get("email")
+    session["email_recuperacao"] = email
 
     # verifica se o email existe
     if not verificar_email(email):
@@ -237,9 +240,32 @@ def pagina_recuperar_senha_codigo_validar():
 
     return "<h2>Código incorreto! Tente novamente.</h2>"
 
-@app.route("/password_recover/code/password_reset")
+@app.route("/password_recover/code/password_reset", methods=["POST"])
 def pagina_recuperar_senha_redefinicao():
-    return render_template("password/auth_password_reset.html")
+
+    nova_senha = request.form.get("new-password")
+    nova_senha_confirm = request.form.get("confirm-password")
+
+    # ve se as senhas sao iguais
+    if nova_senha != nova_senha_confirm:
+
+        return render_template(
+            "password/auth_password_reset.html",
+            erro_senha=True
+        )
+
+    email = session.get("email_recuperacao")
+
+    # Atualiza a senha através do model
+    sucesso = atualizar_senha(email,nova_senha)
+
+    # Verifica se conseguiu atualizar
+    if sucesso:
+
+        return render_template(
+            "password/auth_password_reset.html",
+            senha_atualizada=True
+        )
 
 
 if __name__ == '__main__':

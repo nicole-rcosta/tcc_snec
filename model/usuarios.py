@@ -1,4 +1,5 @@
 from database.conexao import conectar
+from static.utils.cpf_validation import validar_cpf
 import bcrypt
 
 def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str) -> bool:
@@ -8,6 +9,11 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str) -> bool:
         senha_bytes = senha.encode('utf-8')
         salt = bcrypt.gensalt()
         senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
+
+        if not validar_cpf(cpf):
+            {"sucesso": False, "mensagem": "CPF inválido."}
+            print("cpf invalido")
+            return False
 
         conexao, cursor = conectar()
         

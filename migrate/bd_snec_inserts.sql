@@ -1,0 +1,2 @@
+INSERT INTO tb_usuarios(nome_usuario, email, cargo, senha, cpf, status)
+VALUE ('ADM SNEC', 'sneccode@gmail.com', 'adm', '$2b$12$WpdfRGaObonrj/OnjmTHM.BcB73YWHLsf2KXQuN0h.hxgK6EJjd8W', '00000000000', 'aprovado');

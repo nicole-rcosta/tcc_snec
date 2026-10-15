@@ -19,7 +19,7 @@
             </a>
         </div>
 
-        <h1 class="admin-student-extra__title">Cadastrar Aluno:</h1>
+        <h1 class="admin-student-extra__title">Cadastrar Aluno na Atividade:</h1>
 
         <form action="" method="POST" class="admin-student-extra__form">
             <div class="admin-student-extra__form-group">
@@ -35,6 +35,18 @@
                     <label for="student-class" class="admin-student-extra__label">Turma:</label>
                     <input type="text" id="student-class" name="student_class" class="admin-student-extra__input" required>
                 </div>
+                <div class="admin-student-extra__field admin-student-extra__field--activity">
+                    <label for="student-activity" class="admin-student-extra__label">Atividade:</label>
+                    <input type="text" id="student-activity" name="student_activity" class="admin-student-extra__input" required>
+                </div>
+                <div class="admin-student-extra__field admin-student-extra__field--period">
+                    <label for="student-period" class="admin-student-extra__label">Período:</label>
+                    <input type="text" id="student-period" name="student_period" class="admin-student-extra__input" required>
+                </div>
+                <div class="admin-student-extra__field admin-student-extra__field--week-day">
+                    <label for="student-week-day" class="admin-student-extra__label">Dia da Semana:</label>
+                    <input type="text" id="student-week-day" name="student_week-day" class="admin-student-extra__input" required>
+                </div>
             </div>
 
             <button type="submit" class="admin-student-extra__button admin-student-extra__button--submit">Cadastrar</button>
@@ -48,6 +60,8 @@
                         <th class="admin-student-extra__table-cell admin-student-extra__table-cell--name" scope="col">Nome</th>
                         <th class="admin-student-extra__table-cell admin-student-extra__table-cell--rm" scope="col">RM</th>
                         <th class="admin-student-extra__table-cell admin-student-extra__table-cell--class" scope="col">Turma</th>
+                        <th class="admin-student-extra__table-cell admin-student-extra__table-cell--activity" scope="col">Atividade</th>
+                        <th class="admin-student-extra__table-cell admin-student-extra__table-cell--period" scope="col">Período</th>
                         <th class="admin-student-extra__table-cell admin-student-extra__table-cell--actions" scope="col">
                             <span class="visually-hidden">Ações</span>
                         </th>
@@ -58,6 +72,8 @@
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--name" data-label="Nome">Fulana Lorenzo Morales</td>
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--rm" data-label="RM">7041</td>
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--class" data-label="Turma">3ºB</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--activity" data-label="Atividade">Natação</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--period" data-label="Turma">Manhã</td>
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--actions">
                             <button type="button" class="admin-student-extra__button admin-student-extra__button--delete" aria-label="Excluir aluno Fulana Lorenzo Morales">
                                 <i class="fa-regular fa-trash-can admin-student-extra__button-icon" aria-hidden="true"></i>
@@ -68,6 +84,8 @@
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--name" data-label="Nome">Fulano Giovani de Andrade</td>
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--rm" data-label="RM">7042</td>
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--class" data-label="Turma">3ºC</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--activity" data-label="Atividade">Basquete</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--period" data-label="Turma">Tarde</td>
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--actions">
                             <button type="button" class="admin-student-extra__button admin-student-extra__button--delete" aria-label="Excluir aluno Fulano Giovani de Andrade">
                                 <i class="fa-regular fa-trash-can admin-student-extra__button-icon" aria-hidden="true"></i>
@@ -78,6 +96,8 @@
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--name" data-label="Nome">Fulana Gonçalves</td>
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--rm" data-label="RM">7043</td>
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--class" data-label="Turma">3ºA</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--activity" data-label="Atividade">Dança</td>
+                        <td class="admin-student-extra__table-cell admin-student-extra__table-cell--period" data-label="Turma">Noite</td>
                         <td class="admin-student-extra__table-cell admin-student-extra__table-cell--actions">
                             <button type="button" class="admin-student-extra__button admin-student-extra__button--delete" aria-label="Excluir aluna Fulana Gonçalves">
                                 <i class="fa-regular fa-trash-can admin-student-extra__button-icon" aria-hidden="true"></i>

@@ -197,7 +197,9 @@ body {
 }
 
 .admin-student-extra__table-cell--rm,
-.admin-student-extra__table-cell--class {
+.admin-student-extra__table-cell--class,
+.admin-student-extra__table-cell--activity,
+.admin-student-extra__table-cell--period {
     color: var(--text-secondary);
 }
 

@@ -11,6 +11,7 @@ from model.class_register import deletar_sala
 from model.students_register import recuperar_alunos
 from model.students_register import adicionar_aluno
 from model.students_register import deletar_aluno
+from model.nutri_dashboard import recuperar_dados_dashboard
 import mysql
 import mysql.connector
 
@@ -72,9 +73,12 @@ def cadastrar_usuario():
 def pagina_adm():
     return render_template("/adm/admin_item_register.html")
 
+
 @app.route("/adm_register")
 def pagina_adm_register():
     return render_template("/adm/admin_register.html")
+
+
 @app.route("/adm_register/post", methods=["POST"])
 def cadastrar_adm():
     nome = request.form.get("name")

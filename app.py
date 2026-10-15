@@ -4,6 +4,7 @@ from model.usuarios import cadastrar, logar
 from model.salas import recuperar_salas
 from model.salas import adicionar_sala
 from model.salas import deletar_sala
+from model.nutri_dashboard import recuperar_dados_dashboard
 import mysql
 import mysql.connector
 
@@ -126,7 +127,23 @@ def pagina_painel_adm():
 
 @app.route("/nutri_dashboard")
 def pagina_dashboard():
-    return render_template("nutri/nutritionist_dashboard.html")
+    # Chama a função que busca e processa os dados do MySQL
+    dados = recuperar_dados_dashboard()
+    
+    # Pega o nome do usuário da sessão ou define um padrão
+    nome_usuario = session.get("usuario_nome", "Nutricionista")
+
+    # Renderiza o HTML passando todas as variáveis necessárias
+    return render_template(
+        "nutri/nutritionist_dashboard.html",
+        usuario=nome_usuario,
+        turmas=dados["turmas"],
+        total_lanches=dados["total_lanches"],
+        total_almocos=dados["total_almocos"],
+        todas_concluidas=dados["todas_concluidas"]
+    )
+
+    
 
 @app.route("/nutri_dashboard/report")
 def pagina_dashboard_report():

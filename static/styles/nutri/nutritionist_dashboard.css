@@ -9,8 +9,18 @@
 }
 
 
-/* Container Principal */
-.dashboard__content{
+@import url(/static/styles/global.css);
+
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+/* Centralizador e organizador vertical */
+.dashboard__content {
   width: 100%;
   max-width: 480px;
   padding: 0 16px;
@@ -71,15 +81,12 @@
   width: 42%;
 }
 
-/* Suporte para ambas as variações de classe do ícone */
-.dashboard__class-icon,
 .dashboard__class-status-icon {
   width: 18%;
   text-align: center;
   font-size: 1.15rem;
 }
 
-/* Cores dinâmicas para os ícones do FontAwesome */
 .dashboard__class-status-icon.concluded {
   color: #28A745; 
 }
@@ -98,7 +105,7 @@
   padding-left: 10px;
 }
 
-/* Parte de Refeições Atualizada */
+/* Cards de Refeições */
 .dashboard__meals {
   background-color: #ffffff;
   border-radius: 20px;
@@ -155,7 +162,6 @@
   box-shadow: 0 4px 12px rgba(255, 107, 74, 0.25);
 }
 
-/* Footer */
 .dashboard__footer-status {
   text-align: center;
   padding-top: 4px;
@@ -166,8 +172,6 @@
   font-size: 1rem;
   font-weight: 600;
 }
-
-
 
 @media (max-width: 480px) {
   .dashboard__greeting {
@@ -182,11 +186,10 @@
   .dashboard__class-count {
     font-size: 0.95rem;
   }
-
 }
 
 @media (min-width: 768px) {
-  .dashboard__content{
+  .dashboard__content {
     max-width: 520px;
   }
 }

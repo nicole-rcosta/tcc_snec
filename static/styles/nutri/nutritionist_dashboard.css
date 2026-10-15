@@ -8,17 +8,6 @@
   padding-bottom: 30px;
 }
 
-
-@import url(/static/styles/global.css);
-
-.dashboard {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 30px;
-}
-
 /* Centralizador e organizador vertical */
 .dashboard__content {
   width: 100%;

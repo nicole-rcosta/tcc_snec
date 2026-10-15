@@ -1,5 +1,7 @@
 from database.conexao import conectar
 
+
+
 def recuperar_alunos_atividade():
     conexao,cursor = conectar()
     cursor.execute("""SELECT

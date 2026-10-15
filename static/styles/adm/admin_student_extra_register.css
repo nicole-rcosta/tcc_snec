@@ -94,7 +94,7 @@ body {
     border-radius: 12px;
     padding: 0 1rem;
     font-size: 1rem;
-    color: var(--text-main);
+    color: var(--color-blue);
     box-sizing: border-box;
     outline: none;
     transition: box-shadow 0.2s, background-color 0.2s;
@@ -279,7 +279,7 @@ body {
     padding: 0 8px;
     color: var(--color-blue);
     cursor: pointer;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 .admin-student-extra__input--dropdown option {

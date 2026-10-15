@@ -169,9 +169,12 @@ def pagina_cad_aluno_delete(id):
 
 
 
+
 @app.route("/adm/reg_student_extra")
 def pagina_cad_aluno_ativ():
-    return render_template("adm/admin_student_extra_register.html")
+    alunos = recuperar_alunos()
+    atividades= ra()
+    return render_template("adm/admin_student_extra_register.html", alunos=alunos, atividades=atividades)
 
 
 

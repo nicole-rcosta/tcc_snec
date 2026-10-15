@@ -69,6 +69,22 @@ def pagina_adm():
 @app.route("/adm_register")
 def pagina_adm_register():
     return render_template("adm/admin_register.html")
+@app.route("/adm_register/post")
+def cadastrar_adm():
+    nome = request.form.get("name")
+    cpf = request.form.get("cpf")
+    email = request.form.get("email")
+    senha = request.form.get("password")
+    confirmar_senha = request.form.get("confirm-password")
+    cargo = "adm"
+
+    if senha == confirmar_senha:
+        if cadastrar(nome, email, cargo, senha, cpf):
+            return render_template("login/auth_login.html")
+        else:
+            return redirect("/adm_register")
+    else:
+        return redirect("/adm_register")
 
 @app.route("/adm/reg_activity")
 def pagina_cad_atividade():

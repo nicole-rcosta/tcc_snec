@@ -23,7 +23,7 @@
 
         <h1 class="admin-student__title">Cadastrar Aluno:</h1>
 
-        <form action="" method="POST" class="admin-student__form">
+        <form action="/adm/reg_student/post" method="POST" class="admin-student__form">
             <div class="admin-student__form-group">
                 <div class="admin-student__field admin-student__field--name">
                     <label for="student-name" class="admin-student__label">Nome Completo:</label>
@@ -35,12 +35,18 @@
                 </div>
                 <div class="admin-student__field admin-student__field--class">
                     <label for="student-class" class="admin-student__label">Turma:</label>
-                    <input type="text" id="student-class" name="student_class" class="admin-student__input" required>
+                    <select class="admin-student__input admin-student__input--dropdown" id="admin-student__table-cell--week-day"
+                        name="student_class" required>
+                        <option value="" selected disabled>Selecione uma turma:</option>
+                            {% for sala in salas %}
+                                <option value="{{sala.id_turma}}" >{{sala.turma}}</option>
+                            {% endfor %}
+                    </select>
                 </div>
             </div>
 
-            <button type="submit" class="admin-student__button admin-student__button--submit">Cadastrar</button>
-        </form>
+        <button type="submit" class="admin-student__button admin-student__button--submit">Cadastrar</button>
+    </form>
 
         <section class="admin-student__list-section">
             <h2 class="admin-student__list-title">Alunos cadastrados:</h2>
@@ -56,36 +62,20 @@
                     </tr>
                 </thead>
                 <tbody class="admin-student__table-body">
+                    {% for aluno in alunos %}
                     <tr class="admin-student__table-row">
-                        <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">Fulana Lorenzo Morales</td>
-                        <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">7041</td>
-                        <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">3ºB</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">{{aluno.nome_aluno}}</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">{{aluno.rm_aluno}}</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">{{aluno.turma}}</td>
                         <td class="admin-student__table-cell admin-student__table-cell--actions">
-                            <button type="button" class="admin-student__button admin-student__button--delete" aria-label="Excluir aluno Fulana Lorenzo Morales">
-                                <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
-                            </button>
+                            <a href="/adm/reg_student/delete/{{aluno.rm_aluno}}">
+                                <button type="button" class="admin-student__button admin-student__button--delete" aria-label="Excluir aluno ">
+                                    <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
+                                </button>
+                            </a>
                         </td>
                     </tr>
-                    <tr class="admin-student__table-row">
-                        <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">Fulano Giovani de Andrade</td>
-                        <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">7042</td>
-                        <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">3ºC</td>
-                        <td class="admin-student__table-cell admin-student__table-cell--actions">
-                            <button type="button" class="admin-student__button admin-student__button--delete" aria-label="Excluir aluno Fulano Giovani de Andrade">
-                                <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr class="admin-student__table-row">
-                        <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">Fulana Gonçalves</td>
-                        <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">7043</td>
-                        <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">3ºA</td>
-                        <td class="admin-student__table-cell admin-student__table-cell--actions">
-                            <button type="button" class="admin-student__button admin-student__button--delete" aria-label="Excluir aluna Fulana Gonçalves">
-                                <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </section>

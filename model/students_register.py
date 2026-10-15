@@ -32,12 +32,14 @@ def recuperar_alunos():
     return alunos
 
 
-def deletar_aluno(cod:int) -> bool:
+
+def deletar_aluno(rm:str) -> bool:
 
 
     conexao,cursor = conectar()
      
-    cursor.execute("""delete from tb_turmas where id_turma = (%s);""",(cod,) )
+    cursor.execute("""delete from tb_alunos where rm_aluno = (%s);""",(rm,) )
 
     conexao.commit()
     conexao.close()
+

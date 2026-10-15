@@ -8,6 +8,7 @@ from model.class_register import adicionar_sala
 from model.class_register import deletar_sala
 from model.students_register import recuperar_alunos
 from model.students_register import adicionar_aluno
+from model.students_register import deletar_aluno
 import mysql
 import mysql.connector
 
@@ -139,6 +140,13 @@ def pagina_cad_aluno_post():
     print(rm,nome_aluno,id_turma)
 
     adicionar_aluno(rm,nome_aluno,id_turma)
+
+    return redirect("/adm/reg_student")
+
+@app.route("/adm/reg_student/delete/<int:id>")
+def pagina_cad_aluno_delete(id):
+
+    deletar_aluno(id)
 
     return redirect("/adm/reg_student")
 

@@ -68,9 +68,11 @@
                         <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">{{aluno.rm_aluno}}</td>
                         <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">{{aluno.turma}}</td>
                         <td class="admin-student__table-cell admin-student__table-cell--actions">
-                            <button type="button" class="admin-student__button admin-student__button--delete" aria-label="Excluir aluno Fulana Lorenzo Morales">
-                                <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
-                            </button>
+                            <a href="/adm/reg_student/delete/{{aluno.rm_aluno}}">
+                                <button type="button" class="admin-student__button admin-student__button--delete" aria-label="Excluir aluno ">
+                                    <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
+                                </button>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}

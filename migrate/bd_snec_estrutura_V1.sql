@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS tb_usuarios (
 );
 
 CREATE TABLE IF NOT EXISTS tb_alunos (
- rm_aluno INT PRIMARY KEY,
+ rm_aluno VARCHAR(4) PRIMARY KEY,
  nome_aluno VARCHAR(100) NOT NULL,
  id_turma INT,
  CONSTRAINT FK_ALUNO_TURMA
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS tb_alunos (
 );
 
 CREATE TABLE IF NOT EXISTS tb_his_almoco (
- rm_aluno INT,
+ rm_aluno VARCHAR(4),
  data DATE DEFAULT (CURRENT_DATE),
  id_usuario INT,
  atendido BOOLEAN DEFAULT FALSE,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS tb_his_lanche (
 );
 
 CREATE TABLE IF NOT EXISTS tb_aluno_atividade (
- rm_aluno INT,
+ rm_aluno VARCHAR(4),
  id_atividade INT,
  dia_semana ENUM('SEG', 'TER', 'QUA', 'QUI', 'SEX') NOT NULL,	-- DAYOFWEEK(data)
  CONSTRAINT FK_ALUNO_ATIVIDADE

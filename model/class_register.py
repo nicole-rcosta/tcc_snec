@@ -17,7 +17,7 @@ def adicionar_sala(turma:str,periodo:str,qnt_alunos:int) -> bool:
 
 def recuperar_salas():
     conexao,cursor = conectar()
-    cursor.execute("""SELECT id_turma, turma, periodo, quantidade_alunos FROM db_snec.tb_turmas;""")
+    cursor.execute("""SELECT id_turma, turma, periodo, quantidade_alunos FROM db_snec.tb_turmas ORDER BY turma;""")
 
 
     musicas=cursor.fetchall()

@@ -1,9 +1,16 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
 from model.usuarios import cadastrar, logar
-from model.salas import recuperar_salas
-from model.salas import adicionar_sala
-from model.salas import deletar_sala
+from static.utils.verification_password import verificar_senha_mestra as vsm
+import bcrypt
+from flask import Flask, render_template, request, redirect, session, jsonify, flash
+from model.usuarios import cadastrar
+from model.class_register import recuperar_salas
+from model.class_register import adicionar_sala
+from model.class_register import deletar_sala
+from model.students_register import recuperar_alunos
+from model.students_register import adicionar_aluno
+from model.students_register import deletar_aluno
 import mysql
 import mysql.connector
 
@@ -20,6 +27,11 @@ def logar_usuario():
     cpf = request.form.get("cpf")
     senha = request.form.get("password")
 
+    senha_cript_mestra = "$2b$12$WpdfRGaObonrj/OnjmTHM.BcB73YWHLsf2KXQuN0h.hxgK6EJjd8W"
+
+    if (cpf == '00000000000') and vsm(senha, senha_cript_mestra):
+        return render_template("adm/admin_register.html")
+
     resultado = logar(cpf, senha)
 
     if resultado['sucesso']:
@@ -30,14 +42,14 @@ def logar_usuario():
         elif cargo == 'nutri':
             return redirect('/nutri_dashboard')
         elif cargo == 'adm':
-            return redirect('/adm')
+            return render_template("/adm/admin_item_register.html")
         return render_template()
     else:
         return redirect("/cadastro")
 
 @app.route("/cadastro")
 def pagina_cadastro():
-    return render_template("register/auth_register.html")
+    return render_template("/register/auth_register.html")
 @app.route("/cadastro/post", methods=["POST"])
 def cadastrar_usuario():
     nome = request.form.get("name")
@@ -45,9 +57,10 @@ def cadastrar_usuario():
     email = request.form.get("email")
     cargo = request.form.get("register")
     senha = request.form.get("password")
+    status = "pendente"
 
-    if cadastrar(nome, email, cargo, senha, cpf):
-        return render_template("login/auth_login.html")
+    if cadastrar(nome, email, cargo, senha, cpf, status):
+        return render_template("/login/auth_login.html")
     else:
         return redirect("/cadastro")
     
@@ -57,11 +70,28 @@ def cadastrar_usuario():
 
 @app.route("/adm")
 def pagina_adm():
-    return render_template("adm/admin_item_register.html")
+    return render_template("/adm/admin_item_register.html")
 
 @app.route("/adm_register")
 def pagina_adm_register():
-    return render_template("adm/admin_register.html")
+    return render_template("/adm/admin_register.html")
+@app.route("/adm_register/post", methods=["POST"])
+def cadastrar_adm():
+    nome = request.form.get("name")
+    cpf = request.form.get("cpf")
+    email = request.form.get("email")
+    senha = request.form.get("password")
+    confirmar_senha = request.form.get("confirm-password")
+    cargo = "adm"
+    status = "aprovado"
+
+    if senha == confirmar_senha:
+        if cadastrar(nome, email, cargo, senha, cpf, status):
+            return render_template("/login/auth_login.html")
+        else:
+            return redirect("/adm_register")
+    else:
+        return redirect("/adm_register")
 
 @app.route("/adm/reg_activity")
 def pagina_cad_atividade():
@@ -86,15 +116,11 @@ def excluir_atividades(id_atividade):
     return redirect(url_for("pagina_cad_atividade"))
 
 
-@app.route("/adm/reg_student")
-def pagina_cad_aluno():
-    return render_template("adm/admin_student_register.html")
-
-
 
 @app.route("/adm/reg_class")
 def pagina_cad_sala():
     salas = recuperar_salas()
+    print(salas)
     return render_template("adm/admin_room_register.html", salas = salas)
 
 @app.route("/adm/reg_class/post", methods=["POST"])
@@ -109,6 +135,44 @@ def pagina_cad_sala_post():
 def pagina_cad_sala_del(id):
     deletar_sala(id)
     return redirect("/adm/reg_class")
+
+
+
+
+
+@app.route("/adm/reg_student")
+def pagina_cad_aluno():
+    alunos = recuperar_alunos()
+    salas = recuperar_salas()
+    return render_template("adm/admin_student_register.html", alunos=alunos,salas=salas)
+
+@app.route("/adm/reg_student/post", methods=["POST"])
+def pagina_cad_aluno_post():
+
+    rm = request.form.get("student_rm")
+    nome_aluno = request.form.get("student_name")
+    id_turma = request.form.get("student_class")
+
+    print(rm,nome_aluno,id_turma)
+
+    adicionar_aluno(rm,nome_aluno,id_turma)
+
+    return redirect("/adm/reg_student")
+
+
+@app.route("/adm/reg_student/delete/<int:id>")
+def pagina_cad_aluno_delete(id):
+
+    deletar_aluno(id)
+
+    return redirect("/adm/reg_student")
+
+
+
+@app.route("/adm/reg_student_extra")
+def pagina_cad_aluno_ativ():
+    return render_template("adm/admin_student_extra_register.html")
+
 
 
 @app.route("/adm/conf_panel")

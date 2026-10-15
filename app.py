@@ -91,14 +91,7 @@ def excluir_atividades(id_atividade):
     return redirect(url_for("pagina_cad_atividade"))
 
 
-@app.route("/adm/reg_studentt")
-def pagina_cad_aluno_antiga():
-    atividades = ra()
-    salas = recuperar_salas()
-    alunos = recuperar_alunos()
 
-
-    return render_template("adm/admin_student_register.html",atividades = atividades, salas=salas, alunos=alunos)
 
 
 
@@ -122,34 +115,14 @@ def pagina_cad_sala_del(id):
     return redirect("/adm/reg_class")
 
 
-
-
 @app.route("/adm/reg_student")
 def pagina_cad_aluno():
-    alunos = recuperar_alunos()
+    atividades = ra()
     salas = recuperar_salas()
-    return render_template("adm/admin_student_register.html", alunos=alunos,salas=salas)
+    alunos = recuperar_alunos()
 
-@app.route("/adm/reg_student/post", methods=["POST"])
-def pagina_cad_aluno_post():
 
-    rm = request.form.get("student_rm")
-    nome_aluno = request.form.get("student_name")
-    id_turma = request.form.get("student_class")
-
-    print(rm,nome_aluno,id_turma)
-
-    adicionar_aluno(rm,nome_aluno,id_turma)
-
-    return redirect("/adm/reg_student")
-
-@app.route("/adm/reg_student/delete/<int:id>")
-def pagina_cad_aluno_delete(id):
-
-    deletar_aluno(id)
-
-    return redirect("/adm/reg_student")
-
+    return render_template("adm/admin_student_register.html",atividades = atividades, salas=salas, alunos=alunos)
 
 
 @app.route("/adm/reg_student_extra")

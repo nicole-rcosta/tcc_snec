@@ -8,26 +8,6 @@
   padding-bottom: 30px;
 }
 
-/* Header Faixa */
-.dashboard__header {
-  background-color: var(--color-green);
-  width: 100%;
-  padding: 1.25rem 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 24px;
-  color: var(--bg-card);
-}
-
-.dashboard__header--title {
-  color: var(--bg-card);
-  font-size: 1.5rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  font-family: var(--font-primary);
-}
-
-/* Container Principal */
 .dashboard__content{
   width: 100%;
   max-width: 480px;

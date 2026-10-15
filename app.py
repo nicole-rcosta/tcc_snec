@@ -5,6 +5,8 @@ from model.usuarios import cadastrar
 from model.class_register import recuperar_salas
 from model.class_register import adicionar_sala
 from model.class_register import deletar_sala
+from model.students_register import recuperar_alunos
+from model.students_register import adicionar_aluno
 import mysql
 import mysql.connector
 
@@ -71,9 +73,26 @@ def excluir_atividades(id_atividade):
 def pagina_cad_aluno():
     atividades = ra()
     salas = recuperar_salas()
-    return render_template("adm/admin_extra_student_register.html",atividades = atividades, salas=salas)
+    alunos = recuperar_alunos()
 
 
+    return render_template("adm/admin_extra_student_register.html",atividades = atividades, salas=salas, alunos=alunos)
+
+
+@app.route("/adm/reg_student/post", methods=["POST"])
+def pagina_cad_aluno_post():
+
+    rm = request.form.get("student_rm")
+    nome_aluno = request.form.get("student_name")
+    id_turma = request.form.get("student_class")
+    id_atividade = request.form.get("student_activity")
+    dia_semana = request.form.get("student_week-day")
+
+    print(rm,nome_aluno,id_turma,id_atividade,dia_semana)
+
+    adicionar_aluno(rm,nome_aluno,id_turma,id_atividade,dia_semana)
+
+    return redirect("/adm/reg_student")
 
 
 @app.route("/adm/reg_class")

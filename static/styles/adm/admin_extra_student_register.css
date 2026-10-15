@@ -82,7 +82,7 @@ body {
 
 .admin-student__form-group {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   width: 100%;
 }
@@ -223,18 +223,20 @@ body {
 .admin-student__table-cell--rm,
 .admin-student__table-cell--class,
 .admin-student__table-cell--course,
-.admin-student__table-cell--period {
+.admin-student__table-cell--period,
+.admin-student__table-cell--week-day {
   color: var(--text-secondary);
 }
 
 /* Campo específico do dropdown */
 .admin-student__field--activity {
-    width: 90%;
+    width: 100%;
 }
 
 /* Formatação do select */
 .admin-student__input--dropdown {
-    height: 38px;
+    width: 100%;
+    height: 42px;
     padding: 0 8px;
     color: var(--color-blue);
     cursor: pointer;

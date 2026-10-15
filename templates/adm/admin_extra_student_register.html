@@ -23,7 +23,7 @@
 
     <h1 class="admin-student__title">Cadastrar Aluno - Extracurricular:</h1>
 
-    <form action="" method="POST" class="admin-student__form">
+    <form action="/adm/reg_student/post" method="POST" class="admin-student__form">
         <div class="admin-student__form-group">
             <div class="admin-student__field admin-student__field--name">
                 <label for="student-name" class="admin-student__label">Nome Completo:</label>
@@ -39,10 +39,10 @@
                 </label>
 
                 <select class="admin-student__input admin-student__input--dropdown" id="admin-student__table-cell--class"
-                    name="student_activity" required>
+                    name="student_class" required>
                     <option value="" selected disabled>Selecione uma turma:</option>
                     {% for sala in salas %}
-                        <option value="{{sala.id_sala}}" >{{sala.turma}}</option>
+                        <option value="{{sala.id_turma}}" >{{sala.turma}}</option>
                     {% endfor %}
 
                 </select>
@@ -63,7 +63,22 @@
             </div>
             <div class="admin-student__field admin-student__field--period">
                 <label for="student-period" class="admin-student__label">Período:</label>
-                <input type="text" id="student-period" name="student_period" class="admin-student__input" required>
+                <input type="text" id="student-period" name="student_period" class="admin-student__input" required disabled>
+            </div>
+            <div class="admin-student__field">
+                <label for="student-activity" class="admin-student__label">
+                    Dia da Semana:
+                </label>
+                <select class="admin-student__input admin-student__input--dropdown" id="admin-student__table-cell--week-day"
+                    name="student_week-day" required>
+                    <option value="" selected disabled>Selecione uma turma:</option>
+                        <option value="SEG" >Segunda</option>
+                        <option value="TER" >Terça</option>
+                        <option value="QUA" >Quarta</option>
+                        <option value="QUI" >Quinta</option>
+                        <option value="SEX" >Sexta</option>
+
+                </select>
             </div>
         </div>
 
@@ -80,6 +95,7 @@
                     <th class="admin-student__table-cell admin-student__table-cell--class" scope="col">Turma</th>
                     <th class="admin-student__table-cell admin-student__table-cell--course" scope="col">Curso</th>
                     <th class="admin-student__table-cell admin-student__table-cell--period" scope="col">Período</th>
+                    <th class="admin-student__table-cell admin-student__table-cell--period" scope="col">Dia da Semana</th>
                     <th class="admin-student__table-cell admin-student__table-cell--actions" scope="col">
                         <span class="visually-hidden">Ações</span>
                     </th>
@@ -95,6 +111,8 @@
                     </td>
                     <td class="admin-student__table-cell admin-student__table-cell--period" data-label="Período">Manhã
                     </td>
+                    <td class="admin-student__table-cell admin-student__table-cell--week-day" data-label="Dia da Semana">Segunda
+                    </td>
                     <td class="admin-student__table-cell admin-student__table-cell--actions">
                         <button type="button" class="admin-student__button admin-student__button--delete"
                             aria-label="Excluir aluno Fulana Lorenzo Morales">
@@ -102,38 +120,37 @@
                         </button>
                     </td>
                 </tr>
+                {% if alunos %}
+                {% for aluno in alunos %}
                 <tr class="admin-student__table-row">
-                    <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">Fulano
-                        Giovani de Andrade</td>
-                    <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">7042</td>
-                    <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">3ºC</td>
-                    <td class="admin-student__table-cell admin-student__table-cell--course" data-label="Curso">Natação
+                    <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">{{aluno.nome}}</td>
+                    <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">{{aluno.rm}}</td>
+                    <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">{{aluno.turma}}</td>
+                    <td class="admin-student__table-cell admin-student__table-cell--course" data-label="Curso">{{aluno.atividade}}
                     </td>
-                    <td class="admin-student__table-cell admin-student__table-cell--period" data-label="Período">Manhã
+                    <td class="admin-student__table-cell admin-student__table-cell--period" data-label="Período">{{aluno.periodo}}
+                    </td>
+                    <td class="admin-student__table-cell admin-student__table-cell--week-day" data-label="Dia da Semana">{% if aluno.dia == 'SEG' %}
+                                                                                                                            Segunda-feira
+                                                                                                                        {% elif aluno.dia == 'TER' %}
+                                                                                                                            Terça-feira
+                                                                                                                        {% elif aluno.dia == 'QUA' %}
+                                                                                                                            Quarta-feira
+                                                                                                                        {% elif aluno.dia == 'QUI' %}
+                                                                                                                            Quinta-feira
+                                                                                                                        {% elif aluno.dia == 'SEX' %}
+                                                                                                                            Sexta-feira
+                                                                                                                        {% endif %}
                     </td>
                     <td class="admin-student__table-cell admin-student__table-cell--actions">
                         <button type="button" class="admin-student__button admin-student__button--delete"
-                            aria-label="Excluir aluno Fulano Giovani de Andrade">
+                            aria-label="Excluir aluno Fulana Lorenzo Morales">
                             <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
                         </button>
                     </td>
                 </tr>
-                <tr class="admin-student__table-row">
-                    <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">Fulana
-                        Gonçalves</td>
-                    <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">7043</td>
-                    <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">3ºA</td>
-                    <td class="admin-student__table-cell admin-student__table-cell--course" data-label="Curso">Dança
-                    </td>
-                    <td class="admin-student__table-cell admin-student__table-cell--period" data-label="Período">Manhã
-                    </td>
-                    <td class="admin-student__table-cell admin-student__table-cell--actions">
-                        <button type="button" class="admin-student__button admin-student__button--delete"
-                            aria-label="Excluir aluna Fulana Gonçalves">
-                            <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
-                        </button>
-                    </td>
-                </tr>
+                {% endfor %}
+                {% endif %}
             </tbody>
         </table>
     </section>

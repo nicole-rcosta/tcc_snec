@@ -88,7 +88,7 @@ def excluir_atividades(id_atividade):
 
 @app.route("/adm/reg_student")
 def pagina_cad_aluno():
-    return render_template("adm/admin_extra_student_register.html")
+    return render_template("adm/admin_student_register.html")
 
 
 

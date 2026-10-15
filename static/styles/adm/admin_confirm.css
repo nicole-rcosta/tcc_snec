@@ -1,32 +1,7 @@
 @import url(/static/styles/global.css);
 
+
 .admin-confirm{
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  min-height: 100vh;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.header {
-  background-color: var(--color-orange);
-  padding: 1.25rem 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.1);
-}
-
-.header__title {
-  color: var(--bg-card);
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 0;
-  font-family: var(--font-primary);
-}
-
-.admin-confirm__main{
   flex: 1;
   max-width: 500px;
   width: 100%;
@@ -140,9 +115,9 @@
     transform: translateX(-4px);
 }
 
-/* ==========================================
-   Responsividade: Mobile First Breakpoint
-   ========================================== */
+
+
+
 @media (max-width: 600px) {
   .admin-confirm__main {
     margin: 1.5rem auto;

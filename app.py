@@ -1,9 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
 from model.usuarios import cadastrar, logar
-from model.salas import recuperar_salas
-from model.salas import adicionar_sala
-from model.salas import deletar_sala
 from static.utils.verification_password import verificar_senha_mestra as vsm
 import bcrypt
 from flask import Flask, render_template, request, redirect, session, jsonify, flash

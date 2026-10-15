@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
 from model.usuarios import cadastrar
-from model.usuarios import atualizar_senha
+from model.usuarios import verificar_email
 from model.salas import recuperar_salas
 from model.salas import adicionar_sala
 from model.salas import deletar_sala
@@ -151,10 +151,24 @@ def receber_email():
     codigo = f"{secrets.randbelow(100000):05d}"
 
     session["codigo_recuperacao"] = codigo
-    # coloca um limite de 3 minutos pra expirar
-    session["expiracao_codigo"] = time.time() + 180
+    # coloca um limite de 100 segundos pra expirar
+    session["expiracao_codigo"] = time.time() + 100 
 
     email = request.form.get("email")
+
+    # verifica se o email existe
+    if not verificar_email(email):
+
+        flash(
+            "E-mail não encontrado. Verifique o e-mail digitado.",
+            "error"
+        )
+
+        return redirect(url_for("pagina_cadastro"))
+
+
+    # se existir segue ess logica:
+    
     # Dados da sua conta
     EMAIL_REMETENTE = "pablolorenzomoralez@gmail.com"
     # tomar cuidado com isso

@@ -92,7 +92,6 @@ def pagina_cad_aluno():
 
 
 
-
 @app.route("/adm/reg_class")
 def pagina_cad_sala():
     salas = recuperar_salas()
@@ -110,8 +109,6 @@ def pagina_cad_sala_post():
 def pagina_cad_sala_del(id):
     deletar_sala(id)
     return redirect("/adm/reg_class")
-
-
 
 
 @app.route("/adm/conf_panel")

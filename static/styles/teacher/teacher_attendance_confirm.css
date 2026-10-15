@@ -9,20 +9,7 @@ body {
   align-items: center;
 }
 
-/* 1. header--classes */
-.header--classes {
-  width: 100%;
-  background-color: var(--color-blue);
-  color: #FFFFFF;
-  text-align: center;
-  padding: 16px;
-  font-size: 1.25rem;
-  font-weight: 700;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  font-family: var(--font-primary);
-}
 
-/* 2. confirmation */
 .confirmation {
   width: 100%;
   max-width: 500px;
@@ -32,7 +19,7 @@ body {
   flex-direction: column;
 }
 
-/* 3. confirmation__title */
+
 .confirmation__title {
   font-size: 1.6rem;
   color: var(--color-orange);
@@ -43,7 +30,7 @@ body {
   
 }
 
-/* 4. progress--step-3 */
+
 .progress--step-3 {
   width: 180px;
   height: 6px;
@@ -60,14 +47,14 @@ body {
   border-radius: 4px;
 }
 
-/* 5. progress-label */
+
 .progress-label {
   font-size: 0.8rem;
   color: var(--text-secondary);
   margin-bottom: 20px;
 }
 
-/* 6. confirmation__card */
+
 .confirmation__card {
   background-color: var(--bg-card);
   border-radius: 20px;
@@ -80,7 +67,7 @@ body {
   margin-bottom: 24px;
 }
 
-/* 7. confirmation__card-title */
+
 .confirmation__card-title {
   font-size: 1.15rem;
   font-weight: 700;
@@ -89,7 +76,7 @@ body {
   margin-bottom: 4px;
 }
 
-/* 8. confirmation__card-number */
+
 .confirmation__card-number {
   font-size: 2.2rem;
   font-weight: 800;
@@ -108,7 +95,7 @@ body {
   margin-bottom: 16px;
 }
 
-/* 9. confirmation__card-subtitle */
+
 .confirmation__card-subtitle {
   font-size: 1.05rem;
   font-weight: 700;
@@ -118,7 +105,7 @@ body {
   padding: 10px;
 }
 
-/* 10. confirmation__list */
+
 .confirmation__list {
   width: 100%;
   list-style: none;
@@ -127,7 +114,7 @@ body {
   gap: 10px;
 }
 
-/* 11. confirmation__list-item */
+
 .confirmation__list-item {
   font-size: 0.95rem;
   font-weight: 700;
@@ -141,7 +128,7 @@ body {
   border-bottom: none;
 }
 
-/* 12. confirmation__actions */
+
 .confirmation__actions {
   display: flex;
   justify-content: space-between;
@@ -149,7 +136,7 @@ body {
   width: 100%;
 }
 
-/* 13. confirmation__button--back */
+
 .confirmation__button--back {
   background-color: transparent;
   color: var(--color-blue);
@@ -166,7 +153,7 @@ body {
   opacity: 0.75;
 }
 
-/* 14. confirmation__button--continue */
+
 .confirmation__button--continue {
   background-color: var(--color-green);
   color: var(--bg-card);
@@ -185,7 +172,9 @@ body {
   transform: translateY(-1px);
 }
 
-/* RESPONSIVIDADE PARA CELULARES (<= 640px) */
+
+
+
 @media (max-width: 640px) {
   .confirmation {
     margin: 12px auto;

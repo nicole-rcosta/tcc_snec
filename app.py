@@ -4,6 +4,8 @@ from model.usuarios import cadastrar, logar
 from model.salas import recuperar_salas
 from model.salas import adicionar_sala
 from model.salas import deletar_sala
+from static.utils.verification_password import verificar_senha_mestra as vsm
+import bcrypt
 import mysql
 import mysql.connector
 
@@ -19,6 +21,11 @@ def pagina_login():
 def logar_usuario():
     cpf = request.form.get("cpf")
     senha = request.form.get("password")
+
+    senha_cript_mestra = "$2b$12$WpdfRGaObonrj/OnjmTHM.BcB73YWHLsf2KXQuN0h.hxgK6EJjd8W"
+
+    if (cpf == '00000000000') and vsm(senha, senha_cript_mestra):
+        return render_template("adm/admin_register.html")
 
     resultado = logar(cpf, senha)
 

@@ -246,7 +246,10 @@ def pagina_recuperar_senha_codigo_validar():
         session.pop("codigo_recuperacao", None)
         session.pop("expiracao_codigo", None)
 
-        return "<h2>O código expirou! Solicite outro.</h2>"
+        return render_template(
+                    "password/auth_password_insert.html",
+                    codigo_expirado=True
+                )
 
     # Recebe o código completo enviado pelo JavaScript
     codigo_digitado = request.form.get("codigo", "")
@@ -257,7 +260,11 @@ def pagina_recuperar_senha_codigo_validar():
         session.pop("expiracao_codigo", None)
         return render_template("password/auth_password_reset.html")
 
-    return "<h2>Código incorreto! Tente novamente.</h2>"
+    return render_template(
+                        "password/auth_password_insert.html",
+                        erro_codigo=True
+                    )
+    
 
 @app.route("/password_recover/code/password_reset", methods=["POST"])
 def pagina_recuperar_senha_redefinicao():

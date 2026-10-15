@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
-from model.usuarios import cadastrar
+from model.usuarios import cadastrar, logar
 from model.usuarios import verificar_email
 from model.usuarios import atualizar_senha
 from model.salas import recuperar_salas
@@ -15,13 +15,32 @@ import smtplib
 from email.message import EmailMessage
 
 app = Flask(__name__)
-app.secret_key = "chave_teste"
+app.secret_key = "snec_tcc_chave"
 
 @app.route("/")
 
 @app.route("/login")
 def pagina_login():
     return render_template("login/auth_login.html")
+@app.route("/login/post", methods=["POST"])
+def logar_usuario():
+    cpf = request.form.get("cpf")
+    senha = request.form.get("password")
+
+    resultado = logar(cpf, senha)
+
+    if resultado['sucesso']:
+        session['usuario'] = resultado['usuario']
+        cargo = resultado['usuario']['cargo']
+        if cargo == 'prof':
+            return redirect('/teacher')
+        elif cargo == 'nutri':
+            return redirect('/nutri_dashboard')
+        elif cargo == 'adm':
+            return redirect('/adm')
+        return render_template()
+    else:
+        return redirect("/cadastro")
 
 @app.route("/cadastro")
 def pagina_cadastro():
@@ -37,7 +56,7 @@ def cadastrar_usuario():
     if cadastrar(nome, email, cargo, senha, cpf):
         return render_template("login/auth_login.html")
     else:
-        return redirect("/")
+        return redirect("/cadastro")
     
 # ---------------------------
 # Paginas de Administrador

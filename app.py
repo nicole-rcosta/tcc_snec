@@ -158,14 +158,10 @@ def receber_email():
 
     # verifica se o email existe
     if not verificar_email(email):
-
-        flash(
-            "E-mail não encontrado. Verifique o e-mail digitado.",
-            "error"
+        return render_template(
+            "password/auth_password_recover.html",
+            erro_email=True
         )
-
-        return redirect(url_for("pagina_cadastro"))
-
 
     # se existir segue ess logica:
     

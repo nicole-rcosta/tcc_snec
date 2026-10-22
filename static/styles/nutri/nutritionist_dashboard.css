@@ -1,5 +1,16 @@
 @import url(/static/styles/global.css);
 
+/* Garantia de fundo escuro no body no modo escuro */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body {
+  background-color: var(--bg-main, #121214);
+}
+
 .dashboard {
   min-height: 100vh;
   display: flex;
@@ -38,18 +49,29 @@
 }
 
 .dashboard__status-title {
+  color: var(--text-secondary);
   font-size: 1rem;
   font-weight: 600;
   margin-top: 4px;
 }
 
 /* Tabela Principal */
+
+/* MODO CLARO: Fundo esverdeado */
 .dashboard__table-section {
-  background-color: color-mix(in srgb, var(--color-green) 15%, white);
+  background-color: rgba(90, 175, 144, 0.15); 
   border-radius: 24px;
   padding: 18px 20px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(208, 223, 213, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(90, 175, 144, 0.3);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* MODO ESCURO: Fundo do cartão limpo e escuro (sem tom verde) */
+[data-theme="dark"] .dashboard__table-section {
+  background-color: var(--bg-card);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 .dashboard__class-table {
@@ -58,9 +80,9 @@
 }
 
 .dashboard__class-row td {
-  padding: 6px 0;
+  padding: 10px 0;
   vertical-align: middle;
-  border-bottom: 1.5px solid #D0DFD5; 
+  border-bottom: 1px solid rgba(120, 130, 140, 0.15); 
 }
 
 .dashboard__class-name {
@@ -77,7 +99,7 @@
 }
 
 .dashboard__class-status-icon.concluded {
-  color: #28A745; 
+  color: var(--color-green); 
 }
 
 .dashboard__class-status-icon.waiting {
@@ -90,19 +112,26 @@
   font-size: 1.1rem;
   text-align: center;
   width: 42%;
-  border-left: 1.5px solid #D0DFD5; 
+  border-left: 1px solid rgba(120, 130, 140, 0.15); 
   padding-left: 10px;
 }
 
 /* Cards de Refeições */
 .dashboard__meals {
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   border-radius: 20px;
   padding: 24px 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(208, 223, 213, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(120, 130, 140, 0.15);
   display: flex;
   align-items: stretch;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .dashboard__meals {
+  background-color: var(--bg-card);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 .dashboard__meal-item {
@@ -115,7 +144,7 @@
 }
 
 .dashboard__meal-item:first-child {
-  border-right: 1.5px solid #D0DFD5;
+  border-right: 1px solid rgba(120, 130, 140, 0.15);
 }
 
 .dashboard__meal-title {
@@ -146,9 +175,8 @@
 
 .dashboard__button--see-more:hover {
   background-color: var(--color-orange);
-  color: var(--bg-card);
+  color: #FFFFFF;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 107, 74, 0.25);
 }
 
 .dashboard__footer-status {

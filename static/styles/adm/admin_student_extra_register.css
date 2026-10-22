@@ -1,9 +1,9 @@
 @import url(/static/styles/global.css);
 
 body {
-    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+   font-family: var(--font-secondary);
     background-color: var(--bg-main);
-    color: #a6a6a6;
+    color: var(--text-main);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,7 +19,13 @@ body {
     align-items: center;
     border-radius: 20px;
     padding: 20px 50px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .admin-student-extra__main {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .admin-student-extra__navigation {
@@ -42,8 +48,7 @@ body {
     transition: transform 0.2s, filter 0.2s;
 }
 
-.admin-student-extra__back-button:hover
-.admin-student-extra__back-icon {
+.admin-student-extra__back-button:hover .admin-student-extra__back-icon {
     filter: brightness(0.9);
     transform: translateX(-3px);
 }
@@ -89,19 +94,19 @@ body {
 .admin-student-extra__input {
     width: 100%;
     height: 42px;
-    background-color: rgba(80, 102, 202, 0.1);
-    border: none;
+    background-color: color-mix(in srgb, var(--color-blue) 10%, var(--bg-card));
+    border: 1px solid transparent;
     border-radius: 12px;
     padding: 0 1rem;
     font-size: 1rem;
     color: var(--color-blue);
     box-sizing: border-box;
     outline: none;
-    transition: box-shadow 0.2s, background-color 0.2s;
+    transition: box-shadow 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
 .admin-student-extra__input:focus {
-    box-shadow: 0 0 0 2px var(--color-blue);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-blue) 50%, transparent);
 }
 
 .admin-student-extra__button {
@@ -109,7 +114,7 @@ body {
     border-radius: 12px;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.2s, filter 0.2s, transform 0.1s;
+    transition: background-color 0.2s, filter 0.2s, transform 0.1s, box-shadow 0.2s;
 }
 
 .admin-student-extra__button--submit {
@@ -118,12 +123,12 @@ body {
     font-size: 0.95rem;
     padding: 0.6rem 2.5rem;
     min-height: 40px;
-    box-shadow: 0 4px 10px rgba(90, 175, 144, 0.25);
+    box-shadow: 0 4px 10px color-mix(in srgb, var(--color-green) 30%, transparent);
 }
 
 .admin-student-extra__button--submit:hover {
     filter: brightness(0.95);
-    box-shadow: 0 6px 14px rgba(90, 175, 144, 0.35);
+    box-shadow: 0 6px 14px color-mix(in srgb, var(--color-green) 40%, transparent);
 }
 
 .admin-student-extra__button--submit:active {
@@ -131,7 +136,7 @@ body {
 }
 
 .admin-student-extra__button--delete {
-    background-color: rgba(220, 53, 69, 0.12);
+    background-color: color-mix(in srgb, var(--color-delete) 12%, transparent);
     color: var(--color-delete);
     padding: 0.5rem 0.65rem;
     font-size: 1.1rem;
@@ -146,8 +151,9 @@ body {
     color: #FFFFFF;
 }
 
+/* Fundo da secção da lista no modo claro (laranja suave) */
 .admin-student-extra__list-section {
-    background-color: rgba(255, 96, 28, 0.08);
+    background-color: color-mix(in srgb, var(--color-orange) 8%, var(--bg-card));
     padding: 1.5rem;
     border-radius: 16px;
     display: flex;
@@ -155,10 +161,12 @@ body {
     gap: 1.25rem;
     width: 100%;
     box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/* Fundo da secção da lista no modo escuro (fundo neutro sem o tom laranja) */
 [data-theme="dark"] .admin-student-extra__list-section {
-    background-color: rgba(255, 96, 28, 0.05);
+    background-color: color-mix(in srgb, var(--text-main) 3%, var(--bg-card));
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -177,21 +185,18 @@ body {
     font-size: 0.9rem;
 }
 
-.admin-student-extra__table-header
-.admin-student-extra__table-cell {
+.admin-student-extra__table-header .admin-student-extra__table-cell {
     padding: 0.75rem 0.5rem;
     color: var(--color-blue);
     font-weight: 700;
-    border-bottom: 2px solid rgba(80, 102, 202, 0.2);
+    border-bottom: 2px solid color-mix(in srgb, var(--color-blue) 30%, transparent);
 }
 
-.admin-student-extra__table-body
-.admin-student-extra__table-row {
-    border-bottom: 1px solid rgba(108, 117, 125, 0.15);
+.admin-student-extra__table-body .admin-student-extra__table-row {
+    border-bottom: 1px solid color-mix(in srgb, var(--text-secondary) 20%, transparent);
 }
 
-.admin-student-extra__table-body
-.admin-student-extra__table-row:last-child {
+.admin-student-extra__table-body .admin-student-extra__table-row:last-child {
     border-bottom: none;
 }
 
@@ -204,13 +209,32 @@ body {
 .admin-student-extra__table-cell--name {
     font-weight: 600;
     text-align: left;
+    color: var(--text-main);
 }
 
 .admin-student-extra__table-cell--rm,
 .admin-student-extra__table-cell--class,
 .admin-student-extra__table-cell--activity,
-.admin-student-extra__table-cell--period {
+.admin-student-extra__table-cell--course,
+.admin-student-extra__table-cell--period,
+.admin-student-extra__table-cell--week-day {
     color: var(--text-secondary);
+}
+
+/* Formatação do dropdown */
+.admin-student-extra__input--dropdown {
+    width: 100%;
+    height: 42px;
+    padding: 0 8px;
+    color: var(--color-blue);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.admin-student-extra__input--dropdown option {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    padding: 10px;
 }
 
 /* Responsividade da tabela e do formulário */
@@ -236,14 +260,17 @@ body {
         box-sizing: border-box;
     }
 
-    .admin-student-extra__table-body
-    .admin-student-extra__table-row {
+    .admin-student-extra__table-body .admin-student-extra__table-row {
         background-color: var(--bg-card);
         border-radius: 12px;
         padding: 0.8rem 1rem;
         margin-bottom: 0.75rem;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        border: 1px solid rgba(108, 117, 125, 0.15);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        border: 1px solid color-mix(in srgb, var(--text-secondary) 20%, transparent);
+    }
+
+    [data-theme="dark"] .admin-student-extra__table-body .admin-student-extra__table-row {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     .admin-student-extra__table-cell {
@@ -251,7 +278,7 @@ body {
         justify-content: space-between;
         align-items: center;
         padding: 0.5rem 0;
-        border-bottom: 1px dashed rgba(108, 117, 125, 0.2);
+        border-bottom: 1px dashed color-mix(in srgb, var(--text-secondary) 20%, transparent);
         text-align: right;
     }
 
@@ -272,24 +299,6 @@ body {
     }
 }
 
-/* Formatação do dropdown */
-.admin-student-extra__input--dropdown {
-    width: 100%;
-    height: 42px;
-    padding: 0 8px;
-    color: var(--color-blue);
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.admin-student-extra__input--dropdown option {
-    background-color: rgb(from var(--color-blue) r g b / 0.1);
-    color: var(--color-blue);
-    padding: 10px;
-    transition: 0.3s;
-}
-
-/* Responsividade do dropdown */
 @media (max-width: 1500px) {
     .admin-student-extra__field--activity {
         width: 100%;
@@ -300,39 +309,4 @@ body {
     .admin-student-extra__input--dropdown {
         font-size: 15px;
     }
-}
-
-
-.admin-student-extra__table-header .admin-student-extra__table-cell {
-    padding: 0.75rem 0.5rem;
-    color: var(--color-blue);
-    font-weight: 700;
-    border-bottom: 2px solid rgba(80, 102, 202, 0.2);
-}
-
-.admin-student-extra__table-body .admin-student-extra__table-row {
-    border-bottom: 1px solid rgba(108, 117, 125, 0.15);
-}
-
-.admin-student-extra__table-body .admin-student-extra__table-row:last-child {
-    border-bottom: none;
-}
-
-.admin-student-extra__table-cell {
-    padding: 0.75rem 0.5rem;
-    color: var(--text-main);
-    vertical-align: middle;
-}
-
-.admin-student-extra__table-cell--name {
-    font-weight: 600;
-    text-align: left;
-}
-
-.admin-student-extra__table-cell--rm,
-.admin-student-extra__table-cell--class,
-.admin-student-extra__table-cell--course,
-.admin-student-extra__table-cell--period,
-.admin-student-extra__table-cell--week-day {
-    color: var(--text-secondary);
 }

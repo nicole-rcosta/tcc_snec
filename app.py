@@ -213,6 +213,9 @@ def pagina_cad_aluno_ativ_delete(id,atividade,dia):
 
 @app.route("/adm/conf_panel")
 def pagina_confirmar_painel():
+    senha = request.form.get("password")
+
+    
     return render_template("adm/admin_confirm.html")
 
 @app.route("/adm/adm_panel")

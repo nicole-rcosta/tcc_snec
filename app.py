@@ -252,6 +252,7 @@ def pagina_dashboard_report():
 # ENDPOINTS REST API (Usados pelo arquivo nutritionist_report.js)
 # ---------------------------
 
+# json para renderizar os alunos para o almoço
 @app.route("/api/nutri/alunos-almoco", methods=["GET"])
 def api_alunos_almoco():
     """Retorna a lista de alunos do dia em formato JSON para o JS renderizar a tabela."""

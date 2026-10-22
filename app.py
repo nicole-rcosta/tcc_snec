@@ -12,6 +12,7 @@ from model.students_register import recuperar_alunos
 from model.students_register import adicionar_aluno
 from model.students_register import deletar_aluno
 from model.nutri_dashboard import recuperar_dados_dashboard
+from model.nutritionist_report import buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
 import mysql
 import mysql.connector
 
@@ -215,6 +216,34 @@ def pagina_dashboard():
 @app.route("/nutri_dashboard/report")
 def pagina_dashboard_report():
     return render_template("nutri/nutritionist_report.html")
+
+# ---------------------------
+# ENDPOINTS REST API (Usados pelo arquivo nutritionist_report.js)
+# ---------------------------
+
+@app.route("/api/nutri/alunos-almoco", methods=["GET"])
+def api_alunos_almoco():
+    """Retorna a lista de alunos do dia em formato JSON para o JS renderizar a tabela."""
+    dados = buscar_alunos_almoco_hoje()
+    return jsonify(dados)
+
+@app.route("/api/nutri/atualizar-almoco", methods=["POST"])
+def api_atualizar_almoco():
+    """Recebe o clique no checkbox da tabela e atualiza a presenca no MySQL."""
+    dados = request.get_json()
+
+    if not dados or "rm" not in dados or "atendido" not in dados:
+        return jsonify({"sucesso": False, "mensagem": "Dados incompletos"}), 400
+
+    rm_aluno = dados.get("rm")
+    atendido = dados.get("atendido")
+
+    # Obtém o ID do usuário conectado na sessão (se houver login)
+    usuario_sessao = session.get("usuario", {})
+    id_usuario = usuario_sessao.get("id_usuario", None)
+
+    resultado = atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario)
+    return jsonify(resultado)
 
 # ---------------------------
 # Paginas de Professor

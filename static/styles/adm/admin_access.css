@@ -148,6 +148,10 @@
     transform: translateX(-4px);
 }
 
+.admin-access__table-cell--erro{
+  text-align: center;
+  color: var(--color-red);
+}
 
 
 

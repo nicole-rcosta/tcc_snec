@@ -7,7 +7,7 @@ from model.students_register import recuperar_alunos, adicionar_aluno, deletar_a
 from model.nutri_dashboard import recuperar_dados_dashboard
 from model.students_extra_register import recuperar_alunos_atividade, adicionar_aluno_atividade, excluir_aluno_atividade
 from model.nutritionist_report import buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
-from model.adm_access import buscar_adm, buscar_usuario_pendente
+from model.adm_access import buscar_adm, buscar_usuario_pendente, aprovar_usuario, rejeitar_usuario
 import secrets
 import time
 import smtplib
@@ -217,6 +217,16 @@ def verificar_adm():
 def pagina_painel_adm():
     usuarios_pendentes = buscar_usuario_pendente().get("mensagem")
     return render_template("adm/admin_access.html", usuarios_pendentes = usuarios_pendentes)
+
+@app.route("/adm/adm_panel/approve/<int:id>")
+def pagina_painel_adm_aprovar(id):
+    aprovar_usuario(id)
+    return redirect("/adm/adm_panel")
+
+@app.route("/adm/adm_panel/reject/<int:id>")
+def pagina_painel_adm_rejeitar(id):
+    rejeitar_usuario(id)
+    return redirect("/adm/adm_panel")
 
 
 # ---------------------------

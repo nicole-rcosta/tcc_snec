@@ -45,7 +45,7 @@ def buscar_usuario_pendente():
 
     try:
         sql = """
-            SELECT nome_usuario, cargo
+            SELECT id_usuario, nome_usuario, cargo
             FROM db_snec.tb_usuarios
             WHERE status = "pendente";
         """
@@ -54,7 +54,7 @@ def buscar_usuario_pendente():
         usuarios_pendentes = cursor.fetchall()
 
         if not usuarios_pendentes:
-            return {"sucesso": False, "mensagem": "Nenhum usuário pendente!."}
+            return {"sucesso": False, "mensagem": "Nenhum usuário pendente!"}
         else:
             return {"sucesso": True, "mensagem": usuarios_pendentes}
 
@@ -66,5 +66,59 @@ def buscar_usuario_pendente():
         if cursor:
             cursor.close()
         if conexao:
+            conexao.close()
+
+def aprovar_usuario(id):
+    conexao, cursor = conectar()
+
+    try:
+        sql = """
+            UPDATE db_snec.tb_usuarios
+            SET status = 'aprovado'
+            WHERE id_usuario = %s;
+        """
+
+        aprovar = cursor.execute(sql, (id, ))
+        if aprovar:
+            return {"sucesso": True, "mensagem": "Usuário Aprovado!"}
+        else:
+            return {"sucesso": False, "mensagem": "Erro. Tente Novamente!"}
+
+    except Exception as erro:
+        print(f"Erro ao processar login: {erro}")
+        return {"sucesso": False, "mensagem": "Erro interno no servidor."}
+    
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.commit()
+            conexao.close()
+
+def rejeitar_usuario(id):
+    conexao, cursor = conectar()
+
+    try:
+        sql = """
+            UPDATE db_snec.tb_usuarios
+            SET status = 'desaprovado'
+            WHERE id_usuario = %s;
+        """
+
+        aprovar = cursor.execute(sql, (id, ))
+        if aprovar:
+            return {"sucesso": True, "mensagem": "Acesso negado ao usuário!"}
+        else:
+            return {"sucesso": False, "mensagem": "Erro. Tente Novamente!"}
+
+    except Exception as erro:
+        print(f"Erro ao processar login: {erro}")
+        return {"sucesso": False, "mensagem": "Erro interno no servidor."}
+    
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.commit()
             conexao.close()
     

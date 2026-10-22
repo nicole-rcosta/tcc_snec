@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard da Cozinha: Almoço</title>
-    <link rel="stylesheet" href="/static/styles/nutri/nutritionist_report.css">
-</head>
-<body class="dashboard">
-    <header>
-        <h1 class="dashboard__header-title">Dashboard da Cozinha</h1>
-    </header>
-    <main>
+{% extends "layout.html" %}
+
+{% set page_type = 'nutri' %}
+
+{% block page_title %}Dashboard da Cozinha{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/nutri/nutritionist_report.css') }}">  
+
+    <main class="dashboard">
         <a href="/nutri_dashboard"><i class="fa-solid fa-arrow-left-long dashboard__back-button"></i></a>
+        
         <section class="dashboard__total-card">
             <h2 class="dashboard__total-label">Total do almoço do dia:</h2>
-            <p class="dashboard__total-number">20</p>
+            <p class="dashboard__total-number" id="total-almoco">0</p>
         </section>
 
         <section class="dashboard__list-section">
@@ -29,29 +28,18 @@
                         <th class="dashboard__table-cell--status">Estado</th>
                     </tr>
                 </thead>
-                <tbody class="dashboard__table-body">
-                    <tr class="dashboard__table-row">
-                        <td class="dashboard__table-cell--rm" data-label="RM">7050</td>
-                        <td class="dashboard__table-cell--student" data-label="Aluno">Fulano Silva</td>
-                        <td class="dashboard__table-cell--year" data-label="Ano">3°C</td>
-                        <td class="dashboard__table-cell--activity" data-label="Atividade">Comitê</td>
-                        <td class="dashboard__table-cell--status" data-label="Estado">
-                            <label class="dashboard__checkbox-label">
-                                <input type="checkbox" class="dashboard__checkbox-input">
-                                <span class="dashboard__checkbox-custom" aria-hidden="true"></span>
-                                <span class="visually-hidden">Marcar presença de Fulano Silva</span>
-                            </label>
-                        </td>
-                    </tr>
+                <tbody class="dashboard__table-body" id="tabela-alunos-body">
+                    <!-- O arquivo JS vai preencher as linhas do banco dinamicamente aqui -->
                 </tbody>
                 <tfoot class="dashboard__table-footer">
                     <tr class="dashboard__table-row">
-                        <td colspan="5">Data Referente ao dia: 01/10/2026</td>
+                        <td colspan="5" id="data-hoje">Data Referente ao dia: --/--/----</td>
                     </tr>
                 </tfoot>
             </table>
         </section>
     </main>
+
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
-</body>
-</html>
+    <script src="{{ url_for('static', filename='js/nutritionist_report.js') }}"></script>
+{% endblock %}

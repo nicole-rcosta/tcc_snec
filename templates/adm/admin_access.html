@@ -1,22 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administração: Controle de Acesso</title>
-    <link rel="stylesheet" href="/static/styles/adm/admin_access.css">
+{% extends "layout.html" %}
+
+<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
+{% set page_type = 'adm' %}
+
+<!-- Título que vai aparecer dentro da barra azul -->
+{% block page_title %}Administração{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/adm/admin_access.css') }}">  
+ 
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous" defer></script>
-    
-</head>
 
-<body class="admin-access">
-
-    <header class="header header--admin">
-        <h1 class="header__title">Administração</h1>
-    </header>
     
-    <main class="admin-access__main">
+    <main class="admin-access">
          <a href="/adm/conf_panel"><i class="fa-solid fa-arrow-left-long admin-access__back-button"></i></a>
         <section class="admin-access__card-container">
             <h2 class="admin-access__main-title">Pedidos de Acesso</h2>
@@ -55,5 +53,6 @@
         </section>
     </main>
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
-</body>
-</html>
+
+
+{% endblock %}

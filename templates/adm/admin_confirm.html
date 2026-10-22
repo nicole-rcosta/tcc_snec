@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administração: Controle de Acesso</title>
-    <link rel="stylesheet" href="/static/styles/adm/admin_confirm.css">
+{% extends "layout.html" %}
+
+<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
+{% set page_type = 'adm' %}
+
+<!-- Título que vai aparecer dentro da barra azul -->
+{% block page_title %}Administração{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/adm/admin_confirm.css') }}">  
+ 
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous" defer></script>
-</head>
 
-<body class="admin-confirm">
 
-    <header class="header">
-        <h1 class="header__title">Administração</h1>
-    </header>
-    
-    <main class="admin-confirm__main">
+    <main class="admin-confirm">
         <a href="/adm"><i class="fa-solid fa-arrow-left-long admin-confirm__back-button"></i></a>
         <section class="admin-confirm__card">
             <h2 class="admin-confirm__title">Confirme que você é o administrador:</h2>
@@ -34,6 +33,6 @@
         </section>
     </main>
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
-</body>
+    
 
-</html>
+{% endblock %}

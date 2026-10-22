@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+<!-- Cor da barra (azul para professor, nutri para verde, adm para laranja) -->
+{% set page_type = 'adm' %}
+
+<!-- Título que vai aparecer dentro da barra azul -->
+{% block page_title %}Administração{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/adm/admin_student_register.css') }}">  
+
+
+
+    <main class="admin-student">
+        <div class="admin-student__navigation">
+            <a href="/adm">
+                <button type="button" class="admin-student__back-button" aria-label="Voltar para a página anterior">
+                    <i class="fa-solid fa-arrow-left-long admin-student__back-icon" aria-hidden="true"></i>
+                </button>
+            </a>
+        </div>
+
+        <h1 class="admin-student__title">Cadastrar Aluno:</h1>
+
+        <form action="/adm/reg_student/post" method="POST" class="admin-student__form">
+            <div class="admin-student__form-group">
+                <div class="admin-student__field admin-student__field--name">
+                    <label for="student-name" class="admin-student__label">Nome Completo:</label>
+                    <input type="text" id="student-name" name="student_name" class="admin-student__input" required>
+                </div>
+                <div class="admin-student__field admin-student__field--rm">
+                    <label for="student-rm" class="admin-student__label">RM:</label>
+                    <input type="text" id="student-rm" name="student_rm" class="admin-student__input" required>
+                </div>
+                <div class="admin-student__field admin-student__field--class">
+                    <label for="student-class" class="admin-student__label">Turma:</label>
+                    <select class="admin-student__input admin-student__input--dropdown" id="admin-student__table-cell--week-day"
+                        name="student_class" required>
+                        <option value="" selected disabled>Selecione uma turma:</option>
+                            {% for sala in salas %}
+                                <option value="{{sala.id_turma}}" >{{sala.turma}}</option>
+                            {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+        <button type="submit" class="admin-student__button admin-student__button--submit">Cadastrar</button>
+    </form>
+
+        <section class="admin-student__list-section">
+            <h2 class="admin-student__list-title">Alunos cadastrados:</h2>
+            <table class="admin-student__table">
+                <thead class="admin-student__table-header">
+                    <tr class="admin-student__table-row">
+                        <th class="admin-student__table-cell admin-student__table-cell--name" scope="col">Nome</th>
+                        <th class="admin-student__table-cell admin-student__table-cell--rm" scope="col">RM</th>
+                        <th class="admin-student__table-cell admin-student__table-cell--class" scope="col">Turma</th>
+                        <th class="admin-student__table-cell admin-student__table-cell--actions" scope="col">
+                            <span class="visually-hidden">Ações</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="admin-student__table-body">
+                    {% for aluno in alunos %}
+                    <tr class="admin-student__table-row">
+                        <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">{{aluno.nome_aluno}}</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">{{aluno.rm_aluno}}</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">{{aluno.turma}}</td>
+                        <td class="admin-student__table-cell admin-student__table-cell--actions">
+                            <a href="/adm/reg_student/delete/{{aluno.rm_aluno}}">
+                                <button type="button" class="admin-student__button admin-student__button--delete" aria-label="Excluir aluno ">
+                                    <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+
+    
+{% endblock %}

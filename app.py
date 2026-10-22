@@ -47,15 +47,35 @@ def logar_usuario():
     if resultado['sucesso']:
         session['usuario'] = resultado['usuario']
         cargo = resultado['usuario']['cargo']
+
         if cargo == 'prof':
             return redirect('/teacher')
+
         elif cargo == 'nutri':
             return redirect('/nutri_dashboard')
+
         elif cargo == 'adm':
             return render_template("/adm/admin_item_register.html")
+
         return render_template()
-    else:
-        return redirect("/cadastro")
+
+    elif resultado.get('erro_login'):
+        return render_template(
+            "login/auth_login.html",
+            erro_login=True
+        )
+
+    elif resultado.get('erro_aprovacao'):
+        return render_template(
+            "login/auth_login.html",
+            erro_aprovacao=True
+        )
+
+    elif resultado.get('erro_servidor'):
+        return render_template(
+            "login/auth_login.html",
+            erro_servidor=True
+        )
 
 @app.route("/cadastro")
 def pagina_cadastro():
@@ -72,7 +92,7 @@ def cadastrar_usuario():
     if cadastrar(nome, email, cargo, senha, cpf, status):
         return render_template("/login/auth_login.html")
     else:
-        return redirect("/cadastro")
+        return redirect("/")
     
 # ---------------------------
 # Paginas de Administrador

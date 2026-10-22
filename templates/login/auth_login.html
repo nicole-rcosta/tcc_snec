@@ -35,4 +35,40 @@
             <a class="login__link--register" href="/cadastro">Ainda não tem conta? <strong>Cadastre-se</strong></a>
 
 </body>
+    <script src="/static/js/alerts.js"></script>
+
+    {% if erro_login %}
+
+    <script>
+        mostrarAlerta(
+            "CPF ou senha incorretos",
+            "error",
+            "/login",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% elif erro_aprovacao %}
+
+    <script>
+        mostrarAlerta(
+            "Seu cadastro está pendente de aprovação pelo Administrador",
+            "error",
+            "/login",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% elif erro_servidor %}
+
+    <script>
+        mostrarAlerta(
+            "Não foi possível realizar o login",
+            "error",
+            "/login",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% endif %}
 </html>

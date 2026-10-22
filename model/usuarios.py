@@ -38,6 +38,7 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
         if conexao:
             conexao.close()
 
+
 def logar(cpf: str, senha: str) -> dict:
     conexao = None
     cursor = None
@@ -56,8 +57,10 @@ def logar(cpf: str, senha: str) -> dict:
         resultado = cursor.fetchone()
 
         if not resultado:
-            print("Usuário não encontrado.")
-            return {"sucesso": False, "mensagem": "CPF ou senha incorretos."}
+            return {
+                "sucesso": False,
+                "erro_login": True
+            }
 
         id_usuario = resultado['id_usuario']
         nome_usuario = resultado['nome_usuario']
@@ -65,40 +68,45 @@ def logar(cpf: str, senha: str) -> dict:
         senha_hash_banco = resultado['senha']
         status_result = resultado['status']
 
-        if status_result != "aprovado":
-            print("Cadastro ainda pendente de aprovação pelo Administrador.")
-            return {
-                "sucesso": False, 
-                "mensagem": "Seu cadastro está pendente de aprovação pelo Administrador."
-            }
-
         senha_bytes = senha.encode('utf-8')
         hash_banco_bytes = senha_hash_banco.encode('utf-8')
 
-        if bcrypt.checkpw(senha_bytes, hash_banco_bytes):
-            print(f"Login aprovado para {nome_usuario} ({cargo})!")
+        if not bcrypt.checkpw(senha_bytes, hash_banco_bytes):
             return {
-                "sucesso": True,
-                "mensagem": "Login realizado com sucesso!",
-                "usuario": {
-                    "id": id_usuario,
-                    "nome": nome_usuario,
-                    "cargo": cargo
-                }
+                "sucesso": False,
+                "erro_login": True
             }
-        else:
-            print("Senha incorreta!")
-            return {"sucesso": False, "mensagem": "CPF ou senha incorretos."}
+
+        if status_result != "aprovado":
+            return {
+                "sucesso": False,
+                "erro_aprovacao": True
+            }
+
+        return {
+            "sucesso": True,
+            "usuario": {
+                "id": id_usuario,
+                "nome": nome_usuario,
+                "cargo": cargo
+            }
+        }
 
     except Exception as erro:
         print(f"Erro ao processar login: {erro}")
-        return {"sucesso": False, "mensagem": "Erro interno no servidor."}
+
+        return {
+            "sucesso": False,
+            "erro_servidor": True
+        }
 
     finally:
         if cursor:
             cursor.close()
+
         if conexao:
             conexao.close()
+
 
 # 
 def verificar_email(email: str) -> bool:

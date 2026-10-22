@@ -1,20 +1,10 @@
 @import url(/static/styles/global.css);
 
-/* Visually Hidden Helper (Acessibilidade) */
 
-/* Na revisão, excluindo esta parte, visualmente nada foi alterado (não sei para que serve) */
-
-/* .visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-} */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
 
 
 .admin-access {
@@ -24,17 +14,26 @@
   box-sizing: border-box;
 }
 
+.admin-access__back-button {
+  color: var(--color-orange);
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.admin-access__back-button:hover {
+  transform: translateX(-4px);
+}
+
 .admin-access__card-container {
   background-color: var(--bg-card);
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-[data-theme="dark"] .admin-access__card-container {
-  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
 }
 
 .admin-access__main-title {
@@ -64,10 +63,6 @@
   border-bottom: 2px solid rgba(80, 102, 202, 0.2);
 }
 
-.admin-access__table-body .admin-access__table-row {
-  border-bottom: 1px solid rgba(108, 117, 125, 0.15);
-}
-
 .admin-access__table-body .admin-access__table-row:last-child {
   border-bottom: none;
 }
@@ -91,45 +86,50 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .admin-access__button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.35rem;
-  padding: 0.45rem 0.85rem;
+  padding: 0.45rem 0.65rem;
   border: none;
   border-radius: 8px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+  white-space: nowrap;
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s, color 0.2s;
 }
 
 .admin-access__button-icon {
   font-size: 0.9em;
 }
 
+/* Botão Aprovar */
 .admin-access__button--approve {
-  background-color: rgba(90, 175, 144, 0.15);
+  background-color: color-mix(in srgb, var(--color-green) 15%, transparent);
   color: var(--color-green);
 }
 
 .admin-access__button--approve:hover {
   background-color: var(--color-green);
-  color: var(--bg-card);
-  box-shadow: 0 2px 8px rgb(from var(--color-green) r g b / 0.3);
+  color: #ffffff;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-green) 30%, transparent);
 }
 
+/* Botão Rejeitar */
 .admin-access__button--reject {
-  background-color: rgb(from var(--color-orange) r g b / 0.12);
-  color: #dc3545;
+  background-color: color-mix(in srgb, var(--color-delete) 12%, transparent);
+  color: var(--color-delete);
 }
 
 .admin-access__button--reject:hover {
-  background-color: #dc3545;
-  color: var(--bg-card);
-  box-shadow: 0 2px 8px rgb(220 53 69 / 0.3);
+  background-color: var(--color-delete);
+  color: #ffffff;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-delete) 30%, transparent);
 }
 
 .admin-access__button:active {
@@ -137,29 +137,14 @@
 }
 
 
-.admin-access__back-button{
-  color: var(--color-orange);
-  font-size: 30px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.admin-access__back-button:hover {
-    transform: translateX(-4px);
-}
-
-
-
-
-
 @media (max-width: 600px) {
-  .admin-access__main {
+  .admin-access {
     margin: 1rem auto;
     padding: 0 0.5rem;
   }
 
   .admin-access__card-container {
-    padding: 1rem 0.75rem;
+    padding: 1.25rem 0.75rem;
   }
 
   .admin-access__table-header {
@@ -178,18 +163,16 @@
   .admin-access__table-body .admin-access__table-row {
     background-color: var(--bg-card);
     border-radius: 12px;
-    padding: 0.8rem 1rem;
+    padding: 0.8rem;
     margin-bottom: 0.75rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(108, 117, 125, 0.15);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
 
   .admin-access__table-body .admin-access__table-cell {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0;
-    border-bottom: 1px dashed rgba(108, 117, 125, 0.2);
+    padding: 0.6rem 0;
     text-align: right;
   }
 
@@ -201,13 +184,15 @@
     content: attr(data-label);
     font-weight: 700;
     color: var(--color-blue);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
   }
 
   .admin-access__action-buttons {
     justify-content: flex-end;
+    width: 100%;
   }
 }

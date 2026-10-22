@@ -74,3 +74,21 @@ INSERT INTO tb_his_almoco (rm_aluno, data, id_usuario, atendido) VALUES
 (1012, CURRENT_DATE(), 1, TRUE),
 (1014, CURRENT_DATE(), 1, TRUE)
 ON DUPLICATE KEY UPDATE atendido = TRUE;
+
+-- Insere as ativ. extracurriculares 
+INSERT INTO tb_atividades (id_atividade, atividade, periodo) VALUES
+(1, 'Reforço de Matemática', 'Tarde'),
+(2, 'Treino de Futsal', 'Tarde'),
+(3, 'Oficina de Robótica', 'Tarde')
+ON DUPLICATE KEY UPDATE atividade=VALUES(atividade);
+
+INSERT INTO tb_aluno_atividade (rm_aluno, id_atividade, dia_semana) VALUES
+(1001, 1, 'QUI'), 
+(1002, 2, 'QUI'), 
+(1004, 1, 'QUI'), 
+(1007, 2, 'QUI'), 
+(1008, 3, 'QUI'), 
+(1009, 1, 'QUI'), 
+(1012, 2, 'QUI'), 
+(1014, 3, 'QUI')  
+ON DUPLICATE KEY UPDATE id_atividade = VALUES(id_atividade);

@@ -21,33 +21,45 @@
             <table class="admin-access__table">
                 <thead class="admin-access__table-header">
                     <tr class="admin-access__table-row">
-                        <th class="admin-access__table-cell admin-access__table-cell--code" scope="col">Código</th>
                         <th class="admin-access__table-cell admin-access__table-cell--name" scope="col">Nome</th>
                         <th class="admin-access__table-cell admin-access__table-cell--role" scope="col">Cargo</th>
                         <th class="admin-access__table-cell admin-access__table-cell--actions" scope="col">Permissão</th>
                     </tr>
                 </thead>
+                {% if usuarios_pendentes != "Nenhum usuário pendente!" %}
                 <tbody class="admin-access__table-body">
+                    {% for usuario_pendente in usuarios_pendentes %}
                     <tr class="admin-access__table-row">
-                        <td class="admin-access__table-cell admin-access__table-cell--code" data-label="Código">7030</td>
-                        <td class="admin-access__table-cell admin-access__table-cell--name" data-label="Nome">Fulano Silva</td>
-                        <td class="admin-access__table-cell admin-access__table-cell--role" data-label="Cargo">Professor</td>
+                        <td class="admin-access__table-cell admin-access__table-cell--name" data-label="Nome">{{ usuario_pendente.nome_usuario }}</td>
+                        <td class="admin-access__table-cell admin-access__table-cell--role" data-label="Cargo">{{ usuario_pendente.cargo }}</td>
                         <td class="admin-access__table-cell admin-access__table-cell--actions" data-label="Permissão">
                             <div class="admin-access__action-buttons">
-                                <button onclick="mostrarAlerta('Senha alterada <br> com sucesso','success')" type="button" class="admin-access__button admin-access__button--approve"
-                                    title="Aprovar pedido" aria-label="Aprovar pedido de Fulano Silva">
-                                    <i class="fa-solid fa-check admin-access__button-icon" aria-hidden="true"></i>
-                                    <span>Aprovar</span>
-                                </button>
-                                <button onclick="mostrarAlerta('Todos os campos <br> obrigatórios','error')" type="button" class="admin-access__button admin-access__button--reject"
-                                    title="Rejeitar pedido" aria-label="Rejeitar pedido de Fulano Silva">
-                                    <i class="fa-solid fa-xmark admin-access__button-icon" aria-hidden="true"></i>
-                                    <span>Rejeitar</span>
-                                </button>
+                                <a href="/adm/adm_panel/approve/{{ usuario_pendente.id_usuario }}">
+                                    <button onclick="mostrarAlerta('Senha alterada <br> com sucesso','success')" type="button" class="admin-access__button admin-access__button--approve"
+                                        title="Aprovar pedido" aria-label="Aprovar pedido de Fulano Silva">
+                                        <i class="fa-solid fa-check admin-access__button-icon" aria-hidden="true"></i>
+                                        <span>Aprovar</span>
+                                    </button>
+                                </a>
+                                <a href="/adm/adm_panel/reject/{{ usuario_pendente.id_usuario }}">
+                                    <button onclick="mostrarAlerta('Todos os campos <br> obrigatórios','error')" type="button" class="admin-access__button admin-access__button--reject"
+                                        title="Rejeitar pedido" aria-label="Rejeitar pedido de Fulano Silva">
+                                        <i class="fa-solid fa-xmark admin-access__button-icon" aria-hidden="true"></i>
+                                        <span>Rejeitar</span>
+                                    </button>
+                                </a>
                             </div>
                         </td>
                     </tr>
+                    {% endfor %}
                 </tbody>
+                {% else %}
+                <tfoot>
+                    <tr class="admin-access__table-row">
+                        <td class="admin-access__table-cell admin-access__table-cell--erro" colspan="3">Nenhum usuário pendente</td>
+                    </tr>
+                </tfoot>
+                {% endif %}
             </table>
         </section>
     </main>

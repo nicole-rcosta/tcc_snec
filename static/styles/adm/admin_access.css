@@ -137,6 +137,25 @@ body {
 }
 
 
+.admin-access__back-button{
+  color: var(--color-orange);
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.admin-access__back-button:hover {
+    transform: translateX(-4px);
+}
+
+.admin-access__table-cell--erro{
+  text-align: center;
+  color: var(--color-red);
+}
+
+
+
+
 @media (max-width: 600px) {
   .admin-access {
     margin: 1rem auto;

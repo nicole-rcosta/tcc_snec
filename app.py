@@ -1,24 +1,13 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
-from model.usuarios import cadastrar, logar
-from model.usuarios import verificar_email
-from model.usuarios import atualizar_senha
+from model.usuarios import cadastrar, logar, verificar_email, atualizar_senha, cadastrar
 from static.utils.verification_password import verificar_senha_mestra as vsm
-import bcrypt
-from model.usuarios import cadastrar
-from model.class_register import recuperar_salas
-from model.class_register import adicionar_sala
-from model.class_register import deletar_sala
-from model.students_register import recuperar_alunos
-from model.students_register import adicionar_aluno
-from model.students_register import deletar_aluno
+from model.class_register import recuperar_salas, adicionar_sala, deletar_sala
+from model.students_register import recuperar_alunos, adicionar_aluno, deletar_aluno
 from model.nutri_dashboard import recuperar_dados_dashboard
-from model.students_extra_register import recuperar_alunos_atividade
-from model.students_extra_register import adicionar_aluno_atividade
-from model.students_extra_register import excluir_aluno_atividade
+from model.students_extra_register import recuperar_alunos_atividade, adicionar_aluno_atividade, excluir_aluno_atividade
 from model.nutritionist_report import buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
-import mysql
-import mysql.connector
+from model.adm_access import buscar_adm, buscar_usuario_pendente, aprovar_usuario, rejeitar_usuario
 import secrets
 import time
 import smtplib
@@ -26,6 +15,7 @@ from email.message import EmailMessage
 
 app = Flask(__name__)
 app.secret_key = "snec_tcc_chave"
+
 
 @app.route("/")
 
@@ -210,14 +200,33 @@ def pagina_cad_aluno_ativ_delete(id,atividade,dia):
 
     return redirect("/adm/reg_student_extra")
 
-
 @app.route("/adm/conf_panel")
 def pagina_confirmar_painel():
     return render_template("adm/admin_confirm.html")
 
+@app.route("/adm/conf_panel/post", methods=["POST"])
+def verificar_adm():
+    id_usuario = session.get("usuario")["id"]
+    senha = request.form.get("password")
+    if buscar_adm(id_usuario, senha).get("sucesso"):
+        return redirect("/adm/adm_panel")
+    else:
+        return redirect("/adm/conf_panel")
+
 @app.route("/adm/adm_panel")
 def pagina_painel_adm():
-    return render_template("adm/admin_access.html")
+    usuarios_pendentes = buscar_usuario_pendente().get("mensagem")
+    return render_template("adm/admin_access.html", usuarios_pendentes = usuarios_pendentes)
+
+@app.route("/adm/adm_panel/approve/<int:id>")
+def pagina_painel_adm_aprovar(id):
+    aprovar_usuario(id)
+    return redirect("/adm/adm_panel")
+
+@app.route("/adm/adm_panel/reject/<int:id>")
+def pagina_painel_adm_rejeitar(id):
+    rejeitar_usuario(id)
+    return redirect("/adm/adm_panel")
 
 
 # ---------------------------

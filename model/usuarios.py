@@ -2,7 +2,7 @@ from database.conexao import conectar
 from static.utils.cpf_validation import validar_cpf
 import bcrypt
 
-def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str) -> bool:
+def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) -> bool:
     conexao = None
     cursor = None
     try:
@@ -18,11 +18,11 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str) -> bool:
         conexao, cursor = conectar()
         
         sql = """
-            INSERT INTO tb_usuarios (nome_usuario, email, cargo, senha, cpf) 
-            VALUES (%s, %s, %s, %s, %s);
+            INSERT INTO tb_usuarios (nome_usuario, email, cargo, senha, cpf, status) 
+            VALUES (%s, %s, %s, %s, %s, %s);
         """
         
-        cursor.execute(sql, (nome, email, cargo, senha_hash, cpf))
+        cursor.execute(sql, (nome, email, cargo, senha_hash, cpf, status))
         conexao.commit()
         return True
 

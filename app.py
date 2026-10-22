@@ -11,6 +11,7 @@ from model.class_register import deletar_sala
 from model.students_register import recuperar_alunos
 from model.students_register import adicionar_aluno
 from model.students_register import deletar_aluno
+from model.nutri_dashboard import recuperar_dados_dashboard
 import mysql
 import mysql.connector
 
@@ -72,9 +73,12 @@ def cadastrar_usuario():
 def pagina_adm():
     return render_template("/adm/admin_item_register.html")
 
+
 @app.route("/adm_register")
 def pagina_adm_register():
     return render_template("/adm/admin_register.html")
+
+
 @app.route("/adm_register/post", methods=["POST"])
 def cadastrar_adm():
     nome = request.form.get("name")
@@ -193,7 +197,23 @@ def pagina_painel_adm():
 
 @app.route("/nutri_dashboard")
 def pagina_dashboard():
-    return render_template("nutri/nutritionist_dashboard.html")
+    # Chama a função que busca e processa os dados do MySQL
+    dados = recuperar_dados_dashboard()
+    
+    # Pega o nome do usuário da sessão ou define um padrão
+    nome_usuario = session.get("usuario_nome", "Nutricionista")
+
+    # Renderiza o HTML passando todas as variáveis necessárias
+    return render_template(
+        "nutri/nutritionist_dashboard.html",
+        usuario=nome_usuario,
+        turmas=dados["turmas"],
+        total_lanches=dados["total_lanches"],
+        total_almocos=dados["total_almocos"],
+        todas_concluidas=dados["todas_concluidas"]
+    )
+
+    
 
 @app.route("/nutri_dashboard/report")
 def pagina_dashboard_report():

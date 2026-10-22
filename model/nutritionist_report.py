@@ -1,5 +1,5 @@
-from database.conexao import conectar
 import datetime
+from database.conexao import conectar
 
 def buscar_alunos_almoco_hoje():
     """
@@ -8,7 +8,6 @@ def buscar_alunos_almoco_hoje():
     """
     conexao, cursor = conectar()
 
-    # Mapeamento do dia da semana (0 = Segunda, 4 = Sexta)
     dias_map = {0: 'SEG', 1: 'TER', 2: 'QUA', 3: 'QUI', 4: 'SEX'}
     hoje_num = datetime.date.today().weekday()
 
@@ -16,7 +15,11 @@ def buscar_alunos_almoco_hoje():
     if hoje_num > 4:
         cursor.close()
         conexao.close()
-        return {"total_dia": 0, "data_hoje": datetime.date.today().strftime('%d/%m/%Y'), "alunos": []}
+        return {
+            "total_dia": 0, 
+            "data_hoje": datetime.date.today().strftime('%d/%m/%Y'), 
+            "alunos": []
+        }
 
     dia_semana = dias_map[hoje_num]
 
@@ -41,6 +44,10 @@ def buscar_alunos_almoco_hoje():
 
     cursor.close()
     conexao.close()
+
+    # Garante a conversão do campo atendido do MySQL para bool nativo do Python
+    for aluno in alunos:
+        aluno['status'] = bool(aluno['status'])
 
     return {
         "total_dia": len(alunos),

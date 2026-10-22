@@ -12,6 +12,9 @@ from model.students_register import recuperar_alunos
 from model.students_register import adicionar_aluno
 from model.students_register import deletar_aluno
 from model.nutri_dashboard import recuperar_dados_dashboard
+from model.students_extra_register import recuperar_alunos_atividade
+from model.students_extra_register import adicionar_aluno_atividade
+from model.students_extra_register import excluir_aluno_atividade
 import mysql
 import mysql.connector
 
@@ -173,10 +176,33 @@ def pagina_cad_aluno_delete(id):
 
 
 
+
 @app.route("/adm/reg_student_extra")
 def pagina_cad_aluno_ativ():
-    return render_template("adm/admin_student_extra_register.html")
+    alunos = recuperar_alunos()
+    atividades= ra()
+    alunos_atv = recuperar_alunos_atividade()
+    return render_template("adm/admin_student_extra_register.html", alunos=alunos, atividades=atividades, alunos_atv=alunos_atv)
 
+
+@app.route("/adm/reg_student_extra/post", methods=["POST"])
+def pagina_cad_aluno_ativ_post():
+
+    rm = request.form.get("student_rm")
+    id_atividade = request.form.get("student_activity")
+    dia_semana = request.form.get("student_week-day")
+
+    adicionar_aluno_atividade(rm,id_atividade,dia_semana)
+
+    return redirect("/adm/reg_student_extra")
+
+
+@app.route("/adm/reg_student_extra/delete/<int:id>/<int:atividade>/<string:dia>")
+def pagina_cad_aluno_ativ_delete(id,atividade,dia):
+
+    excluir_aluno_atividade(id,atividade,dia)
+
+    return redirect("/adm/reg_student_extra")
 
 
 @app.route("/adm/conf_panel")

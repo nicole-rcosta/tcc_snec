@@ -157,35 +157,41 @@ def pagina_cad_atividade():
     return render_template("adm/admin_extra_activity_register.html", atividades=atividades)
 
 
-@app.route("/adm/reg_activity/post", methods=["POST"])
-def pagina_cad_atividades():
-    ativid = request.form.get("activity_name")
-    periodo = request.form.get("activity_period")
 
-    resultado = ca(ativid, periodo)
+@app.route("/adm/reg_student/post", methods=["POST"])
+def pagina_cad_aluno_post():
+
+    rm = request.form.get("student_rm")
+    nome_aluno = request.form.get("student_name")
+    id_turma = request.form.get("student_class")
+
+    resultado = adicionar_aluno(
+        rm,
+        nome_aluno,
+        id_turma
+    )
 
     if resultado["sucesso"]:
-        return redirect(url_for("pagina_cad_atividade"))
+        return redirect("/adm/reg_student")
 
-    elif resultado.get("erro_atividade_vazia"):
+    elif resultado.get("erro_aluno_vazio"):
         return render_template(
-            "adm/admin_extra_activity_register.html",
-            erro_atividade_vazia=True
+            "adm/admin_student_register.html",
+            erro_aluno_vazio=True
         )
 
-    elif resultado.get("erro_atividade_existente"):
+    elif resultado.get("erro_aluno_existente"):
         return render_template(
-            "adm/admin_extra_activity_register.html",
-            erro_atividade_existente=True
+            "adm/admin_student_register.html",
+            erro_aluno_existente=True
         )
 
     elif resultado.get("erro_servidor"):
         return render_template(
-            "adm/admin_extra_activity_register.html",
+            "adm/admin_student_register.html",
             erro_servidor=True
         )
 
-        
 
 @app.route("/adm/exc_activity/<id_atividade>", methods=["POST"])
 def excluir_atividades(id_atividade):

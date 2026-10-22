@@ -3,8 +3,8 @@ from database.conexao import conectar
 
 def buscar_alunos_almoco_hoje():
     """
-    Busca TODOS os alunos que possuem atividade no contraturno no dia da semana atual,
-    trazendo o status de presença (atendido = True/False) em tb_his_almoco.
+    Busca SOMENTE os alunos previstos para o almoço no dia da semana atual 
+    (com base nas atividades do contraturno cadastradas em tb_aluno_atividade).
     """
     conexao, cursor = conectar()
 
@@ -23,6 +23,7 @@ def buscar_alunos_almoco_hoje():
 
     dia_semana = dias_map[hoje_num]
 
+    # Filtra pelo dia da semana atual
     query = """
         SELECT 
             a.rm_aluno AS rm,
@@ -45,7 +46,7 @@ def buscar_alunos_almoco_hoje():
     cursor.close()
     conexao.close()
 
-    # Garante a conversão do campo atendido do MySQL para bool nativo do Python
+    # Converte a coluna 'status' (0 ou 1 do MySQL) para booleano nativo (True/False)
     for aluno in alunos:
         aluno['status'] = bool(aluno['status'])
 
@@ -58,8 +59,7 @@ def buscar_alunos_almoco_hoje():
 
 def atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario=None):
     """
-    Insere ou atualiza o status de atendimento do almoço (True/False)
-    para o aluno no dia de hoje.
+    Registra ou altera o atendimento do almoço (True/False) na tabela tb_his_almoco.
     """
     conexao, cursor = conectar()
 
@@ -71,7 +71,6 @@ def atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario=None):
                 atendido = VALUES(atendido),
                 id_usuario = VALUES(id_usuario);
         """
-        
         cursor.execute(query, (rm_aluno, id_usuario, atendido))
         conexao.commit()
         return {"sucesso": True, "mensagem": "Status do almoço atualizado com sucesso!"}

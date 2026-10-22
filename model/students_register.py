@@ -15,7 +15,7 @@ def adicionar_aluno(rm:int,nome_aluno:str,id_turma:int) -> bool:
 
 def recuperar_alunos():
     conexao,cursor = conectar()
-    cursor.execute("""SELECT LPAD(tb_alunos.rm_aluno,4,"0") as rm_aluno, tb_alunos.nome_aluno, tb_turmas.turma FROM db_snec.tb_alunos
+    cursor.execute("""SELECT tb_alunos.rm_aluno, tb_alunos.nome_aluno, tb_turmas.turma FROM db_snec.tb_alunos
                         INNER JOIN tb_turmas 
                         ON tb_alunos.id_turma = tb_turmas.id_turma
                         ORDER BY

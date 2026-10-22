@@ -1,4 +1,4 @@
-function mostrarAlerta(mensagem,estado) {
+function mostrarAlerta(mensagem,estado, link_botao, texto_botao) {
   const alertOverlay = document.createElement("div");
   alertOverlay.classList.add("alert-overlay");
 
@@ -8,7 +8,9 @@ function mostrarAlerta(mensagem,estado) {
       <div class="alert-content-success">
         <img class="alert-icon-wrapper-success" src="/static/img/icons/check_icon.png" alt="">
         <p class="alert-message-success">${mensagem}</p>
-        <button class="alert-button-success">Voltar</button>
+        <a href="${link_botao}">
+          <button class="alert-button-success">${texto_botao}</button>
+        </a> 
       </div>
     </div>
 `;
@@ -26,7 +28,9 @@ function mostrarAlerta(mensagem,estado) {
     <div class="alert-content-error">
         <img class="alert-icon-wrapper-error" src="/static/img/icons/error_icon.png" alt="">
         <p class="alert-message-error">${mensagem}</p>
-        <button class="alert-button-error">Voltar</button>
+        <a href="${link_botao}">
+          <button class="alert-button-error">${texto_botao}</button>
+        </a>
     </div>
 </div>
 `;

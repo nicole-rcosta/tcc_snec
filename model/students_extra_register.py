@@ -2,6 +2,32 @@ from database.conexao import conectar
 
 
 
+def adicionar_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:
+    """
+    Adicona o aluno com as informações passadas através dos parâmetros.
+    """
+
+    conexao,cursor = conectar()
+     
+    cursor.execute("""INSERT INTO `db_snec`.`tb_aluno_atividade` (`rm_aluno`, `id_atividade`, `dia_semana`) VALUES (%s, %s, %s);""",(rm,atividade,dia_semana) )
+
+    conexao.commit()
+    conexao.close()
+
+
+def excluir_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:
+    """
+    Adicona o aluno com as informações passadas através dos parâmetros.
+    """
+
+    conexao,cursor = conectar()
+     
+    cursor.execute("""DELETE FROM `db_snec`.`tb_aluno_atividade` WHERE (`rm_aluno` = %s) and (`id_atividade` = %s) and (`dia_semana` = %s);;""",(rm,atividade,dia_semana) )
+
+    conexao.commit()
+    conexao.close()
+
+
 def recuperar_alunos_atividade():
     conexao,cursor = conectar()
     cursor.execute("""SELECT
@@ -9,6 +35,7 @@ def recuperar_alunos_atividade():
                             tb_alunos.rm_aluno AS rm,
                             tb_turmas.turma AS turma,
                             tb_atividades.atividade AS atividade,
+                            tb_atividades.id_atividade AS id_atividade,
                             tb_atividades.periodo AS periodo,
                             tb_aluno_atividade.dia_semana AS dia
                         FROM tb_alunos
@@ -28,3 +55,4 @@ def recuperar_alunos_atividade():
     conexao.close()
 
     return alunos
+

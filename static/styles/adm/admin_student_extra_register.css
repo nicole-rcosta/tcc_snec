@@ -301,3 +301,38 @@ body {
         font-size: 15px;
     }
 }
+
+
+.admin-student-extra__table-header .admin-student-extra__table-cell {
+    padding: 0.75rem 0.5rem;
+    color: var(--color-blue);
+    font-weight: 700;
+    border-bottom: 2px solid rgba(80, 102, 202, 0.2);
+}
+
+.admin-student-extra__table-body .admin-student-extra__table-row {
+    border-bottom: 1px solid rgba(108, 117, 125, 0.15);
+}
+
+.admin-student-extra__table-body .admin-student-extra__table-row:last-child {
+    border-bottom: none;
+}
+
+.admin-student-extra__table-cell {
+    padding: 0.75rem 0.5rem;
+    color: var(--text-main);
+    vertical-align: middle;
+}
+
+.admin-student-extra__table-cell--name {
+    font-weight: 600;
+    text-align: left;
+}
+
+.admin-student-extra__table-cell--rm,
+.admin-student-extra__table-cell--class,
+.admin-student-extra__table-cell--course,
+.admin-student-extra__table-cell--period,
+.admin-student-extra__table-cell--week-day {
+    color: var(--text-secondary);
+}

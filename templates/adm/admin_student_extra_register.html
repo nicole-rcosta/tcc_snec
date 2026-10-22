@@ -21,12 +21,12 @@
 
         <h1 class="admin-student-extra__title">Cadastrar Aluno na Atividade:</h1>
 
-        <form action="" method="POST" class="admin-student-extra__form">
+        <form action="/adm/reg_student_extra/post" method="POST" class="admin-student-extra__form">
             <div class="admin-student-extra__form-group">
                 <div class="admin-student-extra__field admin-student-extra__field--name">
                     <label for="student-name" class="admin-student-extra__label">Nome Completo:</label>
                     <select class="admin-student-extra__input admin-student-extra__input--dropdown" id="student_name"
-                        name="student_name" required>
+                        name="student_rm" required>
                         <option value="" selected disabled>Selecione um aluno:</option>
                             {% for aluno in alunos %}
                                 <option value="{{aluno.rm_aluno}}" data-rm="{{aluno.rm_aluno}}" data-turma="{{aluno.turma}}">{{aluno.nome_aluno}}</option>
@@ -44,7 +44,7 @@
                 <div class="admin-student-extra__field admin-student-extra__field--activity">
                     <label for="student-class" class="admin-student-extra__label">Atividade:</label>
                     <select class="admin-student-extra__input admin-student-extra__input--dropdown" id="student-activity"
-                        name="student_name" required>
+                        name="student_activity" required>
                         <option value="" selected disabled>Selecione uma atividade:</option>
                             {% for atividade in atividades %}
                                 <option value="{{atividade.id_atividade}}" data-periodo="{{atividade.periodo}}">{{atividade.atividade}}</option>
@@ -58,7 +58,7 @@
                 <div class="admin-student-extra__field admin-student-extra__field--week-day">
                     <label for="student-week-day" class="admin-student-extra__label">Dia da Semana:</label>
                     <select class="admin-student-extra__input admin-student-extra__input--dropdown" id="student-activity"
-                        name="student_name" required>
+                        name="student_week-day" required>
                         <option value="" selected disabled>Selecione um dia da semana:</option>
                             <option value="SEG" >Segunda</option>
                             <option value="TER" >Terça</option>
@@ -82,6 +82,7 @@
                         <th class="admin-student-extra__table-cell admin-student-extra__table-cell--class" scope="col">Turma</th>
                         <th class="admin-student-extra__table-cell admin-student-extra__table-cell--activity" scope="col">Atividade</th>
                         <th class="admin-student-extra__table-cell admin-student-extra__table-cell--period" scope="col">Período</th>
+                        <th class="admin-student-extra__table-cell admin-student-extra__table-cell--week-day" scope="col">Dia da Semana</th>
                         <th class="admin-student-extra__table-cell admin-student-extra__table-cell--actions" scope="col">
                             <span class="visually-hidden">Ações</span>
                         </th>
@@ -89,15 +90,15 @@
                 </thead>
                 <tbody class="admin-student-extra__table-body">
                 {% for aluno in alunos_atv %}
-                <tr class="admin-student__table-row">
-                    <td class="admin-student__table-cell admin-student__table-cell--name" data-label="Nome">{{aluno.nome}}</td>
-                    <td class="admin-student__table-cell admin-student__table-cell--rm" data-label="RM">{{aluno.rm}}</td>
-                    <td class="admin-student__table-cell admin-student__table-cell--class" data-label="Turma">{{aluno.turma}}</td>
-                    <td class="admin-student__table-cell admin-student__table-cell--course" data-label="Curso">{{aluno.atividade}}
+                <tr class="admin-student-extra__table-row">
+                    <td class="admin-student-extra__table-cell admin-student-extra__table-cell--name" data-label="Nome">{{aluno.nome}}</td>
+                    <td class="admin-student-extra__table-cell admin-student-extra__table-cell--rm" data-label="RM">{{aluno.rm}}</td>
+                    <td class="admin-student-extra__table-cell admin-student-extra__table-cell--class" data-label="Turma">{{aluno.turma}}</td>
+                    <td class="admin-student-extra__table-cell admin-student-extra__table-cell--course" data-label="Curso">{{aluno.atividade}}
                     </td>
-                    <td class="admin-student__table-cell admin-student__table-cell--period" data-label="Período">{{aluno.periodo}}
+                    <td class="admin-student-extra__table-cell admin-student-extra__table-cell--period" data-label="Período">{{aluno.periodo}}
                     </td>
-                    <td class="admin-student__table-cell admin-student__table-cell--week-day" data-label="Dia da Semana">{% if aluno.dia == 'SEG' %}
+                    <td class="admin-student-extra__table-cell admin-student-extra__table-cell--week-day" data-label="Dia da Semana">{% if aluno.dia == 'SEG' %}
                                                                                                                             Segunda-feira
                                                                                                                         {% elif aluno.dia == 'TER' %}
                                                                                                                             Terça-feira
@@ -109,11 +110,13 @@
                                                                                                                             Sexta-feira
                                                                                                                         {% endif %}
                     </td>
-                    <td class="admin-student__table-cell admin-student__table-cell--actions">
-                        <button type="button" class="admin-student__button admin-student__button--delete"
-                            aria-label="Excluir aluno Fulana Lorenzo Morales">
-                            <i class="fa-regular fa-trash-can admin-student__button-icon" aria-hidden="true"></i>
-                        </button>
+                    <td class="admin-student-extra__table-cell admin-student-extra__table-cell--actions">
+                        <a href="/adm/reg_student_extra/delete/{{aluno.rm}}/{{aluno.id_atividade}}/{{aluno.dia}}">
+                            <button type="button" class="admin-student-extra__button admin-student-extra__button--delete"
+                                aria-label="">
+                                <i class="fa-regular fa-trash-can admin-student-extra__button-icon" aria-hidden="true"></i>
+                            </button>
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}

@@ -66,7 +66,9 @@ body{
     background-color: var(--color-green);
     color: white;
     border-radius: 10px;
-    width: 30%;
+    /* Width e min-width alterados para a responsividade no botão se adequar a tamanhos menores de tela */
+    width: auto;   
+    min-width: 120px;
     font-size: 20px;
     margin-top: 20px;
     font-weight: 600;
@@ -114,56 +116,85 @@ body{
     left: 0;
 }   
 
-@media (min-width: 600px) {
+
+@media (max-width: 599px) {
   .login--card{
-    width: 50%;
+    width: 65%;
   }
+
   .background{
-    height: 300px;
+    height: 200px;
     z-index: -1;
-    }
+  }
+
   .login__label{
     font-size:20px ;
   }
+
   .logo_snec{
     height: 120px;
+  }
+}
 
-    }
+
+@media (min-width: 600px) {
+  .login--card{
+    width: 55%;
+  }
+
+  .background{
+    height: 230px;
+    z-index: -1;
+  }
+
+  .login__label{
+    font-size:20px ;
+  }
+
+  .logo_snec{
+    height: 120px;
+  }
 }
 
 @media (min-width: 800px) {
   .login--card{
     width: 50%;
   }
+  
   .background{
-    height: 300px;
+    height: 250px;
     z-index: -1;
-    }
-    .login__label{
-    font-size:20px ;
   }
+    
+  .login__label{
+    font-size: 20px;
+  }
+
   .logo_snec{
     height: 120px;
 
-    }
+  }
 }
 
 @media (min-width: 1200px) {
   .login--card{
-    width: 30%;
+    width: 50%;
   }
+
   .background{
-    height: 400px;
+    height: 250px;
     z-index: -1;
   }
+
   .login__title{
-    font-size: 35px;
+    font-size: 30px;
   }
+
   .login__label{
     font-size:20px ;
   }
+
   .logo_snec{
     height: 120px;
-
-    }
+  }
 }

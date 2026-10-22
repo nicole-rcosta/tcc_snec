@@ -5,7 +5,6 @@ from model.usuarios import verificar_email
 from model.usuarios import atualizar_senha
 from static.utils.verification_password import verificar_senha_mestra as vsm
 import bcrypt
-from flask import Flask, render_template, request, redirect, session, jsonify, flash
 from model.usuarios import cadastrar
 from model.class_register import recuperar_salas
 from model.class_register import adicionar_sala
@@ -17,7 +16,6 @@ from model.nutri_dashboard import recuperar_dados_dashboard
 from model.students_extra_register import recuperar_alunos_atividade
 from model.students_extra_register import adicionar_aluno_atividade
 from model.students_extra_register import excluir_aluno_atividade
-
 from model.nutritionist_report import buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
 import mysql
 import mysql.connector

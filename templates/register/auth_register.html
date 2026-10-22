@@ -59,5 +59,53 @@
     </div>
     
 </body>
-<script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+    <script src="/static/js/alerts.js"></script>
+
+    {% if erro_cadastro_vazio %}
+
+    <script>
+        mostrarAlerta(
+            "Preencha todos os campos para realizar o cadastro",
+            "error",
+            "/cadastro",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% elif erro_cpf %}
+
+    <script>
+        mostrarAlerta(
+            "CPF inválido",
+            "error",
+            "/cadastro",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% elif erro_cadastro_existente %}
+
+    <script>
+        mostrarAlerta(
+            "O CPF ou e-mail informado já está cadastrado",
+            "error",
+            "/cadastro",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% elif erro_servidor %}
+
+    <script>
+        mostrarAlerta(
+            "Não foi possível realizar o cadastro",
+            "error",
+            "/cadastro",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% endif %}
+
 </html>

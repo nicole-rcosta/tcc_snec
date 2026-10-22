@@ -79,5 +79,42 @@
     </main>
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
 
+    <script src="/static/js/alerts.js"></script>
+
+    {% if erro_sala_vazia %}
+
+    <script>
+        mostrarAlerta(
+            "Preencha todos os campos para cadastrar a turma",
+            "error",
+            "/adm/reg_class",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% elif erro_turma_existente %}
+
+    <script>
+        mostrarAlerta(
+            "Essa turma já está cadastrada",
+            "error",
+            "/adm/reg_class",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% elif erro_servidor %}
+
+    <script>
+        mostrarAlerta(
+            "Não foi possível cadastrar a turma",
+            "error",
+            "/adm/reg_class",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% endif %}
+    
 
 {% endblock %}

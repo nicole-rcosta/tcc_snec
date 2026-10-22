@@ -2,39 +2,78 @@ from database.conexao import conectar
 from static.utils.cpf_validation import validar_cpf
 import bcrypt
 
-def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) -> bool:
+def cadastrar(nome: str, email: str, cargo: str, senha: str, cpf: str, status: str) -> dict:
     conexao = None
     cursor = None
+
     try:
+        # Verifica se algum campo está vazio
+        if not nome or not email or not cargo or not senha or not cpf:
+            return {
+                "sucesso": False,
+                "erro_cadastro_vazio": True
+            }
+
         senha_bytes = senha.encode('utf-8')
         salt = bcrypt.gensalt()
         senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
 
         if not validar_cpf(cpf):
-            {"sucesso": False, "mensagem": "CPF inválido."}
             print("cpf invalido")
-            return False
+            return {
+                "sucesso": False,
+                "erro_cpf": True
+            }
 
         conexao, cursor = conectar()
-        
+
+        # Verifica se o email ou CPF já existem
+        sql_verificar = """
+            SELECT id_usuario
+            FROM tb_usuarios
+            WHERE email = %s OR cpf = %s;
+        """
+
+        cursor.execute(sql_verificar, (email, cpf))
+        resultado = cursor.fetchone()
+
+        if resultado:
+            return {
+                "sucesso": False,
+                "erro_cadastro_existente": True
+            }
+
         sql = """
             INSERT INTO tb_usuarios (nome_usuario, email, cargo, senha, cpf, status) 
             VALUES (%s, %s, %s, %s, %s, %s);
         """
-        
-        cursor.execute(sql, (nome, email, cargo, senha_hash, cpf, status))
+
+        cursor.execute(
+            sql,
+            (nome, email, cargo, senha_hash, cpf, status)
+        )
+
         conexao.commit()
-        return True
+
+        return {
+            "sucesso": True
+        }
 
     except Exception as erro:
         print(f"Erro ao cadastrar usuário: {erro}")
+
         if conexao:
             conexao.rollback()
-        return False
+
+        return {
+            "sucesso": False,
+            "erro_servidor": True
+        }
 
     finally:
         if cursor:
             cursor.close()
+
         if conexao:
             conexao.close()
 

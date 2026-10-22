@@ -24,6 +24,7 @@ import time
 import smtplib
 from email.message import EmailMessage
 
+
 app = Flask(__name__)
 app.secret_key = "snec_tcc_chave"
 
@@ -89,10 +90,34 @@ def cadastrar_usuario():
     senha = request.form.get("password")
     status = "pendente"
 
-    if cadastrar(nome, email, cargo, senha, cpf, status):
+    resultado = cadastrar(nome, email, cargo, senha, cpf, status)
+
+    if resultado["sucesso"]:
         return render_template("/login/auth_login.html")
-    else:
-        return redirect("/")
+
+    elif resultado.get("erro_cadastro_vazio"):
+        return render_template(
+            "/register/auth_register.html",
+            erro_cadastro_vazio=True
+        )
+
+    elif resultado.get("erro_cpf"):
+        return render_template(
+            "/register/auth_register.html",
+            erro_cpf=True
+        )
+
+    elif resultado.get("erro_cadastro_existente"):
+        return render_template(
+            "/register/auth_register.html",
+            erro_cadastro_existente=True
+        )
+
+    elif resultado.get("erro_servidor"):
+        return render_template(
+            "/register/auth_register.html",
+            erro_servidor=True
+        )
     
 # ---------------------------
 # Paginas de Administrador
@@ -131,15 +156,35 @@ def pagina_cad_atividade():
     atividades = ra()
     return render_template("adm/admin_extra_activity_register.html", atividades=atividades)
 
+
 @app.route("/adm/reg_activity/post", methods=["POST"])
 def pagina_cad_atividades():
     ativid = request.form.get("activity_name")
     periodo = request.form.get("activity_period")
 
-    if ativid and periodo:
-        ca(ativid, periodo)
+    resultado = ca(ativid, periodo)
 
-    return redirect(url_for("pagina_cad_atividade"))
+    if resultado["sucesso"]:
+        return redirect(url_for("pagina_cad_atividade"))
+
+    elif resultado.get("erro_atividade_vazia"):
+        return render_template(
+            "adm/admin_extra_activity_register.html",
+            erro_atividade_vazia=True
+        )
+
+    elif resultado.get("erro_atividade_existente"):
+        return render_template(
+            "adm/admin_extra_activity_register.html",
+            erro_atividade_existente=True
+        )
+
+    elif resultado.get("erro_servidor"):
+        return render_template(
+            "adm/admin_extra_activity_register.html",
+            erro_servidor=True
+        )
+
         
 
 @app.route("/adm/exc_activity/<id_atividade>", methods=["POST"])
@@ -158,18 +203,45 @@ def pagina_cad_sala():
 
 @app.route("/adm/reg_class/post", methods=["POST"])
 def pagina_cad_sala_post():
-    turma= request.form.get("room_class")
-    periodo= request.form.get("room_period")
-    qnt_aluno= request.form.get("class_quantity")
-    adicionar_sala(turma=turma,periodo=periodo,qnt_alunos=qnt_aluno)
-    return redirect("/adm/reg_class")
+    turma = request.form.get("room_class")
+    periodo = request.form.get("room_period")
+    qnt_aluno = request.form.get("class_quantity")
+
+    resultado = adicionar_sala(
+        turma=turma,
+        periodo=periodo,
+        qnt_alunos=qnt_aluno
+    )
+
+    if resultado["sucesso"]:
+        return redirect("/adm/reg_class")
+
+    elif resultado.get("erro_sala_vazia"):
+        return render_template(
+            "/adm/admin_room_register.html",
+            erro_sala_vazia=True
+        )
+
+    elif resultado.get("erro_turma_existente"):
+        return render_template(
+            "/adm/admin_room_register.html",
+            erro_turma_existente=True
+        )
+
+    elif resultado.get("erro_servidor"):
+        return render_template(
+            "/adm/admin_room_register.html",
+            erro_servidor=True
+        )
+
+
 
 @app.route("/adm/reg_class/delete/<int:id>")
 def pagina_cad_sala_del(id):
     deletar_sala(id)
     return redirect("/adm/reg_class")
 
-
+    
 
 
 

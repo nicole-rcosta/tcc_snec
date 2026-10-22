@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
 from model.usuarios import cadastrar, logar
+from model.usuarios import verificar_email
+from model.usuarios import atualizar_senha
 from static.utils.verification_password import verificar_senha_mestra as vsm
 import bcrypt
 from flask import Flask, render_template, request, redirect, session, jsonify, flash
@@ -15,8 +17,13 @@ from model.nutri_dashboard import recuperar_dados_dashboard
 from model.students_extra_register import recuperar_alunos_atividade
 from model.students_extra_register import adicionar_aluno_atividade
 from model.students_extra_register import excluir_aluno_atividade
+
 import mysql
 import mysql.connector
+import secrets
+import time
+import smtplib
+from email.message import EmailMessage
 
 app = Flask(__name__)
 app.secret_key = "snec_tcc_chave"
@@ -258,21 +265,217 @@ def pagina_prof_registro():
 def pagina_confirmacao_prof():
     return render_template("teacher/teacher_attendance_confirm.html")
 
-# ---------------------------
-# Paginas de Recuperar Senha
-# ---------------------------
+# =========================================================
+# RECUPERAÇÃO DE SENHA
+# =========================================================
 
-@app.route("/password_recover")
+# GET
+# Mostra a página onde o usuário informa o e-mail
+@app.route("/password_recover", methods=["GET"])
 def pagina_recuperar_senha():
-    return render_template("password/auth_password_recover.html")
+    return render_template(
+        "password/auth_password_recover.html"
+    )
 
-@app.route("/password_recover/code")
+
+# POST
+# Recebe o e-mail, verifica, gera o código e envia
+@app.route("/password_recover", methods=["POST"])
+def receber_email():
+    
+    # linha que gera o código
+    codigo = f"{secrets.randbelow(100000):05d}"
+
+    session["codigo_recuperacao"] = codigo
+
+    # coloca um limite de 5 minutos segundos pra expirar
+    session["expiracao_codigo"] = time.time() + 300
+
+    email = request.form.get("email")
+    session["email_recuperacao"] = email
+
+    # verifica se o email existe
+    if not verificar_email(email):
+        return render_template(
+            "password/auth_password_recover.html",
+            erro_email=True
+        )
+
+    # se existir segue ess logica:
+    
+    # Dados da conta
+    EMAIL_REMETENTE = "pablolorenzomoralez@gmail.com"
+    # tomar cuidado com isso
+    SENHA_APP = "mtls ntmg kxxn aquu" 
+    DESTINATARIO = email
+
+    email = EmailMessage()
+    email["Subject"] = "Código de Recuperação de senha"
+    email["From"] = EMAIL_REMETENTE
+    email["To"] = DESTINATARIO
+
+    email.set_content(f'''
+    Confirme seu e-mail
+
+    Use este código no snec pra confirmar que este e-mail é seu:
+
+    {codigo}
+
+    ''')
+
+    # Conectando ao Gmail e enviando
+
+    try:
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=3) as servidor:
+            servidor.starttls()
+            servidor.login(EMAIL_REMETENTE, SENHA_APP)
+
+            print("Enviando e-mail...", flush=True)
+            servidor.send_message(email)
+
+            print("E-mail enviado com sucesso!", flush=True)
+
+    except (smtplib.SMTPException, TimeoutError, OSError) as erro:
+        print(f"Envio não confirmado: {erro}", flush=True)
+
+    finally:
+        print("Programa encerrado.", flush=True)
+        
+        return  render_template("password/auth_password_insert.html")
+
+#página onde o usuário informa o código
+@app.route("/password_recover/code", methods=["GET"])
 def pagina_recuperar_senha_codigo():
-    return render_template("password/auth_password_insert.html")
+    return render_template(
+        "password/auth_password_insert.html"
+    )
 
-@app.route("/password_recover/code/password_reset")
+
+
+# recebe e valida o código
+@app.route("/password_recover/code", methods=["POST"])
+def verificar_codigo():
+
+    codigo = session.get("codigo_recuperacao")
+    expiracao = session.get("expiracao_codigo", 0)
+
+    if not codigo:
+        return "<h2>Nenhum código foi gerado!</h2>"
+
+    # ve se o código expirou
+    if time.time() >= expiracao:
+        session.pop("codigo_recuperacao", None)
+        session.pop("expiracao_codigo", None)
+
+        return render_template(
+                    "password/auth_password_insert.html",
+                    codigo_expirado=True
+                )
+
+    
+    codigo_digitado = request.form.get("codigo-completo")
+    # ve se o código está correto
+    if codigo_digitado == codigo:
+        session.pop("codigo_recuperacao", None)
+        session.pop("expiracao_codigo", None)
+        session["recuperacao_autorizada"] = True
+        return redirect(url_for("pagina_recuperar_senha_redefinicao"))
+
+    return render_template(
+                        "password/auth_password_insert.html",
+                        erro_codigo=True
+                    )
+    
+
+# mostra a página para criar a nova senha
+@app.route(
+    "/password_recover/code/password_reset",
+    methods=["GET"]
+)
 def pagina_recuperar_senha_redefinicao():
-    return render_template("password/auth_password_reset.html")
+
+    # impede acesso a página sem ve o código
+    if not session.get("recuperacao_autorizada"):
+        return redirect(
+            url_for("pagina_recuperar_senha")
+        )
+
+    return render_template(
+        "password/auth_password_reset.html"
+    )
+
+
+# POST
+# Recebe a nova senha e atualiza no banco
+@app.route(
+    "/password_recover/code/password_reset",
+    methods=["POST"]
+)
+def redefinir_senha():
+
+    # Verifica se o usuário passou pela validação
+    if not session.get("recuperacao_autorizada"):
+        return redirect(
+            url_for("pagina_recuperar_senha")
+        )
+
+    nova_senha = request.form.get(
+        "new-password"
+    )
+
+    nova_senha_confirm = request.form.get(
+        "confirm-password"
+    )
+
+    # Verifica se as senhas são iguais
+    if nova_senha != nova_senha_confirm:
+
+        return render_template(
+            "password/auth_password_reset.html",
+            erro_senha=True
+        )
+
+    # Recupera o e-mail salvo anteriormente
+    email = session.get(
+        "email_recuperacao"
+    )
+
+    # Atualiza a senha no banco
+    sucesso = atualizar_senha(
+        email,
+        nova_senha
+    )
+
+    if sucesso:
+
+       
+        session.pop("email_recuperacao",None)
+
+        session.pop("recuperacao_autorizada",None)
+
+     
+        return redirect(
+            url_for("pagina_recuperacao_sucesso")
+        )
+
+    return render_template(
+        "password/auth_password_reset.html",
+        erro_atualizacao=True
+    )
+
+
+
+@app.route(
+    "/password_recover/success",
+    methods=["GET"]
+)
+def pagina_recuperacao_sucesso():
+
+    return render_template(
+        "password/auth_password_reset.html",
+        senha_atualizada=True
+    )
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)

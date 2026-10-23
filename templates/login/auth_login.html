@@ -18,6 +18,10 @@
             <img class="logo_snec" src="/static/img/logo_principal.png" alt="">
 
             <h1 class="login__title">Login</h1>
+
+            {% if erro %}
+            <span class="login__message-error">{{ erro }}</span>
+            {% endif %}
         
             <div class="login-field">
                 <label class="login__label" for="cpf">CPF</label>

@@ -50,26 +50,34 @@
               {% for aluno in alunos %}
                 {% if aluno %}
                   <tr class="activities__table-row">
-                    <td class="activities__table-cell--rm">{{ tb_alunos.rm_aluno }}</td>
-                    <td class="activities__table-cell--student">{{ tb_alunos.nome_aluno }}</td>
-                    <td class="activities__table-cell--year">{{ tb_turmas.turma }}</td>
-                    <td class="activities__table-cell--activity"><span class="badge">{{ tb_atividades.atividade }}</span></td>
-                    <td class="activities__table-cell--shift">{{ tb_atividades.periodo }}</td>
-                    <td class="activities__table-cell--check"><input type="checkbox" name="rms_atendidos" value="{{ tb_alunos.rm_aluno }}" {% if status %}checked{% endif %}></td>
+                    <td class="activities__table-cell--rm">{{ aluno.rm_aluno }}</td>
+                    <td class="activities__table-cell--student">{{ aluno.nome_aluno }}</td>
+                    <td class="activities__table-cell--year">{{ aluno.turma }}</td>
+                    <td class="activities__table-cell--activity"><span class="badge">{{ aluno.atividade }}</span></td>
+                    <td class="activities__table-cell--shift">{{ aluno.periodo }}</td>
+                    <td class="activities__table-cell--check"><input type="checkbox" name="rms_atendidos" value="{{ aluno.rm_aluno }}" {% if not status %} checked {% endif %}></td>
                   </tr>
                   <!-- Mensagem da Fer -->
                 {% endif %}
               {% endfor %}
             </tbody>
+            {% if erro %}
+            <tfoot>
+              <tr class="activities__table-row">
+                <td colspan="6" style="color: var(--color-red); text-align: center;">{{ erro }}</td>
+              </tr>
+            </tfoot>
+            {% endif %}
           </table>
         </div>
       </section>
       
       <div class="activities__actions">
-        <a href="{{ url_for('pagina_prof_selecionar_sala') }}"><button class="activities__button--back" type="button">Voltar</button></a>
-        <a href="{{ url_for('pagina_confirmacao_prof') }}"><button class="activities__button--continue" type="submit">Continuar</button></a>
+        <a href="/teacher"><button class="activities__button--back" type="button">Voltar</button></a>
+        <a href="/teacher/class_info/confirm"><button class="activities__button--continue" type="submit">Continuar</button></a>
       </div>
     </form>
+    
 
   </main>
 

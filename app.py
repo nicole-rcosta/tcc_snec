@@ -8,6 +8,7 @@ from model.nutri_dashboard import recuperar_dados_dashboard
 from model.students_extra_register import recuperar_alunos_atividade, adicionar_aluno_atividade, excluir_aluno_atividade
 from model.nutritionist_report import buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
 from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_presenca, buscar_turmas, buscar_qntd_alunos
+from model.adm_access import buscar_adm, buscar_usuario_pendente, rejeitar_usuario, aprovar_usuario
 import secrets
 import time
 import smtplib
@@ -295,21 +296,26 @@ def pagina_prof_selecionar_sala():
     turmas = buscar_turmas()
 
     if turmas.get("sucesso"):
-        return render_template("teacher/teacher_class_select.html", turmas = turmas)
+        return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"))
     else:
         return render_template("teacher/teacher_class_select.html", erro = turmas.get("mensagem"))
 
 @app.route("/teacher/class_info/<id_turma>")
 def pagina_prof_registro(id_turma):
-    qtd_padrao, alunos = buscar_alunos(id_turma)
-    return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qtd_padrao=qtd_padrao, alunos=alunos)
+    qnt_alunos = buscar_qntd_alunos(id_turma)
+    alunos = buscar_alunos(id_turma)
+    print(alunos)
+    if alunos.get("sucesso"):
+        return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))
+    else:
+        return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, erro=alunos.get("mensagem"))
 
 @app.route("/teacher/class_info/confirm/<id_turma>", methods=['POST'])
 def pagina_confirmacao_prof(id_turma):
 
     qtd_alunos = request.form.get('quantidade_alunos')
-    rms_atendidos= request.form.getList('rms_atendidos')
-    rms_contraturnos = request.form.getList('rms_contraturnos')
+    rms_atendidos= request.form.getlist('rms_atendidos')
+    rms_contraturnos = request.form.getlist('rms_contraturnos')
 
     alunos_confirmados = alunos_presentes(rms_atendidos)
 
@@ -324,8 +330,8 @@ def pagina_confirmacao_prof(id_turma):
 @app.route("/teacher/class_info/save/<id_turma>", methods=['POST'])
 def salvar_registro_prof(id_turma):
     qtd_alunos = request.form.get('quantidade_alunos')
-    rms_atendidos= request.form.getList('rms_atendidos')
-    rms_contraturnos = request.form.getList('rms_contraturnos')
+    rms_atendidos = request.form.getlist('rms_atendidos')
+    rms_contraturnos = request.form.getlist('rms_contraturnos')
     id_usuario = session.get('id_usuario', 1)
 
     sucesso = salvar_presenca(id_turma, qtd_alunos, rms_atendidos, rms_contraturnos, id_usuario)

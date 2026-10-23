@@ -9,9 +9,10 @@ def buscar_turmas():
     try:
         cursor.execute("SELECT id_turma, turma FROM tb_turmas")
         turmas = cursor.fetchall()
+        print(turmas)
 
         if turmas:
-            return {"sucesso": True, "mensagem": "Requisição bem-sucessida."}
+            return {"sucesso": True, "turmas": turmas}
         else:
             return {"sucesso": False, "mensagem": "Nenhuma turma cadastrada."}
 
@@ -71,7 +72,10 @@ def buscar_alunos(id_turma):
 
         alunos = cursor.fetchall()
 
-        return alunos
+        if alunos:
+            return {"sucesso": True, "alunos": alunos}
+        else:
+            return {"sucesso": False, "mensagem": "Nenhum aluno cadastrado."}
     
     except Exception as erro:
         print(f"Erro ao cadastrar usuário: {erro}")

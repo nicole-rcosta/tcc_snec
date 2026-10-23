@@ -36,7 +36,7 @@
         {% endif %}
         {% for turma in turmas %}
         <div class="class-card">
-            <a href="/teacher/class_info"><button class="class-card__title">{{ turma.turma }}</button></a>
+            <a href="/teacher/class_info/{{ turma.id_turma }}"><button class="class-card__title">{{ turma.turma }}</button></a>
         </div>
         {% endfor %}
     </section>

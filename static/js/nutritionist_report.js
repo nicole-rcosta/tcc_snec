@@ -53,7 +53,7 @@ async function carregarAlunosAlmoco() {
                             onchange="salvarPresenca(${aluno.rm}, this.checked)"
                         />
                         <span class="dashboard__checkbox-custom" aria-hidden="true"></span>
-                        <span class="visually-hidden">Marcar presença de ${aluno.aluno}</span>
+
                     </label>
                 </td>
             `;

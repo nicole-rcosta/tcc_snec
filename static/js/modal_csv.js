@@ -43,3 +43,11 @@ modal.addEventListener('click', function(event) {
   }
 });
 
+
+
+document.addEventListener('keydown', function(event) {
+
+  if (event.key === 'Escape') {
+    fecharModal()
+  }
+});

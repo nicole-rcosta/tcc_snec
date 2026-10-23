@@ -191,7 +191,7 @@ body {
   .background-sup-esq, .background-sup-dir,
   .background-inf-esq, .background-inf-dir {
     height: 180px;
-    opacity: 0.7;
+    opacity: 0.9;
   }
 }
 

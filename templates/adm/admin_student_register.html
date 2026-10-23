@@ -17,6 +17,10 @@
                     <i class="fa-solid fa-arrow-left-long admin-student__back-icon" aria-hidden="true"></i>
                 </button>
             </a>
+
+            <button  type="button" class="admin-student__import-button" id="abrirModal">
+                    <i class="fa-solid fa-download admin-student__import-icon" aria-hidden="true"></i> Importar
+            </button>           
         </div>
 
         <h1 class="admin-student__title">Cadastrar Aluno:</h1>
@@ -44,6 +48,11 @@
             </div>
 
         <button type="submit" class="admin-student__button admin-student__button--submit">Cadastrar</button>
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+            <span style="color:red; display: inline; width: 100%; text-align: center;">{{message}}</span>
+            {% endfor %}
+        {% endwith %}
     </form>
 
         <section class="admin-student__list-section">
@@ -78,6 +87,51 @@
             </table>
         </section>
     </main>
+
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-import">
+            <div class="modal-header">
+                <h1 class="modal-import--title">Enviar Anexo</h1>
+                <button class="modal-backbutton" id="fecharBtn"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+            </div>
+            <div class="modal-import__box">
+                <p class="import__box--text ">Para realizar o cadastro, baixe uma das planilhas modelo abaixo <br>
+                    Modelo para Excel: <strong><a href="/static/modelos/modelo-alunos-excel.xls">Baixe Aqui</a></strong> <br>
+                    Modelo para CSV: <strong><a href="/static/modelos/modelo-alunos-csv.csv">Baixe Aqui</a></strong>
+                    <br>
+                    preencha com as informações dos alunos e faça o envio do arquivo.</p>
+
+                <div class="modal__import--button-container">
+
+                    <div class="button-container__excel">
+                        <form class="button-container__csv-input" action="/adm/reg_student/excel" method="POST" enctype="multipart/form-data">
+                            <input  type="file" name="input_excel" id="arquivo-excel" style="display: none;" required accept=".xlsx, .xls" />
+                            <label for="arquivo-excel" class="botao-arquivo">Escolher arquivo xls/xlsx</label>
+                            <span id="nome-arquivo-excel">Nenhum arquivo selecionado</span>
+                            <button class="modal__import--buttons">Enviar Excel</button>
+                        </form>
+                        
+                    </div>
+
+                    <div class="button-container__csv">
+                        <form class="button-container__csv-input" action="/adm/reg_student/csv" method="POST" enctype="multipart/form-data">
+                            <input type="file" name="input_csv" id="arquivo-csv" style="display: none;" required  accept=".csv"/>
+                            <label for="arquivo-csv" class="botao-arquivo">Escolher arquivo CSV</label>
+                            <span id="nome-arquivo-csv">Nenhum arquivo selecionado</span>
+                            <button class="modal__import--buttons">Enviar CSV</button>
+                        </form>
+                        
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+    <script src="/static/js/modal_csv.js"></script>
 
     
 {% endblock %}

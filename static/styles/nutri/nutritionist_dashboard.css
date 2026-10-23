@@ -1,5 +1,10 @@
 @import url(/static/styles/global.css);
 
+html, body {
+  overflow-y: auto;
+  scrollbar-width: none; 
+}
+
 /* Garantia de fundo escuro no body no modo escuro */
 body {
   background-color: var(--bg-main);
@@ -7,16 +12,15 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+
 [data-theme="dark"] body {
   background-color: var(--bg-main, #121214);
 }
 
 .dashboard {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 30px;
 }
 
 /* Centralizador e organizador vertical */

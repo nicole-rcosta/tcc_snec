@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/static/styles/global.css">
     <link rel="stylesheet" href="/static/styles/login/auth_login.css">
-    <title>Login - SNEC</title>
+    <link rel="stylesheet" href="/static/styles/global.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/alerts.css') }}">
+
+    <link rel="icon" href="/static/img/icone.ico" type="image/x-icon">
+    <title>Login</title>
 </head>
 <body>
         
@@ -56,4 +60,20 @@
 
     <script src="{{ url_for('static', filename='js/toggle_password.js') }}"></script>
 </body>
+    <script>
+    function mascaraCPF(valor) {
+    return valor
+        .replace(/\D/g, '')                    
+        .slice(0, 11)                          
+        .replace(/(\d{3})(\d)/, '$1.$2')       // primeiro ponto
+        .replace(/(\d{3})(\d)/, '$1.$2')       // segundo ponto
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // traço
+}
+
+    const input = document.getElementById('cpf');
+
+    input.addEventListener('input', (e) => {
+    e.target.value = mascaraCPF(e.target.value);
+    });
+    </script>
 </html>

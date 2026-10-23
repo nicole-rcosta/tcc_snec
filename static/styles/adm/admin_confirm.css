@@ -1,7 +1,11 @@
 @import url(/static/styles/global.css);
 
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
 
-.admin-confirm{
+.admin-confirm {
   flex: 1;
   max-width: 500px;
   width: 100%;
@@ -14,6 +18,20 @@
   flex-direction: column;
 }
 
+.admin-confirm__back-button {
+  color: var(--color-orange);
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  align-self: flex-start;
+  margin-bottom: 0.75rem;
+  display: inline-block;
+}
+
+.admin-confirm__back-button:hover {
+  transform: translateX(-4px);
+}
+
 .admin-confirm__card {
   position: relative;
   width: 100%;
@@ -21,13 +39,12 @@
   border-radius: 16px;
   padding: 2.5rem 2rem 2rem 2rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: background-color 0.3s, border-color 0.3s;
+  border: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 [data-theme="dark"] .admin-confirm__card {
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .admin-confirm__title {
@@ -58,22 +75,30 @@
   font-weight: 600;
 }
 
+
 .admin-confirm__input {
   width: 100%;
   padding: 0.85rem 1rem;
   font-size: 1rem;
   border-radius: 10px;
   border: none;
-  background-color: rgba(80, 102, 202, 0.1);
+  background-color: color-mix(in srgb, var(--color-blue) 8%, var(--bg-card));
   color: var(--text-main);
   box-sizing: border-box;
   outline: none;
-  transition: box-shadow 0.2s, background-color 0.2s;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .admin-confirm__input:focus {
-  box-shadow: 0 0 0 2px var(--color-blue);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-blue) 50%, transparent);
+  background-color: var(--bg-card);
 }
+
+.admin-confirm__input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
 
 .admin-confirm__actions {
   display: flex;
@@ -83,20 +108,20 @@
 
 .admin-confirm__button {
   background-color: var(--color-green);
-  color: var(--bg-card);
+  color: #ffffff;
   border: none;
   font-size: 1rem;
   font-weight: 700;
   padding: 0.75rem 2rem;
   border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(90, 175, 144, 0.25);
-  transition: background-color 0.2s, filter 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--color-green) 30%, transparent);
+  transition: background-color 0.2s ease, filter 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
 .admin-confirm__button:hover {
   filter: brightness(0.95);
-  box-shadow: 0 6px 14px rgba(90, 175, 144, 0.35);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--color-green) 40%, transparent);
 }
 
 .admin-confirm__button:active {
@@ -104,22 +129,8 @@
 }
 
 
-.admin-confirm__back-button{
-    color: var(--color-orange);
-    font-size: 30px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.admin-confirm__back-button:hover{
-    transform: translateX(-4px);
-}
-
-
-
-
 @media (max-width: 600px) {
-  .admin-confirm__main {
+  .admin-confirm {
     margin: 1.5rem auto;
     padding: 0 0.75rem;
   }

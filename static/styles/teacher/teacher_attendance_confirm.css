@@ -7,8 +7,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 .confirmation {
   width: 100%;
@@ -19,7 +19,6 @@ body {
   flex-direction: column;
 }
 
-
 .confirmation__title {
   font-size: 1.6rem;
   color: var(--color-orange);
@@ -27,17 +26,16 @@ body {
   line-height: 1.2;
   margin-bottom: 20px;
   margin-top: 15px;
-  
 }
 
-
+/* Barra de Progresso */
 .progress--step-3 {
   width: 180px;
   height: 6px;
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: color-mix(in srgb, var(--text-secondary) 20%, transparent);
   border-radius: 4px;
   overflow: hidden;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .progress--step-3 .progress-bar {
@@ -45,8 +43,8 @@ body {
   height: 100%;
   background-color: var(--color-green);
   border-radius: 4px;
+  transition: width 0.3s ease;
 }
-
 
 .progress-label {
   font-size: 0.8rem;
@@ -54,7 +52,7 @@ body {
   margin-bottom: 20px;
 }
 
-
+/* Card Principal */
 .confirmation__card {
   background-color: var(--bg-card);
   border-radius: 20px;
@@ -62,11 +60,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid color-mix(in srgb, var(--text-secondary) 15%, transparent);
   margin-bottom: 24px;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+[data-theme="dark"] .confirmation__card {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.08);
+}
 
 .confirmation__card-title {
   font-size: 1.15rem;
@@ -76,25 +79,23 @@ body {
   margin-bottom: 4px;
 }
 
-
 .confirmation__card-number {
   font-size: 2.2rem;
   font-weight: 800;
   color: var(--color-orange);
-  margin-bottom: 12px;
-  background-color: rgb(from var(--color-orange) r g b / 0.12);
-  padding: 5px;
-  border-radius: 10%;
-  margin: 10px;
+  background-color: color-mix(in srgb, var(--color-orange) 12%, var(--bg-card));
+  padding: 6px 20px;
+  border-radius: 12px;
+  margin: 12px 0;
+  text-align: center;
 }
 
 .confirmation__card-divider {
   width: 100%;
   border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 16px;
+  border-top: 1px solid color-mix(in srgb, var(--text-secondary) 15%, transparent);
+  margin: 16px 0;
 }
-
 
 .confirmation__card-subtitle {
   font-size: 1.05rem;
@@ -102,40 +103,39 @@ body {
   color: var(--color-blue);
   text-align: center;
   margin-bottom: 12px;
-  padding: 10px;
+  padding: 4px;
 }
 
-
+/* Lista */
 .confirmation__list {
   width: 100%;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
 }
-
 
 .confirmation__list-item {
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-main);
-  padding: 4px 0;
-  border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
-  margin-top: 5px;
+  padding: 8px 0;
+  border-bottom: 1px dashed color-mix(in srgb, var(--text-secondary) 20%, transparent);
 }
 
 .confirmation__list-item:last-child {
   border-bottom: none;
 }
 
-
+/* Ações e Botões */
 .confirmation__actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
-
 
 .confirmation__button--back {
   background-color: transparent;
@@ -153,28 +153,30 @@ body {
   opacity: 0.75;
 }
 
-
 .confirmation__button--continue {
   background-color: var(--color-green);
-  color: var(--bg-card);
+  color: #FFFFFF;
   border: none;
   padding: 12px 32px;
   font-size: 1rem;
   font-weight: 700;
   border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(90, 175, 144, 0.3);
-  transition: opacity 0.2s, transform 0.1s;
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--color-green) 30%, transparent);
+  transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
 }
 
 .confirmation__button--continue:hover {
-  opacity: 0.9;
+  opacity: 0.95;
   transform: translateY(-1px);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--color-green) 40%, transparent);
 }
 
+.confirmation__button--continue:active {
+  transform: scale(0.98);
+}
 
-
-
+/* Responsividade */
 @media (max-width: 640px) {
   .confirmation {
     margin: 12px auto;
@@ -197,7 +199,7 @@ body {
   }
 
   .confirmation__button--back {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: color-mix(in srgb, var(--text-secondary) 10%, var(--bg-card));
     text-decoration: none;
     border-radius: 12px;
     padding: 12px;

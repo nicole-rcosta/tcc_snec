@@ -1,10 +1,10 @@
 @import url(/static/styles/global.css);
 
-
-body{
+body {
   background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 .dashboard {
   max-width: 800px;
@@ -15,7 +15,7 @@ body{
   gap: 1.5rem;
 }
 
-
+/* Card Totalizador */
 .dashboard__total-card {
   background-color: var(--bg-card);
   border-radius: 16px;
@@ -23,8 +23,14 @@ body{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4px 12px rgb(from var(--text-main) r g b / 0.09);
-  transition: background-color 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(120, 130, 140, 0.12);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .dashboard__total-card {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .dashboard__total-label {
@@ -37,7 +43,7 @@ body{
 }
 
 .dashboard__total-number {
-  background-color: rgb(from var(--color-orange) r g b / 0.12);
+  background-color: color-mix(in srgb, var(--color-orange) 12%, var(--bg-card));
   color: var(--color-orange);
   font-size: 2.8rem;
   font-weight: 800;
@@ -48,12 +54,20 @@ body{
   margin: 0;
 }
 
+/* Seção de Listagem (Verde no modo claro, fundo escuro limpo no modo escuro) */
 .dashboard__list-section {
-  background-color: rgb(from var(--color-green) r g b / 0.15);
+  background-color: rgba(90, 175, 144, 0.15);
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgb(from var(--text-main) r g b / 0.05);
-  transition: background-color 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(90, 175, 144, 0.25);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .dashboard__list-section {
+  background-color: color-mix(in srgb, var(--text-main) 3%, var(--bg-card));
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 .dashboard__list-title {
@@ -66,7 +80,7 @@ body{
   font-family: var(--font-primary);
 }
 
-
+/* Tabela */
 .dashboard__table {
   width: 100%;
   border-collapse: collapse;
@@ -74,7 +88,12 @@ body{
   background-color: var(--bg-card);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgb(from var(--text-main) r g b / 0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .dashboard__table {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
 .dashboard__table-header th {
@@ -82,11 +101,11 @@ body{
   font-size: 0.9rem;
   font-weight: 700;
   padding: 1rem 0.8rem;
-  border-bottom: 2px solid rgb(from var(--color-blue) r g b / 0.15);
+  border-bottom: 2px solid color-mix(in srgb, var(--color-blue) 25%, transparent);
 }
 
 .dashboard__table-body tr {
-  border-bottom: 1px solid rgb(from var(--text-main) r g b / 0.08);
+  border-bottom: 1px solid color-mix(in srgb, var(--text-secondary) 15%, transparent);
 }
 
 .dashboard__table-body td {
@@ -109,10 +128,10 @@ body{
   color: var(--text-secondary);
   font-size: 0.85rem;
   text-align: center;
-  background-color: rgb(from var(--text-main) r g b / 0.02);
+  background-color: color-mix(in srgb, var(--text-main) 3%, var(--bg-card));
 }
 
-
+/* Checkbox Personalizado */
 .dashboard__checkbox-label {
   display: inline-flex;
   align-items: center;
@@ -154,24 +173,24 @@ body{
   content: "";
   width: 5px;
   height: 10px;
-  border: solid var(--bg-card);
+  border: solid #FFFFFF;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
   margin-bottom: 2px;
 }
 
 .dashboard__back-button {
-    color: var(--color-orange);
-    font-size: 30px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+  color: var(--color-orange);
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .dashboard__back-button:hover {
-    transform: translateX(-4px);
+  transform: translateX(-4px);
 }
 
-
+/* Responsividade */
 @media (max-width: 600px) {
   main {
     margin: 1rem auto;
@@ -193,7 +212,6 @@ body{
     padding: 1rem 0.75rem;
   }
 
-
   .dashboard__table-header {
     display: none;
   }
@@ -207,14 +225,17 @@ body{
     box-sizing: border-box;
   }
 
-
   .dashboard__table-body .dashboard__table-row {
     background-color: var(--bg-card);
     border-radius: 12px;
     padding: 0.8rem 1rem;
     margin-bottom: 0.75rem;
-    box-shadow: 0 2px 6px rgb(from var(--text-main) r g b / 0.05);
-    border: 1px solid rgb(from var(--text-main) r g b / 0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid color-mix(in srgb, var(--text-secondary) 15%, transparent);
+  }
+
+  [data-theme="dark"] .dashboard__table-body .dashboard__table-row {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
   .dashboard__table-body td {
@@ -222,7 +243,7 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 0;
-    border-bottom: 1px dashed rgb(from var(--text-main) r g b / 0.1);
+    border-bottom: 1px dashed color-mix(in srgb, var(--text-secondary) 15%, transparent);
     text-align: right;
   }
 

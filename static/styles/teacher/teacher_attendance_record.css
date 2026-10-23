@@ -109,7 +109,7 @@ body {
 
 .activities__section--counter-shift {
   background-color: #EFF2F9;
-  padding: 20px;
+  padding-top: 20px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -160,7 +160,7 @@ body {
 }
 
 .activities__table-row td {
-  padding: 10px 6px;
+  padding: 10px 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   color: var(--text-main);
   vertical-align: middle;

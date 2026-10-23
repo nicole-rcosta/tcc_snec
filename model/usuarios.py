@@ -11,9 +11,8 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
         senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
 
         if not validar_cpf(cpf):
-            {"sucesso": False, "mensagem": "CPF inválido."}
             print("cpf invalido")
-            return False
+            return {"sucesso": False, "mensagem": "CPF inválido."}
 
         conexao, cursor = conectar()
         
@@ -30,7 +29,7 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
         print(f"Erro ao cadastrar usuário: {erro}")
         if conexao:
             conexao.rollback()
-        return False
+        return {"sucesso": False, "mensagem": "Erro interno no servidor."}
 
     finally:
         if cursor:

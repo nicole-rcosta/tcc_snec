@@ -48,8 +48,11 @@ def logar_usuario():
         print(resultado['mensagem'])
         if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.':
             return render_template("login/auth_login.html", erro = resultado['mensagem'])
-        else:
+        elif resultado['mensagem'] == "Usuário não encontrado. Cadastre-se!":
             return redirect("/cadastro")
+        else:
+            pass
+            ######################################### ERRO INTERNO -> EXIBIR MODAL
 
 @app.route("/cadastro")
 def pagina_cadastro():
@@ -63,10 +66,16 @@ def cadastrar_usuario():
     senha = request.form.get("password")
     status = "pendente"
 
-    if cadastrar(nome, email, cargo, senha, cpf, status):
+    cadastro_resp = cadastrar(nome, email, cargo, senha, cpf, status)
+
+    if cadastro_resp['sucesso']:
         return render_template("/login/auth_login.html")
     else:
-        return redirect("/cadastro")
+        if cadastro_resp['mensagem'] == "CPF inválido.":
+            return render_template("/register/auth_register.html", erro = cadastro_resp['mensagem'])
+        else:
+            return redirect("/cadastro")
+            ######################################### ERRO INTERNO -> EXIBIR MODAL
     
 # ---------------------------
 # Paginas de Administrador

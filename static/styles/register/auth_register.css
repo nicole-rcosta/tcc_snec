@@ -198,9 +198,11 @@ body {
   height: 90px;
 }
 
-
-
-
+.register__message-error{
+    text-align: center;
+    color: var(--color-red);
+    margin: 5px;
+}
 
 @media (max-width: 599px) {
   .register {

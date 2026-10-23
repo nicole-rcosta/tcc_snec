@@ -48,6 +48,11 @@
             </div>
 
         <button type="submit" class="admin-student__button admin-student__button--submit">Cadastrar</button>
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+            <span style="color:red; display: inline; width: 100%; text-align: center;">{{message}}</span>
+            {% endfor %}
+        {% endwith %}
     </form>
 
         <section class="admin-student__list-section">

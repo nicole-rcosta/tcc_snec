@@ -29,6 +29,7 @@ body {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 1rem;
+    justify-content: space-between;
 }
 
 .admin-student__back-button {
@@ -38,10 +39,26 @@ body {
     cursor: pointer;
 }
 
+.admin-student__import-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-blue);
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 5px;
+}
+
 .admin-student__back-icon {
     font-size: 1.75rem;
     color: var(--color-orange);
     transition: transform 0.2s, filter 0.2s;
+}
+
+.admin-student__import-icon{
+    color: var(--color-blue);
+    font-size: 1.50rem;
 }
 
 .admin-student__back-button:hover .admin-student__back-icon {
@@ -269,5 +286,196 @@ body {
 
     .admin-student__table-cell--actions::before {
         content: "Ações";
+    }
+}
+
+
+
+
+
+
+
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.5s ease, visibility 0.3s ease;
+}
+
+
+.modal-overlay.ativo {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.modal-content {
+  padding: 20px;
+  border-radius: 8px;
+  transform: translateY(-20px);
+  transition: transform 0.5s ease;
+}
+
+.modal-overlay.ativo .modal-content {
+  transform: translateY(0);
+}
+
+.modal-backbutton{
+    font-size: 1.75rem;
+    background-color: transparent;
+    border: none;
+    color: var(--color-orange);
+    
+}
+.modal-backbutton:hover{
+    cursor: pointer;
+}
+
+
+.modal-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    margin-bottom: 25px;
+}
+
+.modal-import {
+    background-color: #ffffff;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    max-width: 650px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.modal-import--title {
+    color: #5B61B9;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+.modal-import__box {
+    background-color: #FFF3EE; 
+    padding: 25px;
+    border-radius: 16px;
+}
+
+
+.import__box--text {
+    color: #5B61B9;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 25px 0;
+}
+
+.import__box--text a {
+    color: #FF6B35;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.import__box--text a:hover {
+    color: #e0531f;
+    text-decoration: underline;
+}
+
+
+.modal__import--button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.button-container__excel,
+.button-container__csv {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+}
+
+.button-container__csv-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.botao-arquivo {
+    background-color: #5B61B9;
+    color: #ffffff;
+    padding: 9px 16px;
+    cursor: pointer;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    transition: background-color 0.2s;
+    user-select: none;
+}
+
+.botao-arquivo:hover {
+    background-color: #484c96;
+}
+
+
+#nome-arquivo-excel,
+#nome-arquivo-csv {
+    font-size: 12px;
+    color: #777777;
+    text-align: center;
+    word-break: break-all;
+}
+
+
+.modal__import--buttons {
+    background-color: #4EAD8A;
+    color: #ffffff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.modal__import--buttons:hover {
+    background-color: #3e9173;
+    transform: translateY(-1px);
+}
+
+
+@media (max-width: 580px) {
+    .modal__import--button-container {
+        flex-direction: column;
     }
 }

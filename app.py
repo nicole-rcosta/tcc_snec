@@ -23,6 +23,8 @@ import secrets
 import time
 import smtplib
 from email.message import EmailMessage
+import pandas
+from model.inserts_csv import inserir_excel_bcd
 
 app = Flask(__name__)
 app.secret_key = "snec_tcc_chave"
@@ -178,6 +180,21 @@ def pagina_cad_aluno_delete(id):
 
     deletar_aluno(id)
 
+    return redirect("/adm/reg_student")
+
+
+@app.route("/adm/reg_student/excel", methods=["POST"])
+def pegar_excel_pag_student():
+    arquivo = request.files.get('input_excel')
+
+    inserir_excel_bcd(arquivo)
+    return redirect("/adm/reg_student")
+
+
+@app.route("/adm/reg_student/csv", methods=["POST"])
+def pegar_csv_pag_student():
+    arquivo = request.files.get('input_csv')
+    inserir_excel_bcd(arquivo)
     return redirect("/adm/reg_student")
 
 

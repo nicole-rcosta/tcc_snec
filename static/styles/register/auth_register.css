@@ -155,64 +155,123 @@ body{
     z-index: 100;
 }
 
-@media (max-width: 1500px) {
-  body{
-    height: 100vh;
-  }
-  .register{
-    max-width: 40%;
+/* ============================================================
+   1. ESTILOS BASE (CELULAR - Padrão para qualquer tela pequena)
+   ============================================================ */
+body {
+  min-height: 100vh;
+}
+
+/* No celular, o card ocupa quase a tela toda para ter espaço */
+.register {
+  width: 92%;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.register__field,
+.register__field--dropdown {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.register__button--submit {
+  width: 100%; /* Botão largo e fácil de clicar no mobile */
+  font-size: 15px;
+}
+
+.register__title {
+  font-size: 24px;
+}
+
+.register__input,
+.register__input--dropdown {
+  font-size: 15px;
+}
+
+.background {
+  height: 200px;
+}
+
+.logo_snec {
+  height: 90px;
+}
+
+
+
+
+
+@media (max-width: 599px) {
+  .register {
+    width: 75%;
+    max-width: 520px; 
   }
 
-  .register__field{
-    margin-left: 0;
-    margin-right: 0;
-    width: 100%;
-  }
-  .register__field--dropdown{
-    width: 100%;
-  }
-  .register__button--submit{
+  .register__button--submit {
     width: 60%;
-    font-size: 15px;
   }
-  .background{
-    height: 200px;
+
+  .register__title {
+    font-size: 25px;
+  }
+
+  .logo_snec {
+    height: 110px;
   }
 }
 
-@media (max-width: 900px) {
-  body{
-    height: 100vh;
-  }
-  .register{
-    width: 85%;
-    max-width: 450px;
+
+
+@media (min-width: 600px) {
+  .register {
+    width: 75%;
+    max-width: 520px; 
   }
 
-  .register__field{
-    margin-left: 0;
-    margin-right: 0;
-    width: 100%;
-  }
-  .register__field--dropdown{
-    width: 100%;
-  }
-  .register__button--submit{
+  .register__button--submit {
     width: 60%;
   }
-  .register__title{
-    font-size: 30px;
+
+  .register__title {
+    font-size: 25px;
   }
-  .background{
-    height: 150px;
+
+  .logo_snec {
+    height: 110px;
   }
-  .register__input--dropdown {
-    font-size: 15px;
+}
+
+
+
+@media (min-width: 900px) {
+  .register {
+    width: 60%;
+    max-width: 650px;
   }
-  .register__input{
-    font-size: 15px;
+
+  .register__button--submit {
+    width: 60%;
   }
-  .logo_snec{
-    height:120px;
-    }
+
+  .logo_snec {
+    height: 120px;
+  }
+}
+
+
+
+@media (min-width: 1200px) {
+  .register {
+    width: 60%;
+    max-width: 650px;
+  }
+
+  .register__title {
+    font-size: 25px;
+  }
+
+  .logo_snec {
+    height: 120px;
+  }
 }

@@ -1,17 +1,16 @@
 @import url(/static/styles/global.css);
 
 body {
-    font-family: "Inter", "Segoe UI", Arial, sans-serif;
-    background-color: var(--bg-main) ;
-    color: #a6a6a6;
+    font-family: var(--font-secondary);
+    background-color: var(--bg-main);
+    color: var(--text-main);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-
-.admin-student{
+.admin-student {
     background-color: var(--bg-card);
     color: var(--text-secondary);
     display: flex;
@@ -20,7 +19,13 @@ body {
     align-items: center;
     border-radius: 20px;
     padding: 20px 50px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .admin-student {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Navegação */
@@ -109,19 +114,19 @@ body {
 .admin-student__input {
     width: 100%;
     height: 42px;
-    background-color: rgba(80, 102, 202, 0.1);
-    border: none;
+    background-color: color-mix(in srgb, var(--color-blue) 10%, var(--bg-card));
+    border: 1px solid transparent;
     border-radius: 12px;
     padding: 0 1rem;
     font-size: 1rem;
     color: var(--text-main);
     box-sizing: border-box;
     outline: none;
-    transition: box-shadow 0.2s, background-color 0.2s;
+    transition: box-shadow 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
 .admin-student__input:focus {
-    box-shadow: 0 0 0 2px var(--color-blue);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-blue) 50%, transparent);
 }
 
 /* Botões */
@@ -130,7 +135,7 @@ body {
     border-radius: 12px;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.2s, filter 0.2s, transform 0.1s;
+    transition: background-color 0.2s, filter 0.2s, transform 0.1s, box-shadow 0.2s;
 }
 
 .admin-student__button--submit {
@@ -139,12 +144,12 @@ body {
     font-size: 0.95rem;
     padding: 0.6rem 2.5rem;
     min-height: 40px;
-    box-shadow: 0 4px 10px rgba(90, 175, 144, 0.25);
+    box-shadow: 0 4px 10px color-mix(in srgb, var(--color-green) 30%, transparent);
 }
 
 .admin-student__button--submit:hover {
     filter: brightness(0.95);
-    box-shadow: 0 6px 14px rgba(90, 175, 144, 0.35);
+    box-shadow: 0 6px 14px color-mix(in srgb, var(--color-green) 40%, transparent);
 }
 
 .admin-student__button--submit:active {
@@ -152,8 +157,8 @@ body {
 }
 
 .admin-student__button--delete {
-    background-color: rgba(220, 53, 69, 0.12);
-    color: #DC3545;
+    background-color: color-mix(in srgb, var(--color-delete, #DC3545) 12%, transparent);
+    color: var(--color-delete, #DC3545);
     padding: 0.5rem 0.65rem;
     font-size: 1.1rem;
     border-radius: 6px;
@@ -163,13 +168,13 @@ body {
 }
 
 .admin-student__button--delete:hover {
-    background-color: #DC3545;
+    background-color: var(--color-delete, #DC3545);
     color: #FFFFFF;
 }
 
 /* Seção de listagem */
 .admin-student__list-section {
-    background-color: rgba(255, 96, 28, 0.08);
+    background-color: color-mix(in srgb, var(--color-orange) 8%, var(--bg-card));
     padding: 1.5rem;
     border-radius: 16px;
     display: flex;
@@ -177,10 +182,12 @@ body {
     gap: 1.25rem;
     width: 100%;
     box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/* Fundo neutro e sem tom de laranja no modo escuro */
 [data-theme="dark"] .admin-student__list-section {
-    background-color: rgba(255, 96, 28, 0.05);
+    background-color: color-mix(in srgb, var(--text-main) 3%, var(--bg-card));
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -204,11 +211,11 @@ body {
     padding: 0.75rem 0.5rem;
     color: var(--color-blue);
     font-weight: 700;
-    border-bottom: 2px solid rgba(80, 102, 202, 0.2);
+    border-bottom: 2px solid color-mix(in srgb, var(--color-blue) 30%, transparent);
 }
 
 .admin-student__table-body .admin-student__table-row {
-    border-bottom: 1px solid rgba(108, 117, 125, 0.15);
+    border-bottom: 1px solid color-mix(in srgb, var(--text-secondary) 20%, transparent);
 }
 
 .admin-student__table-body .admin-student__table-row:last-child {
@@ -224,6 +231,7 @@ body {
 .admin-student__table-cell--name {
     font-weight: 600;
     text-align: left;
+    color: var(--text-main);
 }
 
 .admin-student__table-cell--rm,
@@ -259,8 +267,12 @@ body {
         border-radius: 12px;
         padding: 0.8rem 1rem;
         margin-bottom: 0.75rem;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        border: 1px solid rgba(108, 117, 125, 0.15);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        border: 1px solid color-mix(in srgb, var(--text-secondary) 20%, transparent);
+    }
+
+    [data-theme="dark"] .admin-student__table-body .admin-student__table-row {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     .admin-student__table-cell {
@@ -268,7 +280,7 @@ body {
         justify-content: space-between;
         align-items: center;
         padding: 0.5rem 0;
-        border-bottom: 1px dashed rgba(108, 117, 125, 0.2);
+        border-bottom: 1px dashed color-mix(in srgb, var(--text-secondary) 20%, transparent);
         text-align: right;
     }
 

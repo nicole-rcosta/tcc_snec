@@ -1,6 +1,7 @@
 flask
 mysql-connector-python
 bcrypt
+dotenv
 gunicorn
 python-calamine
 pandas

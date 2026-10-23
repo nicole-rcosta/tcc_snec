@@ -21,12 +21,13 @@ body {
   position: absolute;
   z-index: -1;
   pointer-events: none;
+  transition: all 0.3s ease; 
 }
 
-.background-sup-esq { top: 0; left: 0; height: 220px; }
-.background-sup-dir { top: 0; right: 0; height: 220px; }
-.background-inf-esq { bottom: 0; left: 0; height: 220px; }
-.background-inf-dir { bottom: 0; right: 0; height: 220px; }
+.background-sup-esq { top: 0; left: 0; height: 180px; }
+.background-sup-dir { top: 0; right: 0; height: 180px; }
+.background-inf-esq { bottom: 0; left: 0; height: 180px; }
+.background-inf-dir { bottom: 0; right: 0; height: 180px; }
 
 .register-container {
   width: 100%;
@@ -178,7 +179,7 @@ body {
 
 
 @media (max-width: 599px) {
-  .register {
+  .login--card {
     padding: 25px 20px;
   }
 
@@ -188,6 +189,30 @@ body {
 
   .background-sup-esq, .background-sup-dir,
   .background-inf-esq, .background-inf-dir {
-    height: 150px;
+    height: 180px;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .background-sup-esq, .background-sup-dir,
+  .background-inf-esq, .background-inf-dir {
+    height: 230px;
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .background-sup-esq, .background-sup-dir,
+  .background-inf-esq, .background-inf-dir {
+    height: 300px; 
+  }
+}
+
+
+@media (min-width: 1440px) {
+  .background-sup-esq, .background-sup-dir,
+  .background-inf-esq, .background-inf-dir {
+    height: 350px; 
   }
 }

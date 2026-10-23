@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for
+from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for, flash
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
 from model.usuarios import cadastrar, logar, verificar_email, atualizar_senha, cadastrar
 from static.utils.verification_password import verificar_senha_mestra as vsm
@@ -12,6 +12,8 @@ import secrets
 import time
 import smtplib
 from email.message import EmailMessage
+import pandas
+from model.inserts_csv import inserir_excel_bcd
 
 app = Flask(__name__)
 app.secret_key = "snec_tcc_chave"
@@ -169,6 +171,28 @@ def pagina_cad_aluno_delete(id):
     deletar_aluno(id)
 
     return redirect("/adm/reg_student")
+
+
+@app.route("/adm/reg_student/excel", methods=["POST"])
+def pegar_excel_pag_student():
+    arquivo = request.files.get('input_excel')
+
+    if inserir_excel_bcd(arquivo):
+        return redirect("/adm/reg_student")
+    else:
+        flash("Turmas Invalidas! Verifique se elas existem ou se foram digitas corretamente.")
+        return redirect("/adm/reg_student")
+
+
+@app.route("/adm/reg_student/csv", methods=["POST"])
+def pegar_csv_pag_student():
+    arquivo = request.files.get('input_csv')
+    inserir_excel_bcd(arquivo)
+    if inserir_excel_bcd(arquivo):
+        return redirect("/adm/reg_student")
+    else:
+        flash("Turmas Invalidas! Verifique se elas existem ou se foram digitas corretamente.")
+        return redirect("/adm/reg_student")
 
 
 

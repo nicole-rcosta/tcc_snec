@@ -3,22 +3,60 @@ from datetime import date
 
 datas = {0: 'SEG', 1: 'TER', 2: 'QUA', 3: 'QUI', 4: 'SEX'}
 
+def buscar_turmas():
+    conexao, cursor = conectar()
+    
+    try:
+        cursor.execute("SELECT id_turma, turma FROM tb_turmas")
+        turmas = cursor.fetchall()
+
+        if turmas:
+            return {"sucesso": True, "mensagem": "Requisição bem-sucessida."}
+        else:
+            return {"sucesso": False, "mensagem": "Nenhuma turma cadastrada."}
+
+    except Exception as erro:
+        print(f"Erro ao cadastrar usuário: {erro}")
+        if conexao:
+            conexao.rollback()
+        return False
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()    
+
+def buscar_qntd_alunos(id_turma):
+
+    conexao, cursor = conectar()
+
+    try:
+        cursor.execute("SELECT quantidade_alunos FROM tb_turmas WHERE id_turma = %s", (id_turma, ))
+        qntd_alunos = cursor.fetchone()
+
+        return qntd_alunos
+
+    except Exception as erro:
+        print(f"Erro ao cadastrar usuário: {erro}")
+        if conexao:
+            conexao.rollback()
+        return False
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()
+
 def buscar_alunos(id_turma):
+
     conexao, cursor = conectar()
 
     try:
     
         hoje_num = date.today().weekday()
         dia_semana = datas.get(hoje_num, 'SEG')
-
-        cursor.execute("SELECT quantidade_alunos FROM tb_turmas WHERE id_turma = %s", (id_turma, ))
-        info = cursor.fetchone()
-
-        if info:
-            formato = info['quantidade_alunos'] if isinstance(info, dict) else info[0]
-        else: 
-            formato = 0
-
 
         cursor.execute("""SELECT tb_alunos.rm_aluno, tb_alunos.nome_aluno, tb_turmas.turma, tb_atividades.atividade, tb_atividades.periodo, COALESCE (tb_his_almoco.atendido, TRUE) AS status
         FROM tb_alunos
@@ -30,14 +68,22 @@ def buscar_alunos(id_turma):
         AND tb_his_almoco.data = CURRENT_DATE()
         WHERE tb_turmas.id_turma = %s
         AND tb_aluno_atividade.dia_semana = %s; """, (id_turma, dia_semana, ))
-        
-        alunos = cursor.fetchall()
-        return formato, alunos
 
+        alunos = cursor.fetchall()
+
+        return alunos
+    
+    except Exception as erro:
+        print(f"Erro ao cadastrar usuário: {erro}")
+        if conexao:
+            conexao.rollback()
+        return False
 
     finally:
-        cursor.close()
-        conexao.close()
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()
 
 
 def alunos_presentes(rms_atendidos):

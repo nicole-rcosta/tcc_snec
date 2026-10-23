@@ -17,7 +17,7 @@ from model.students_extra_register import recuperar_alunos_atividade
 from model.students_extra_register import adicionar_aluno_atividade
 from model.students_extra_register import excluir_aluno_atividade
 from model.nutritionist_report import buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
-from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_presenca
+from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_presenca, buscar_turmas, buscar_qntd_alunos
 import mysql
 import mysql.connector
 import secrets
@@ -284,7 +284,12 @@ def api_atualizar_almoco():
 
 @app.route("/teacher")
 def pagina_prof_selecionar_sala():
-    return render_template("teacher/teacher_class_select.html")
+    turmas = buscar_turmas()
+
+    if turmas.get("sucesso"):
+        return render_template("teacher/teacher_class_select.html", turmas = turmas)
+    else:
+        return render_template("teacher/teacher_class_select.html", erro = turmas.get("mensagem"))
 
 @app.route("/teacher/class_info/<id_turma>")
 def pagina_prof_registro(id_turma):

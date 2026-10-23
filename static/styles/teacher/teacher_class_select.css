@@ -108,7 +108,11 @@ body {
     
 }
 
-
+.classes__message-error{
+    text-align: center;
+    color: var(--color-red);
+    grid-column: 1 / -1;
+}
 
 
 @media (min-width: 768px) {

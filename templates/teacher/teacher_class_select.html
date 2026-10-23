@@ -10,63 +10,36 @@
 
 
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/teacher/teacher_class_select.css') }}">
-     
-    <main class="classes">
-        <section class="classes-status">
-            <div class="classes__greeting-wrapper">
-                <div class="classes__greeting">
-                    <p>Olá, Professor(a)!</p>
-                </div>
+
+<main class="classes">
+    <section class="classes-status">
+        <div class="classes__greeting-wrapper">
+            <div class="classes__greeting">
+                <p>Olá, Professor(a)!</p>
             </div>
+        </div>
 
-            <!-- Barra de Progresso -->
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress--step-1"></div>
-                </div>
-                <p class="progress-label">Etapa 1 de 3</p>
+        <!-- Barra de Progresso -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress--step-1"></div>
             </div>
-        </section>
+            <p class="progress-label">Etapa 1 de 3</p>
+        </div>
+    </section>
 
 
-        <!-- Grid de Cards -->
-        <section class="classes__grid">
-            <div class="class-card">
-                <a href="/teacher/class_info"><button class="class-card__title">3°A</button></a>
-            </div>
+    <!-- Grid de Cards -->
+    <section class="classes__grid">
+        {% if erro %}
+        <span class="classes__message-error">{{ erro }}</span>
+        {% endif %}
+        {% for turma in turmas %}
+        <div class="class-card">
+            <a href="/teacher/class_info"><button class="class-card__title">{{ turma.turma }}</button></a>
+        </div>
+        {% endfor %}
+    </section>
+</main>
 
-            <div class="class-card">
-                <a href="/teacher/class_info"><button class="class-card__title">1°A</button></a>
-            </div>
-
-            <div class="class-card">
-                <a href="/teacher/class_info"><button class="class-card__title">2°B</button></a>
-            </div>
-
-            <div class="class-card">
-                <a href="/teacher/class_info"><button class="class-card__title">3°C</button></a>
-            </div>
-
-            <div class="class-card">
-                <a href="/teacher/class_info"><button class="class-card__title">3°B</button></a>
-            </div>
-
-            <div class="class-card">
-                <a href="/teacher/class_info"><button class="class-card__title">2°A</button></a>
-            </div>
-
-            <div class="class-card">
-                <a href="/teacher/class_info"><button class="class-card__title">1°C</button></a>
-            </div>
-
-            <div class="class-card">
-                <a href="/teacher/class_info"><button class="class-card__title">1°B</button></a>
-            </div>
-
-
-        </section>
-    </main>
-
- {% endblock %}
-
-
+{% endblock %}

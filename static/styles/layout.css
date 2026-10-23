@@ -73,7 +73,7 @@
 .main-content {
   margin-top: 0;
   padding: 2rem;
-  min-height: calc(100vh - 116px);
+  min-height: calc(100vh - 160px);
 }
 
 /* ==========================================================================

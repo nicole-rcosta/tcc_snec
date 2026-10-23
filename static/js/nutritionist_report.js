@@ -27,7 +27,7 @@ async function carregarAlunosAlmoco() {
         if (!dados.alunos || dados.alunos.length === 0) {
             tbody.innerHTML = `
                 <tr class="dashboard__table-row">
-                    <td colspan="5" style="text-align: center; padding: 1.5rem;">
+                    <td colspan="5" style="text-align: center; padding: 1.5rem; color: var(--color-red)">
                         Nenhum aluno cadastrado no contraturno para hoje.
                     </td>
                 </tr>`;

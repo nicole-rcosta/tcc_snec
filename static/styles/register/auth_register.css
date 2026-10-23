@@ -10,18 +10,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(from var(--color-blue) r g b / 0.1);
+  /* background-color: rgb(from var(--color-blue) r g b / 0.1); */
   font-family: var(--font-primary, 'Inter', system-ui, sans-serif);
   position: relative;
   overflow-x: hidden;
   padding: 20px;
+  background-color: #EEEFFA;
+  background-image: radial-gradient(rgb(from var(--color-blue, #5967D9) r g b / 0.2) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
 }
 
 .background {
   position: absolute;
   z-index: -1;
   pointer-events: none;
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
+  filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.12)); 
 }
 
 .background-sup-esq { top: 0; left: 0; height: 180px; }
@@ -35,6 +39,7 @@ body {
   display: flex;
   justify-content: center;
   z-index: 1;
+  filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.05));
 }
 
 .register {
@@ -46,7 +51,7 @@ body {
   border-radius: 20px;
   align-items: center;
   gap: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 10px 3px rgba(0, 0, 0, 0.06);
 }
 
 .logo_snec {
@@ -190,6 +195,7 @@ body {
   .background-sup-esq, .background-sup-dir,
   .background-inf-esq, .background-inf-dir {
     height: 180px;
+    opacity: 0.7;
   }
 }
 
@@ -205,7 +211,7 @@ body {
 @media (min-width: 1024px) {
   .background-sup-esq, .background-sup-dir,
   .background-inf-esq, .background-inf-dir {
-    height: 300px; 
+    height: 250px; 
   }
 }
 
@@ -213,6 +219,6 @@ body {
 @media (min-width: 1440px) {
   .background-sup-esq, .background-sup-dir,
   .background-inf-esq, .background-inf-dir {
-    height: 350px; 
+    height: 300px; 
   }
 }

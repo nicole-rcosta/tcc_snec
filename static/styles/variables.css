@@ -10,16 +10,24 @@
   --bg-card: #FFFFFF;
   --text-main: #212529;
   --text-secondary: #6C757D;
+
+  --border-color: #E2E8F0;
+
+
+
 }
 
 [data-theme="dark"] {
   --color-orange: #FF601C;
   --color-yellow: #FBC754;
   --color-green:  #5AAF90;
-  --color-blue:   #5066CA;
+  --color-blue:   #818CF8;;
 
   --bg-main: #121214;
   --bg-card: #1E1E24;
   --text-main: #F8F9FA;
   --text-secondary: #A0A0B0;
+
+  --border-color: rgba(255, 255, 255, 0.12);
+
 }

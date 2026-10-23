@@ -221,8 +221,11 @@ def pagina_confirmar_painel():
 def verificar_adm():
     id_usuario = session.get("usuario")["id"]
     senha = request.form.get("password")
-    if buscar_adm(id_usuario, senha).get("sucesso"):
+    busca_adm_resp = buscar_adm(id_usuario, senha)
+    if busca_adm_resp.get("sucesso"):
         return redirect("/adm/adm_panel")
+    elif busca_adm_resp.get("mensagem") == "Senha incorreta!":
+        return render_template("adm/admin_confirm.html", erro = busca_adm_resp.get("mensagem"))
     else:
         return redirect("/adm/conf_panel")
 

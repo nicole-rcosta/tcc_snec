@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS tb_usuarios (
 CREATE TABLE IF NOT EXISTS tb_alunos (
  rm_aluno VARCHAR(4) PRIMARY KEY,
  nome_aluno VARCHAR(100) NOT NULL,
- id_turma INT,
+ id_turma INT NOT NULL,
  CONSTRAINT FK_ALUNO_TURMA
  FOREIGN KEY (id_turma) REFERENCES tb_turmas(id_turma)
 );
@@ -66,3 +66,6 @@ CREATE TABLE IF NOT EXISTS tb_aluno_atividade (
  FOREIGN KEY (id_atividade) REFERENCES tb_atividades(id_atividade),
  PRIMARY KEY(rm_aluno, id_atividade, dia_semana)
 );
+
+INSERT INTO tb_usuarios(nome_usuario, email, cargo, senha, cpf, status)
+VALUE ('ADM SNEC', 'sneccode@gmail.com', 'adm', '$2b$12$WpdfRGaObonrj/OnjmTHM.BcB73YWHLsf2KXQuN0h.hxgK6EJjd8W', '00000000000', 'aprovado');

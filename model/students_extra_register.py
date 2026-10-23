@@ -1,18 +1,82 @@
 from database.conexao import conectar
 
 
-
-def adicionar_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:
+def adicionar_aluno_atividade(rm: int, atividade: str, dia_semana: int) -> dict:
     """
-    Adicona o aluno com as informações passadas através dos parâmetros.
+    Adiciona o aluno em uma atividade com as informações
+    passadas através dos parâmetros.
     """
 
-    conexao,cursor = conectar()
-     
-    cursor.execute("""INSERT INTO `db_snec`.`tb_aluno_atividade` (`rm_aluno`, `id_atividade`, `dia_semana`) VALUES (%s, %s, %s);""",(rm,atividade,dia_semana) )
+    conexao = None
+    cursor = None
 
-    conexao.commit()
-    conexao.close()
+    try:
+        # Verifica se algum campo está vazio
+        if not rm or not atividade or not dia_semana:
+            return {
+                "sucesso": False,
+                "erro_aluno_atividade_vazio": True
+            }
+
+        conexao, cursor = conectar()
+
+        # Verifica se o mesmo aluno já possui
+        # a mesma atividade no mesmo dia
+        sql_verificar = """
+            SELECT rm_aluno
+            FROM tb_aluno_atividade
+            WHERE rm_aluno = %s
+            AND id_atividade = %s
+            AND dia_semana = %s;
+        """
+
+        cursor.execute(
+            sql_verificar,
+            (rm, atividade, dia_semana)
+        )
+
+        resultado = cursor.fetchone()
+
+        if resultado:
+            return {
+                "sucesso": False,
+                "erro_aluno_atividade_existente": True
+            }
+
+        sql = """
+            INSERT INTO tb_aluno_atividade
+            (rm_aluno, id_atividade, dia_semana)
+            VALUES (%s, %s, %s);
+        """
+
+        cursor.execute(
+            sql,
+            (rm, atividade, dia_semana)
+        )
+
+        conexao.commit()
+
+        return {
+            "sucesso": True
+        }
+
+    except Exception as erro:
+        print(f"Erro ao cadastrar aluno na atividade: {erro}")
+
+        if conexao:
+            conexao.rollback()
+
+        return {
+            "sucesso": False,
+            "erro_servidor": True
+        }
+
+    finally:
+        if cursor:
+            cursor.close()
+
+        if conexao:
+            conexao.close()
 
 
 def excluir_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:

@@ -127,4 +127,42 @@
 
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
     <script src="/static/js/auto_input.js"></script>
+
+    <script src="/static/js/alerts.js"></script>
+
+    {% if erro_aluno_atividade_vazio %}
+
+    <script>
+        mostrarAlerta(
+            "Preencha todos os campos para cadastrar o aluno na atividade",
+            "error",
+            "/adm/reg_student_extra",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% elif erro_aluno_atividade_existente %}
+
+    <script>
+        mostrarAlerta(
+            "Esse aluno já está cadastrado nessa atividade nesse dia",
+            "error",
+            "/adm/reg_student_extra",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% elif erro_servidor %}
+
+    <script>
+        mostrarAlerta(
+            "Não foi possível cadastrar o aluno na atividade",
+            "error",
+            "/adm/reg_student_extra",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% endif %}
+
 {% endblock %}

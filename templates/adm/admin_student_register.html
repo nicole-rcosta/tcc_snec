@@ -81,6 +81,42 @@
         </section>
     </main>
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+    <script src="/static/js/alerts.js"></script>
+
+    {% if erro_aluno_vazio %}
+
+    <script>
+        mostrarAlerta(
+            "Preencha todos os campos para cadastrar o aluno",
+            "error",
+            "/adm/reg_student",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% elif erro_aluno_existente %}
+
+    <script>
+        mostrarAlerta(
+            "Esse RM já pertence a um usuário cadastrado",
+            "error",
+            "/adm/reg_student",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% elif erro_servidor %}
+
+    <script>
+        mostrarAlerta(
+            "Não foi possível cadastrar o aluno",
+            "error",
+            "/adm/reg_student",
+            "Tentar novamente"
+        );
+    </script>
+
+    {% endif %}
 
     
 {% endblock %}

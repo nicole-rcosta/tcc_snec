@@ -70,6 +70,7 @@ def adicionar_aluno(rm: int, nome_aluno: str, id_turma: int) -> dict:
             conexao.close()
 
 
+
 def recuperar_alunos():
     conexao, cursor = conectar()
 

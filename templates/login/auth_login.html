@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/alerts.css') }}">
 
     <link rel="icon" href="/static/img/icone.ico" type="image/x-icon">
-    <title>Login</title>
+    <title>SNEC | Login</title>
 </head>
 <body>
         
@@ -28,6 +28,10 @@
             <img class="logo_snec" src="/static/img/logo_principal.png" alt="Logo SNEC">
 
             <h1 class="login__title">Login</h1>
+
+            {% if erro %}
+            <span class="login__message-error">{{ erro }}</span>
+            {% endif %}
         
             <div class="login-field">
                 <label class="login__label" for="cpf">CPF</label>

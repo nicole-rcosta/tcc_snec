@@ -202,6 +202,11 @@ body {
   font-weight: 600;
 }
 
+.dashboard__message-error{
+    text-align: center;
+    color: var(--color-red);
+}
+
 @media (max-width: 480px) {
   .dashboard__greeting {
     font-size: 1.5rem;

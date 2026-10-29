@@ -321,9 +321,6 @@ def pagina_prof_selecionar_sala():
 def pagina_prof_registro():
     return render_template("teacher/teacher_attendance_record.html")
 
-@app.route("/teacher/class_info/confirm")
-def pagina_confirmacao_prof():
-    return render_template("teacher/teacher_attendance_confirm.html")
 
 # =========================================================
 # RECUPERAÇÃO DE SENHA

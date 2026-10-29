@@ -2,17 +2,26 @@
 
 
 body {
-    background-color: var(--bg-main);
+    background-color: #EEEFFA;
+    background-image: radial-gradient(var(--bg-dot-color) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+
+
     color: var(--text-main);
 }
 
+
 .admin-panel {
-    background-color: transparent;
+    background-color: var(--bg-main);
     color: var(--text-secondary);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 .admin-panel__greeting {

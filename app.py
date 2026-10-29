@@ -338,32 +338,36 @@ def pagina_prof_registro(id_turma):
 def pagina_confirmacao_prof(id_turma):
 
     qtd_alunos = request.form.get('quantidade_alunos')
-    rms_atendidos= request.form.getlist('rms_atendidos')
     rms_contraturnos = request.form.getlist('rms_contraturnos')
-
-    alunos_confirmados = alunos_presentes(rms_atendidos)
 
     return render_template("teacher/teacher_attendance_confirm.html",
                            id_turma=id_turma,
                            qtd_alunos=qtd_alunos,
-                           alunos_confirmados=alunos_confirmados,
-                           rms_atendidos=rms_atendidos,
                            rms_contraturnos=rms_contraturnos)
 
-
-@app.route("/teacher/class_info/save/<id_turma>", methods=['POST'])
+@app.route("/teacher/class_info/save/<int:id_turma>", methods=['POST'])
 def salvar_registro_prof(id_turma):
-    qtd_alunos = request.form.get('quantidade_alunos')
-    rms_atendidos = request.form.getlist('rms_atendidos')
-    rms_contraturnos = request.form.getlist('rms_contraturnos')
+    dados = request.get_json()
+    
+    qtd_alunos = dados.get('quantidade_alunos')
+    
+    rms_contraturnos = dados.get('rms_contraturnos', [])  # Apenas os RMs marcados pelo professor
     id_usuario = session.get('id_usuario', 1)
 
-    sucesso = salvar_presenca(id_turma, qtd_alunos, rms_atendidos, rms_contraturnos, id_usuario)
+    # Executa a gravação no banco de dados
+    sucesso = salvar_presenca(id_turma, qtd_alunos, id_usuario, rms_contraturnos)
+
     if sucesso:
-    #ALERTA PABLO
-        return redirect(url_for('pagina_prof_selecionar_sala'))
+        # Retorna resposta positiva e a URL para onde o JS deve redirecionar
+        return jsonify({
+            'sucesso': True, 
+            'redirect_url': url_for('pagina_prof_selecionar_sala')
+        }), 200
     else:
-        return redirect(url_for('pagina_prof_registro', id_turma=id_turma))
+        return jsonify({
+            'sucesso': False, 
+            'erro': 'Não foi possível salvar o registro.'
+        }), 500
 
 
 

@@ -107,8 +107,7 @@ def alunos_presentes(rms_atendidos):
         conexao.close()
 
 
-
-def salvar_presenca(id_turma, quantidade_alunos, id_usuario, rms_atendidos, rms_contraturnos):
+def salvar_presenca(id_turma, quantidade_alunos, id_usuario, rms_contraturnos):
     conexao, cursor = conectar()
 
     try:
@@ -117,7 +116,7 @@ def salvar_presenca(id_turma, quantidade_alunos, id_usuario, rms_atendidos, rms_
                         VALUES (%s, CURRENT_DATE(), %s, %s)
                         ON DUPLICATE KEY UPDATE
                         quantidade_alunos = VALUES(quantidade_alunos),
-                        id_usuario = VALUES(id_usuario);  
+                        id_usuario = VALUES(id_usuario);
                     """
         cursor.execute(query_lanche, (id_turma, id_usuario, quantidade_alunos))
 
@@ -128,14 +127,12 @@ def salvar_presenca(id_turma, quantidade_alunos, id_usuario, rms_atendidos, rms_
                         atendido = VALUES(atendido),
                         id_usuario = VALUES(id_usuario);
                     """
+        # Itera diretamente pelos RMs selecionados e define atendido como False
         for rm in rms_contraturnos:
-            atendido = rm in rms_atendidos
-            cursor.execute(query_almoco, (rm, id_usuario, atendido))
-        
+            cursor.execute(query_almoco, (rm, id_usuario, False))
 
         conexao.commit()
         return True
-    
 
     except Exception as error:
         conexao.rollback()
@@ -145,9 +142,3 @@ def salvar_presenca(id_turma, quantidade_alunos, id_usuario, rms_atendidos, rms_
     finally:
         cursor.close()
         conexao.close()
-
-
-
-
-
-

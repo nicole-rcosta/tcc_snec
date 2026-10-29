@@ -28,7 +28,7 @@
       
       <div class="activities__field--students">
         <label class="activities__label--students" for="students-count">Quantos alunos vieram hoje?</label>
-        <input type="number" id="students-count" name="quantidade_alunos" class="activities__input--students" value="{{ qtd_padrao }} required">
+        <input type="number" id="students-count" name="quantidade_alunos" class="activities__input--students" value="{{ qnt_alunos.quantidade_alunos }}" required>
       </div>
       <hr class="divider">
       
@@ -55,9 +55,8 @@
                     <td class="activities__table-cell--year">{{ aluno.turma }}</td>
                     <td class="activities__table-cell--activity"><span class="badge">{{ aluno.atividade }}</span></td>
                     <td class="activities__table-cell--shift">{{ aluno.periodo }}</td>
-                    <td class="activities__table-cell--check"><input type="checkbox" name="rms_atendidos" value="{{ aluno.rm_aluno }}" {% if not status %} checked {% endif %}></td>
+                    <td class="activities__table-cell--check"><input type="checkbox" name="rms_contraturnos" value="{{ aluno.rm_aluno }}" {% if not aluno.status %} checked {% endif %}></td>
                   </tr>
-                  <!-- Mensagem da Fer -->
                 {% endif %}
               {% endfor %}
             </tbody>

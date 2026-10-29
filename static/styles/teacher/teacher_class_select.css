@@ -84,7 +84,7 @@ body {
     height: 100%;
     padding: 0;
     border: none;
-    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    background-color:var(--input-color);
     border-radius: 18px;
     display: flex;
     align-items: center;

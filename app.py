@@ -197,7 +197,7 @@ def pegar_excel_pag_student():
 @app.route("/adm/reg_student/csv", methods=["POST"])
 def pegar_csv_pag_student():
     arquivo = request.files.get('input_csv')
-    inserir_excel_bcd(arquivo)
+    
     if inserir_excel_bcd(arquivo):
         return redirect("/adm/reg_student")
     else:

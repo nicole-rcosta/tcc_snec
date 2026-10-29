@@ -96,7 +96,7 @@ def pagina_adm_register():
 @app.route("/adm_register/post", methods=["POST"])
 def cadastrar_adm():
     nome = request.form.get("name")
-    cpf = request.form.get("cpf")
+    cpf = request.form.get("cpf-real")
     email = request.form.get("email")
     senha = request.form.get("password")
     confirmar_senha = request.form.get("confirm-password")

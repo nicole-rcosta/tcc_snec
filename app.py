@@ -7,7 +7,7 @@ from model.students_register import recuperar_alunos, adicionar_aluno, deletar_a
 from model.nutri_dashboard import recuperar_dados_dashboard
 from model.students_extra_register import recuperar_alunos_atividade, adicionar_aluno_atividade, excluir_aluno_atividade
 from model.nutritionist_report import buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
-from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_presenca, buscar_turmas, buscar_qntd_alunos
+from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos
 from model.adm_access import buscar_adm, buscar_usuario_pendente, rejeitar_usuario, aprovar_usuario
 import secrets
 import time
@@ -367,14 +367,13 @@ def salvar_registro_prof(id_turma):
     
     qtd_alunos = dados.get('quantidade_alunos')
     
-    rms_contraturnos = dados.get('rms_contraturnos', [])  # Apenas os RMs marcados pelo professor
-    id_usuario = session.get('id_usuario', 1)
+    rms_contraturnos = dados.get('rms_contraturno', [])  # Apenas os RMs marcados pelo professor
+    id_usuario = session.get("usuario")["id"]
 
     # Executa a gravação no banco de dados
-    sucesso = salvar_presenca(id_turma, qtd_alunos, id_usuario, rms_contraturnos)
+    sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario), salvar_his_almoco(id_usuario, rms_contraturnos)
 
     if sucesso:
-        # Retorna resposta positiva e a URL para onde o JS deve redirecionar
         return jsonify({
             'sucesso': True, 
             'redirect_url': url_for('pagina_prof_selecionar_sala')

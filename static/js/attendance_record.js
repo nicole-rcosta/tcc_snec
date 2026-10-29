@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Exibe o modal (ajuste para a classe ou estilo de exibição do seu CSS)
-        modal.classList.add('modal--active');
+        modal.classList.add('ativo');
     });
 
     // 2. Ação ao clicar em "Confirmar" dentro do Modal (Dispara o fetch)

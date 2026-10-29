@@ -107,25 +107,36 @@ def alunos_presentes(rms_atendidos):
         conexao.close()
 
 
-def salvar_presenca(id_turma, quantidade_alunos, id_usuario, rms_contraturnos):
+def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
     conexao, cursor = conectar()
 
     try:
         query_lanche = """
                         INSERT INTO tb_his_lanche (id_turma, data, id_usuario, quantidade_alunos)
-                        VALUES (%s, CURRENT_DATE(), %s, %s)
-                        ON DUPLICATE KEY UPDATE
-                        quantidade_alunos = VALUES(quantidade_alunos),
-                        id_usuario = VALUES(id_usuario);
+                        VALUES (%s, CURRENT_DATE(), %s, %s);
                     """
         cursor.execute(query_lanche, (id_turma, id_usuario, quantidade_alunos))
 
+        conexao.commit()
+        return True
+
+    except Exception as error:
+        conexao.rollback()
+        print(error)
+        return False
+
+    finally:
+        cursor.close()
+        conexao.close()
+
+def salvar_his_almoco(id_usuario, rms_contraturnos):
+    print(rms_contraturnos)
+    conexao, cursor = conectar()
+
+    try:
         query_almoco = """
-                        INSERT INTO tb_his_almoco (rm_aluno, data, id_usuario, atendido)
-                        VALUES(%s, CURRENT_DATE(), %s, %s)
-                        ON DUPLICATE KEY UPDATE
-                        atendido = VALUES(atendido),
-                        id_usuario = VALUES(id_usuario);
+                        INSERT INTO tb_his_almoco (rm_aluno, id_usuario, atendido)
+                        VALUES(%s, %s, %s);
                     """
         # Itera diretamente pelos RMs selecionados e define atendido como False
         for rm in rms_contraturnos:

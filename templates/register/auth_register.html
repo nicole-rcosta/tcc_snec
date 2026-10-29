@@ -3,65 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="/static/styles/register/auth_register.css">
+    <title>SNEC | Cadastro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/styles/global.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/alerts.css') }}">
-
+    <link rel="stylesheet" href="/static/styles/register/auth_register.css">
 </head>
 <body>
-    <img src="/static/img/fundo/canto_inf_dir.png" alt="" class="background-inf-dir background">
-    <img src="/static/img/fundo/canto_inf_esq.png" alt="" class="background-inf-esq background">
-    <img src="/static/img/fundo/canto_sup_dir.png" alt="" class="background-sup-dir background">
-    <img src="/static/img/fundo/canto_sup_esq.png" alt="" class="background-sup-esq background">
 
-    <div class="register">
+    <img src="/static/img/fundo/canto_sup_esq-v2.png" alt="" class="background background-sup-esq">
+    <img src="/static/img/fundo/canto_sup_dir-v2.png" alt="" class="background background-sup-dir">
+    <img src="/static/img/fundo/canto_inf_esq-v2.png" alt="" class="background background-inf-esq">
+    <img src="/static/img/fundo/canto_inf_dir-v2.png" alt="" class="background background-inf-dir">
 
+    <main class="register-container">
+        <div class="register">
 
-        <img class="logo_snec" src="/static/img/logo_snec.png" alt="">
-        
+            <img class="logo_snec" src="/static/img/logo_principal.png" alt="Logo SNEC">
 
         <h1 class="register__title">Cadastre-se</h1>
         {% if erro %}
         <span class="register__message-error">{{ erro }}</span>
         {% endif %}
 
-        <form action="/cadastro/post" method="POST" class="register__form">
+            <form action="/cadastro/post" method="POST" class="register__form">
 
                 <div class="register__field">
                     <label class="register__label" for="input-name">Nome Completo</label>
-                    <input type="text" class="register__input" id="input-name" name="name">
+                    <div class="input-wrapper">
+                        <input type="text" class="register__input" id="input-name" name="name" placeholder="Digite seu nome completo" required>
+                    </div>
                 </div>
+
                 <div class="register__field">
                     <label class="register__label" for="input-cpf">CPF</label>
-                    <input type="text" class="register__input" id="input-cpf" name="cpf">
+                    <div class="input-wrapper">
+                        <input type="text" class="register__input" id="cpf" name="cpf" placeholder="Digite somente números" maxlength="14" required>
+                        
+                        <!-- campo oculto -->
+                        <input type="hidden" name="cpf-real" id="cpf-real">
+                    </div>
                 </div>
+
                 <div class="register__field">
                     <label class="register__label" for="input-email">E-mail</label>
-                    <input type="text" class="register__input" id="input-email" name="email">
+                    <div class="input-wrapper">
+                        <input type="email" class="register__input" id="input-email" name="email" placeholder="seuemail@exemplo.com" required>
+                    </div>
                 </div>
+
                 <div class="register__field">
                     <label class="register__label" for="input-password">Senha</label>
-                    <input type="text" class="register__input" id="input-password" name="password">
+                    <div class="input-wrapper">
+                        <input type="password" class="register__input" id="input-password" name="password" placeholder="Digite sua senha" required>
+                        <button type="button" class="toggle-password" id="togglePasswordBtn">
+                            <i class="fa-solid fa-eye" id="togglePasswordIcon"></i>
+                        </button>
+                    </div>
                 </div>
 
-            <div class="register__field register__field--dropdown">
-                <label class="register__label register__label--dropdown" for="select-register">Cargo</label>
-                <select class="register__input register__input--dropdown" id="select-register" name="register">
-                    <option value="selected">Selecione um cargo</option>
-                    <option value="nutri">Nutricionista</option>
-                    <option value="prof">Professor(a)</option>
-                </select>
-            </div>
+                <div class="register__field">
+                    <label class="register__label" for="select-register">Cargo</label>
+                    <div class="input-wrapper">
+                        <select class="register__input register__input--dropdown" id="select-register" name="register">
+                            <option value="" disabled selected>Selecione um cargo</option>
+                            <option value="nutri">Nutricionista</option>
+                            <option value="prof">Professor(a)</option>
+                        </select>
+                    </div>
+                </div>
 
-            <button type="submit" class="register__button--submit">Cadastrar</button>
-        </form>
-        <a class="link--login" href="/login">Já tem conta? <strong>Entre</strong></a>
-    </div>
-    
+                <button type="submit" class="register__button--submit">Cadastrar</button>
+
+                <!-- Link de navegação ajustado -->
+                <a class="link--login" href="/login">Já tem conta? <strong>Entre</strong></a>
+
+            </form>
+
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/toggle_password.js') }}"></script>
 </body>
-<script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
+    <script>
+    // Função que recebe um valor e aplica a máscara visual do CPF
+    function mascaraCPF(valor) {
+        return valor
+            .replace(/\D/g, '')                    // tira o que não é numero
+            .slice(0, 11)                          // máximo de 11 números
+            .replace(/(\d{3})(\d)/, '$1.$2')       // ponto após o 3 numero
+            .replace(/(\d{3})(\d)/, '$1.$2')       // ponto após o 6 numero
+            .replace(/(\d{3})(\d{1,2})$/, '$1-$2');// traço antes dos últimos 2 numero
+    }
+
+   
+    const inputVisual = document.getElementById('cpf');
+    const inputReal = document.getElementById('cpf-real');
+
+    // Adiciona um ouvinte que dispara toda vez que o usuário digita algo
+    inputVisual.addEventListener('input', (e) => {
+        
+        const valorDigitado = e.target.value;
+        
+        // coloca a mascara no visual
+        e.target.value = mascaraCPF(valorDigitado);
+        
+        // tira tudo ponto e traço do valor digitado e guarda no input oculto (para envio)
+        inputReal.value = valorDigitado.replace(/\D/g, '');
+    });
+    </script>
 </html>

@@ -17,11 +17,12 @@
     <div class="user-greeting">
       <div>
         <h1 class="classes__title">Olá, Professor(a)!</h1>
-        <div class="progress--step-2">
-          <div class="progress-bar"></div>
-        </div>
-        <span class="progress-label">Etapa 2 de 3</span>
-      </div>
+        <div class="progress-container">
+               <div class="progress-bar">
+                   <div class="progress--step-2"></div>
+               </div>
+               <p class="progress-label">Etapa 2 de 3</p>
+           </div>
       
 
     
@@ -121,9 +122,48 @@
     
     <div class="activities__actions">
       <a href="/teacher"><button class="activities__button--back" type="button">Voltar</button></a>
-      <a href="/teacher/class_info/confirm"><button class="activities__button--continue" type="button">Continuar</button></a>
+      <button id="abrirModal" class="activities__button--continue" type="button">Continuar</button>
     </div>
 
   </main>
+
+  <div class="modal-overlay" id="modal">
+
+    <div class="modal-content">
+      <main class="confirmation">
+        <!-- Título da página -->
+        <h1 class="confirmation__title">Deseja confirmar a presença?</h1>
+        <!-- Barra de Progresso e Indicador -->
+        <div class="progress--step-3">
+          <div class="progress-bar"></div>
+        </div>
+        <span class="progress-label">Etapa 3 de 3</span>
+        <!-- Cartão com resumo de presença -->
+        <section class="confirmation__card">
+          <h2 class="confirmation__card-title">Número de alunos presentes:</h2>
+          <span class="confirmation__card-number">32</span>
+          <hr class="confirmation__card-divider">
+          <h3 class="confirmation__card-subtitle">Alunos do contraturno presentes:</h3>
+          <ul class="confirmation__list">
+            <li class="confirmation__list-item">Fulano Giovani de Andrade</li>
+            <li class="confirmation__list-item">Fulana Marques Luiz Gaspar</li>
+            <li class="confirmation__list-item">Fulana Gonçalves</li>
+            <li class="confirmation__list-item">Fulana Fernanda Gil Cândido</li>
+            <li class="confirmation__list-item">Fulana Ramos Costa</li>
+            <li class="confirmation__list-item">Fulano Lorenzo Moralez</li>
+            <li class="confirmation__list-item">Fulano Conceição Neto</li>
+            <li class="confirmation__list-item">Fulano Stocco</li>
+          </ul>
+        </section>
+        <!-- Botões de ação -->
+        <div class="confirmation__actions">
+          <button id="fecharBtn" type="button" class="confirmation__button--back">Voltar</button>
+          <a href="/teacher"><button type="submit" class="confirmation__button--continue">Continuar</button></a>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="/static/js/modal_teacher_confirm.js"></script>
 
   {% endblock %}

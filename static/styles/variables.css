@@ -3,8 +3,10 @@
   --color-yellow: #FBC754;
   --color-green:  #5AAF90;
   --color-blue:   #5066CA;
+  --bg-dot-color: rgba(89, 103, 217, 0.25);
   --color-red:   #ff0000;
   --color-delete: #DC3545;
+  
 
   --bg-main: #F8F9FA;
   --bg-card: #FFFFFF;
@@ -13,7 +15,9 @@
 
   --border-color: #E2E8F0;
 
+  --input-color: #eff3faff;
 
+  --password-color: #d8dff8;
 
 }
 

@@ -1,5 +1,11 @@
 @import url(/static/styles/global.css);
 
+html, body {
+  overflow-y: auto;
+  scrollbar-width: none; 
+}
+
+
 body {
     background-color: var(--bg-main);
     min-height: 100vh;
@@ -32,9 +38,9 @@ body {
 }
 
 
+
 .progress-container {
-    width: 100%;
-    max-width: 160px; 
+    max-width: 50%;
 }
 
 .progress-bar {
@@ -78,7 +84,7 @@ body {
     height: 100%;
     padding: 0;
     border: none;
-    background-color: rgb(from var(--color-blue) r g b / 0.1);
+    background-color:var(--input-color);
     border-radius: 18px;
     display: flex;
     align-items: center;
@@ -131,10 +137,6 @@ body {
     .classes__logout-button svg {
         width: 36px;
         height: 36px;
-    }
-
-    .progress-container {
-        max-width: 220px;
     }
 
     .progress-bar {

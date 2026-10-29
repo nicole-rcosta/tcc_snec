@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, jsonify, url_for
+from flask import Flask, render_template, request, redirect, session, jsonify, url_for, flash
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
 from model.usuarios import cadastrar, logar, verificar_email, atualizar_senha, cadastrar
 from static.utils.verification_password import verificar_senha_mestra as vsm
@@ -10,8 +10,9 @@ from model.nutritionist_report import buscar_alunos_almoco_hoje, atualizar_statu
 from model.adm_access import buscar_adm, buscar_usuario_pendente, aprovar_usuario, rejeitar_usuario
 import secrets
 import time
-import smtplib
-from email.message import EmailMessage
+import pandas
+from static.utils.send_email import enviar_email
+from model.inserts_csv import inserir_excel_bcd
 
 app = Flask(__name__)
 app.secret_key = "snec_tcc_chave"
@@ -24,7 +25,7 @@ def pagina_login():
     return render_template("login/auth_login.html")
 @app.route("/login/post", methods=["POST"])
 def logar_usuario():
-    cpf = request.form.get("cpf")
+    cpf = request.form.get("cpf-real")
     senha = request.form.get("password")
 
     senha_cript_mestra = "$2b$12$WpdfRGaObonrj/OnjmTHM.BcB73YWHLsf2KXQuN0h.hxgK6EJjd8W"
@@ -60,7 +61,7 @@ def pagina_cadastro():
 @app.route("/cadastro/post", methods=["POST"])
 def cadastrar_usuario():
     nome = request.form.get("name")
-    cpf = request.form.get("cpf")
+    cpf = request.form.get("cpf-real")
     email = request.form.get("email")
     cargo = request.form.get("register")
     senha = request.form.get("password")
@@ -136,7 +137,6 @@ def excluir_atividades(id_atividade):
 @app.route("/adm/reg_class")
 def pagina_cad_sala():
     salas = recuperar_salas()
-    print(salas)
     return render_template("adm/admin_room_register.html", salas = salas)
 
 @app.route("/adm/reg_class/post", methods=["POST"])
@@ -169,7 +169,6 @@ def pagina_cad_aluno_post():
     nome_aluno = request.form.get("student_name")
     id_turma = request.form.get("student_class")
 
-    print(rm,nome_aluno,id_turma)
 
     adicionar_aluno(rm,nome_aluno,id_turma)
 
@@ -182,6 +181,28 @@ def pagina_cad_aluno_delete(id):
     deletar_aluno(id)
 
     return redirect("/adm/reg_student")
+
+
+@app.route("/adm/reg_student/excel", methods=["POST"])
+def pegar_excel_pag_student():
+    arquivo = request.files.get('input_excel')
+
+    if inserir_excel_bcd(arquivo):
+        return redirect("/adm/reg_student")
+    else:
+        flash("Turmas Invalidas! Verifique se elas existem ou se foram digitas corretamente.")
+        return redirect("/adm/reg_student")
+
+
+@app.route("/adm/reg_student/csv", methods=["POST"])
+def pegar_csv_pag_student():
+    arquivo = request.files.get('input_csv')
+    inserir_excel_bcd(arquivo)
+    if inserir_excel_bcd(arquivo):
+        return redirect("/adm/reg_student")
+    else:
+        flash("Turmas Invalidas! Verifique se elas existem ou se foram digitas corretamente.")
+        return redirect("/adm/reg_student")
 
 
 
@@ -317,9 +338,6 @@ def pagina_prof_selecionar_sala():
 def pagina_prof_registro():
     return render_template("teacher/teacher_attendance_record.html")
 
-@app.route("/teacher/class_info/confirm")
-def pagina_confirmacao_prof():
-    return render_template("teacher/teacher_attendance_confirm.html")
 
 # =========================================================
 # RECUPERAÇÃO DE SENHA
@@ -359,45 +377,8 @@ def receber_email():
 
     # se existir segue ess logica:
     
-    # Dados da conta
-    EMAIL_REMETENTE = "pablolorenzomoralez@gmail.com"
-    # tomar cuidado com isso
-    SENHA_APP = "mtls ntmg kxxn aquu" 
-    DESTINATARIO = email
-
-    email = EmailMessage()
-    email["Subject"] = "Código de Recuperação de senha"
-    email["From"] = EMAIL_REMETENTE
-    email["To"] = DESTINATARIO
-
-    email.set_content(f'''
-    Confirme seu e-mail
-
-    Use este código no snec pra confirmar que este e-mail é seu:
-
-    {codigo}
-
-    ''')
-
-    # Conectando ao Gmail e enviando
-
-    try:
-        with smtplib.SMTP("smtp.gmail.com", 587, timeout=3) as servidor:
-            servidor.starttls()
-            servidor.login(EMAIL_REMETENTE, SENHA_APP)
-
-            print("Enviando e-mail...", flush=True)
-            servidor.send_message(email)
-
-            print("E-mail enviado com sucesso!", flush=True)
-
-    except (smtplib.SMTPException, TimeoutError, OSError) as erro:
-        print(f"Envio não confirmado: {erro}", flush=True)
-
-    finally:
-        print("Programa encerrado.", flush=True)
-        
-        return  render_template("password/auth_password_insert.html")
+    if enviar_email(email, codigo):
+        return render_template("password/auth_password_insert.html")
 
 #página onde o usuário informa o código
 @app.route("/password_recover/code", methods=["GET"])

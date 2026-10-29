@@ -7,7 +7,10 @@ html, body {
 
 body {
    font-family: var(--font-secondary);
-    background-color: var(--bg-main);
+    background-color: var(--bg-dot-color-main);
+    background-image: radial-gradient(var(--bg-dot-color) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+
     color: var(--text-main);
     display: flex;
     flex-direction: column;
@@ -15,206 +18,254 @@ body {
     align-items: center;
 }
 
+
 .admin-student-extra__main {
-    background-color: var(--bg-card);
-    color: var(--text-secondary);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    padding: 2.5rem 2.5rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--bg-card);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  width: calc(100% - 2rem);
+  max-width: 1050px;
+  box-sizing: border-box;
+  margin: 2rem auto;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, max-width 0.3s ease;
 }
 
 [data-theme="dark"] .admin-student-extra__main {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .admin-student-extra__navigation {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
 }
 
 .admin-student-extra__back-button {
-    background: none;
-    border: none;
-    padding: 0.5rem;
-    cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
 }
 
 .admin-student-extra__back-icon {
-    font-size: 1.75rem;
-    color: var(--color-orange);
-    transition: transform 0.2s, filter 0.2s;
+  font-size: 1.75rem;
+  color: var(--color-orange);
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .admin-student-extra__back-button:hover .admin-student-extra__back-icon {
-    filter: brightness(0.9);
-    transform: translateX(-3px);
+  filter: brightness(0.9);
+  transform: translateX(-3px);
 }
 
 .admin-student-extra__title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--color-blue);
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    text-align: center;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--color-blue);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
+
 .admin-student-extra__form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    width: 100%;
-    margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 2.5rem;
 }
 
 .admin-student-extra__form-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
 }
 
 .admin-student-extra__field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .admin-student-extra__label {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-blue);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-blue);
 }
 
 .admin-student-extra__input {
-    width: 100%;
-    height: 42px;
-    background-color: var(--input-color);
-    border: 1px solid transparent;
-    border-radius: 12px;
-    padding: 0 1rem;
-    font-size: 1rem;
-    color: var(--color-blue);
-    box-sizing: border-box;
-    outline: none;
-    transition: box-shadow 0.2s, background-color 0.2s, border-color 0.2s;
+  width: 100%;
+  height: 44px;
+  background-color: var(--input-color);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 0 0.85rem;
+  font-size: 0.95rem;
+  color: var(--color-blue);
+  box-sizing: border-box;
+  outline: none;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .admin-student-extra__input:focus {
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-blue) 50%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-blue) 50%, transparent);
+  background-color: var(--bg-card);
 }
 
+.admin-student-extra__input--dropdown {
+  width: 100%;
+  height: 44px;
+  padding: 0 0.75rem;
+  color: var(--color-blue);
+  cursor: pointer;
+  font-size: 0.95rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.admin-student-extra__input--dropdown option {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  padding: 10px;
+}
+
+
 .admin-student-extra__button {
-    border: none;
-    border-radius: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s, filter 0.2s, transform 0.1s, box-shadow 0.2s;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, filter 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
 .admin-student-extra__button--submit {
-    background-color: var(--color-green);
-    color: #FFFFFF;
-    font-size: 0.95rem;
-    padding: 0.6rem 2.5rem;
-    min-height: 40px;
-    box-shadow: 0 4px 10px color-mix(in srgb, var(--color-green) 30%, transparent);
+  background-color: var(--color-green);
+  color: #FFFFFF;
+  font-size: 1rem;
+  padding: 0.75rem 3rem;
+  min-height: 44px;
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--color-green) 30%, transparent);
 }
 
 .admin-student-extra__button--submit:hover {
-    filter: brightness(0.95);
-    box-shadow: 0 6px 14px color-mix(in srgb, var(--color-green) 40%, transparent);
+  filter: brightness(0.95);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--color-green) 40%, transparent);
 }
 
 .admin-student-extra__button--submit:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .admin-student-extra__button--delete {
-    background-color: color-mix(in srgb, var(--color-delete) 12%, transparent);
-    color: var(--color-delete);
-    padding: 0.5rem 0.65rem;
-    font-size: 1.1rem;
-    border-radius: 6px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  background-color: color-mix(in srgb, var(--color-delete) 12%, transparent);
+  color: var(--color-delete);
+  padding: 0.4rem 0.6rem;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .admin-student-extra__button--delete:hover {
-    background-color: var(--color-delete);
-    color: #FFFFFF;
+  background-color: var(--color-delete);
+  color: #FFFFFF;
 }
 
-/* Fundo da secção da lista no modo claro (laranja suave) */
 .admin-student-extra__list-section {
-    background-color: color-mix(in srgb, var(--color-orange) 8%, var(--bg-card));
-    padding: 1.5rem;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    width: 100%;
-    box-sizing: border-box;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+  background-color: color-mix(in srgb, var(--color-orange) 8%, var(--bg-card));
+  padding: 1.75rem 1.5rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Fundo da secção da lista no modo escuro (fundo neutro sem o tom laranja) */
 [data-theme="dark"] .admin-student-extra__list-section {
-    background-color: color-mix(in srgb, var(--text-main) 3%, var(--bg-card));
-    border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: color-mix(in srgb, var(--text-main) 3%, var(--bg-card));
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .admin-student-extra__list-title {
-    font-size: 1.3rem;
-    color: var(--color-blue);
-    font-weight: 700;
-    text-align: center;
-    margin: 0;
+  font-size: 1.35rem;
+  color: var(--color-blue);
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
 }
 
+
 .admin-student-extra__table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-    font-size: 0.9rem;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-card, #FFFFFF);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  font-size: 0.88rem;
+}
+
+
+.admin-student-extra__table-header {
+  background-color: transparent;
 }
 
 .admin-student-extra__table-header .admin-student-extra__table-cell {
-    padding: 0.75rem 0.5rem;
-    color: var(--color-blue);
-    font-weight: 700;
-    border-bottom: 2px solid color-mix(in srgb, var(--color-blue) 30%, transparent);
+  padding: 0.9rem 0.5rem;
+  color: var(--color-blue);
+  font-weight: 700;
+  border-bottom: 1.5px solid color-mix(in srgb, var(--color-blue) 15%, transparent);
+  letter-spacing: 0.2px;
 }
 
+.admin-student-extra__table-header .admin-student-extra__table-cell--name {
+  text-align: left;
+  padding-left: 1.25rem;
+}
+
+
 .admin-student-extra__table-body .admin-student-extra__table-row {
-    border-bottom: 1px solid color-mix(in srgb, var(--text-secondary) 20%, transparent);
+  border-bottom: 1px dashed color-mix(in srgb, var(--text-secondary) 18%, transparent);
+  transition: background-color 0.15s ease;
 }
 
 .admin-student-extra__table-body .admin-student-extra__table-row:last-child {
-    border-bottom: none;
+  border-bottom: none;
+}
+
+.admin-student-extra__table-body .admin-student-extra__table-row:hover {
+  background-color: color-mix(in srgb, var(--color-orange) 3%, var(--bg-card));
 }
 
 .admin-student-extra__table-cell {
-    padding: 0.75rem 0.5rem;
-    color: var(--text-main);
-    vertical-align: middle;
+  padding: 0.8rem 0.5rem;
+  color: var(--text-main);
+  vertical-align: middle;
 }
 
-.admin-student-extra__table-cell--name {
-    font-weight: 600;
-    text-align: left;
-    color: var(--text-main);
+.admin-student-extra__table-body .admin-student-extra__table-cell--name {
+  font-weight: 700;
+  text-align: left;
+  padding-left: 1.25rem;
+  color: var(--color-blue);
 }
 
 .admin-student-extra__table-cell--rm,
@@ -223,95 +274,85 @@ body {
 .admin-student-extra__table-cell--course,
 .admin-student-extra__table-cell--period,
 .admin-student-extra__table-cell--week-day {
-    color: var(--text-secondary);
+  color: var(--text-secondary);
 }
 
-/* Formatação do dropdown */
-.admin-student-extra__input--dropdown {
-    width: 100%;
-    height: 42px;
-    padding: 0 8px;
-    color: var(--color-blue);
-    cursor: pointer;
-    font-size: 1rem;
-}
 
-.admin-student-extra__input--dropdown option {
-    background-color: var(--bg-card);
-    color: var(--text-main);
-    padding: 10px;
-}
-
-/* Responsividade da tabela e do formulário */
 @media (max-width: 768px) {
-    .admin-student-extra__button--submit {
-        width: 100%;
-    }
+  .admin-student-extra__main {
+    max-width: 580px;
+    width: calc(100% - 1.5rem);
+    padding: 1.5rem 1rem;
+    margin: 1rem auto;
+  }
 
-    .admin-student-extra__list-section {
-        padding: 1rem;
-    }
+  .admin-student-extra__form-group {
+    grid-template-columns: 1fr;
+  }
 
-    .admin-student-extra__table-header {
-        display: none;
-    }
+  .admin-student-extra__button--submit {
+    width: 100%;
+  }
 
-    .admin-student-extra__table,
-    .admin-student-extra__table-body,
-    .admin-student-extra__table-row,
-    .admin-student-extra__table-cell {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
+  .admin-student-extra__list-section {
+    padding: 1rem;
+  }
 
-    .admin-student-extra__table-body .admin-student-extra__table-row {
-        background-color: var(--bg-card);
-        border-radius: 12px;
-        padding: 0.8rem 1rem;
-        margin-bottom: 0.75rem;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-        border: 1px solid color-mix(in srgb, var(--text-secondary) 20%, transparent);
-    }
+  .admin-student-extra__table {
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
 
-    [data-theme="dark"] .admin-student-extra__table-body .admin-student-extra__table-row {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
+  .admin-student-extra__table-header {
+    display: none;
+  }
 
-    .admin-student-extra__table-cell {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem 0;
-        border-bottom: 1px dashed color-mix(in srgb, var(--text-secondary) 20%, transparent);
-        text-align: right;
-    }
+  .admin-student-extra__table,
+  .admin-student-extra__table-body,
+  .admin-student-extra__table-row,
+  .admin-student-extra__table-cell {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
-    .admin-student-extra__table-cell:last-child {
-        border-bottom: none;
-    }
+  .admin-student-extra__table-body .admin-student-extra__table-row {
+    background-color: var(--bg-card);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid color-mix(in srgb, var(--text-secondary) 15%, transparent);
+  }
 
-    .admin-student-extra__table-cell::before {
-        content: attr(data-label);
-        font-weight: 700;
-        color: var(--color-blue);
-        font-size: 0.85rem;
-        text-transform: uppercase;
-    }
+  .admin-student-extra__table-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed color-mix(in srgb, var(--text-secondary) 20%, transparent);
+    text-align: right;
+  }
 
-    .admin-student-extra__table-cell--actions::before {
-        content: "Ações";
-    }
-}
+  .admin-student-extra__table-body .admin-student-extra__table-cell--name {
+    padding-left: 0;
+    text-align: right;
+  }
 
-@media (max-width: 1500px) {
-    .admin-student-extra__field--activity {
-        width: 100%;
-    }
-}
+  .admin-student-extra__table-cell:last-child {
+    border-bottom: none;
+  }
 
-@media (max-width: 900px) {
-    .admin-student-extra__input--dropdown {
-        font-size: 15px;
-    }
+  .admin-student-extra__table-cell::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--color-blue);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+
+  .admin-student-extra__table-cell--actions::before {
+    content: "Ações";
+  }
 }

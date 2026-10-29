@@ -2,8 +2,10 @@
   --color-orange: #FF601C;
   --color-yellow: #FBC754;
   --color-green:  #5AAF90;
+  --color-green-light:#dceeeb;
   --color-blue:   #5066CA;
   --bg-dot-color: rgba(89, 103, 217, 0.25);
+  --bg-dot-color-main: #EEEFFA;
   --color-red:   #ff0000;
   --color-delete: #DC3545;
   
@@ -15,7 +17,8 @@
 
   --border-color: #E2E8F0;
 
-  --input-color: #eff3faff;
+  --input-color: #edf0fc;
+  --input-color-hover: #dee5ee;
 
   --password-color: #d8dff8;
 
@@ -26,7 +29,7 @@
   --color-yellow: #FBC754;
   --color-green:  #5AAF90;
   --color-blue:   #818CF8;;
-
+  --bg-dot-color-main: #222224;
   --bg-main: #121214;
   --bg-card: #1E1E24;
   --text-main: #F8F9FA;
@@ -34,4 +37,6 @@
 
   --border-color: rgba(255, 255, 255, 0.12);
 
+  --input-color: #26262d;
+  --input-color-hover: #1d1d2e;
 }

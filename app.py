@@ -7,7 +7,8 @@ from model.students_register import recuperar_alunos, adicionar_aluno, deletar_a
 from model.nutri_dashboard import recuperar_dados_dashboard
 from model.students_extra_register import recuperar_alunos_atividade, adicionar_aluno_atividade, excluir_aluno_atividade
 from model.nutritionist_report import buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
-from model.adm_access import buscar_adm, buscar_usuario_pendente, aprovar_usuario, rejeitar_usuario
+from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos
+from model.adm_access import buscar_adm, buscar_usuario_pendente, rejeitar_usuario, aprovar_usuario
 import secrets
 import time
 import pandas
@@ -94,7 +95,7 @@ def pagina_adm_register():
 @app.route("/adm_register/post", methods=["POST"])
 def cadastrar_adm():
     nome = request.form.get("name")
-    cpf = request.form.get("cpf")
+    cpf = request.form.get("cpf-real")
     email = request.form.get("email")
     senha = request.form.get("password")
     confirmar_senha = request.form.get("confirm-password")
@@ -331,11 +332,57 @@ def api_atualizar_almoco():
 
 @app.route("/teacher")
 def pagina_prof_selecionar_sala():
-    return render_template("teacher/teacher_class_select.html")
+    turmas = buscar_turmas()
 
-@app.route("/teacher/class_info")
-def pagina_prof_registro():
-    return render_template("teacher/teacher_attendance_record.html")
+    if turmas.get("sucesso"):
+        return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"))
+    else:
+        return render_template("teacher/teacher_class_select.html", erro = turmas.get("mensagem"))
+
+@app.route("/teacher/class_info/<id_turma>")
+def pagina_prof_registro(id_turma):
+    qnt_alunos = buscar_qntd_alunos(id_turma)
+    alunos = buscar_alunos(id_turma)
+    print(alunos)
+    if alunos.get("sucesso"):
+        return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))
+    else:
+        return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, erro=alunos.get("mensagem"))
+
+@app.route("/teacher/class_info/confirm/<int:id_turma>", methods=['POST'])
+def pagina_confirmacao_prof(id_turma):
+
+    qtd_alunos = request.form.get('quantidade_alunos')
+    rms_contraturnos = request.form.getlist('rms_contraturnos')
+
+    return render_template("teacher/teacher_attendance_confirm.html",
+                           id_turma=id_turma,
+                           qtd_alunos=qtd_alunos,
+                           rms_contraturnos=rms_contraturnos)
+
+@app.route("/teacher/class_info/save/<int:id_turma>", methods=['POST'])
+def salvar_registro_prof(id_turma):
+    dados = request.get_json()
+    
+    qtd_alunos = dados.get('quantidade_alunos')
+    
+    rms_contraturnos = dados.get('rms_contraturno', [])  # Apenas os RMs marcados pelo professor
+    id_usuario = session.get("usuario")["id"]
+
+    # Executa a gravação no banco de dados
+    sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario), salvar_his_almoco(id_usuario, rms_contraturnos)
+
+    if sucesso:
+        return jsonify({
+            'sucesso': True, 
+            'redirect_url': url_for('pagina_prof_selecionar_sala')
+        }), 200
+    else:
+        return jsonify({
+            'sucesso': False, 
+            'erro': 'Não foi possível salvar o registro.'
+        }), 500
+
 
 
 # =========================================================

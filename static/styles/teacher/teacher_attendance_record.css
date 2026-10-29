@@ -277,7 +277,7 @@ body {
 }
 
 .activities__button--back {
-  background-color: #E2E8F0;
+  background-color: var(--bg-dot-color-main);
   color: var(--color-blue);
   border: none;
   padding: 12px 28px;

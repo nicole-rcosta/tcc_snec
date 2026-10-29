@@ -127,7 +127,6 @@ def excluir_atividades(id_atividade):
 @app.route("/adm/reg_class")
 def pagina_cad_sala():
     salas = recuperar_salas()
-    print(salas)
     return render_template("adm/admin_room_register.html", salas = salas)
 
 @app.route("/adm/reg_class/post", methods=["POST"])
@@ -160,7 +159,6 @@ def pagina_cad_aluno_post():
     nome_aluno = request.form.get("student_name")
     id_turma = request.form.get("student_class")
 
-    print(rm,nome_aluno,id_turma)
 
     adicionar_aluno(rm,nome_aluno,id_turma)
 

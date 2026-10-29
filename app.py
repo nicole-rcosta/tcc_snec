@@ -10,9 +10,8 @@ from model.nutritionist_report import buscar_alunos_almoco_hoje, atualizar_statu
 from model.adm_access import buscar_adm, buscar_usuario_pendente, aprovar_usuario, rejeitar_usuario
 import secrets
 import time
-import smtplib
-from email.message import EmailMessage
 import pandas
+from static.utils.send_email import enviar_email
 from model.inserts_csv import inserir_excel_bcd
 
 app = Flask(__name__)
@@ -322,9 +321,6 @@ def pagina_prof_selecionar_sala():
 def pagina_prof_registro():
     return render_template("teacher/teacher_attendance_record.html")
 
-@app.route("/teacher/class_info/confirm")
-def pagina_confirmacao_prof():
-    return render_template("teacher/teacher_attendance_confirm.html")
 
 # =========================================================
 # RECUPERAÇÃO DE SENHA
@@ -364,45 +360,8 @@ def receber_email():
 
     # se existir segue ess logica:
     
-    # Dados da conta
-    EMAIL_REMETENTE = "pablolorenzomoralez@gmail.com"
-    # tomar cuidado com isso
-    SENHA_APP = "mtls ntmg kxxn aquu" 
-    DESTINATARIO = email
-
-    email = EmailMessage()
-    email["Subject"] = "Código de Recuperação de senha"
-    email["From"] = EMAIL_REMETENTE
-    email["To"] = DESTINATARIO
-
-    email.set_content(f'''
-    Confirme seu e-mail
-
-    Use este código no snec pra confirmar que este e-mail é seu:
-
-    {codigo}
-
-    ''')
-
-    # Conectando ao Gmail e enviando
-
-    try:
-        with smtplib.SMTP("smtp.gmail.com", 587, timeout=3) as servidor:
-            servidor.starttls()
-            servidor.login(EMAIL_REMETENTE, SENHA_APP)
-
-            print("Enviando e-mail...", flush=True)
-            servidor.send_message(email)
-
-            print("E-mail enviado com sucesso!", flush=True)
-
-    except (smtplib.SMTPException, TimeoutError, OSError) as erro:
-        print(f"Envio não confirmado: {erro}", flush=True)
-
-    finally:
-        print("Programa encerrado.", flush=True)
-        
-        return  render_template("password/auth_password_insert.html")
+    if enviar_email(email, codigo):
+        return render_template("password/auth_password_insert.html")
 
 #página onde o usuário informa o código
 @app.route("/password_recover/code", methods=["GET"])

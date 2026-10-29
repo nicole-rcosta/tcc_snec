@@ -38,9 +38,9 @@ body {
 }
 
 
+
 .progress-container {
-    width: 100%;
-    max-width: 160px; 
+    max-width: 50%;
 }
 
 .progress-bar {
@@ -137,10 +137,6 @@ body {
     .classes__logout-button svg {
         width: 36px;
         height: 36px;
-    }
-
-    .progress-container {
-        max-width: 220px;
     }
 
     .progress-bar {

@@ -45,7 +45,6 @@ def logar_usuario():
             return redirect('/nutri_dashboard')
         elif cargo == 'adm':
             return render_template("/adm/admin_item_register.html")
-        return render_template()
     else:
         print(resultado['mensagem'])
         if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.':
@@ -191,18 +190,18 @@ def pegar_excel_pag_student():
     if inserir_excel_bcd(arquivo):
         return redirect("/adm/reg_student")
     else:
-        flash("Turmas Invalidas! Verifique se elas existem ou se foram digitas corretamente.")
+        flash("Dados Inválidas! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
 
 
 @app.route("/adm/reg_student/csv", methods=["POST"])
 def pegar_csv_pag_student():
     arquivo = request.files.get('input_csv')
-    inserir_excel_bcd(arquivo)
+    
     if inserir_excel_bcd(arquivo):
         return redirect("/adm/reg_student")
     else:
-        flash("Turmas Invalidas! Verifique se elas existem ou se foram digitas corretamente.")
+        flash("Dados Inválidas! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
 
 

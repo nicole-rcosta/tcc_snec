@@ -12,20 +12,35 @@ def inserir_excel_bcd(arquivo):
         else:
             dados = pandas.read_excel(arquivo)
 
+
+        dados = dados.dropna(how='all')  
+
+        if dados.empty:
+            print("Planinha em branco ou sem registros válidos")
+            return False
+
         alunos = dados.to_dict('records')
         
-        conexao,cursor = conectar()
+        conexao, cursor = conectar()
 
-        cursor = conexao.cursor()
 
         sql = "INSERT INTO tb_alunos (rm_aluno, nome_aluno, id_turma) VALUES "
 
         for aluno in alunos:
+            if pandas.isna(aluno.get('rm')) or pandas.isna(aluno.get('nome')) or pandas.isna(aluno.get('turma')):
+                continue
+
             sql = sql  + f"""(
                                 '{aluno['rm']}',
                                 '{aluno['nome']}',
                                 (SELECT id_turma FROM tb_turmas WHERE turma = '{aluno['turma']}')
                             ),"""
+
+        if sql.endswith("VALUES "): 
+            cursor.close()
+            conexao.close()
+            return False
+
 
         sql = sql.rstrip(',') + ';'
 
@@ -39,13 +54,9 @@ def inserir_excel_bcd(arquivo):
 
         return True
 
-    except mysql.connector.errors.IntegrityError:
-        print('derg9u')
+    except (mysql.connector.errors.IntegrityError, mysql.connector.errors.ProgrammingError, pandas.errors.EmptyDataError) as e:
+        print(f"Erro ao processar planilha/banco: {e}")
         return False
-
-    
-
-
-
-
-
+    except Exception as e:
+        print(f"Erro inesperado: {e}")
+        return False

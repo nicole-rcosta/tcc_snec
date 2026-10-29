@@ -334,7 +334,7 @@ def pagina_prof_registro(id_turma):
     else:
         return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, erro=alunos.get("mensagem"))
 
-@app.route("/teacher/class_info/confirm/<id_turma>", methods=['POST'])
+@app.route("/teacher/class_info/confirm/<int:id_turma>", methods=['POST'])
 def pagina_confirmacao_prof(id_turma):
 
     qtd_alunos = request.form.get('quantidade_alunos')

@@ -55,7 +55,7 @@
                     <td class="activities__table-cell--year">{{ aluno.turma }}</td>
                     <td class="activities__table-cell--activity"><span class="badge">{{ aluno.atividade }}</span></td>
                     <td class="activities__table-cell--shift">{{ aluno.periodo }}</td>
-                    <td class="activities__table-cell--check"><input type="checkbox" name="rms_contraturnos" value="{{ aluno.rm_aluno }}" {% if not aluno.status %} checked {% endif %}></td>
+                    <td class="activities__table-cell--check"><input type="checkbox" name="rms_contraturnos" value="{{ aluno.rm_aluno }}" {% if aluno.status %} checked {% endif %}></td>
                   </tr>
                 {% endif %}
               {% endfor %}
@@ -73,7 +73,7 @@
       
       <div class="activities__actions">
         <a href="/teacher"><button class="activities__button--back" type="button">Voltar</button></a>
-        <a href="/teacher/class_info/confirm"><button class="activities__button--continue" type="submit">Continuar</button></a>
+        <a href="/teacher/class_info/confirm/{{ id_turma }}"><button class="activities__button--continue" type="submit">Continuar</button></a>
       </div>
     </form>
     

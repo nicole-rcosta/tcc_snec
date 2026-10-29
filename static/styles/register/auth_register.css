@@ -1,6 +1,6 @@
 @import url('/static/styles/global.css');
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
@@ -10,7 +10,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color:var(--input-color); */
   font-family: var(--font-primary, 'Inter', system-ui, sans-serif);
   position: relative;
   overflow-x: hidden;
@@ -18,14 +17,22 @@ body {
   background-color: var(--bg-dot-color-main);
   background-image: radial-gradient(var(--bg-dot-color) 1.5px, transparent 1.5px);
   background-size: 24px 24px;
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 
 .background {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease, filter 0.3s ease;
   filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.12)); 
+}
+
+[data-theme="dark"] .background {
+  opacity: 0.5;
+  filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.4));
 }
 
 .background-sup-esq { top: 0; left: 0; height: 150px; }
@@ -33,16 +40,17 @@ body {
 .background-inf-esq { bottom: 0; left: 0; height: 150px; }
 .background-inf-dir { bottom: 0; right: 0; height: 150px; }
 
+
 .register-container {
   width: 100%;
   max-width: 460px;
   display: flex;
   justify-content: center;
   z-index: 1;
-  filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.05));
 }
 
 .register {
+  position: relative; 
   display: flex;
   flex-direction: column;
   background-color: var(--bg-card, #FFFFFF);
@@ -51,8 +59,42 @@ body {
   border-radius: 20px;
   align-items: center;
   gap: 16px;
-  box-shadow: 0 10px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+[data-theme="dark"] .register {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+
+.register__theme-toggle-container,
+.login__theme-toggle-container {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+}
+
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--color-orange);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
 
 .logo_snec {
   height: 90px;
@@ -69,6 +111,7 @@ body {
   text-align: center;
   margin-bottom: 4px;
 }
+
 
 .register__form {
   display: flex;
@@ -99,21 +142,21 @@ body {
 }
 
 .register__input {
-  border: none;
+  border: 1px solid transparent;
   padding: 12px 16px;
   width: 100%;
   border-radius: 10px;
-  background-color:var(--input-color);
+  background-color: var(--input-color);
   color: var(--color-blue);
   font-size: 15px;
   outline: none;
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .register__input:focus {
   box-shadow: 0 0 0 2px var(--color-blue);
+  background-color: var(--input-color-hover);
 }
-
 
 .register__input--dropdown {
   cursor: pointer;
@@ -125,10 +168,15 @@ body {
   padding-right: 40px;
 }
 
-.register__input--dropdown option {
-  background-color: var(--bg-card, #FFFFFF);
-  color: var(--color-blue);
+[data-theme="dark"] .register__input--dropdown {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23818CF8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
 }
+
+.register__input--dropdown option {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+}
+
 
 .toggle-password {
   position: absolute;
@@ -140,17 +188,19 @@ body {
   cursor: pointer;
   padding: 4px;
   font-size: 16px;
+  transition: opacity 0.2s ease;
 }
 
 .toggle-password:hover {
   opacity: 1;
 }
 
+
 .register__button--submit {
   border: none;
   padding: 12px 24px;
   background-color: var(--color-green);
-  color: white;
+  color: #FFFFFF;
   border-radius: 10px;
   width: 100%;
   max-width: 220px;
@@ -158,11 +208,15 @@ body {
   font-weight: 600;
   cursor: pointer;
   margin-top: 10px;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.1s ease;
 }
 
 .register__button--submit:hover {
   opacity: 0.9;
+}
+
+.register__button--submit:active {
+  transform: scale(0.98);
 }
 
 .link--login {
@@ -182,14 +236,15 @@ body {
   text-decoration: underline;
 }
 
-.register__message-error{
-    text-align: center;
-    color: var(--color-red);
-    margin: 5px;
+.register__message-error {
+  text-align: center;
+  color: var(--color-red);
+  margin: 5px;
+  font-weight: 600;
 }
 
 @media (max-width: 599px) {
-  .login--card {
+  .register {
     padding: 25px 20px;
   }
 
@@ -200,10 +255,8 @@ body {
   .background-sup-esq, .background-sup-dir,
   .background-inf-esq, .background-inf-dir {
     height: 150px;
-    opacity: 0.9;
   }
 }
-
 
 @media (min-width: 768px) {
   .background-sup-esq, .background-sup-dir,
@@ -212,14 +265,12 @@ body {
   }
 }
 
-
 @media (min-width: 1024px) {
   .background-sup-esq, .background-sup-dir,
   .background-inf-esq, .background-inf-dir {
     height: 250px; 
   }
 }
-
 
 @media (min-width: 1440px) {
   .background-sup-esq, .background-sup-dir,

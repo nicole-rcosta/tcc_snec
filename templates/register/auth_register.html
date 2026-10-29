@@ -20,6 +20,12 @@
 
     <main class="register-container">
         <div class="register">
+            
+            <div class="login__theme-toggle-container">
+                <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Alternar tema">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
 
             <img class="logo_snec" src="/static/img/logo_principal.png" alt="Logo SNEC">
 
@@ -86,8 +92,8 @@
     </main>
 
     <script src="{{ url_for('static', filename='js/toggle_password.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tema.js') }}"></script>
 </body>
-    <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
     <script>
     // Função que recebe um valor e aplica a máscara visual do CPF
     function mascaraCPF(valor) {

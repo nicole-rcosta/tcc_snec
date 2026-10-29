@@ -37,7 +37,10 @@
                 <div class="register__field">
                     <label class="register__label" for="input-cpf">CPF</label>
                     <div class="input-wrapper">
-                        <input type="text" class="register__input" id="input-cpf" name="cpf" placeholder="Digite somente números">
+                        <input type="text" class="register__input" id="cpf" name="cpf" placeholder="Digite somente números" maxlength="14">
+                        
+                        <!-- campo oculto -->
+                        <input type="hidden" name="cpf-real" id="cpf-real">
                     </div>
                 </div>
 
@@ -83,19 +86,30 @@
 </body>
     <script src="https://kit.fontawesome.com/29baadc06e.js" crossorigin="anonymous"></script>
     <script>
+    // Função que recebe um valor e aplica a máscara visual do CPF
     function mascaraCPF(valor) {
-    return valor
-        .replace(/\D/g, '')                    
-        .slice(0, 11)                          
-        .replace(/(\d{3})(\d)/, '$1.$2')       // primeiro ponto
-        .replace(/(\d{3})(\d)/, '$1.$2')       // segundo ponto
-        .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // traço
-}
+        return valor
+            .replace(/\D/g, '')                    // tira o que não é numero
+            .slice(0, 11)                          // máximo de 11 números
+            .replace(/(\d{3})(\d)/, '$1.$2')       // ponto após o 3 numero
+            .replace(/(\d{3})(\d)/, '$1.$2')       // ponto após o 6 numero
+            .replace(/(\d{3})(\d{1,2})$/, '$1-$2');// traço antes dos últimos 2 numero
+    }
 
-    const input = document.getElementById('input-cpf');
+   
+    const inputVisual = document.getElementById('cpf');
+    const inputReal = document.getElementById('cpf-real');
 
-    input.addEventListener('input', (e) => {
-    e.target.value = mascaraCPF(e.target.value);
+    // Adiciona um ouvinte que dispara toda vez que o usuário digita algo
+    inputVisual.addEventListener('input', (e) => {
+        
+        const valorDigitado = e.target.value;
+        
+        // coloca a mascara no visual
+        e.target.value = mascaraCPF(valorDigitado);
+        
+        // tira tudo ponto e traço do valor digitado e guarda no input oculto (para envio)
+        inputReal.value = valorDigitado.replace(/\D/g, '');
     });
     </script>
 </html>

@@ -26,7 +26,7 @@ def pagina_login():
     return render_template("login/auth_login.html")
 @app.route("/login/post", methods=["POST"])
 def logar_usuario():
-    cpf = request.form.get("cpf")
+    cpf = request.form.get("cpf-real")
     senha = request.form.get("password")
 
     senha_cript_mestra = "$2b$12$WpdfRGaObonrj/OnjmTHM.BcB73YWHLsf2KXQuN0h.hxgK6EJjd8W"
@@ -55,14 +55,16 @@ def pagina_cadastro():
 @app.route("/cadastro/post", methods=["POST"])
 def cadastrar_usuario():
     nome = request.form.get("name")
-    cpf = request.form.get("cpf")
+    cpf = request.form.get("cpf-real")
     email = request.form.get("email")
     cargo = request.form.get("register")
     senha = request.form.get("password")
     status = "pendente"
+    print(cpf)
 
     if cadastrar(nome, email, cargo, senha, cpf, status):
         return render_template("/login/auth_login.html")
+        
     else:
         return redirect("/cadastro")
     

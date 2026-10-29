@@ -2,6 +2,7 @@
   --color-orange: #FF601C;
   --color-yellow: #FBC754;
   --color-green:  #5AAF90;
+  --color-green-light:#dceeeb;
   --color-blue:   #5066CA;
   --bg-dot-color: rgba(89, 103, 217, 0.25);
   --color-red:   #ff0000;
@@ -16,6 +17,7 @@
   --border-color: #E2E8F0;
 
   --input-color: #eff3faff;
+  --input-color-hover: #dee5ee;
 
   --password-color: #d8dff8;
 
@@ -34,4 +36,6 @@
 
   --border-color: rgba(255, 255, 255, 0.12);
 
+  --input-color: #292941;
+  --input-color-hover: #1d1d2e;
 }

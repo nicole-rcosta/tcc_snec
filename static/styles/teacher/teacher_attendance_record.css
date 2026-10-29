@@ -39,16 +39,13 @@ body {
   font-weight: 700;
   margin-bottom: 6px;
 }
-/*  */
-.progress-container {
-    max-width: 50%;
-}
+
 .progress-bar {
-    width: 33.33%;
-    height: 8px;
-    background-color: rgb(from var(--color-green) r g b / 0.15);
-    border-radius: 10px;
-    overflow: hidden;
+  width: 180px;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--color-green-light);
 }
 
 .progress--step-2 {
@@ -231,7 +228,7 @@ body {
 }
 
 .activities__button--back {
-  background-color: #E2E8F0;
+  background-color: var(--input-color);
   color: var(--color-blue);
   border: none;
   padding: 12px 28px;
@@ -239,6 +236,18 @@ body {
   font-weight: 700;
   border-radius: 10px;
   cursor: pointer;
+  transition:   0.3s;
+}
+.activities__button--back:hover{
+  background-color: var(--input-color-hover);
+}
+
+
+[data-theme='dark'] .activities__button--back{
+  background-color: var(--input-color);
+}
+[data-theme='dark'] .activities__button--back:hover{
+  background-color: var(--input-color-hover);
 }
 
 .activities__button--continue {
@@ -445,6 +454,10 @@ body {
   background-color: var(--input-color);
 }
 
+[data-theme='dark'].modal-content {
+  background-color: var(--input-color-hover);
+}
+
 .modal-overlay.ativo .modal-content {
   transform: translateY(0);
 }
@@ -479,7 +492,7 @@ body {
 /* Barra de Progresso */
 .progress--step-3 {
   width: 180px;
-  height: 6px;
+  height: 10px;
   background-color: color-mix(in srgb, var(--text-secondary) 20%, transparent);
   border-radius: 4px;
   overflow: hidden;

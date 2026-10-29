@@ -15,9 +15,7 @@ body {
   align-items: center;
 }
 
-/* ==========================================================================
-   CONTAINER PRINCIPAL (Ampliado para ocupar mais espaço no PC e Tablet)
-   ========================================================================== */
+
 .admin-activity {
   background-color: var(--bg-card);
   color: var(--text-main);
@@ -62,7 +60,7 @@ body {
   transform: translateX(-3px);
 }
 
-/* Título */
+
 .admin-activity__title {
   font-size: 1.85rem;
   font-weight: 700;
@@ -72,9 +70,7 @@ body {
   text-align: center;
 }
 
-/* ==========================================================================
-   FORMULÁRIO DE CADASTRO
-   ========================================================================== */
+
 .admin-activity__form {
   display: flex;
   flex-direction: column;
@@ -86,7 +82,7 @@ body {
 
 .admin-activity__form-group {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Mínimo ajustado para evitar quebras falsas */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1.25rem;
   width: 100%;
 }
@@ -129,7 +125,7 @@ body {
   opacity: 0.7;
 }
 
-/* Botões */
+
 .admin-activity__button {
   border: none;
   border-radius: 12px;
@@ -172,9 +168,7 @@ body {
   color: #FFFFFF;
 }
 
-/* ==========================================================================
-   SEÇÃO DE LISTAGEM (Com o fundo Laranja suave)
-   ========================================================================== */
+
 .admin-activity__list-section {
   background-color: color-mix(in srgb, var(--color-orange) 8%, var(--bg-card));
   padding: 2rem;
@@ -200,9 +194,7 @@ body {
   margin: 0 0 0.5rem 0;
 }
 
-/* ==========================================================================
-   TABELA UNIFICADA (PC e Tablet com Camada Branca)
-   ========================================================================== */
+
 .admin-activity__table {
   width: 100%;
   border-collapse: separate;
@@ -216,6 +208,11 @@ body {
   color: var(--color-blue);
   font-weight: 700;
   border: none;
+}
+
+.admin-activity__table-header .admin-activity__table-cell--activity {
+  text-align: left;
+  padding-left: 1.25rem;
 }
 
 .admin-activity__table-body .admin-activity__table-row {
@@ -245,8 +242,10 @@ body {
   vertical-align: middle;
 }
 
-.admin-activity__table-cell--activity {
+.admin-activity__table-body .admin-activity__table-cell--activity {
   font-weight: 700;
+  text-align: left;
+  padding-left: 1.25rem;
   color: var(--color-blue);
 }
 
@@ -254,11 +253,8 @@ body {
   color: var(--text-secondary);
 }
 
-/* ==========================================================================
-   RESPONSIVIDADE SEM CONFLITO DE BREAKPOINTS
-   ========================================================================== */
 
-/* Ajuste específico para Tablet (651px até 1024px) */
+
 @media (max-width: 1024px) and (min-width: 651px) {
   .admin-activity {
     max-width: 90%;
@@ -266,7 +262,7 @@ body {
   }
 }
 
-/* Mobile e Telas Estreitas (Até 650px) */
+
 @media (max-width: 650px) {
   .admin-activity {
     padding: 1.5rem 1rem;
@@ -274,7 +270,7 @@ body {
   }
 
   .admin-activity__form-group {
-    grid-template-columns: 1fr; /* Estabiliza em 1 coluna até 650px */
+    grid-template-columns: 1fr;
   }
 
   .admin-activity__button--submit {
@@ -321,6 +317,11 @@ body {
     align-items: center;
     padding: 0.55rem 0;
     border-bottom: 1px dashed color-mix(in srgb, var(--text-main) 15%, transparent);
+    text-align: right;
+  }
+
+  .admin-activity__table-body .admin-activity__table-cell--activity {
+    padding-left: 0;
     text-align: right;
   }
 

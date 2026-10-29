@@ -15,9 +15,7 @@ body {
   align-items: center;
 }
 
-/* ==========================================================================
-   CONTAINER PRINCIPAL (Ampliado para ocupar mais espaço no PC e Tablet)
-   ========================================================================== */
+
 .admin-student {
   background-color: var(--bg-card);
   color: var(--text-secondary);
@@ -40,7 +38,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Navegação */
+
 .admin-student__navigation {
   width: 100%;
   display: flex;
@@ -89,7 +87,7 @@ body {
   transform: translateX(-3px);
 }
 
-/* Título */
+
 .admin-student__title {
   font-size: 1.85rem;
   font-weight: 700;
@@ -99,9 +97,7 @@ body {
   text-align: center;
 }
 
-/* ==========================================================================
-   FORMULÁRIO DE CADASTRO
-   ========================================================================== */
+
 .admin-student__form {
   display: flex;
   flex-direction: column;
@@ -150,7 +146,7 @@ body {
   background-color: var(--bg-card);
 }
 
-/* Botões */
+
 .admin-student__button {
   border: none;
   border-radius: 12px;
@@ -193,9 +189,7 @@ body {
   color: #FFFFFF;
 }
 
-/* ==========================================================================
-   SEÇÃO DE LISTAGEM (Com fundo Laranja suave)
-   ========================================================================== */
+
 .admin-student__list-section {
   background-color: color-mix(in srgb, var(--color-orange) 8%, var(--bg-card));
   padding: 2rem;
@@ -222,9 +216,7 @@ body {
   margin: 0 0 0.5rem 0;
 }
 
-/* ==========================================================================
-   TABELA UNIFICADA (PC e Tablet acima de 650px com Camada Branca)
-   ========================================================================== */
+
 .admin-student__table {
   width: 100%;
   border-collapse: separate;
@@ -278,11 +270,20 @@ body {
   color: var(--text-secondary);
 }
 
-/* ==========================================================================
-   RESPONSIVIDADE UNIFICADA
-   ========================================================================== */
 
-/* Tablet (651px até 1024px) */
+.admin-student__table-cell--name {
+  font-weight: 700;
+  text-align: left; 
+  padding-left: 1.25rem;
+  color: var(--color-blue);
+}
+
+.admin-student__table-header .admin-student__table-cell--name {
+  text-align: left;
+  padding-left: 1.25rem;
+}
+
+
 @media (max-width: 1024px) and (min-width: 651px) {
   .admin-student {
     max-width: 90%;
@@ -290,7 +291,7 @@ body {
   }
 }
 
-/* Mobile apenas para smartphones (Abaixo de 650px) */
+
 @media (max-width: 650px) {
   .admin-student {
     padding: 1.5rem 1rem;
@@ -363,11 +364,14 @@ body {
   .admin-student__table-cell--actions::before {
     content: "Ações";
   }
+
+  .admin-student__table-cell--name {
+    padding-left: 0;
+    text-align: right;
+  }
 }
 
-/* ==========================================================================
-   MODAL DE IMPORTAÇÃO (Excel / CSV)
-   ========================================================================== */
+
 .modal-overlay {
   position: fixed;
   top: 0;

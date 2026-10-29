@@ -17,7 +17,7 @@
 
   --border-color: #E2E8F0;
 
-  --input-color: #eff3faff;
+  --input-color: #edf0fc;
   --input-color-hover: #dee5ee;
 
   --password-color: #d8dff8;
@@ -37,6 +37,6 @@
 
   --border-color: rgba(255, 255, 255, 0.12);
 
-  --input-color: #292941;
+  --input-color: #26262d;
   --input-color-hover: #1d1d2e;
 }

@@ -15,7 +15,7 @@
 
   --border-color: #E2E8F0;
 
-  --input-color: #eff3faff;
+  --input-color: #edf0fc;
 
   --password-color: #d8dff8;
 
@@ -33,5 +33,7 @@
   --text-secondary: #A0A0B0;
 
   --border-color: rgba(255, 255, 255, 0.12);
+
+  --input-color: #1E1E24;
 
 }

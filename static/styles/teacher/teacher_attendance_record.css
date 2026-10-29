@@ -40,9 +40,9 @@ body {
   margin-bottom: 6px;
 }
 
-.progress--step-2 {
+.progress-bar {
   width: 180px;
-  height: 6px;
+  height: 8px;
   border-radius: 4px;
   overflow: hidden;
   background-color: var(--color-green-light);
@@ -236,7 +236,7 @@ body {
   font-weight: 700;
   border-radius: 10px;
   cursor: pointer;
-  transition: 0.3s;
+  transition:   0.3s;
 }
 .activities__button--back:hover{
   background-color: var(--input-color-hover);
@@ -456,6 +456,10 @@ body {
   background-color: var(--input-color);
 }
 
+[data-theme='dark'].modal-content {
+  background-color: var(--input-color-hover);
+}
+
 .modal-overlay.ativo .modal-content {
   transform: translateY(0);
 }
@@ -490,7 +494,7 @@ body {
 /* Barra de Progresso */
 .progress--step-3 {
   width: 180px;
-  height: 6px;
+  height: 10px;
   background-color: color-mix(in srgb, var(--text-secondary) 20%, transparent);
   border-radius: 4px;
   overflow: hidden;

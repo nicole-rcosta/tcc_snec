@@ -5,25 +5,37 @@ import bcrypt
 def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) -> bool:
     conexao = None
     cursor = None
+    
     try:
-        senha_bytes = senha.encode('utf-8')
-        salt = bcrypt.gensalt()
-        senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
-
-        if not validar_cpf(cpf):
-            print("cpf invalido")
-            return {"sucesso": False, "mensagem": "CPF inválido."}
-
         conexao, cursor = conectar()
-        
+
         sql = """
-            INSERT INTO tb_usuarios (nome_usuario, email, cargo, senha, cpf, status) 
-            VALUES (%s, %s, %s, %s, %s, %s);
-        """
-        
-        cursor.execute(sql, (nome, email, cargo, senha_hash, cpf, status))
-        conexao.commit()
-        return True
+                SELECT * FROM tb_usuarios
+                WHERE cpf = %s;
+            """
+        cursor.execute(sql, (cpf, ))
+        user = cursor.fetchone()
+
+        if user:
+            print("Usuário já cadastrado")
+            return {"sucesso": False, "mensagem": "Usuário já cadastrado."}
+        else:
+            senha_bytes = senha.encode('utf-8')
+            salt = bcrypt.gensalt()
+            senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
+
+            if not validar_cpf(cpf):
+                print("cpf invalido")
+                return {"sucesso": False, "mensagem": "CPF inválido."}
+            
+            sql = """
+                INSERT INTO tb_usuarios (nome_usuario, email, cargo, senha, cpf, status) 
+                VALUES (%s, %s, %s, %s, %s, %s);
+            """
+            
+            cursor.execute(sql, (nome, email, cargo, senha_hash, cpf, status))
+            conexao.commit()
+            return True
 
     except Exception as erro:
         print(f"Erro ao cadastrar usuário: {erro}")
@@ -47,8 +59,7 @@ def logar(cpf: str, senha: str) -> dict:
         sql = """
             SELECT id_usuario, nome_usuario, cargo, senha, status 
             FROM tb_usuarios 
-            WHERE cpf = %s
-            ;
+            WHERE cpf = %s;
         """
 
         cursor.execute(sql, (cpf,))

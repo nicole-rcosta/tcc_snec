@@ -24,6 +24,9 @@ def recuperar_dados_dashboard():
     cursor.execute(query_turmas)
     turmas = cursor.fetchall()
 
+    if not turmas:
+        return {"sucesso": False, "mensagem": "Nenhuma turma cadastrada"}
+
     # Total de lanches somando as turmas que já enviaram contagem hoje
     query_total_lanches = """
         SELECT COALESCE(SUM(quantidade_alunos), 0) AS total

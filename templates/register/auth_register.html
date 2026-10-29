@@ -23,7 +23,10 @@
 
             <img class="logo_snec" src="/static/img/logo_principal.png" alt="Logo SNEC">
 
-            <h1 class="register__title">Cadastre-se</h1>
+        <h1 class="register__title">Cadastre-se</h1>
+        {% if erro %}
+        <span class="register__message-error">{{ erro }}</span>
+        {% endif %}
 
             <form action="/cadastro/post" method="POST" class="register__form">
 

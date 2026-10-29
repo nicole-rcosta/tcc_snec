@@ -177,6 +177,20 @@ body {
 .login__link--register strong:hover {
   text-decoration: underline;
 }
+.background-sup-dir{
+    top: 0;
+    right: 0;
+}
+
+.background-sup-esq{
+    top: 0;
+    left: 0;
+} 
+
+.login__message-error{
+    text-align: center;
+    color: var(--color-red);
+}
 
 
 @media (max-width: 599px) {

@@ -47,6 +47,13 @@
                     </tr>
                     {% endfor %}
                 </tbody>
+                {% if erro %}
+                <tfoot>
+                    <tr class="dashboard__class-row">
+                        <td class="dashboard__message-error">{{ erro }}</td>
+                    </tr>
+                </tfoot>
+                {% endif %}
             </table>
         </section>
 
@@ -54,7 +61,11 @@
         <section class="dashboard__meals">
             <article class="dashboard__meal-item">
                 <h2 class="dashboard__meal-title">Lanche</h2>
+                {% if erro %}
+                <p class="dashboard__meal-count">0</p>
+                {% else %}
                 <p class="dashboard__meal-count">{{ total_lanches }}</p>
+                {% endif %}
             </article>
 
             <article class="dashboard__meal-item">

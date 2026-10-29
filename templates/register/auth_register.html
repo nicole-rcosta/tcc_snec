@@ -30,14 +30,14 @@
                 <div class="register__field">
                     <label class="register__label" for="input-name">Nome Completo</label>
                     <div class="input-wrapper">
-                        <input type="text" class="register__input" id="input-name" name="name" placeholder="Digite seu nome completo">
+                        <input type="text" class="register__input" id="input-name" name="name" placeholder="Digite seu nome completo" required>
                     </div>
                 </div>
 
                 <div class="register__field">
                     <label class="register__label" for="input-cpf">CPF</label>
                     <div class="input-wrapper">
-                        <input type="text" class="register__input" id="cpf" name="cpf" placeholder="Digite somente números" maxlength="14">
+                        <input type="text" class="register__input" id="cpf" name="cpf" placeholder="Digite somente números" maxlength="14" required>
                         
                         <!-- campo oculto -->
                         <input type="hidden" name="cpf-real" id="cpf-real">
@@ -47,14 +47,14 @@
                 <div class="register__field">
                     <label class="register__label" for="input-email">E-mail</label>
                     <div class="input-wrapper">
-                        <input type="email" class="register__input" id="input-email" name="email" placeholder="seuemail@exemplo.com">
+                        <input type="email" class="register__input" id="input-email" name="email" placeholder="seuemail@exemplo.com" required>
                     </div>
                 </div>
 
                 <div class="register__field">
                     <label class="register__label" for="input-password">Senha</label>
                     <div class="input-wrapper">
-                        <input type="password" class="register__input" id="input-password" name="password" placeholder="Digite sua senha">
+                        <input type="password" class="register__input" id="input-password" name="password" placeholder="Digite sua senha" required>
                         <button type="button" class="toggle-password" id="togglePasswordBtn">
                             <i class="fa-solid fa-eye" id="togglePasswordIcon"></i>
                         </button>

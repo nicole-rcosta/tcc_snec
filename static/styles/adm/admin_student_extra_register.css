@@ -7,7 +7,10 @@ html, body {
 
 body {
    font-family: var(--font-secondary);
-    background-color: var(--bg-main);
+    background-color: var(--bg-dot-color-main);
+    background-image: radial-gradient(var(--bg-dot-color) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+
     color: var(--text-main);
     display: flex;
     flex-direction: column;

@@ -7,7 +7,10 @@ html, body {
 
 /* Garantia de fundo escuro no body no modo escuro */
 body {
-  background-color: var(--bg-main);
+  background-color: var(--bg-dot-color-main);
+  background-image: radial-gradient(var(--bg-dot-color) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+
   color: var(--text-main);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -31,6 +34,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  background-color: var(--bg-card);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard__user {

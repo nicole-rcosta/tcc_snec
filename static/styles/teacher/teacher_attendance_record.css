@@ -45,6 +45,7 @@ body {
   height: 6px;
   border-radius: 4px;
   overflow: hidden;
+  background-color: var(--color-green-light);
 }
 
 .progress--step-2 .progress-bar {
@@ -225,7 +226,7 @@ body {
 }
 
 .activities__button--back {
-  background-color: #E2E8F0;
+  background-color: var(--input-color);
   color: var(--color-blue);
   border: none;
   padding: 12px 28px;
@@ -233,6 +234,18 @@ body {
   font-weight: 700;
   border-radius: 10px;
   cursor: pointer;
+  transition: 0.3s;
+}
+.activities__button--back:hover{
+  background-color: var(--input-color-hover);
+}
+
+
+[data-theme='dark'] .activities__button--back{
+  background-color: var(--input-color);
+}
+[data-theme='dark'] .activities__button--back:hover{
+  background-color: var(--input-color-hover);
 }
 
 .activities__button--continue {

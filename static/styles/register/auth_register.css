@@ -16,7 +16,7 @@ body {
   overflow-x: hidden;
   padding: 20px;
   background-color: #EEEFFA;
-  background-image: radial-gradient(rgb(from var(--color-blue, #5967D9) r g b / 0.2) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(var(--bg-dot-color) 1.5px, transparent 1.5px);
   background-size: 24px 24px;
 }
 
@@ -182,6 +182,11 @@ body {
   text-decoration: underline;
 }
 
+.register__message-error{
+    text-align: center;
+    color: var(--color-red);
+    margin: 5px;
+}
 
 @media (max-width: 599px) {
   .login--card {

@@ -129,6 +129,10 @@ body {
   transform: scale(0.98);
 }
 
+.admin__message-error{
+    text-align: center;
+    color: var(--color-red);
+}
 
 @media (max-width: 600px) {
   .admin-confirm {

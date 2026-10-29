@@ -11,9 +11,8 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
         senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
 
         if not validar_cpf(cpf):
-            {"sucesso": False, "mensagem": "CPF inválido."}
             print("cpf invalido")
-            return False
+            return {"sucesso": False, "mensagem": "CPF inválido."}
 
         conexao, cursor = conectar()
         
@@ -30,7 +29,7 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
         print(f"Erro ao cadastrar usuário: {erro}")
         if conexao:
             conexao.rollback()
-        return False
+        return {"sucesso": False, "mensagem": "Erro interno no servidor."}
 
     finally:
         if cursor:
@@ -53,23 +52,23 @@ def logar(cpf: str, senha: str) -> dict:
         """
 
         cursor.execute(sql, (cpf,))
-        resultado = cursor.fetchone()
+        usuario = cursor.fetchone()
 
-        if not resultado:
+        if not usuario:
             print("Usuário não encontrado.")
-            return {"sucesso": False, "mensagem": "CPF ou senha incorretos."}
+            return {"sucesso": False, "mensagem": "Usuário não encontrado. Cadastre-se!"}
 
-        id_usuario = resultado['id_usuario']
-        nome_usuario = resultado['nome_usuario']
-        cargo = resultado['cargo']
-        senha_hash_banco = resultado['senha']
-        status_result = resultado['status']
+        id_usuario = usuario['id_usuario']
+        nome_usuario = usuario['nome_usuario']
+        cargo = usuario['cargo']
+        senha_hash_banco = usuario['senha']
+        status_result = usuario['status']
 
         if status_result != "aprovado":
             print("Cadastro ainda pendente de aprovação pelo Administrador.")
             return {
                 "sucesso": False, 
-                "mensagem": "Seu cadastro está pendente de aprovação pelo Administrador."
+                "mensagem": "Aguarde a aprovação do administrador para efetivar o seu cadastro."
             }
 
         senha_bytes = senha.encode('utf-8')

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, jsonify, flash, url_for, flash
+from flask import Flask, render_template, request, redirect, session, jsonify, url_for, flash
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
 from model.usuarios import cadastrar, logar, verificar_email, atualizar_senha, cadastrar
 from static.utils.verification_password import verificar_senha_mestra as vsm
@@ -11,9 +11,8 @@ from model.teacher_attendance_record import buscar_alunos, alunos_presentes, sal
 from model.adm_access import buscar_adm, buscar_usuario_pendente, rejeitar_usuario, aprovar_usuario
 import secrets
 import time
-import smtplib
-from email.message import EmailMessage
 import pandas
+from static.utils.send_email import enviar_email
 from model.inserts_csv import inserir_excel_bcd
 
 app = Flask(__name__)
@@ -48,7 +47,14 @@ def logar_usuario():
             return render_template("/adm/admin_item_register.html")
         return render_template()
     else:
-        return redirect("/cadastro")
+        print(resultado['mensagem'])
+        if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.':
+            return render_template("login/auth_login.html", erro = resultado['mensagem'])
+        elif resultado['mensagem'] == "Usuário não encontrado. Cadastre-se!":
+            return redirect("/cadastro")
+        else:
+            pass
+            ######################################### ERRO INTERNO -> EXIBIR MODAL
 
 @app.route("/cadastro")
 def pagina_cadastro():
@@ -61,13 +67,17 @@ def cadastrar_usuario():
     cargo = request.form.get("register")
     senha = request.form.get("password")
     status = "pendente"
-    print(cpf)
 
-    if cadastrar(nome, email, cargo, senha, cpf, status):
+    cadastro_resp = cadastrar(nome, email, cargo, senha, cpf, status)
+
+    if cadastro_resp['sucesso']:
         return render_template("/login/auth_login.html")
-        
     else:
-        return redirect("/cadastro")
+        if cadastro_resp['mensagem'] == "CPF inválido.":
+            return render_template("/register/auth_register.html", erro = cadastro_resp['mensagem'])
+        else:
+            return redirect("/cadastro")
+            ######################################### ERRO INTERNO -> EXIBIR MODAL
     
 # ---------------------------
 # Paginas de Administrador
@@ -233,8 +243,11 @@ def pagina_confirmar_painel():
 def verificar_adm():
     id_usuario = session.get("usuario")["id"]
     senha = request.form.get("password")
-    if buscar_adm(id_usuario, senha).get("sucesso"):
+    busca_adm_resp = buscar_adm(id_usuario, senha)
+    if busca_adm_resp.get("sucesso"):
         return redirect("/adm/adm_panel")
+    elif busca_adm_resp.get("mensagem") == "Senha incorreta!":
+        return render_template("adm/admin_confirm.html", erro = busca_adm_resp.get("mensagem"))
     else:
         return redirect("/adm/conf_panel")
 
@@ -265,6 +278,9 @@ def pagina_dashboard():
     
     # Pega o nome do usuário da sessão ou define um padrão
     nome_usuario = session.get("usuario_nome", "Nutricionista")
+
+    if dados.get("sucesso") == False:
+        return render_template("nutri/nutritionist_dashboard.html", erro = dados.get("mensagem"))
 
     # Renderiza o HTML passando todas as variáveis necessárias
     return render_template(
@@ -409,45 +425,8 @@ def receber_email():
 
     # se existir segue ess logica:
     
-    # Dados da conta
-    EMAIL_REMETENTE = "pablolorenzomoralez@gmail.com"
-    # tomar cuidado com isso
-    SENHA_APP = "mtls ntmg kxxn aquu" 
-    DESTINATARIO = email
-
-    email = EmailMessage()
-    email["Subject"] = "Código de Recuperação de senha"
-    email["From"] = EMAIL_REMETENTE
-    email["To"] = DESTINATARIO
-
-    email.set_content(f'''
-    Confirme seu e-mail
-
-    Use este código no snec pra confirmar que este e-mail é seu:
-
-    {codigo}
-
-    ''')
-
-    # Conectando ao Gmail e enviando
-
-    try:
-        with smtplib.SMTP("smtp.gmail.com", 587, timeout=3) as servidor:
-            servidor.starttls()
-            servidor.login(EMAIL_REMETENTE, SENHA_APP)
-
-            print("Enviando e-mail...", flush=True)
-            servidor.send_message(email)
-
-            print("E-mail enviado com sucesso!", flush=True)
-
-    except (smtplib.SMTPException, TimeoutError, OSError) as erro:
-        print(f"Envio não confirmado: {erro}", flush=True)
-
-    finally:
-        print("Programa encerrado.", flush=True)
-        
-        return  render_template("password/auth_password_insert.html")
+    if enviar_email(email, codigo):
+        return render_template("password/auth_password_insert.html")
 
 #página onde o usuário informa o código
 @app.route("/password_recover/code", methods=["GET"])

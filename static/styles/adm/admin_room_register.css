@@ -5,7 +5,6 @@ html, body {
   scrollbar-width: none; 
 }
 
-
 body {
   font-family: var(--font-secondary);
   background-color: var(--bg-main);
@@ -16,6 +15,9 @@ body {
   align-items: center;
 }
 
+/* ==========================================================================
+   CONTAINER PRINCIPAL (Ampliado para ocupar mais espaço no PC e Tablet)
+   ========================================================================== */
 .admin-room {
   background-color: var(--bg-card);
   color: var(--text-main);
@@ -24,14 +26,14 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  padding: 2.5rem 2.5rem; 
+  padding: 2.5rem 3rem; 
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
   border: none;
   width: 100%;
-  max-width: 680px;
+  max-width: 1050px; /* Aumentado consideravelmente para ocupar a tela */
   box-sizing: border-box;
   margin: 2rem 1rem;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, max-width 0.3s ease;
 }
 
 .admin-room__navigation {
@@ -60,7 +62,7 @@ body {
 }
 
 .admin-room__title {
-  font-size: 1.75rem;
+  font-size: 1.85rem;
   font-weight: 700;
   color: var(--color-blue);
   margin-top: 0;
@@ -68,6 +70,9 @@ body {
   text-align: center;
 }
 
+/* ==========================================================================
+   FORMULÁRIO DE CADASTRO
+   ========================================================================== */
 .admin-room__form {
   display: flex;
   flex-direction: column;
@@ -79,8 +84,8 @@ body {
 
 .admin-room__form-group {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
   width: 100%;
 }
 
@@ -99,8 +104,8 @@ body {
 
 .admin-room__input {
   width: 100%;
-  height: 42px;
-  background-color:var(--input-color);
+  height: 46px;
+  background-color: var(--input-color);
   border: none;
   border-radius: 12px;
   padding: 0 1rem;
@@ -133,9 +138,9 @@ body {
 .admin-room__button--submit {
   background-color: var(--color-green);
   color: #FFFFFF;
-  font-size: 0.95rem;
-  padding: 0.6rem 2.5rem;
-  min-height: 40px;
+  font-size: 1rem;
+  padding: 0.75rem 3rem;
+  min-height: 44px;
   box-shadow: 0 4px 10px color-mix(in srgb, var(--color-green) 30%, transparent);
 }
 
@@ -151,9 +156,9 @@ body {
 .admin-room__button--delete {
   background-color: color-mix(in srgb, var(--color-delete) 12%, transparent);
   color: var(--color-delete);
-  padding: 0.5rem 0.65rem;
+  padding: 0.55rem 0.75rem;
   font-size: 1.1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -164,11 +169,13 @@ body {
   color: #FFFFFF;
 }
 
-/* Seção de Listagem */
+/* ==========================================================================
+   SEÇÃO DE LISTAGEM (Com o fundo Laranja suave)
+   ========================================================================== */
 .admin-room__list-section {
-  background-color: color-mix(in srgb, var(--color-orange) 6%, var(--bg-card));
-  padding: 1.5rem;
-  border-radius: 16px;
+  background-color: color-mix(in srgb, var(--color-orange) 8%, var(--bg-card));
+  padding: 2rem;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -183,44 +190,63 @@ body {
 }
 
 .admin-room__list-title {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: var(--color-blue);
   font-weight: 700;
   text-align: center;
-  margin: 0;
+  margin: 0 0 0.5rem 0;
 }
 
-/* Tabela */
+/* ==========================================================================
+   TABELA UNIFICADA (PC e Tablet acima de 600px com Camada Branca)
+   ========================================================================== */
 .admin-room__table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Espaçamento entre as linhas brancas */
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .admin-room__table-header .admin-room__table-cell {
-  padding: 0.75rem 0.5rem;
+  padding: 0.6rem 1rem;
   color: var(--color-blue);
   font-weight: 700;
-  border-bottom: 2px solid color-mix(in srgb, var(--color-blue) 25%, transparent);
+  border: none;
 }
 
+/* Camada branca aplicada nas linhas da tabela (PC e Tablet) */
 .admin-room__table-body .admin-room__table-row {
-  border-bottom: 1px solid color-mix(in srgb, var(--text-main) 12%, transparent);
+  background-color: var(--bg-card, #FFFFFF);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.admin-room__table-body .admin-room__table-row:last-child {
-  border-bottom: none;
+.admin-room__table-body .admin-room__table-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* Arredondamento dos cantos das linhas */
+.admin-room__table-body .admin-room__table-row td:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.admin-room__table-body .admin-room__table-row td:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .admin-room__table-cell {
-  padding: 0.75rem 0.5rem;
+  padding: 0.95rem 1rem;
   color: var(--text-main);
   vertical-align: middle;
 }
 
 .admin-room__table-cell--class {
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--color-blue);
 }
 
 .admin-room__table-cell--period,
@@ -228,7 +254,20 @@ body {
   color: var(--text-secondary);
 }
 
-@media (max-width: 768px) {
+/* ==========================================================================
+   RESPONSIVIDADE 
+   ========================================================================== */
+
+/* Ajuste específico para Tablet (601px até 1024px) */
+@media (max-width: 1024px) and (min-width: 601px) {
+  .admin-room {
+    max-width: 90%; /* Garante que aproveite bem a tela do tablet */
+    padding: 2rem;
+  }
+}
+
+/* Mobile apenas para smartphones (Abaixo de 600px) */
+@media (max-width: 600px) {
   .admin-room {
     padding: 1.5rem 1rem;
     margin: 1rem 0.5rem;
@@ -240,6 +279,10 @@ body {
 
   .admin-room__list-section {
     padding: 1rem;
+  }
+
+  .admin-room__table {
+    border-spacing: 0;
   }
 
   .admin-room__table-header {
@@ -257,18 +300,22 @@ body {
 
   .admin-room__table-body .admin-room__table-row {
     background-color: var(--bg-card);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 0.8rem 1rem;
     margin-bottom: 0.75rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+
+  .admin-room__table-body .admin-room__table-row td:first-child,
+  .admin-room__table-body .admin-room__table-row td:last-child {
+    border-radius: 0;
   }
 
   .admin-room__table-cell {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 0.55rem 0;
     border-bottom: 1px dashed color-mix(in srgb, var(--text-main) 15%, transparent);
     text-align: right;
   }

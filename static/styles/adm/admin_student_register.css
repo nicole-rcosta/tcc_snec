@@ -6,314 +6,368 @@ html, body {
 }
 
 body {
-    font-family: var(--font-secondary);
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  font-family: var(--font-secondary);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+/* ==========================================================================
+   CONTAINER PRINCIPAL (Ampliado para ocupar mais espaço no PC e Tablet)
+   ========================================================================== */
 .admin-student {
-    background-color: var(--bg-card);
-    color: var(--text-secondary);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    padding: 2.5rem 2.5rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--bg-card);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 1050px;
+  box-sizing: border-box;
+  margin: 2rem 1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, max-width 0.3s ease;
 }
 
 [data-theme="dark"] .admin-student {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Navegação */
 .admin-student__navigation {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .admin-student__back-button {
-    background: none;
-    border: none;
-    padding: 0.5rem;
-    cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
 }
 
 .admin-student__import-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--color-blue);
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-blue);
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  gap: 6px;
+  font-size: 1rem;
+  transition: opacity 0.2s ease;
+}
+
+.admin-student__import-button:hover {
+  opacity: 0.8;
 }
 
 .admin-student__back-icon {
-    font-size: 1.75rem;
-    color: var(--color-orange);
-    transition: transform 0.2s, filter 0.2s;
+  font-size: 1.75rem;
+  color: var(--color-orange);
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.admin-student__import-icon{
-    color: var(--color-blue);
-    font-size: 1.50rem;
+.admin-student__import-icon {
+  color: var(--color-blue);
+  font-size: 1.35rem;
 }
 
 .admin-student__back-button:hover .admin-student__back-icon {
-    filter: brightness(0.9);
-    transform: translateX(-3px);
+  filter: brightness(0.9);
+  transform: translateX(-3px);
 }
 
 /* Título */
 .admin-student__title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--color-blue);
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    text-align: center;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--color-blue);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-/* Formulário */
+/* ==========================================================================
+   FORMULÁRIO DE CADASTRO
+   ========================================================================== */
 .admin-student__form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    width: 100%;
-    margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 2.5rem;
 }
 
 .admin-student__form-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
 }
 
 .admin-student__field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .admin-student__label {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-blue);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-blue);
 }
 
 .admin-student__input {
-    width: 100%;
-    height: 42px;
-    background-color: var(--input-color);
-    border: 1px solid transparent;
-    border-radius: 12px;
-    padding: 0 1rem;
-    font-size: 1rem;
-    color: var(--text-main);
-    box-sizing: border-box;
-    outline: none;
-    transition: box-shadow 0.2s, background-color 0.2s, border-color 0.2s;
+  width: 100%;
+  height: 46px;
+  background-color: var(--input-color);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 0 1rem;
+  font-size: 1rem;
+  color: var(--text-main);
+  box-sizing: border-box;
+  outline: none;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .admin-student__input:focus {
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-blue) 50%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-blue) 50%, transparent);
+  background-color: var(--bg-card);
 }
 
 /* Botões */
 .admin-student__button {
-    border: none;
-    border-radius: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s, filter 0.2s, transform 0.1s, box-shadow 0.2s;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, filter 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
 .admin-student__button--submit {
-    background-color: var(--color-green);
-    color: #FFFFFF;
-    font-size: 0.95rem;
-    padding: 0.6rem 2.5rem;
-    min-height: 40px;
-    box-shadow: 0 4px 10px color-mix(in srgb, var(--color-green) 30%, transparent);
+  background-color: var(--color-green);
+  color: #FFFFFF;
+  font-size: 1rem;
+  padding: 0.75rem 3rem;
+  min-height: 44px;
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--color-green) 30%, transparent);
 }
 
 .admin-student__button--submit:hover {
-    filter: brightness(0.95);
-    box-shadow: 0 6px 14px color-mix(in srgb, var(--color-green) 40%, transparent);
+  filter: brightness(0.95);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--color-green) 40%, transparent);
 }
 
 .admin-student__button--submit:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .admin-student__button--delete {
-    background-color: color-mix(in srgb, var(--color-delete, #DC3545) 12%, transparent);
-    color: var(--color-delete, #DC3545);
-    padding: 0.5rem 0.65rem;
-    font-size: 1.1rem;
-    border-radius: 6px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  background-color: color-mix(in srgb, var(--color-delete, #DC3545) 12%, transparent);
+  color: var(--color-delete, #DC3545);
+  padding: 0.55rem 0.75rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .admin-student__button--delete:hover {
-    background-color: var(--color-delete, #DC3545);
-    color: #FFFFFF;
+  background-color: var(--color-delete, #DC3545);
+  color: #FFFFFF;
 }
 
-/* Seção de listagem */
+/* ==========================================================================
+   SEÇÃO DE LISTAGEM (Com fundo Laranja suave)
+   ========================================================================== */
 .admin-student__list-section {
-    background-color: color-mix(in srgb, var(--color-orange) 8%, var(--bg-card));
-    padding: 1.5rem;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    width: 100%;
-    box-sizing: border-box;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+  background-color: color-mix(in srgb, var(--color-orange) 8%, var(--bg-card));
+  padding: 2rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Fundo neutro e sem tom de laranja no modo escuro */
 [data-theme="dark"] .admin-student__list-section {
-    background-color: color-mix(in srgb, var(--text-main) 3%, var(--bg-card));
-    border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: color-mix(in srgb, var(--text-main) 3%, var(--bg-card));
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .admin-student__list-title {
-    font-size: 1.3rem;
-    color: var(--color-blue);
-    font-weight: 700;
-    text-align: center;
-    margin: 0;
+  font-size: 1.4rem;
+  color: var(--color-blue);
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 0.5rem 0;
 }
 
-/* Tabela */
+/* ==========================================================================
+   TABELA UNIFICADA (PC e Tablet acima de 650px com Camada Branca)
+   ========================================================================== */
 .admin-student__table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-    font-size: 0.9rem;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  text-align: center;
+  font-size: 0.95rem;
 }
 
 .admin-student__table-header .admin-student__table-cell {
-    padding: 0.75rem 0.5rem;
-    color: var(--color-blue);
-    font-weight: 700;
-    border-bottom: 2px solid color-mix(in srgb, var(--color-blue) 30%, transparent);
+  padding: 0.6rem 1rem;
+  color: var(--color-blue);
+  font-weight: 700;
+  border: none;
 }
 
 .admin-student__table-body .admin-student__table-row {
-    border-bottom: 1px solid color-mix(in srgb, var(--text-secondary) 20%, transparent);
+  background-color: var(--bg-card, #FFFFFF);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.admin-student__table-body .admin-student__table-row:last-child {
-    border-bottom: none;
+.admin-student__table-body .admin-student__table-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.admin-student__table-body .admin-student__table-row td:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.admin-student__table-body .admin-student__table-row td:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .admin-student__table-cell {
-    padding: 0.75rem 0.5rem;
-    color: var(--text-main);
-    vertical-align: middle;
+  padding: 0.95rem 1rem;
+  color: var(--text-main);
+  vertical-align: middle;
 }
 
 .admin-student__table-cell--name {
-    font-weight: 600;
-    text-align: left;
-    color: var(--text-main);
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-blue);
 }
 
 .admin-student__table-cell--rm,
 .admin-student__table-cell--class {
-    color: var(--text-secondary);
+  color: var(--text-secondary);
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .admin-student__button--submit {
-        width: 100%;
-    }
+/* ==========================================================================
+   RESPONSIVIDADE UNIFICADA
+   ========================================================================== */
 
-    .admin-student__list-section {
-        padding: 1rem;
-    }
-
-    .admin-student__table-header {
-        display: none;
-    }
-
-    .admin-student__table,
-    .admin-student__table-body,
-    .admin-student__table-row,
-    .admin-student__table-cell {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .admin-student__table-body .admin-student__table-row {
-        background-color: var(--bg-card);
-        border-radius: 12px;
-        padding: 0.8rem 1rem;
-        margin-bottom: 0.75rem;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-        border: 1px solid color-mix(in srgb, var(--text-secondary) 20%, transparent);
-    }
-
-    [data-theme="dark"] .admin-student__table-body .admin-student__table-row {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .admin-student__table-cell {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem 0;
-        border-bottom: 1px dashed color-mix(in srgb, var(--text-secondary) 20%, transparent);
-        text-align: right;
-    }
-
-    .admin-student__table-cell:last-child {
-        border-bottom: none;
-    }
-
-    .admin-student__table-cell::before {
-        content: attr(data-label);
-        font-weight: 700;
-        color: var(--color-blue);
-        font-size: 0.85rem;
-        text-transform: uppercase;
-    }
-
-    .admin-student__table-cell--actions::before {
-        content: "Ações";
-    }
+/* Tablet (651px até 1024px) */
+@media (max-width: 1024px) and (min-width: 651px) {
+  .admin-student {
+    max-width: 90%;
+    padding: 2rem;
+  }
 }
 
+/* Mobile apenas para smartphones (Abaixo de 650px) */
+@media (max-width: 650px) {
+  .admin-student {
+    padding: 1.5rem 1rem;
+    margin: 1rem 0.5rem;
+  }
 
+  .admin-student__form-group {
+    grid-template-columns: 1fr;
+  }
 
+  .admin-student__button--submit {
+    width: 100%;
+  }
 
+  .admin-student__list-section {
+    padding: 1rem;
+  }
 
+  .admin-student__table {
+    border-spacing: 0;
+  }
 
+  .admin-student__table-header {
+    display: none;
+  }
 
+  .admin-student__table,
+  .admin-student__table-body,
+  .admin-student__table-row,
+  .admin-student__table-cell {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
+  .admin-student__table-body .admin-student__table-row {
+    background-color: var(--bg-card);
+    border-radius: 14px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    border: 1px solid color-mix(in srgb, var(--text-secondary) 20%, transparent);
+  }
 
+  [data-theme="dark"] .admin-student__table-body .admin-student__table-row {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .admin-student__table-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.55rem 0;
+    border-bottom: 1px dashed color-mix(in srgb, var(--text-secondary) 20%, transparent);
+    text-align: right;
+  }
+
+  .admin-student__table-cell:last-child {
+    border-bottom: none;
+  }
+
+  .admin-student__table-cell::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--color-blue);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+  }
+
+  .admin-student__table-cell--actions::before {
+    content: "Ações";
+  }
+}
+
+/* ==========================================================================
+   MODAL DE IMPORTAÇÃO (Excel / CSV)
+   ========================================================================== */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -325,21 +379,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
   z-index: 999;
-
   opacity: 0;
   visibility: hidden;
-
   transition: opacity 0.5s ease, visibility 0.3s ease;
 }
-
 
 .modal-overlay.ativo {
   opacity: 1;
   visibility: visible;
 }
-
 
 .modal-content {
   padding: 20px;
@@ -352,147 +401,138 @@ body {
   transform: translateY(0);
 }
 
-.modal-backbutton{
-    font-size: 1.75rem;
-    background-color: transparent;
-    border: none;
-    color: var(--color-orange);
-    
-}
-.modal-backbutton:hover{
-    cursor: pointer;
+.modal-backbutton {
+  font-size: 1.75rem;
+  background-color: transparent;
+  border: none;
+  color: var(--color-orange);
 }
 
+.modal-backbutton:hover {
+  cursor: pointer;
+}
 
-.modal-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;    
-    margin-bottom: 25px;
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;    
+  margin-bottom: 25px;
 }
 
 .modal-import {
-    background-color: #ffffff;
-    padding: 35px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    max-width: 650px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  background-color: #ffffff;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  max-width: 650px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
-
 
 .modal-import--title {
-    color: #5B61B9;
-    font-size: 24px;
-    font-weight: 700;
-    text-align: center;
+  color: #5B61B9;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
 }
-
 
 .modal-import__box {
-    background-color: #FFF3EE; 
-    padding: 25px;
-    border-radius: 16px;
+  background-color: #FFF3EE; 
+  padding: 25px;
+  border-radius: 16px;
 }
 
-
 .import__box--text {
-    color: #5B61B9;
-    font-size: 16px;
-    line-height: 1.6;
-    margin: 0 0 25px 0;
+  color: #5B61B9;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 25px 0;
 }
 
 .import__box--text a {
-    color: #FF6B35;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.2s;
+  color: #FF6B35;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
 }
 
 .import__box--text a:hover {
-    color: #e0531f;
-    text-decoration: underline;
+  color: #e0531f;
+  text-decoration: underline;
 }
 
-
 .modal__import--button-container {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .button-container__excel,
 .button-container__csv {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #ffffff;
-    padding: 15px;
-    border-radius: 12px;
-    border: 1px solid #E2E8F0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #E2E8F0;
 }
 
 .button-container__csv-input {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
-
 .botao-arquivo {
-    background-color: #5B61B9;
-    color: #ffffff;
-    padding: 9px 16px;
-    cursor: pointer;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: 600;
-    text-align: center;
-    width: 100%;
-    transition: background-color 0.2s;
-    user-select: none;
+  background-color: #5B61B9;
+  color: #ffffff;
+  padding: 9px 16px;
+  cursor: pointer;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  transition: background-color 0.2s;
+  user-select: none;
 }
 
 .botao-arquivo:hover {
-    background-color: #484c96;
+  background-color: #484c96;
 }
-
 
 #nome-arquivo-excel,
 #nome-arquivo-csv {
-    font-size: 12px;
-    color: #777777;
-    text-align: center;
-    word-break: break-all;
+  font-size: 12px;
+  color: #777777;
+  text-align: center;
+  word-break: break-all;
 }
 
-
 .modal__import--buttons {
-    background-color: #4EAD8A;
-    color: #ffffff;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    transition: all 0.2s ease;
+  background-color: #4EAD8A;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
 }
 
 .modal__import--buttons:hover {
-    background-color: #3e9173;
-    transform: translateY(-1px);
+  background-color: #3e9173;
+  transform: translateY(-1px);
 }
 
-
 @media (max-width: 580px) {
-    .modal__import--button-container {
-        flex-direction: column;
-    }
+  .modal__import--button-container {
+    flex-direction: column;
+  }
 }

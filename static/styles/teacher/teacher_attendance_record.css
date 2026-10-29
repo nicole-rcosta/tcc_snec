@@ -46,16 +46,12 @@ body {
   margin-bottom: 6px;
 }
 
-.progress-container {
-  max-width: 50%;
-}
-
 .progress-bar {
-  width: 33.33%;
+  width: 180px;
   height: 8px;
-  background-color: rgb(from var(--color-green) r g b / 0.15);
-  border-radius: 10px;
+  border-radius: 4px;
   overflow: hidden;
+  background-color: var(--color-green-light);
 }
 
 .progress--step-2 {
@@ -124,7 +120,7 @@ body {
 
 .activities__section--counter-shift {
   background-color: #EFF2F9;
-  padding: 20px;
+  padding-top: 20px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -173,7 +169,7 @@ body {
 }
 
 .activities__table-row td {
-  padding: 10px 6px;
+  padding: 10px 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   color: var(--text-main);
   vertical-align: middle;
@@ -277,7 +273,7 @@ body {
 }
 
 .activities__button--back {
-  background-color: var(--bg-dot-color-main);
+  background-color: var(--input-color);
   color: var(--color-blue);
   border: none;
   padding: 12px 28px;
@@ -285,6 +281,18 @@ body {
   font-weight: 700;
   border-radius: 10px;
   cursor: pointer;
+  transition:   0.3s;
+}
+.activities__button--back:hover{
+  background-color: var(--input-color-hover);
+}
+
+
+[data-theme='dark'] .activities__button--back{
+  background-color: var(--input-color);
+}
+[data-theme='dark'] .activities__button--back:hover{
+  background-color: var(--input-color-hover);
 }
 
 .activities__button--continue {
@@ -298,6 +306,7 @@ body {
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(80, 102, 202, 0.25);
 }
+
 
 @media (max-width: 640px) {
   .activities {
@@ -442,6 +451,10 @@ body {
   background-color: var(--input-color);
 }
 
+[data-theme='dark'].modal-content {
+  background-color: var(--input-color-hover);
+}
+
 .modal-overlay.ativo .modal-content {
   transform: translateY(0);
 }
@@ -466,7 +479,7 @@ body {
 
 .progress--step-3 {
   width: 180px;
-  height: 6px;
+  height: 10px;
   background-color: color-mix(in srgb, var(--text-secondary) 20%, transparent);
   border-radius: 4px;
   overflow: hidden;

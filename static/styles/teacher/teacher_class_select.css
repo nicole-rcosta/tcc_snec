@@ -60,7 +60,7 @@ body {
 .progress-bar {
     width: 100%;
     height: 8px;
-    background-color: rgb(from var(--color-green) r g b / 0.15);
+    background-color: var(--color-green-light);
     border-radius: 10px;
     overflow: hidden;
 }
@@ -108,7 +108,7 @@ body {
 }
 
 .class-card button:hover {
-    background-color: rgb(from var(--color-blue) r g b / 0.2);
+    background-color: var(--input-color-hover);
 }
 
 .class-card button:active {
@@ -128,7 +128,11 @@ body {
     
 }
 
-
+.classes__message-error{
+    text-align: center;
+    color: var(--color-red);
+    grid-column: 1 / -1;
+}
 
 
 @media (min-width: 768px) {

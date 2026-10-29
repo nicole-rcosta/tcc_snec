@@ -4,6 +4,7 @@
   --color-green:  #5AAF90;
   --color-blue:   #5066CA;
   --bg-dot-color: rgba(89, 103, 217, 0.25);
+  --bg-dot-color-main: #EEEFFA;
   --color-red:   #ff0000;
   --color-delete: #DC3545;
   
@@ -26,7 +27,7 @@
   --color-yellow: #FBC754;
   --color-green:  #5AAF90;
   --color-blue:   #818CF8;;
-
+  --bg-dot-color-main: #222224;
   --bg-main: #121214;
   --bg-card: #1E1E24;
   --text-main: #F8F9FA;

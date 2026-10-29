@@ -7,7 +7,11 @@ html, body {
 
 
 body {
-  background-color: var(--bg-main);
+  background-color: var(--bg-dot-color-main);
+  background-image: radial-gradient(var(--bg-dot-color) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+
+
   color: var(--text-main);
   display: flex;
   flex-direction: column;
@@ -24,6 +28,15 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  
+  background-color: var(--bg-main);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  width: 100vw;
+    
+
 }
 
 
@@ -626,6 +639,9 @@ body {
   transform: scale(0.98);
 }
 
+.activities__table-cell--student{
+  color: var(--color-orange);
+}
 /* Responsividade */
 @media (max-width: 640px) {
   .confirmation {

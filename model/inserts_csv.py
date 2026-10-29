@@ -1,12 +1,10 @@
 import pandas
-import mysql.connector
 from database.conexao import conectar
-
+import mysql.connector
 
 def inserir_excel_bcd(arquivo):
     try:
-        extensao = arquivo.filename.rsplit('.', 1)[1].lower()
-
+        extensao =  arquivo.filename.rsplit('.', 1)[1].lower()
 
         if extensao == 'csv':
             arquivo.seek(0)
@@ -15,15 +13,11 @@ def inserir_excel_bcd(arquivo):
             dados = pandas.read_excel(arquivo)
 
 
-        # 1. REMOVE LINHAS COMPLETAMENTE VAZIAS DA PLANILHA
-        dados = dados.dropna(how='all')
+        dados = dados.dropna(how='all')  
 
-
-        # 2. BLOQUEIO DE PLANILHA EM BRANCO OU SÓ COM CABEÇALHO
         if dados.empty:
-            print("Planilha em branco ou sem registros válidos.")
+            print("Planinha em branco ou sem registros válidos")
             return False
-
 
         alunos = dados.to_dict('records')
         
@@ -32,21 +26,17 @@ def inserir_excel_bcd(arquivo):
 
         sql = "INSERT INTO tb_alunos (rm_aluno, nome_aluno, id_turma) VALUES "
 
-
         for aluno in alunos:
             if pandas.isna(aluno.get('rm')) or pandas.isna(aluno.get('nome')) or pandas.isna(aluno.get('turma')):
                 continue
 
+            sql = sql  + f"""(
+                                '{aluno['rm']}',
+                                '{aluno['nome']}',
+                                (SELECT id_turma FROM tb_turmas WHERE turma = '{aluno['turma']}')
+                            ),"""
 
-            sql += f"""(
-                '{aluno['rm']}',
-                '{aluno['nome']}',
-                (SELECT id_turma FROM tb_turmas WHERE turma = '{aluno['turma']}')
-            ),"""
-
-
-        # Se nenhuma linha válida foi processada, encerra sem executar SQL inválida
-        if sql.endswith("VALUES "):
+        if sql.endswith("VALUES "): 
             cursor.close()
             conexao.close()
             return False
@@ -54,17 +44,15 @@ def inserir_excel_bcd(arquivo):
 
         sql = sql.rstrip(',') + ';'
 
-
-        
+        # Executa os inserts
         cursor.execute(sql)
+        # Salva as alterações
         conexao.commit()
     
         cursor.close()
         conexao.close()
 
-
         return True
-
 
     except (mysql.connector.errors.IntegrityError, mysql.connector.errors.ProgrammingError, pandas.errors.EmptyDataError) as e:
         print(f"Erro ao processar planilha/banco: {e}")

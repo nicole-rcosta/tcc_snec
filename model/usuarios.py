@@ -14,11 +14,21 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
                 WHERE cpf = %s;
             """
         cursor.execute(sql, (cpf, ))
-        user = cursor.fetchone()
+        ver_cpf = cursor.fetchone()
 
-        if user:
+        sql = """
+                SELECT * FROM tb_usuarios
+                WHERE email = %s;
+            """
+        cursor.execute(sql, (email, ))
+        ver_email = cursor.fetchone()
+
+        if ver_cpf:
             print("Usuário já cadastrado")
-            return {"sucesso": False, "mensagem": "Usuário já cadastrado."}
+            return {"sucesso": False, "mensagem": "CPF já cadastrado."}
+        elif ver_email:
+            print("Este email ja pertence a um usuario.")
+            return {"sucesso": False, "mensagem": "Este email já pertence a um usuario."}
         else:
             senha_bytes = senha.encode('utf-8')
             salt = bcrypt.gensalt()
@@ -35,7 +45,7 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
             
             cursor.execute(sql, (nome, email, cargo, senha_hash, cpf, status))
             conexao.commit()
-            return True
+            return {"sucesso": True, "mensagem": "Usuário cadastrado."}
 
     except Exception as erro:
         print(f"Erro ao cadastrar usuário: {erro}")

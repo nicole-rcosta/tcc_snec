@@ -1,14 +1,23 @@
 import smtplib
 from email.message import EmailMessage
+import os
 from flask import render_template
+from dotenv import load_dotenv
+
+# Carrega o .env para o sistema
+load_dotenv()
+
+# Recupera os valores usando os.getenv()
+email_envia = os.getenv("EMAIL")
+app_senha = os.getenv("APP_PASSWORD")
 
 # Dados da conta
 
 def enviar_email(email, codigo):
 
-    EMAIL_REMETENTE = "pablolorenzomoralez@gmail.com"
+    EMAIL_REMETENTE = email_envia
     # tomar cuidado com isso
-    SENHA_APP = "mtls ntmg kxxn aquu" 
+    SENHA_APP = app_senha
     DESTINATARIO = email
 
     email = EmailMessage()
@@ -24,6 +33,12 @@ def enviar_email(email, codigo):
     {codigo}
 
     ''')
+
+    # 2. Renderiza o template HTML do Flask passando a variável 'codigo'
+    html_conteudo = render_template("email/email_codigo.html", codigo=codigo)
+
+    # 3. Adiciona a versão HTML personalizada
+    email.add_alternative(html_conteudo, subtype="html")
 
     # Conectando ao Gmail e enviando
 

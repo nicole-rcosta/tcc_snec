@@ -4,9 +4,9 @@ from model.usuarios import cadastrar, logar, verificar_email, atualizar_senha, c
 from static.utils.verification_password import verificar_senha_mestra as vsm
 from model.class_register import recuperar_salas, adicionar_sala, deletar_sala
 from model.students_register import recuperar_alunos, adicionar_aluno, deletar_aluno
-from model.nutri_dashboard import recuperar_dados_dashboard
+from model.nutri_dashboard import recuperar_dados_dashboard, buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
 from model.students_extra_register import recuperar_alunos_atividade, adicionar_aluno_atividade, excluir_aluno_atividade
-from model.nutritionist_report import buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
+
 from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos
 from model.adm_access import buscar_adm, buscar_usuario_pendente, rejeitar_usuario, aprovar_usuario
 import secrets
@@ -289,15 +289,15 @@ def pagina_dashboard():
     # Pega o nome do usuário da sessão ou define um padrão
     nome_usuario = session.get("usuario_nome", "Nutricionista")
 
-    if dados.get("sucesso"):
+    if dados and dados.get("sucesso"):
         # Renderiza o HTML passando todas as variáveis necessárias
         return render_template(
             "nutri/nutritionist_dashboard.html",
             usuario=nome_usuario,
-            turmas=dados["turmas"],
-            total_lanches=dados["total_lanches"],
-            total_almocos=dados["total_almocos"],
-            todas_concluidas=dados["todas_concluidas"]
+            turmas=dados.get("turmas"),          
+            total_lanches=dados.get("total_lanches"),
+            total_almocos=dados.get("total_almocos"),
+            todas_concluidas=dados.get("todas_concluidas")
         )
     
     return render_template("nutri/nutritionist_dashboard.html", erro = dados.get("mensagem"))

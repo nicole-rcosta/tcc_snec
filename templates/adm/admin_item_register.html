@@ -16,7 +16,7 @@
 
     <main class="admin-panel">
         <section class="admin-panel__greeting">
-            <h1 class="admin-panel__user-title">Olá, Administrador(a)!</h1>
+            <h1 class="admin-panel__user-title" name="user_id">Olá, {{ session.usuario.nome_usuario if session.get('usuario') else 'Administrador(a)' }} !</h1>
             <h2 class="admin-panel__title">Cadastrar Itens:</h2>
         </section>
 

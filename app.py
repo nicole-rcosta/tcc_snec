@@ -24,6 +24,8 @@ app.secret_key = "snec_tcc_chave"
 @app.route("/login")
 def pagina_login():
     return render_template("login/auth_login.html")
+
+
 @app.route("/login/post", methods=["POST"])
 def logar_usuario():
     cpf = request.form.get("cpf-real")
@@ -83,7 +85,14 @@ def cadastrar_usuario():
 
 @app.route("/adm")
 def pagina_adm():
-    return render_template("/adm/admin_item_register.html")
+
+    usuario_id = session.get('usuario')
+    if not usuario_id or usuario_id.get('cargo') != 'adm':
+        return redirect("/login")
+
+    nome = usuario_id.get('usuario')['nome_usuario']
+
+    return render_template("/adm/admin_item_register.html", nome_usuario=nome)
 
 
 @app.route("/adm_register")

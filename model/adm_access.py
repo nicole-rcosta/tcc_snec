@@ -6,7 +6,7 @@ def buscar_adm(id_usuario, senha):
 
     try:
         sql = """
-            SELECT id_usuario, cargo, senha
+            SELECT id_usuario, nome_usuario, cargo, senha
             FROM db_snec.tb_usuarios
             WHERE id_usuario = %s;
         """

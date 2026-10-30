@@ -3,65 +3,76 @@ import datetime
 
 def recuperar_dados_dashboard():
     # Desestrutura a conexão e o cursor retornados por conectar()
-    conn, cursor = conectar()
+    conexao, cursor = conectar()
 
+    try:
     # Busca todas as turmas e verifica se há lançamento de lanche no dia atual
-    query_turmas = """
-        SELECT 
-            t.id_turma,
-            t.turma AS nome,
-            COALESCE(l.quantidade_alunos, 0) AS total_lanche,
-            CASE 
-                WHEN l.id_turma IS NOT NULL THEN 'concluded'
-                ELSE 'waiting'
-            END AS status
-        FROM tb_turmas t
-        LEFT JOIN tb_his_lanche l 
-            ON t.id_turma = l.id_turma 
-            AND l.data = CURRENT_DATE()
-        ORDER BY t.turma ASC;
-    """
-    cursor.execute(query_turmas)
-    turmas = cursor.fetchall()
+        query_turmas = """
+            SELECT 
+                tb_turmas.id_turma,
+                tb_turmas.turma AS nome,
+                COALESCE(tb_his_lanche.quantidade_alunos, 0) AS total_lanche,
+                CASE 
+                    WHEN tb_his_lanche.id_turma IS NOT NULL OR tb_his_almoco.rm_aluno IS NOT NULL THEN 'concluded'
+                    ELSE 'waiting'
+                END AS status
+            FROM tb_turmas 
+            LEFT JOIN tb_his_lanche 
+                ON tb_turmas.id_turma = tb_his_lanche.id_turma 
+                AND b_his_lanche.data = CURRENT_DATE()
+            LEFT JOIN tb_alunos 
+                    ON tb_turmas.id_turma = tb_alunos.id_turma
+            LEFT JOIN tb_his_almoco
+                        ON tb_alunos.rm_aluno = tb_his_almoco.rm_aluno
+                        AND tb_his_almoco.data = CURRENT_DATE()
+            GROUP BY 
+                tb_turmas.id_turma, 
+                    tb_turmas.turma, 
+                    tb_his_lanche.quantidade_alunos, 
+                    tb_his_lanche.id_turma
+            ORDER BY tb_turmas.turma ASC;
+        """
+        cursor.execute(query_turmas)
+        turmas = cursor.fetchall()
 
-    if not turmas:
-        return {"sucesso": False, "mensagem": "Nenhuma turma cadastrada"}
+        if not turmas:
+            return {"sucesso": False, "mensagem": "Nenhuma turma cadastrada"}
 
-    # Total de lanches somando as turmas que já enviaram contagem hoje
-    query_total_lanches = """
-        SELECT COALESCE(SUM(quantidade_alunos), 0) AS total
-        FROM tb_his_lanche
-        WHERE data = CURRENT_DATE();
-    """
-    cursor.execute(query_total_lanches)
-    resultado_lanche = cursor.fetchone()
-    total_lanches = resultado_lanche['total'] if resultado_lanche else 0
+        # Total de lanches somando as turmas que já enviaram contagem hoje
+        query_total_lanches = """
+            SELECT COALESCE(SUM(tb_his_lanche.quantidade_alunos), 0) AS total
+            FROM tb_his_lanche
+            WHERE tb_his_lanche.data = CURRENT_DATE();
+        """
+        cursor.execute(query_total_lanches)
+        resultado_lanche = cursor.fetchone()
+        total_lanches = resultado_lanche['total'] if resultado_lanche else 0
 
-    # Total de almoços (contagem dos alunos atendidos no dia)
-    query_total_almocos = """
-        SELECT COUNT(*) AS total
-        FROM tb_his_almoco
-        WHERE data = CURRENT_DATE();
-    """
-    cursor.execute(query_total_almocos)
-    resultado_almoco = cursor.fetchone()
-    total_almocos = resultado_almoco['total'] if resultado_almoco else 0
+        # Total de almoços (contagem dos alunos atendidos no dia)
+        query_total_almocos = """
+            SELECT COUNT(DISTINCT tb_his_almoco.rm_aluno) AS total
+            FROM tb_his_almoco
+            WHERE tb_his_almoco.data = CURRENT_DATE();
+        """
+        cursor.execute(query_total_almocos)
+        resultado_almoco = cursor.fetchone()
+        total_almocos = resultado_almoco['total'] if resultado_almoco else 0
 
-    # Sempre feche o cursor e a conexão ao finalizar
-    cursor.close()
-    conn.close()
 
-    # Define se todas as turmas cadastradas já tiveram a chamada concluída hoje
-    todas_concluidas = all(t['status'] == 'concluded' for t in turmas) if turmas else False
+        # Define se todas as turmas cadastradas já tiveram a chamada concluída hoje
+        todas_concluidas = all(t['status'] == 'concluded' for t in turmas) if turmas else False
 
-    return {
-        "sucesso": True,
-        "turmas": turmas,
-        "total_lanches": total_lanches,
-        "total_almocos": total_almocos,
-        "todas_concluidas": todas_concluidas
-    }
+        return {
+            "sucesso": True,
+            "turmas": turmas,
+            "total_lanches": total_lanches,
+            "total_almocos": total_almocos,
+            "todas_concluidas": todas_concluidas
+        }
 
+    finally:
+        cursor.close()
+        conexao.close()
 
 
 

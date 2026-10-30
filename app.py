@@ -68,7 +68,6 @@ def cadastrar_usuario():
     status = "pendente"
 
     cadastro_resp = cadastrar(nome, email, cargo, senha, cpf, status)
-
     if cadastro_resp['sucesso']:
         return render_template("/login/auth_login.html")
     else:

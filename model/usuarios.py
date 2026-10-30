@@ -35,7 +35,7 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
             
             cursor.execute(sql, (nome, email, cargo, senha_hash, cpf, status))
             conexao.commit()
-            return True
+            return {"sucesso": True, "mensagem": "Usuário cadastrado."}
 
     except Exception as erro:
         print(f"Erro ao cadastrar usuário: {erro}")

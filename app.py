@@ -71,7 +71,7 @@ def cadastrar_usuario():
     if cadastro_resp['sucesso']:
         return render_template("/login/auth_login.html")
     else:
-        if cadastro_resp['mensagem'] == "CPF inválido." or cadastro_resp['mensagem'] == "Usuário já cadastrado.":
+        if cadastro_resp['mensagem'] == "CPF inválido." or cadastro_resp['mensagem'] == "CPF já cadastrado." or cadastro_resp["mensagem"] == "Este email já pertence a um usuario.":
             return render_template("/register/auth_register.html", erro = cadastro_resp['mensagem'])
         else:
             return redirect("/cadastro")

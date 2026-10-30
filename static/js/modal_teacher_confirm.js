@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Pega a quantidade de alunos digitada
         const qtdAlunos = document.querySelector('#students-count').value;
+        if (qtdAlunos === '') {
+            qtdAlunos = 0;
+        }
         modalQtdAlunos.textContent = qtdAlunos;
 
         // Limpa a lista do modal antes de preencher
@@ -50,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const checkboxesMarcados = document.querySelectorAll('.activities__table-cell--check input[type="checkbox"]:checked');
 
         if (checkboxesMarcados.length === 0) {
-            modalListaAlunos.innerHTML = '<li>Nenhum aluno de contraturno selecionado.</li>';
+            modalListaAlunos.innerHTML = '<li style="color:var(--text-secondary); text-align: center;">Nenhum aluno de contraturno selecionado.</li>';
         } else {
             checkboxesMarcados.forEach(checkbox => {
                 // Sobe até a linha (tr) correspondente ao checkbox

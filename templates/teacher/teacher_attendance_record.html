@@ -28,7 +28,7 @@
 
       <div class="activities__field--students">
         <label class="activities__label--students" for="students-count">Quantos alunos vieram hoje?</label>
-        <input type="number" id="students-count" class="activities__input--students" value="{{ qnt_alunos }}" max="{{ qnt_alunos }}">
+        <input type="number" id="students-count" class="activities__input--students" value="{{ qnt_alunos.quantidade_alunos }}" max="{{ qnt_alunos.quantidade_alunos }}">
       </div>
 
       <hr class="divider">
@@ -66,10 +66,17 @@
                 </tr>
               {% endfor %}
             </tbody>
+            {% if erro %}
+            <tfoot>
+              <tr class="activities__table-row">
+                <td colspan="6" style="color:var(--text-secondary); text-align: center;">{{ erro }}</td>
+              </tr>
+            </tfoot>
+            {% endif %}
+
           </table>
         </div>
       </section>
-
 
       <div class="activities__actions">
         <a href="/teacher"><button class="activities__button--back" type="button">Voltar</button></a>

@@ -18,7 +18,6 @@ body {
     align-items: center;
 }
 
-
 .admin-student {
   background-color: var(--bg-card);
   color: var(--text-secondary);
@@ -38,9 +37,8 @@ body {
 
 [data-theme="dark"] .admin-student {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
 }
-
 
 .admin-student__navigation {
   width: 100%;
@@ -90,7 +88,6 @@ body {
   transform: translateX(-3px);
 }
 
-
 .admin-student__title {
   font-size: 1.85rem;
   font-weight: 700;
@@ -99,7 +96,6 @@ body {
   margin-bottom: 1.5rem;
   text-align: center;
 }
-
 
 .admin-student__form {
   display: flex;
@@ -149,7 +145,6 @@ body {
   background-color: var(--bg-card);
 }
 
-
 .admin-student__button {
   border: none;
   border-radius: 12px;
@@ -192,7 +187,6 @@ body {
   color: #FFFFFF;
 }
 
-
 .admin-student__list-section {
   background-color: color-mix(in srgb, var(--color-orange) 8%, var(--bg-card));
   padding: 2rem;
@@ -219,7 +213,6 @@ body {
   margin: 0 0 0.5rem 0;
 }
 
-
 .admin-student__table {
   width: 100%;
   border-collapse: separate;
@@ -236,7 +229,7 @@ body {
 }
 
 .admin-student__table-body .admin-student__table-row {
-  background-color: var(--bg-card, #FFFFFF);
+  background-color: var(--bg-card);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -264,7 +257,8 @@ body {
 
 .admin-student__table-cell--name {
   font-weight: 700;
-  text-align: center;
+  text-align: left; 
+  padding-left: 1.25rem;
   color: var(--color-blue);
 }
 
@@ -273,27 +267,18 @@ body {
   color: var(--text-secondary);
 }
 
-
-.admin-student__table-cell--name {
-  font-weight: 700;
-  text-align: left; 
-  padding-left: 1.25rem;
-  color: var(--color-blue);
-}
-
 .admin-student__table-header .admin-student__table-cell--name {
   text-align: left;
   padding-left: 1.25rem;
 }
 
-
+/* Responsividade Tabela */
 @media (max-width: 1024px) and (min-width: 651px) {
   .admin-student {
     max-width: 90%;
     padding: 2rem;
   }
 }
-
 
 @media (max-width: 650px) {
   .admin-student {
@@ -374,6 +359,9 @@ body {
   }
 }
 
+/* ==========================================================================
+   ESTILOS DO MODAL (Refatorado para Variáveis de Tema)
+   ========================================================================== */
 
 .modal-overlay {
   position: fixed;
@@ -381,7 +369,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(3px);
   display: flex;
   justify-content: center;
@@ -389,7 +377,11 @@ body {
   z-index: 999;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+[data-theme="dark"] .modal-overlay {
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .modal-overlay.ativo {
@@ -397,26 +389,18 @@ body {
   visibility: visible;
 }
 
-.modal-content {
-  padding: 20px;
-  border-radius: 8px;
-  transform: translateY(-20px);
-  transition: transform 0.5s ease;
-}
-
-.modal-overlay.ativo .modal-content {
-  transform: translateY(0);
-}
-
-.modal-backbutton {
-  font-size: 1.75rem;
-  background-color: transparent;
-  border: none;
-  color: var(--color-orange);
-}
-
-.modal-backbutton:hover {
-  cursor: pointer;
+.modal-import {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color);
+  max-width: 650px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .modal-header {
@@ -426,49 +410,58 @@ body {
   margin-bottom: 25px;
 }
 
-.modal-import {
-  background-color: #ffffff;
-  padding: 35px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  max-width: 650px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .modal-import--title {
-  color: #5B61B9;
+  color: var(--color-blue);
   font-size: 24px;
   font-weight: 700;
   text-align: center;
 }
 
+.modal-backbutton {
+  font-size: 1.75rem;
+  background-color: transparent;
+  border: none;
+  color: var(--color-orange);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.modal-backbutton:hover {
+  transform: scale(1.1);
+}
+
+/* Caixa interna com fundo adaptável */
 .modal-import__box {
-  background-color: #FFF3EE; 
+  background-color: color-mix(in srgb, var(--color-orange) 8%, var(--bg-card));
   padding: 25px;
   border-radius: 16px;
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .modal-import__box {
+  background-color: var(--input-color);
 }
 
 .import__box--text {
-  color: #5B61B9;
+  color: var(--text-main);
   font-size: 16px;
   line-height: 1.6;
   margin: 0 0 25px 0;
 }
 
 .import__box--text a {
-  color: #FF6B35;
+  color: var(--color-orange);
   text-decoration: none;
   font-weight: bold;
   transition: color 0.2s;
 }
 
 .import__box--text a:hover {
-  color: #e0531f;
   text-decoration: underline;
 }
 
+/* Containers dos botões de arquivo */
 .modal__import--button-container {
   display: flex;
   flex-direction: row;
@@ -481,10 +474,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   padding: 15px;
   border-radius: 12px;
-  border: 1px solid #E2E8F0;
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .button-container__csv-input {
@@ -495,7 +489,7 @@ body {
 }
 
 .botao-arquivo {
-  background-color: #5B61B9;
+  background-color: var(--color-blue);
   color: #ffffff;
   padding: 9px 16px;
   cursor: pointer;
@@ -504,24 +498,24 @@ body {
   font-weight: 600;
   text-align: center;
   width: 100%;
-  transition: background-color 0.2s;
+  transition: opacity 0.2s ease;
   user-select: none;
 }
 
 .botao-arquivo:hover {
-  background-color: #484c96;
+  opacity: 0.9;
 }
 
 #nome-arquivo-excel,
 #nome-arquivo-csv {
   font-size: 12px;
-  color: #777777;
+  color: var(--text-secondary);
   text-align: center;
   word-break: break-all;
 }
 
 .modal__import--buttons {
-  background-color: #4EAD8A;
+  background-color: var(--color-green);
   color: #ffffff;
   border: none;
   padding: 10px 16px;
@@ -530,11 +524,11 @@ body {
   font-weight: bold;
   cursor: pointer;
   width: 100%;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .modal__import--buttons:hover {
-  background-color: #3e9173;
+  opacity: 0.9;
   transform: translateY(-1px);
 }
 

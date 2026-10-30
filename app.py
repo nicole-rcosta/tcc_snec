@@ -107,6 +107,7 @@ def cadastrar_adm():
         else:
             return redirect("/adm_register")
     else:
+        flash("Digite a mesma senha para confirmar.")
         return redirect("/adm_register")
 
 @app.route("/adm/reg_activity")
@@ -127,9 +128,13 @@ def pagina_cad_atividades():
 
 @app.route("/adm/exc_activity/<id_atividade>", methods=["POST"])
 def excluir_atividades(id_atividade):
-    
-    ea(id_atividade)
-    return redirect(url_for("pagina_cad_atividade"))
+    delete = ea(id_atividade)
+    if delete['sucesso']:
+        return redirect("/adm/reg_activity")
+    else:
+        erro = delete['mensagem']
+        flash(erro)
+        return redirect("/adm/reg_activity")
 
 
 
@@ -148,9 +153,13 @@ def pagina_cad_sala_post():
 
 @app.route("/adm/reg_class/delete/<int:id>")
 def pagina_cad_sala_del(id):
-    deletar_sala(id)
-    return redirect("/adm/reg_class")
-
+    delete = deletar_sala(id)
+    if delete['sucesso']:
+        return redirect("/adm/reg_class")
+    else:
+        erro = delete['mensagem']
+        flash(erro)
+        return redirect("/adm/reg_class")
 
 
 
@@ -176,10 +185,13 @@ def pagina_cad_aluno_post():
 
 @app.route("/adm/reg_student/delete/<int:id>")
 def pagina_cad_aluno_delete(id):
-
-    deletar_aluno(id)
-
-    return redirect("/adm/reg_student")
+    delete = deletar_aluno(id)
+    if delete['sucesso']:
+        return redirect("/adm/reg_student")
+    else:
+        erro = delete['mensagem']
+        flash(erro)
+        return redirect("/adm/reg_student")
 
 
 @app.route("/adm/reg_student/excel", methods=["POST"])
@@ -189,7 +201,7 @@ def pegar_excel_pag_student():
     if inserir_excel_bcd(arquivo):
         return redirect("/adm/reg_student")
     else:
-        flash("Dados Inválidas! Verifique se elas existem ou se foram digitadas corretamente.")
+        flash("Dados Inválidos! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
 
 
@@ -200,7 +212,7 @@ def pegar_csv_pag_student():
     if inserir_excel_bcd(arquivo):
         return redirect("/adm/reg_student")
     else:
-        flash("Dados Inválidas! Verifique se elas existem ou se foram digitadas corretamente.")
+        flash("Dados Inválidos! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
 
 
@@ -338,8 +350,8 @@ def pagina_prof_selecionar_sala():
 @app.route("/teacher/class_info/<id_turma>")
 def pagina_prof_registro(id_turma):
     qnt_alunos = buscar_qntd_alunos(id_turma)
-    qnt_alunos = qnt_alunos.get("quantidade_alunos")
     alunos = buscar_alunos(id_turma)
+    print(alunos)
     if alunos.get("sucesso"):
         return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))
     else:

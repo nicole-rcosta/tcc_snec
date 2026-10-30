@@ -350,6 +350,7 @@ def pagina_prof_selecionar_sala():
 @app.route("/teacher/class_info/<id_turma>")
 def pagina_prof_registro(id_turma):
     qnt_alunos = buscar_qntd_alunos(id_turma)
+    qnt_alunos = buscar_qntd_alunos(id_turma).get("quantidade_alunos")
     alunos = buscar_alunos(id_turma)
     print(alunos)
     if alunos.get("sucesso"):

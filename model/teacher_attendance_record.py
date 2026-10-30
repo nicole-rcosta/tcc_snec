@@ -111,6 +111,7 @@ def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
     conexao, cursor = conectar()
 
     try:
+
         query_lanche = """
                         INSERT INTO tb_his_lanche (id_turma, data, id_usuario, quantidade_alunos)
                         VALUES (%s, CURRENT_DATE(), %s, %s);
@@ -130,10 +131,13 @@ def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
         conexao.close()
 
 def salvar_his_almoco(id_usuario, rms_contraturnos):
+
     print(rms_contraturnos)
+
     conexao, cursor = conectar()
 
     try:
+        
         query_almoco = """
                         INSERT INTO tb_his_almoco (rm_aluno, id_usuario, atendido)
                         VALUES(%s, %s, %s);
@@ -149,6 +153,34 @@ def salvar_his_almoco(id_usuario, rms_contraturnos):
         conexao.rollback()
         print(error)
         return False
+
+    finally:
+        cursor.close()
+        conexao.close()
+
+def buscar_his_lanche(id_turma):
+    conexao, cursor = conectar()
+
+    try:
+
+        sql = """
+            SELECT * FROM tb_his_lanche
+            WHERE id_turma = %s
+            AND data = CURRENT_DATE();
+        """
+
+        cursor.execute(sql, (id_turma, ))
+        his = cursor.fetchone()
+
+        if his:
+            return {"sucesso": True, "mensagem": "O histórico dessa sala já foi salvo."}
+        else:
+            return {"sucesso": False, "mensagem": "O histórico do dia da turma já foi salvo."}
+
+    except Exception as error:
+        conexao.rollback()
+        print(error)
+        return {"sucesso": False, "mensagem": "Erro interno no servidor"}
 
     finally:
         cursor.close()

@@ -41,7 +41,7 @@ def recuperar_dados_dashboard():
     query_total_almocos = """
         SELECT COUNT(*) AS total
         FROM tb_his_almoco
-        WHERE data = CURRENT_DATE() AND atendido = TRUE;
+        WHERE data = CURRENT_DATE();
     """
     cursor.execute(query_total_almocos)
     resultado_almoco = cursor.fetchone()

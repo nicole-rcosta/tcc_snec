@@ -277,18 +277,18 @@ def pagina_dashboard():
     # Pega o nome do usuário da sessão ou define um padrão
     nome_usuario = session.get("usuario_nome", "Nutricionista")
 
-    if dados.get("sucesso") == False:
-        return render_template("nutri/nutritionist_dashboard.html", erro = dados.get("mensagem"))
-
-    # Renderiza o HTML passando todas as variáveis necessárias
-    return render_template(
-        "nutri/nutritionist_dashboard.html",
-        usuario=nome_usuario,
-        turmas=dados["turmas"],
-        total_lanches=dados["total_lanches"],
-        total_almocos=dados["total_almocos"],
-        todas_concluidas=dados["todas_concluidas"]
-    )
+    if dados.get("sucesso"):
+        # Renderiza o HTML passando todas as variáveis necessárias
+        return render_template(
+            "nutri/nutritionist_dashboard.html",
+            usuario=nome_usuario,
+            turmas=dados["turmas"],
+            total_lanches=dados["total_lanches"],
+            total_almocos=dados["total_almocos"],
+            todas_concluidas=dados["todas_concluidas"]
+        )
+    
+    return render_template("nutri/nutritionist_dashboard.html", erro = dados.get("mensagem"))
 
     
 

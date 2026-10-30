@@ -155,8 +155,8 @@ def pagina_cad_sala_del(id):
         return redirect("/adm/reg_class")
     else:
         erro = delete['mensagem']
-        return render_template("adm/admin_room_register.html", erro = erro)
-
+        flash(erro)
+        return redirect("/adm/reg_class")
 
 
 
@@ -347,8 +347,8 @@ def pagina_prof_selecionar_sala():
 @app.route("/teacher/class_info/<id_turma>")
 def pagina_prof_registro(id_turma):
     qnt_alunos = buscar_qntd_alunos(id_turma)
-    qnt_alunos = qnt_alunos.get("quantidade_alunos")
     alunos = buscar_alunos(id_turma)
+    print(alunos)
     if alunos.get("sucesso"):
         return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))
     else:

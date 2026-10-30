@@ -1,4 +1,5 @@
 from database.conexao import conectar
+import mysql.connector
 
 def adicionar_sala(turma:str,periodo:str,qnt_alunos:int) -> bool:
     """
@@ -20,12 +21,12 @@ def recuperar_salas():
     cursor.execute("""SELECT id_turma, turma, periodo, quantidade_alunos FROM db_snec.tb_turmas ORDER BY turma;""")
 
 
-    musicas=cursor.fetchall()
+    salas = cursor.fetchall()
 
 
     conexao.close()
 
-    return musicas
+    return salas
 
 
 def deletar_sala(cod:int) -> bool:
@@ -33,16 +34,21 @@ def deletar_sala(cod:int) -> bool:
     conexao,cursor = conectar()
 
     try:
-        delete = cursor.execute("""delete from tb_turmas where id_turma = (%s);""",(cod,) )
-        if delete:
-            return {"sucesso": True, "mensagem": "Sala apagada."}
-        else:
-            return {"sucesso": False, "mensagem": "Existem alunos cadastrados nessa sala."}
+        cursor.execute("""delete from tb_turmas where id_turma = (%s);""",(cod,) )
+        conexao.commit()
 
     except Exception as erro:
         print(f"Erro ao cadastrar usuário: {erro}")
+        
         if conexao:
             conexao.rollback()
+        if "1451" in str(erro) or "foreign key constraint" in str(erro).lower():
+            return {
+                "sucesso": False, 
+                "mensagem": "Não é possível excluir: existem alunos cadastrados nesta sala."
+            }
+            
+        print(f"Erro ao deletar sala (ID: {cod}): {erro}")
         return {"sucesso": False, "mensagem": "Erro interno no servidor."}
     
     finally:

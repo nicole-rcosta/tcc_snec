@@ -44,9 +44,11 @@
         <section class="admin-room__list-section">
             <h2 class="admin-room__list-title">Turmas já cadastradas:</h2>
 
-            {% if erro %}
-            <span class="register__message-error">{{ erro }}</span>
-            {% endif %}
+             {% with messages = get_flashed_messages() %}
+                {% for message in messages %}
+                    <span style="color:red; display: inline; width: 100%; text-align: center;">{{ message }}</span>
+                {% endfor %}
+            {% endwith %}
 
             <table class="admin-room__table">
                 <thead class="admin-room__table-header">

@@ -33,6 +33,12 @@ def enviar_email(email, codigo):
 
     ''')
 
+    # 2. Renderiza o template HTML do Flask passando a variável 'codigo'
+    html_conteudo = render_template("email/email_codigo.html", codigo=codigo)
+
+    # 3. Adiciona a versão HTML personalizada
+    email.add_alternative(html_conteudo, subtype="html")
+
     # Conectando ao Gmail e enviando
 
     try:

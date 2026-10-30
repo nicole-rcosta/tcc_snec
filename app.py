@@ -245,9 +245,6 @@ def pagina_cad_aluno_ativ_delete(id,atividade,dia):
 
     return redirect("/adm/reg_student_extra")
 
-@app.route("/adm/conf_panel")
-def pagina_confirmar_painel():
-    return render_template("adm/admin_confirm.html")
 
 @app.route("/adm/conf_panel/post", methods=["POST"])
 def verificar_adm():
@@ -257,9 +254,9 @@ def verificar_adm():
     if busca_adm_resp.get("sucesso"):
         return redirect("/adm/adm_panel")
     elif busca_adm_resp.get("mensagem") == "Senha incorreta!":
-        return render_template("adm/admin_confirm.html", erro = busca_adm_resp.get("mensagem"))
+        return render_template("adm/admin_item_register.html", erro = busca_adm_resp.get("mensagem"))
     else:
-        return redirect("/adm/conf_panel")
+        return redirect("/adm")
 
 @app.route("/adm/adm_panel")
 def pagina_painel_adm():

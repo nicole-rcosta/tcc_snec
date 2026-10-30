@@ -39,6 +39,13 @@
 
         <section class="admin-activity__list-section">
             <h2 class="admin-activity__list-title">Atividades cadastradas:</h2>
+
+            {% with messages = get_flashed_messages() %}
+                {% for message in messages %}
+                    <span style="color:red; display: inline; width: 100%; text-align: center;">{{ message }}</span>
+                {% endfor %}
+            {% endwith %}
+
             <table class="admin-activity__table">
                 <thead class="admin-activity__table-header">
                     <tr class="admin-activity__table-row">

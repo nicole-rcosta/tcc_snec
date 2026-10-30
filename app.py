@@ -46,7 +46,7 @@ def logar_usuario():
         elif cargo == 'nutri':
             return redirect('/nutri_dashboard')
         elif cargo == 'adm':
-            return render_template("/adm/admin_item_register.html")
+            return redirect('/adm')
     else:
         print(resultado['mensagem'])
         if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.':
@@ -86,12 +86,12 @@ def cadastrar_usuario():
 @app.route("/adm")
 def pagina_adm():
 
-    usuario_id = session.get('usuario')
-    if not usuario_id or usuario_id.get('cargo') != 'adm':
+    usuario = session.get('usuario')
+    if not usuario or usuario.get('cargo') != 'adm':
         return redirect("/login")
 
-    nome = usuario_id.get('usuario')['nome_usuario']
-
+    nome = usuario.get('nome')
+    print(nome)
     return render_template("/adm/admin_item_register.html", nome_usuario=nome)
 
 

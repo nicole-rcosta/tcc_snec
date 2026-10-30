@@ -50,110 +50,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="activities__table-row">
-                <td class="activities__table-cell--rm">7087</td>
-                <td class="activities__table-cell--student">Fulana Lorenzo Morales</td>
-                <td class="activities__table-cell--year">3ºC</td>
-                <td class="activities__table-cell--activity"><span class="badge">Comitê</span></td>
-                <td class="activities__table-cell--shift">Tarde</td>
-                <td class="activities__table-cell--check">
-                  <label class="activities__checkbox-label">
-                    <input type="checkbox" class="activities__checkbox-input" checked>
-                    <span class="activities__checkbox-custom"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr class="activities__table-row">
-                <td class="activities__table-cell--rm">7068</td>
-                <td class="activities__table-cell--student">Fulana Giovani de Andrade</td>
-                <td class="activities__table-cell--year">3ºC</td>
-                <td class="activities__table-cell--activity"><span class="badge">Grêmio</span></td>
-                <td class="activities__table-cell--shift">Tarde</td>
-                <td class="activities__table-cell--check">
-                  <label class="activities__checkbox-label">
-                    <input type="checkbox" class="activities__checkbox-input" checked>
-                    <span class="activities__checkbox-custom"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr class="activities__table-row">
-                <td class="activities__table-cell--rm">7009</td>
-                <td class="activities__table-cell--student">Fulana Marques Luiz Gaspar</td>
-                <td class="activities__table-cell--year">3ºC</td>
-                <td class="activities__table-cell--activity"><span class="badge">Personaliza</span></td>
-                <td class="activities__table-cell--shift">Tarde</td>
-                <td class="activities__table-cell--check">
-                  <label class="activities__checkbox-label">
-                    <input type="checkbox" class="activities__checkbox-input" checked>
-                    <span class="activities__checkbox-custom"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr class="activities__table-row">
-                <td class="activities__table-cell--rm">7070</td>
-                <td class="activities__table-cell--student">Fulana Gonçalves</td>
-                <td class="activities__table-cell--year">3ºC</td>
-                <td class="activities__table-cell--activity"><span class="badge">Natação</span></td>
-                <td class="activities__table-cell--shift">Tarde</td>
-                <td class="activities__table-cell--check">
-                  <label class="activities__checkbox-label">
-                    <input type="checkbox" class="activities__checkbox-input" checked>
-                    <span class="activities__checkbox-custom"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr class="activities__table-row">
-                <td class="activities__table-cell--rm">7071</td>
-                <td class="activities__table-cell--student">Fulana Fernanda Gili Cândido</td>
-                <td class="activities__table-cell--year">3ºC</td>
-                <td class="activities__table-cell--activity"><span class="badge">Dança</span></td>
-                <td class="activities__table-cell--shift">Tarde</td>
-                <td class="activities__table-cell--check">
-                  <label class="activities__checkbox-label">
-                    <input type="checkbox" class="activities__checkbox-input" checked>
-                    <span class="activities__checkbox-custom"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr class="activities__table-row">
-                <td class="activities__table-cell--rm">7072</td>
-                <td class="activities__table-cell--student">Fulana Ramos Costa</td>
-                <td class="activities__table-cell--year">3ºC</td>
-                <td class="activities__table-cell--activity"><span class="badge">Teatro</span></td>
-                <td class="activities__table-cell--shift">Tarde</td>
-                <td class="activities__table-cell--check">
-                  <label class="activities__checkbox-label">
-                    <input type="checkbox" class="activities__checkbox-input" checked>
-                    <span class="activities__checkbox-custom"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr class="activities__table-row">
-                <td class="activities__table-cell--rm">7073</td>
-                <td class="activities__table-cell--student">Fulana Conceição Neto</td>
-                <td class="activities__table-cell--year">3ºC</td>
-                <td class="activities__table-cell--activity"><span class="badge">Grêmio</span></td>
-                <td class="activities__table-cell--shift">Tarde</td>
-                <td class="activities__table-cell--check">
-                  <label class="activities__checkbox-label">
-                    <input type="checkbox" class="activities__checkbox-input" checked>
-                    <span class="activities__checkbox-custom"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr class="activities__table-row">
-                <td class="activities__table-cell--rm">7074</td>
-                <td class="activities__table-cell--student">Fulano Stocco</td>
-                <td class="activities__table-cell--year">3ºC</td>
-                <td class="activities__table-cell--activity"><span class="badge">Robótica</span></td>
-                <td class="activities__table-cell--shift">Tarde</td>
-                <td class="activities__table-cell--check">
-                  <label class="activities__checkbox-label">
-                    <input type="checkbox" class="activities__checkbox-input" checked>
-                    <span class="activities__checkbox-custom"></span>
-                  </label>
-                </td>
-              </tr>
+              {% for aluno in alunos %}
+                <tr class="activities__table-row">
+                  <td class="activities__table-cell--rm">{{aluno.rm_aluno}}</td>
+                  <td class="activities__table-cell--student">{{aluno.nome_aluno}}</td>
+                  <td class="activities__table-cell--year">{{aluno.turma}}</td>
+                  <td class="activities__table-cell--activity"><span class="badge">{{aluno.atividade}}</span></td>
+                  <td class="activities__table-cell--shift">{{aluno.periodo}}</td>
+                  <td class="activities__table-cell--check">
+                    <label class="activities__checkbox-label">
+                      <input type="checkbox" class="activities__checkbox-input" checked>
+                      <span class="activities__checkbox-custom"></span>
+                    </label>
+                  </td>
+                </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
@@ -185,14 +96,6 @@
         <hr class="confirmation__card-divider">
         <h3 class="confirmation__card-subtitle">Alunos do contraturno presentes:</h3>
         <ul class="confirmation__list">
-          <li class="confirmation__list-item">Fulano Giovani de Andrade</li>
-          <li class="confirmation__list-item">Fulana Marques Luiz Gaspar</li>
-          <li class="confirmation__list-item">Fulana Gonçalves</li>
-          <li class="confirmation__list-item">Fulana Fernanda Gil Cândido</li>
-          <li class="confirmation__list-item">Fulana Ramos Costa</li>
-          <li class="confirmation__list-item">Fulano Lorenzo Moralez</li>
-          <li class="confirmation__list-item">Fulano Conceição Neto</li>
-          <li class="confirmation__list-item">Fulano Stocco</li>
         </ul>
       </section>
       <!-- Botões de ação -->

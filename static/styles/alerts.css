@@ -79,7 +79,7 @@
 .alert-button-success {
   width: 100%;
   max-width: 200px;
-  padding: 14px 0;
+  padding: 14px 10px;
   background-color: var(--bg-main);
   border: none;
   border-radius: 10px;
@@ -240,20 +240,6 @@
   margin-bottom: 30px;
 }
 
-.alert-button-success {
-  width: 100%;
-  max-width: 200px;
-  padding: 14px 0;
-  background-color: var(--bg-main);
-  border: none;
-  border-radius: 10px;
-  color: var(--color-green);
-  font-family: var(--font-primary);
-  font-weight: 600;
-  font-size: 1.15rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
 
 .alert-button-success:hover {
   background-color: var(--bg-main);
@@ -310,7 +296,7 @@
 .alert-button-error {
   width: 100%;
   max-width: 200px;
-  padding: 14px 0;
+  padding: 14px 10px;
   background-color: var(--bg-main);
   border: none;
   border-radius: 10px;
@@ -325,3 +311,4 @@
 .alert-button-error:hover {
   background-color: var(--bg-main);
 }
+

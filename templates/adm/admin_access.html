@@ -29,7 +29,17 @@
                     {% for usuario_pendente in usuarios_pendentes %}
                     <tr class="admin-access__table-row">
                         <td class="admin-access__table-cell admin-access__table-cell--name" data-label="Nome">{{ usuario_pendente.nome_usuario }}</td>
-                        <td class="admin-access__table-cell admin-access__table-cell--role" data-label="Cargo">{{ usuario_pendente.cargo }}</td>
+                        <td class="admin-access__table-cell admin-access__table-cell--role" data-label="Cargo">
+                            {% if usuario_pendente.cargo == 'prof' %}
+                                Professor(a)
+                            {% elif usuario_pendente.cargo == 'nutri' %}
+                                Nutricionista
+                            {% elif usuario_pendente.cargo == 'adm' %}
+                                Administrador(a)
+                            {% else %}
+                                {{ usuario_pendente.cargo | capitalize }}
+                            {% endif %}
+                        </td>
                         <td class="admin-access__table-cell admin-access__table-cell--actions" data-label="Permissão">
                             <div class="admin-access__action-buttons">
                                 <a href="/adm/adm_panel/approve/{{ usuario_pendente.id_usuario }}">

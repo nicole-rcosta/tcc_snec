@@ -1,6 +1,7 @@
 import smtplib
 from email.message import EmailMessage
 import os
+from flask import render_template
 from dotenv import load_dotenv
 
 # Carrega o .env para o sistema

@@ -388,7 +388,7 @@ def salvar_registro_prof(id_turma):
     # Executa a gravação no banco de dados
     sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario), salvar_his_almoco(id_usuario, rms_contraturnos)
 
-    if sucesso.get("sucesso"):
+    if sucesso:
         return jsonify({
             'sucesso': True, 
             'redirect_url': url_for('pagina_prof_selecionar_sala')

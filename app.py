@@ -293,13 +293,18 @@ def pagina_dashboard():
         return render_template(
             "nutri/nutritionist_dashboard.html",
             usuario=nome_usuario,
-            turmas=dados.get("turmas"),          
-            total_lanches=dados.get("total_lanches"),
-            total_almocos=dados.get("total_almocos"),
-            todas_concluidas=dados.get("todas_concluidas")
+            turmas=dados.get("turmas", []),          
+            total_lanches=dados.get("total_lanches", 0),
+            total_almocos=dados.get("total_almocos", 0),
+            todas_concluidas=dados.get("todas_concluidas", False)
         )
     
-    return render_template("nutri/nutritionist_dashboard.html", erro = dados.get("mensagem"))
+    return render_template("nutri/nutritionist_dashboard.html", usuario=nome_usuario,
+        turmas=[],
+        total_lanches=0,
+        total_almocos=0,
+        todas_concluidas=False,
+        erro=dados.get("mensagem") if dados else "Erro ao conectar ao banco de dados")
 
     
 

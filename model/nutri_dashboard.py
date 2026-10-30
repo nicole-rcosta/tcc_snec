@@ -19,7 +19,7 @@ def recuperar_dados_dashboard():
             FROM tb_turmas 
             LEFT JOIN tb_his_lanche 
                 ON tb_turmas.id_turma = tb_his_lanche.id_turma 
-                AND b_his_lanche.data = CURRENT_DATE()
+                AND tb_his_lanche.data = CURRENT_DATE()
             LEFT JOIN tb_alunos 
                     ON tb_turmas.id_turma = tb_alunos.id_turma
             LEFT JOIN tb_his_almoco

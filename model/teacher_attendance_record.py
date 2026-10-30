@@ -131,7 +131,7 @@ def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
         conexao.close()
 
 def salvar_his_almoco(id_usuario, rms_contraturnos):
-    print(rms_contraturnos)
+    
     conexao, cursor = conectar()
 
     try:

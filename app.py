@@ -386,10 +386,9 @@ def salvar_registro_prof(id_turma):
     id_usuario = session.get("usuario")["id"]
 
     # Executa a gravação no banco de dados
-    sucesso_lanche = salvar_his_lanche(id_turma, qtd_alunos, id_usuario)
-    sucesso_almoco = salvar_his_almoco(id_usuario, rms_contraturnos)
+    sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario), salvar_his_almoco(id_usuario, rms_contraturnos)
 
-    if sucesso_lanche.get("sucesso") and sucesso_almoco:
+    if sucesso.get("sucesso"):
         return jsonify({
             'sucesso': True, 
             'redirect_url': url_for('pagina_prof_selecionar_sala')

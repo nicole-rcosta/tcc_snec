@@ -37,6 +37,12 @@
 
             <h2 class="admin-register__greeting--password">Nova senha</h2>
 
+            {% with messages = get_flashed_messages() %}
+                {% for message in messages %}
+                    <span style="color:red; display: inline; width: 100%; text-align: center;">{{ message }}</span>
+                {% endfor %}
+            {% endwith %}
+
             <div class="admin-register__field--password">
                 <label class="admin-register__label--password" for="password">Senha:</label>
                 <input class="admin-register__input--password" type="password" id="password" name="password" required>

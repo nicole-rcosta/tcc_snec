@@ -108,6 +108,7 @@ def cadastrar_adm():
         else:
             return redirect("/adm_register")
     else:
+        flash("Digite a mesma senha para confirmar.")
         return redirect("/adm_register")
 
 @app.route("/adm/reg_activity")
@@ -149,8 +150,12 @@ def pagina_cad_sala_post():
 
 @app.route("/adm/reg_class/delete/<int:id>")
 def pagina_cad_sala_del(id):
-    deletar_sala(id)
-    return redirect("/adm/reg_class")
+    delete = deletar_sala(id)
+    if delete['sucesso']:
+        return redirect("/adm/reg_class")
+    else:
+        erro = delete['mensagem']
+        return render_template("adm/admin_room_register.html", erro = erro)
 
 
 
@@ -190,7 +195,7 @@ def pegar_excel_pag_student():
     if inserir_excel_bcd(arquivo):
         return redirect("/adm/reg_student")
     else:
-        flash("Dados Inválidas! Verifique se elas existem ou se foram digitadas corretamente.")
+        flash("Dados Inválidos! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
 
 
@@ -201,7 +206,7 @@ def pegar_csv_pag_student():
     if inserir_excel_bcd(arquivo):
         return redirect("/adm/reg_student")
     else:
-        flash("Dados Inválidas! Verifique se elas existem ou se foram digitadas corretamente.")
+        flash("Dados Inválidos! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
 
 

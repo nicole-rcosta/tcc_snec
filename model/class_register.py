@@ -30,10 +30,23 @@ def recuperar_salas():
 
 def deletar_sala(cod:int) -> bool:
 
-
     conexao,cursor = conectar()
-     
-    cursor.execute("""delete from tb_turmas where id_turma = (%s);""",(cod,) )
 
-    conexao.commit()
-    conexao.close()
+    try:
+        delete = cursor.execute("""delete from tb_turmas where id_turma = (%s);""",(cod,) )
+        if delete:
+            return {"sucesso": True, "mensagem": "Sala apagada."}
+        else:
+            return {"sucesso": False, "mensagem": "Existem alunos cadastrados nessa sala."}
+
+    except Exception as erro:
+        print(f"Erro ao cadastrar usuário: {erro}")
+        if conexao:
+            conexao.rollback()
+        return {"sucesso": False, "mensagem": "Erro interno no servidor."}
+    
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()

@@ -26,7 +26,7 @@
             <div class="admin-room__form-group">
                 <div class="admin-room__field admin-room__field--class">
                     <label for="room-class" class="admin-room__label">Turma:</label>
-                    <input type="text" id="room-class" name="room_class" class="admin-room__input" required>
+                    <input type="text" id="room-class" name="room_class" class="admin-room__input" placeholder="1ºB" required>
                 </div>
                 <div class="admin-room__field admin-room__field--period">
                     <label for="room-period" class="admin-room__label">Período:</label>
@@ -43,6 +43,11 @@
 
         <section class="admin-room__list-section">
             <h2 class="admin-room__list-title">Turmas já cadastradas:</h2>
+
+            {% if erro %}
+            <span class="register__message-error">{{ erro }}</span>
+            {% endif %}
+
             <table class="admin-room__table">
                 <thead class="admin-room__table-header">
                     <tr class="admin-room__table-row">
@@ -55,7 +60,6 @@
                     </tr>
                 </thead>
                 <tbody class="admin-room__table-body">
-
 
                     {% for sala in salas: %}
                     <tr class="admin-room__table-row">

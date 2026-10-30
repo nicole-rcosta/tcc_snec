@@ -352,22 +352,37 @@ def api_atualizar_almoco():
 
 @app.route("/teacher")
 def pagina_prof_selecionar_sala():
-    turmas = buscar_turmas()
 
-    if turmas.get("sucesso"):
+   usuario = session.get('usuario')
+   
+   if not usuario or usuario.get('cargo') != 'prof':
+        return redirect("/login")
+    
+   turmas = buscar_turmas()
+
+   if turmas.get("sucesso"):
         return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"))
-    else:
+   else:
         return render_template("teacher/teacher_class_select.html", erro = turmas.get("mensagem"))
+
 
 @app.route("/teacher/class_info/<id_turma>")
 def pagina_prof_registro(id_turma):
+
+    usuario = session.get('usuario')
+       
+    if not usuario or usuario.get('cargo') != 'prof':
+        return redirect("/login")
+        
+
     qnt_alunos = buscar_qntd_alunos(id_turma)
     alunos = buscar_alunos(id_turma)
-    print(alunos)
+
     if alunos.get("sucesso"):
         return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))
     else:
         return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, erro=alunos.get("mensagem"))
+    
 
 @app.route("/teacher/class_info/confirm/<int:id_turma>", methods=['POST'])
 def pagina_confirmacao_prof(id_turma):

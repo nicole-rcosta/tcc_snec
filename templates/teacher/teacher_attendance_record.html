@@ -16,7 +16,7 @@
 
   <div class="user-greeting">
     <div>
-      <h1 class="classes__title">Olá, Professor(a)!</h1>
+      <h1 class="classes__title">Olá, {{ session['usuario']['nome'] if session.get('usuario') and session['usuario'].get('nome') else 'Administrador(a)' }}!</h1>
       <div class="progress-container">
         <div class="progress-bar">
           <div class="progress--step-2"></div>

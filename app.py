@@ -46,7 +46,6 @@ def logar_usuario():
         elif cargo == 'adm':
             return render_template("/adm/admin_item_register.html")
     else:
-        print(resultado['mensagem'])
         if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.':
             return render_template("login/auth_login.html", erro = resultado['mensagem'])
         elif resultado['mensagem'] == "Usuário não encontrado. Cadastre-se!":
@@ -352,7 +351,7 @@ def pagina_prof_registro(id_turma):
     qnt_alunos = buscar_qntd_alunos(id_turma)
     qnt_alunos = buscar_qntd_alunos(id_turma).get("quantidade_alunos")
     alunos = buscar_alunos(id_turma)
-    print(alunos)
+
     if alunos.get("sucesso"):
         return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))
     else:

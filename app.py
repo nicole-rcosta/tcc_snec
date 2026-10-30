@@ -182,10 +182,13 @@ def pagina_cad_aluno_post():
 
 @app.route("/adm/reg_student/delete/<int:id>")
 def pagina_cad_aluno_delete(id):
-
-    deletar_aluno(id)
-
-    return redirect("/adm/reg_student")
+    delete = deletar_aluno(id)
+    if delete['sucesso']:
+        return redirect("/adm/reg_class")
+    else:
+        erro = delete['mensagem']
+        flash(erro)
+        return redirect("/adm/reg_student")
 
 
 @app.route("/adm/reg_student/excel", methods=["POST"])

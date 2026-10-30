@@ -35,11 +35,28 @@ def recuperar_alunos():
 
 def deletar_aluno(rm:str) -> bool:
 
-
     conexao,cursor = conectar()
-     
-    cursor.execute("""delete from tb_alunos where rm_aluno = (%s);""",(rm,) )
 
-    conexao.commit()
-    conexao.close()
+    try:
+        cursor.execute("""delete from tb_alunos where rm_aluno = (%s);""",(rm,) )
+        conexao.commit()
 
+    except Exception as erro:
+        print(f"Erro ao cadastrar usuário: {erro}")
+        
+        if conexao:
+            conexao.rollback()
+        if "1451" in str(erro) or "foreign key constraint" in str(erro).lower():
+            return {
+                "sucesso": False, 
+                "mensagem": "Não é possível excluir: este aluno está cadastrado em uma atividade."
+            }
+            
+        print(f"Erro ao deletar sala (ID: {cod}): {erro}")
+        return {"sucesso": False, "mensagem": "Erro interno no servidor."}
+    
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()

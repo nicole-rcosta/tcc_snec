@@ -47,7 +47,7 @@ body {
 }
 
 .progress-bar {
-  width: 180px;
+  width: 50%;
   height: 8px;
   border-radius: 4px;
   overflow: hidden;
@@ -421,6 +421,30 @@ body {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Modal */
 .modal-overlay {
   position: fixed;
@@ -480,7 +504,7 @@ body {
 }
 
 .progress--step-3 {
-  width: 180px;
+  width: 50%;
   height: 10px;
   background-color: color-mix(in srgb, var(--text-secondary) 20%, transparent);
   border-radius: 4px;

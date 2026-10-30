@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS tb_his_lanche (
  id_usuario INT,
  quantidade_alunos INT NOT NULL,
  CONSTRAINT FK_LANCHE_TURMA
- FOREIGN KEY (id_turma) REFERENCES tb_turmas(id_turma),
+ FOREIGN KEY (id_turma) REFERENCES tb_turmas(id_turma) on delete cascade,
  CONSTRAINT FK_LANCHE_USUARIO
  FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id_usuario),
  PRIMARY KEY (id_turma, data)

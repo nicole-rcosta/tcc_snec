@@ -1,14 +1,22 @@
 import smtplib
 from email.message import EmailMessage
-from flask import render_template
+import os
+from dotenv import load_dotenv
+
+# Carrega o .env para o sistema
+load_dotenv()
+
+# Recupera os valores usando os.getenv()
+email_envia = os.getenv("EMAIL")
+app_senha = os.getenv("APP_PASSWORD")
 
 # Dados da conta
 
 def enviar_email(email, codigo):
 
-    EMAIL_REMETENTE = "pablolorenzomoralez@gmail.com"
+    EMAIL_REMETENTE = email_envia
     # tomar cuidado com isso
-    SENHA_APP = "mtls ntmg kxxn aquu" 
+    SENHA_APP = app_senha
     DESTINATARIO = email
 
     email = EmailMessage()

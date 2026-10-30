@@ -14,7 +14,7 @@
 
         <div class="dashboard__user">
             <div class="dashboard__user-info">
-                <h1 class="dashboard__greeting">Olá, {{ usuario }}!</h1>
+                <h1 class="dashboard__greeting">Olá, {{ session['usuario']['nome'] if session.get('usuario') and session['usuario'].get('nome') else 'Administrador(a)' }}!</h1>
                 <p class="dashboard__status-title">Status das turmas</p>
             </div>
         </div>

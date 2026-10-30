@@ -45,7 +45,6 @@ def logar_usuario():
             return redirect('/nutri_dashboard')
         elif cargo == 'adm':
             return render_template("/adm/admin_item_register.html")
-        return render_template()
     else:
         print(resultado['mensagem'])
         if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.':
@@ -69,11 +68,10 @@ def cadastrar_usuario():
     status = "pendente"
 
     cadastro_resp = cadastrar(nome, email, cargo, senha, cpf, status)
-
     if cadastro_resp['sucesso']:
         return render_template("/login/auth_login.html")
     else:
-        if cadastro_resp['mensagem'] == "CPF inválido.":
+        if cadastro_resp['mensagem'] == "CPF inválido." or cadastro_resp['mensagem'] == "CPF já cadastrado." or cadastro_resp["mensagem"] == "Este email já pertence a um usuario.":
             return render_template("/register/auth_register.html", erro = cadastro_resp['mensagem'])
         else:
             return redirect("/cadastro")
@@ -96,7 +94,7 @@ def pagina_adm_register():
 @app.route("/adm_register/post", methods=["POST"])
 def cadastrar_adm():
     nome = request.form.get("name")
-    cpf = request.form.get("cpf")
+    cpf = request.form.get("cpf-real")
     email = request.form.get("email")
     senha = request.form.get("password")
     confirmar_senha = request.form.get("confirm-password")
@@ -191,18 +189,18 @@ def pegar_excel_pag_student():
     if inserir_excel_bcd(arquivo):
         return redirect("/adm/reg_student")
     else:
-        flash("Turmas Invalidas! Verifique se elas existem ou se foram digitas corretamente.")
+        flash("Dados Inválidas! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
 
 
 @app.route("/adm/reg_student/csv", methods=["POST"])
 def pegar_csv_pag_student():
     arquivo = request.files.get('input_csv')
-    inserir_excel_bcd(arquivo)
+    
     if inserir_excel_bcd(arquivo):
         return redirect("/adm/reg_student")
     else:
-        flash("Turmas Invalidas! Verifique se elas existem ou se foram digitas corretamente.")
+        flash("Dados Inválidas! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
 
 
@@ -343,8 +341,8 @@ def pagina_prof_selecionar_sala():
 @app.route("/teacher/class_info/<id_turma>")
 def pagina_prof_registro(id_turma):
     qnt_alunos = buscar_qntd_alunos(id_turma)
+    qnt_alunos = qnt_alunos.get("quantidade_alunos")
     alunos = buscar_alunos(id_turma)
-    print(alunos)
     if alunos.get("sucesso"):
         return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))
     else:

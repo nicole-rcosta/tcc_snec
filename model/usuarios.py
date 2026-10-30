@@ -5,25 +5,47 @@ import bcrypt
 def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) -> bool:
     conexao = None
     cursor = None
+    
     try:
-        senha_bytes = senha.encode('utf-8')
-        salt = bcrypt.gensalt()
-        senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
-
-        if not validar_cpf(cpf):
-            print("cpf invalido")
-            return {"sucesso": False, "mensagem": "CPF inválido."}
-
         conexao, cursor = conectar()
-        
+
         sql = """
-            INSERT INTO tb_usuarios (nome_usuario, email, cargo, senha, cpf, status) 
-            VALUES (%s, %s, %s, %s, %s, %s);
-        """
-        
-        cursor.execute(sql, (nome, email, cargo, senha_hash, cpf, status))
-        conexao.commit()
-        return True
+                SELECT * FROM tb_usuarios
+                WHERE cpf = %s;
+            """
+        cursor.execute(sql, (cpf, ))
+        ver_cpf = cursor.fetchone()
+
+        sql = """
+                SELECT * FROM tb_usuarios
+                WHERE email = %s;
+            """
+        cursor.execute(sql, (email, ))
+        ver_email = cursor.fetchone()
+
+        if ver_cpf:
+            print("Usuário já cadastrado")
+            return {"sucesso": False, "mensagem": "CPF já cadastrado."}
+        elif ver_email:
+            print("Este email ja pertence a um usuario.")
+            return {"sucesso": False, "mensagem": "Este email já pertence a um usuario."}
+        else:
+            senha_bytes = senha.encode('utf-8')
+            salt = bcrypt.gensalt()
+            senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
+
+            if not validar_cpf(cpf):
+                print("cpf invalido")
+                return {"sucesso": False, "mensagem": "CPF inválido."}
+            
+            sql = """
+                INSERT INTO tb_usuarios (nome_usuario, email, cargo, senha, cpf, status) 
+                VALUES (%s, %s, %s, %s, %s, %s);
+            """
+            
+            cursor.execute(sql, (nome, email, cargo, senha_hash, cpf, status))
+            conexao.commit()
+            return {"sucesso": True, "mensagem": "Usuário cadastrado."}
 
     except Exception as erro:
         print(f"Erro ao cadastrar usuário: {erro}")
@@ -47,8 +69,7 @@ def logar(cpf: str, senha: str) -> dict:
         sql = """
             SELECT id_usuario, nome_usuario, cargo, senha, status 
             FROM tb_usuarios 
-            WHERE cpf = %s
-            ;
+            WHERE cpf = %s;
         """
 
         cursor.execute(sql, (cpf,))

@@ -1,4 +1,4 @@
-const abrirModal = document.getElementById('abrirModal') 
+const abrirModal = document.getElementById('abrirModal')
 
 const modal = document.getElementById('modal');
 const fecharBtn = document.getElementById('fecharBtn');
@@ -37,10 +37,23 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault(); // Impede o envio tradicional do formulário
 
         // Pega a quantidade de alunos digitada
-        const qtdAlunos = document.querySelector('#students-count').value.trim();
+        const inputAlunos = document.querySelector('#students-count');
+
+        // 2. Agora sim, extraia o valor e as propriedades dele separadamente
+        const qtdAlunos = inputAlunos.value.trim();
+        const qtdAlunosMax = Number(inputAlunos.max);
+        const qtdAlunosMin = Number(inputAlunos.min);
+
+        // 3. Converta o valor para número apenas para a comparação matemática
+        const qtdAlunosNum = Number(qtdAlunos);
+
         if (qtdAlunos === '') {
-            infoError.textContent = 'Informe a quantidade de alunos'
-            qtdAlunos.focus()
+            infoError.textContent = 'Informe a quantidade de alunos';
+            inputAlunos.focus(); // Foco no elemento HTML
+        } else if (qtdAlunosNum > qtdAlunosMax || qtdAlunosNum < qtdAlunosMin) {
+            infoError.textContent = 'O número excede a quantidade de alunos da turma.';
+            inputAlunos.value = '';
+            inputAlunos.focus();
         } else {
             modalQtdAlunos.textContent = qtdAlunos;
 

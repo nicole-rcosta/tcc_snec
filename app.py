@@ -129,9 +129,13 @@ def pagina_cad_atividades():
 
 @app.route("/adm/exc_activity/<id_atividade>", methods=["POST"])
 def excluir_atividades(id_atividade):
-    
-    ea(id_atividade)
-    return redirect(url_for("pagina_cad_atividade"))
+    delete = ea(id_atividade)
+    if delete['sucesso']:
+        return redirect("/adm/reg_activity")
+    else:
+        erro = delete['mensagem']
+        flash(erro)
+        return redirect("/adm/reg_activity")
 
 
 
@@ -184,7 +188,7 @@ def pagina_cad_aluno_post():
 def pagina_cad_aluno_delete(id):
     delete = deletar_aluno(id)
     if delete['sucesso']:
-        return redirect("/adm/reg_class")
+        return redirect("/adm/reg_student")
     else:
         erro = delete['mensagem']
         flash(erro)

@@ -28,13 +28,30 @@ def cadastrar_atividade(atividade, periodo):
 
 
 def excluir_atividade(id_atividade):
+
+    conexao, cursor = conectar()
+
     try:
-        conexao, cursor = conectar()
-        cursor.execute("DELETE FROM tb_atividades WHERE id_atividade = %s;", (id_atividade, ))
+        cursor.execute("""DELETE FROM tb_atividades WHERE id_atividade = %s;""", (id_atividade, ) )
         conexao.commit()
-        conexao.close()
-        return True
-    
+        return {"sucesso": True, "mensagem": "Atividade deletada!"}
+
     except Exception as erro:
-        print(erro)
-        return False
+        print(f"Erro ao cadastrar usuário: {erro}")
+        
+        if conexao:
+            conexao.rollback()
+        if "1451" in str(erro) or "foreign key constraint" in str(erro).lower():
+            return {
+                "sucesso": False, 
+                "mensagem": "Não é possível excluir: esta atividade está vinculada a um aluno."
+            }
+            
+        print(f"Erro ao deletar sala (ID: {id_atividade}): {erro}")
+        return {"sucesso": False, "mensagem": "Erro interno no servidor."}
+    
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()

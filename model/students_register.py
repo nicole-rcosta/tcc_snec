@@ -40,6 +40,7 @@ def deletar_aluno(rm:str) -> bool:
     try:
         cursor.execute("""delete from tb_alunos where rm_aluno = (%s);""",(rm,) )
         conexao.commit()
+        return {"sucesso": True, "mensagem": "Aluno deletado!"}
 
     except Exception as erro:
         print(f"Erro ao cadastrar usuário: {erro}")
@@ -52,7 +53,7 @@ def deletar_aluno(rm:str) -> bool:
                 "mensagem": "Não é possível excluir: este aluno está cadastrado em uma atividade."
             }
             
-        print(f"Erro ao deletar sala (ID: {cod}): {erro}")
+        print(f"Erro ao deletar sala (ID: {rm}): {erro}")
         return {"sucesso": False, "mensagem": "Erro interno no servidor."}
     
     finally:

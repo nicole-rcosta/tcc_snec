@@ -36,6 +36,7 @@ def deletar_sala(cod:int) -> bool:
     try:
         cursor.execute("""delete from tb_turmas where id_turma = (%s);""",(cod,) )
         conexao.commit()
+        return {"sucesso": True, "mensagem": "Sala deletada!"}
 
     except Exception as erro:
         print(f"Erro ao cadastrar usuário: {erro}")

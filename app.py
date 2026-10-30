@@ -343,7 +343,6 @@ def pagina_prof_selecionar_sala():
 def pagina_prof_registro(id_turma):
     qnt_alunos = buscar_qntd_alunos(id_turma)
     qnt_alunos = qnt_alunos.get("quantidade_alunos")
-    print(qnt_alunos)
     alunos = buscar_alunos(id_turma)
     if alunos.get("sucesso"):
         return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))

@@ -101,19 +101,24 @@ def buscar_alunos_almoco_hoje():
 
     # Filtra pelo dia da semana atual
     query = """
-        SELECT 
-            a.rm_aluno AS rm,
+            SELECT 
+            ha.rm_aluno AS rm,
             a.nome_aluno AS aluno,
             t.turma AS ano,
-            act.atividade,
-            COALESCE(ha.atendido, FALSE) AS status
-        FROM tb_alunos a
-        JOIN tb_turmas t ON a.id_turma = t.id_turma
-        JOIN tb_aluno_atividade aa ON a.rm_aluno = aa.rm_aluno
-        JOIN tb_atividades act ON aa.id_atividade = act.id_atividade
-        LEFT JOIN tb_his_almoco ha ON ha.rm_aluno = a.rm_aluno AND ha.data = CURRENT_DATE()
-        WHERE aa.dia_semana = %s
-        ORDER BY a.nome_aluno ASC;
+            act.atividade AS atividade,
+            ha.atendido AS status
+            FROM tb_his_almoco ha
+            INNER JOIN tb_alunos a 
+                ON ha.rm_aluno = a.rm_aluno
+            INNER JOIN tb_turmas t 
+                ON a.id_turma = t.id_turma
+            INNER JOIN tb_aluno_atividade aa 
+                ON ha.rm_aluno = aa.rm_aluno
+            INNER JOIN tb_atividades act 
+                ON aa.id_atividade = act.id_atividade
+            WHERE ha.data = CURRENT_DATE()
+            AND aa.dia_semana = %s
+            ORDER BY a.nome_aluno ASC;
     """
 
     cursor.execute(query, (dia_semana,))

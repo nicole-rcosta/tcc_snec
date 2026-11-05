@@ -292,16 +292,9 @@ def pagina_dashboard():
             turmas=dados.get("turmas", []),          
             total_lanches=dados.get("total_lanches", 0),
             total_almocos=dados.get("total_almocos", 0),
-            todas_concluidas=dados.get("todas_concluidas", False)
-        )
+            todas_concluidas=dados.get("todas_concluidas", False),
+            erro=dados.get("mensagem") if dados else "Erro ao conectar ao banco de dados")
     
-    return render_template("nutri/nutritionist_dashboard.html", usuario=nome_usuario,
-        turmas=[],
-        total_lanches=0,
-        total_almocos=0,
-        todas_concluidas=False,
-        erro=dados.get("mensagem") if dados else "Erro ao conectar ao banco de dados")
-
     
 
 @app.route("/nutri_dashboard/report")
@@ -332,7 +325,7 @@ def api_atualizar_almoco():
 
     # Obtém o ID do usuário conectado na sessão (se houver login)
     usuario_sessao = session.get("usuario", {})
-    id_usuario = usuario_sessao.get("id_usuario", None)
+    id_usuario = session.get("usuario")["id"]
 
     resultado = atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario)
     return jsonify(resultado)

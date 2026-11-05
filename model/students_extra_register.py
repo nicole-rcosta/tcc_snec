@@ -29,6 +29,9 @@ def excluir_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:
 
 
 def recuperar_alunos_atividade():
+    """
+       Recupera alunos cadastrados em atividades-extracurriculares.
+    """
     conexao,cursor = conectar()
     cursor.execute("""SELECT
                             tb_alunos.nome_aluno AS nome,

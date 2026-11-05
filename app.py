@@ -287,15 +287,12 @@ def pagina_painel_adm_rejeitar(id):
 
 @app.route("/nutri_dashboard")
 def pagina_dashboard():
-
-    usuario = session.get('usuario')
-       
-    if not usuario or usuario.get('cargo') != 'nutri':
-        return redirect("/login")
-        
     # Chama a função que busca e processa os dados do MySQL
     dados = recuperar_dados_dashboard()
 
+
+    nome_usuario = session.get("usuario_nome", "Nutricionista")
+       
     if dados and dados.get("sucesso"):
         # Renderiza o HTML passando todas as variáveis necessárias
         return render_template(

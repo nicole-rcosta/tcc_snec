@@ -6,7 +6,7 @@ from model.class_register import recuperar_salas, adicionar_sala, deletar_sala
 from model.students_register import recuperar_alunos, adicionar_aluno, deletar_aluno
 from model.nutri_dashboard import recuperar_dados_dashboard, buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
 from model.students_extra_register import recuperar_alunos_atividade, adicionar_aluno_atividade, excluir_aluno_atividade
-from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos
+from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos, buscar_his_lanche
 from model.adm_access import buscar_adm, buscar_usuario_pendente, rejeitar_usuario, aprovar_usuario
 import secrets
 import time
@@ -45,7 +45,6 @@ def logar_usuario():
         elif cargo == 'adm':
             return render_template("/adm/admin_item_register.html")
     else:
-        print(resultado['mensagem'])
         if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.':
             return render_template("login/auth_login.html", erro = resultado['mensagem'])
         elif resultado['mensagem'] == "Usuário não encontrado. Cadastre-se!":
@@ -244,9 +243,6 @@ def pagina_cad_aluno_ativ_delete(id,atividade,dia):
 
     return redirect("/adm/reg_student_extra")
 
-@app.route("/adm/conf_panel")
-def pagina_confirmar_painel():
-    return render_template("adm/admin_confirm.html")
 
 @app.route("/adm/conf_panel/post", methods=["POST"])
 def verificar_adm():
@@ -256,9 +252,9 @@ def verificar_adm():
     if busca_adm_resp.get("sucesso"):
         return redirect("/adm/adm_panel")
     elif busca_adm_resp.get("mensagem") == "Senha incorreta!":
-        return render_template("adm/admin_confirm.html", erro = busca_adm_resp.get("mensagem"))
+        return render_template("adm/admin_item_register.html", erro = busca_adm_resp.get("mensagem"))
     else:
-        return redirect("/adm/conf_panel")
+        return redirect("/adm")
 
 @app.route("/adm/adm_panel")
 def pagina_painel_adm():
@@ -357,12 +353,18 @@ def pagina_prof_selecionar_sala():
 @app.route("/teacher/class_info/<id_turma>")
 def pagina_prof_registro(id_turma):
     qnt_alunos = buscar_qntd_alunos(id_turma)
+    qnt_alunos = buscar_qntd_alunos(id_turma).get("quantidade_alunos")
     alunos = buscar_alunos(id_turma)
-    print(alunos)
-    if alunos.get("sucesso"):
-        return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))
+    his_lanche = buscar_his_lanche(id_turma)
+    turmas = buscar_turmas()
+
+    if his_lanche.get("sucesso"):
+        return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"), erro=his_lanche.get("mensagem"))
     else:
-        return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, erro=alunos.get("mensagem"))
+        if alunos.get("sucesso"):
+            return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))
+        else:
+            return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, erro=alunos.get("mensagem"))
 
 @app.route("/teacher/class_info/confirm/<int:id_turma>", methods=['POST'])
 def pagina_confirmacao_prof(id_turma):

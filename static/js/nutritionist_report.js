@@ -14,6 +14,7 @@ async function carregarAlunosAlmoco() {
 
         // Atualiza os contadores no HTML se os elementos existirem
         const totalElement = document.getElementById('total-almoco');
+        const totalElementDashboard = document.getElementById('total-almoco-dashboard');
         const dataElement = document.getElementById('data-hoje');
 
         if (totalElement) totalElement.innerText = dados.total_dia;

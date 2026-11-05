@@ -43,11 +43,11 @@ body {
   font-size: 1.6rem;
   color: var(--color-orange);
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 15px;
 }
 
 .progress-bar {
-  width: 180px;
+  width: 50%;
   height: 8px;
   border-radius: 4px;
   overflow: hidden;
@@ -87,6 +87,7 @@ body {
 }
 
 .activities__label--students {
+  margin-top: 10px;
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-main);
@@ -312,7 +313,7 @@ body {
   .activities {
     width: 100%;
     margin: 12px auto;
-    padding: 0 12px;
+    padding: 24px 12px;
     gap: 16px;
   }
 
@@ -405,7 +406,8 @@ body {
   }
 
   .activities__actions {
-    flex-direction: column-reverse; 
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 12px;
   }
@@ -418,6 +420,30 @@ body {
     text-align: center;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Modal */
 .modal-overlay {
@@ -478,7 +504,7 @@ body {
 }
 
 .progress--step-3 {
-  width: 180px;
+  width: 50%;
   height: 10px;
   background-color: color-mix(in srgb, var(--text-secondary) 20%, transparent);
   border-radius: 4px;

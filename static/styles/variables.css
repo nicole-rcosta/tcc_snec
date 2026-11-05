@@ -25,6 +25,9 @@
 }
 
 [data-theme="dark"] {
+
+  color-scheme: dark;
+
   --color-orange: #FF601C;
   --color-yellow: #FBC754;
   --color-green:  #5AAF90;

@@ -84,7 +84,7 @@ def buscar_alunos(id_turma):
         if alunos:
             return {"sucesso": True, "alunos": alunos}
         else:
-            return {"sucesso": False, "mensagem": "Nenhum aluno cadastrado."}
+            return {"sucesso": False, "mensagem": "Nenhum aluno cadastrado em atividades hoje."}
     
     except Exception as erro:
         print(f"Erro ao cadastrar usuário: {erro}")

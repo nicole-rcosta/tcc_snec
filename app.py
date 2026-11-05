@@ -18,47 +18,64 @@ from model.inserts_csv import inserir_excel_bcd
 app = Flask(__name__)
 app.secret_key = "snec_tcc_chave"
 
-
 @app.route("/")
 
+#Rota que exibe a página de login
 @app.route("/login")
 def pagina_login():
     return render_template("login/auth_login.html")
+
+# Rota que envia os dados do formulário para fazer o login
 @app.route("/login/post", methods=["POST"])
 def logar_usuario():
+
+    # Pega os dados do formulário e guarda em variáveis
     cpf = request.form.get("cpf-real")
     senha = request.form.get("password")
 
+    # Define a senha mestra já criptografada
     senha_cript_mestra = "$2b$12$WpdfRGaObonrj/OnjmTHM.BcB73YWHLsf2KXQuN0h.hxgK6EJjd8W"
 
+    # Verifica se o usuário é o administrador master e redireciona pra página de primeiro acesso
     if (cpf == '00000000000') and vsm(senha, senha_cript_mestra):
         return render_template("adm/admin_register.html")
 
+    # Guarda o retorno da função logar dentro de uma variável
     resultado = logar(cpf, senha)
 
+    # Verifica se o login foi bem sucedido e guarda o usuário na session
     if resultado['sucesso']:
         session['usuario'] = resultado['usuario']
         cargo = resultado['usuario']['cargo']
+        # Redireciona o usuário à tela inicial do seu respectivo cargo
         if cargo == 'prof':
             return redirect('/teacher')
         elif cargo == 'nutri':
             return redirect('/nutri_dashboard')
         elif cargo == 'adm':
             return render_template("/adm/admin_item_register.html")
+        
+    # Caso a função de logar não tenha sido bem sucedida
     else:
+        # Exibe mensagem de erro caso o CPF ou SENHA sejam inválidos
         if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.':
             return render_template("login/auth_login.html", erro = resultado['mensagem'])
+        # Exibe mensagem de erro caso o usuário não exista
         elif resultado['mensagem'] == "Usuário não encontrado. Cadastre-se!":
             return redirect("/cadastro")
         else:
             pass
-            ######################################### ERRO INTERNO -> EXIBIR MODAL
 
+#Rota que exibe a página de cadastro
 @app.route("/cadastro")
 def pagina_cadastro():
     return render_template("/register/auth_register.html")
+
+# Rota que envia os dados do formulário para fazer o cadastro
 @app.route("/cadastro/post", methods=["POST"])
 def cadastrar_usuario():
+
+    # Pega os dados do formulário e guarda em variáveis
     nome = request.form.get("name")
     cpf = request.form.get("cpf-real")
     email = request.form.get("email")
@@ -66,32 +83,37 @@ def cadastrar_usuario():
     senha = request.form.get("password")
     status = "pendente"
 
+    # Guarda o retorno da função cadastro dentro de uma variável
     cadastro_resp = cadastrar(nome, email, cargo, senha, cpf, status)
+
+    # Verifica se o cadastro foi bem sucedido e redireciona o usuário pra página de login
     if cadastro_resp['sucesso']:
         return render_template("/login/auth_login.html")
     else:
+    # Caso tenha erros no cadastro, exibe uma mensagem de erro  
         if cadastro_resp['mensagem'] == "CPF inválido." or cadastro_resp['mensagem'] == "CPF já cadastrado." or cadastro_resp["mensagem"] == "Este email já pertence a um usuario.":
             return render_template("/register/auth_register.html", erro = cadastro_resp['mensagem'])
         else:
             return redirect("/cadastro")
-            ######################################### ERRO INTERNO -> EXIBIR MODAL
     
 # ---------------------------
 # Paginas de Administrador
 # ---------------------------
 
+# Rota que exibe a página inicial de adm
 @app.route("/adm")
 def pagina_adm():
     return render_template("/adm/admin_item_register.html")
 
-
+# Rota que exibe a página de cadastro de primeiro acesso do ADM master
 @app.route("/adm_register")
 def pagina_adm_register():
     return render_template("/adm/admin_register.html")
 
-
+# Rota que envia os dados do formulário para fazer o cadastro de primeiro acesso 
 @app.route("/adm_register/post", methods=["POST"])
 def cadastrar_adm():
+    # Pega os dados do formulário e guarda em variáveis
     nome = request.form.get("name")
     cpf = request.form.get("cpf-real")
     email = request.form.get("email")
@@ -100,6 +122,7 @@ def cadastrar_adm():
     cargo = "adm"
     status = "aprovado"
 
+    # Verifica se as senhas digitadas correspondem
     if senha == confirmar_senha:
         if cadastrar(nome, email, cargo, senha, cpf, status):
             return render_template("/login/auth_login.html")
@@ -108,165 +131,221 @@ def cadastrar_adm():
     else:
         flash("Digite a mesma senha para confirmar.")
         return redirect("/adm_register")
-
+    
+# Rota que exibe a página de cadastro de atividades
 @app.route("/adm/reg_activity")
 def pagina_cad_atividade():
+    # Recupera as atividades e guarda em uma varíavel
     atividades = ra()
     return render_template("adm/admin_extra_activity_register.html", atividades=atividades)
 
+# Rota que envia os dados da atividade para fazer o cadastro
 @app.route("/adm/reg_activity/post", methods=["POST"])
 def pagina_cad_atividades():
+
+    # Pega os dados do formulário e guarda em variáveis
     ativid = request.form.get("activity_name")
     periodo = request.form.get("activity_period")
 
+    # verifica se os campos estão preenchidos
     if ativid and periodo:
+
+        # cadastra atividade
         ca(ativid, periodo)
 
     return redirect(url_for("pagina_cad_atividade"))
         
-
+# Rota que deleta uma atividade de acordo com ID enviado
 @app.route("/adm/exc_activity/<id_atividade>", methods=["POST"])
 def excluir_atividades(id_atividade):
+
+    # deleta atividade
     delete = ea(id_atividade)
     if delete['sucesso']:
         return redirect("/adm/reg_activity")
     else:
+
+        # em caso de erros, exibe a mensagem de erro no terminal
         erro = delete['mensagem']
         flash(erro)
         return redirect("/adm/reg_activity")
 
 
-
+#Rota que exibe a página de cadastrar sala
 @app.route("/adm/reg_class")
 def pagina_cad_sala():
+
+    # Recupera salas cadastradas e guarda em uma variável
     salas = recuperar_salas()
     return render_template("adm/admin_room_register.html", salas = salas)
 
+# Rota que envia os dados da sala para fazer o cadastro
 @app.route("/adm/reg_class/post", methods=["POST"])
 def pagina_cad_sala_post():
+
+    # Pega os dados do formulário e guarda em variáveis
     turma= request.form.get("room_class")
     periodo= request.form.get("room_period")
     qnt_aluno= request.form.get("class_quantity")
+
+    # Cadastra salas
     adicionar_sala(turma=turma,periodo=periodo,qnt_alunos=qnt_aluno)
     return redirect("/adm/reg_class")
 
+# Rota que deleta uma sala de acordo com ID enviado
 @app.route("/adm/reg_class/delete/<int:id>")
 def pagina_cad_sala_del(id):
+
+    # deleta sala
     delete = deletar_sala(id)
     if delete['sucesso']:
         return redirect("/adm/reg_class")
+
+    # em caso de erros, exibe a mensagem de erro no terminal
     else:
         erro = delete['mensagem']
         flash(erro)
         return redirect("/adm/reg_class")
 
 
-
-
+#Rota que exibe a página de cadastrar aluno
 @app.route("/adm/reg_student")
 def pagina_cad_aluno():
+
+    # Recupera alunos cadastrados e guarda em uma variável
     alunos = recuperar_alunos()
+
+    # Recupera salas cadastradas e guarda em uma variável
     salas = recuperar_salas()
     return render_template("adm/admin_student_register.html", alunos=alunos,salas=salas)
 
+# Rota que envia os dados do aluno para fazer o cadastro
 @app.route("/adm/reg_student/post", methods=["POST"])
 def pagina_cad_aluno_post():
 
+    # Pega os dados do formulário e guarda em variáveis
     rm = request.form.get("student_rm")
     nome_aluno = request.form.get("student_name")
     id_turma = request.form.get("student_class")
 
-
+    # Cadastra o aluno
     adicionar_aluno(rm,nome_aluno,id_turma)
 
     return redirect("/adm/reg_student")
 
-
+# Rota que deleta um estudante de acordo com ID enviado
 @app.route("/adm/reg_student/delete/<int:id>")
 def pagina_cad_aluno_delete(id):
+
+    # deleta sala
     delete = deletar_aluno(id)
     if delete['sucesso']:
         return redirect("/adm/reg_student")
+
+    # em caso de erros, exibe a mensagem de erro no terminal
     else:
         erro = delete['mensagem']
         flash(erro)
         return redirect("/adm/reg_student")
 
-
+# Rota que cadastra alunos pela planilha do EXCEL
 @app.route("/adm/reg_student/excel", methods=["POST"])
 def pegar_excel_pag_student():
+
+    # Pega o arquivo enviado pelo usuário e guarda dentro de uma variável
     arquivo = request.files.get('input_excel')
 
+    # Chama a função de cadastrar e verifica se deu certo
     if inserir_excel_bcd(arquivo):
         return redirect("/adm/reg_student")
+
+    # Exibe mensagem de erro caso não deu certo
     else:
         flash("Dados Inválidos! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
 
-
+# Rota que cadastra alunos pela planilha CSV
 @app.route("/adm/reg_student/csv", methods=["POST"])
 def pegar_csv_pag_student():
+
+    # Pega o arquivo enviado pelo usuário e guarda dentro de uma variável
     arquivo = request.files.get('input_csv')
-    
+
+    # Chama a função de cadastrar e verifica se deu certo
     if inserir_excel_bcd(arquivo):
         return redirect("/adm/reg_student")
+
+    # Exibe mensagem de erro caso não deu certo
     else:
         flash("Dados Inválidos! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
 
 
 
-
+# Rota que exibe a tela de cadastro dos alunos nas atividades
 @app.route("/adm/reg_student_extra")
 def pagina_cad_aluno_ativ():
+
+    # Recupera os dados já cadastrados e guardam em uma variável
     alunos = recuperar_alunos()
     atividades= ra()
     alunos_atv = recuperar_alunos_atividade()
     return render_template("adm/admin_student_extra_register.html", alunos=alunos, atividades=atividades, alunos_atv=alunos_atv)
 
-
+# Rota que cadastra os alunos nas atividades 
 @app.route("/adm/reg_student_extra/post", methods=["POST"])
 def pagina_cad_aluno_ativ_post():
 
+    # Pega os dados dos formulários e guarda em variáveis
     rm = request.form.get("student_rm")
     id_atividade = request.form.get("student_activity")
     dia_semana = request.form.get("student_week-day")
 
+    # cadastra aluno na atividade
     adicionar_aluno_atividade(rm,id_atividade,dia_semana)
 
     return redirect("/adm/reg_student_extra")
 
-
+# Rota que deleta um estudante de acordo com ID enviado
 @app.route("/adm/reg_student_extra/delete/<int:id>/<int:atividade>/<string:dia>")
 def pagina_cad_aluno_ativ_delete(id,atividade,dia):
 
+    # deleta sala
     excluir_aluno_atividade(id,atividade,dia)
 
     return redirect("/adm/reg_student_extra")
 
-
+# Rota que verifica se o usuário é um admin para poder aprovar outros cargos
 @app.route("/adm/conf_panel/post", methods=["POST"])
 def verificar_adm():
+
+    # Pega os dados do formulário e guarda em variáveis
     id_usuario = session.get("usuario")["id"]
     senha = request.form.get("password")
     busca_adm_resp = buscar_adm(id_usuario, senha)
     if busca_adm_resp.get("sucesso"):
         return redirect("/adm/adm_panel")
+
+    # Em caso de erro exibe mensafgem na interface
     elif busca_adm_resp.get("mensagem") == "Senha incorreta!":
         return render_template("adm/admin_item_register.html", erro = busca_adm_resp.get("mensagem"))
     else:
         return redirect("/adm")
 
+# Rota que exibe a tela de aprovação de usuário
 @app.route("/adm/adm_panel")
 def pagina_painel_adm():
+    # Recupera usuários que ainda estão pendentes
     usuarios_pendentes = buscar_usuario_pendente().get("mensagem")
     return render_template("adm/admin_access.html", usuarios_pendentes = usuarios_pendentes)
 
+# Rota que aprova usuário pelo id
 @app.route("/adm/adm_panel/approve/<int:id>")
 def pagina_painel_adm_aprovar(id):
     aprovar_usuario(id)
     return redirect("/adm/adm_panel")
 
+# Rota que rejeita usuário pelo id
 @app.route("/adm/adm_panel/reject/<int:id>")
 def pagina_painel_adm_rejeitar(id):
     rejeitar_usuario(id)
@@ -277,6 +356,7 @@ def pagina_painel_adm_rejeitar(id):
 # Paginas de Nutricionista
 # ---------------------------
 
+# Rota que exibe o dashboard da nutricionista
 @app.route("/nutri_dashboard")
 def pagina_dashboard():
     # Chama a função que busca e processa os dados do MySQL
@@ -299,7 +379,7 @@ def pagina_dashboard():
     )
 
     
-
+# Rota que exibe o dashboard de pessoas que vão ficar para o almoço
 @app.route("/nutri_dashboard/report")
 def pagina_dashboard_report():
     return render_template("nutri/nutritionist_report.html")
@@ -337,23 +417,32 @@ def api_atualizar_almoco():
 # Paginas de Professor
 # ---------------------------
 
+# Rota que exibe página inicial de professor
 @app.route("/teacher")
 def pagina_prof_selecionar_sala():
+    # Recupera turmas cadastradas e guarda em uma variável
     turmas = buscar_turmas()
 
+    # verifica se a "Recuperação foi bem sucedida"
     if turmas.get("sucesso"):
         return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"))
     else:
         return render_template("teacher/teacher_class_select.html", erro = turmas.get("mensagem"))
 
+# Rota que exibe informação da turma de acordo com o ID
 @app.route("/teacher/class_info/<id_turma>")
 def pagina_prof_registro(id_turma):
+
+    # Recupera quantidade de alunos da turma
     qnt_alunos = buscar_qntd_alunos(id_turma)
     qnt_alunos = buscar_qntd_alunos(id_turma).get("quantidade_alunos")
+
+    # Recupera dados já cadastrados
     alunos = buscar_alunos(id_turma)
     his_lanche = buscar_his_lanche(id_turma)
     turmas = buscar_turmas()
 
+    # Verifica se o processo foi bem sucedido para avançar para a próxima página
     if his_lanche.get("sucesso"):
         return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"), erro=his_lanche.get("mensagem"))
     else:

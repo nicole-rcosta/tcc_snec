@@ -431,7 +431,6 @@ def pagina_prof_selecionar_sala():
     
    turmas = buscar_turmas()
     # Recupera turmas cadastradas e guarda em uma variável
-    turmas = buscar_turmas()
 
    if turmas.get("sucesso"):
     # verifica se a "Recuperação foi bem sucedida"

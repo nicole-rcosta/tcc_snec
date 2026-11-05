@@ -34,6 +34,9 @@ def recuperar_alunos():
 
 
 def deletar_aluno(rm:str) -> bool:
+    """
+        Deleta o aluno com as informações passadas através dos parâmetros.
+    """
 
     conexao,cursor = conectar()
 

@@ -3,6 +3,9 @@ from database.conexao import conectar
 import mysql.connector
 
 def inserir_excel_bcd(arquivo):
+    """
+        Insere alunos por meio de uma planilha.
+    """
     try:
         extensao =  arquivo.filename.rsplit('.', 1)[1].lower()
 

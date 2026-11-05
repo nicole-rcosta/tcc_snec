@@ -102,9 +102,15 @@ def cadastrar_usuario():
 # Rota que exibe a página inicial de adm
 @app.route("/adm")
 def pagina_adm():
-    return render_template("/adm/admin_item_register.html")
+    usuario = session.get('usuario')
+    if not usuario or usuario.get('cargo') != 'adm':
+        return redirect("/login")
 
-# Rota que exibe a página de cadastro de primeiro acesso do ADM master
+    nome = usuario.get('nome')
+    return render_template("/adm/admin_item_register.html", nome_usuario=nome)
+
+
+
 @app.route("/adm_register")
 def pagina_adm_register():
     return render_template("/adm/admin_register.html")
@@ -360,10 +366,10 @@ def pagina_painel_adm_rejeitar(id):
 def pagina_dashboard():
     # Chama a função que busca e processa os dados do MySQL
     dados = recuperar_dados_dashboard()
-    
-    # Pega o nome do usuário da sessão ou define um padrão
-    nome_usuario = session.get("usuario_nome", "Nutricionista")
 
+
+    nome_usuario = session.get("usuario_nome", "Nutricionista")
+       
     if dados and dados.get("sucesso"):
         # Renderiza o HTML passando todas as variáveis necessárias
         return render_template(
@@ -417,18 +423,34 @@ def api_atualizar_almoco():
 # Rota que exibe página inicial de professor
 @app.route("/teacher")
 def pagina_prof_selecionar_sala():
+
+   usuario = session.get('usuario')
+   
+   if not usuario or usuario.get('cargo') != 'prof':
+        return redirect("/login")
+    
+   turmas = buscar_turmas()
     # Recupera turmas cadastradas e guarda em uma variável
     turmas = buscar_turmas()
 
+   if turmas.get("sucesso"):
     # verifica se a "Recuperação foi bem sucedida"
     if turmas.get("sucesso"):
         return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"))
-    else:
+   else:
         return render_template("teacher/teacher_class_select.html", erro = turmas.get("mensagem"))
+
 
 # Rota que exibe informação da turma de acordo com o ID
 @app.route("/teacher/class_info/<id_turma>")
 def pagina_prof_registro(id_turma):
+
+    usuario = session.get('usuario')
+       
+    if not usuario or usuario.get('cargo') != 'prof':
+        return redirect("/login")
+        
+
 
     # Recupera quantidade de alunos da turma
     qnt_alunos = buscar_qntd_alunos(id_turma)

@@ -15,7 +15,8 @@
     <section class="classes-status">
         <div class="classes__greeting-wrapper">
             <div class="classes__greeting">
-                <p>Olá, Professor(a)!</p>
+                
+                <p>Olá, {{ session['usuario']['nome'] if session.get('usuario') and session['usuario'].get('nome') else 'Administrador(a)' }}!</p>
             </div>
         </div>
 

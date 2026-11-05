@@ -103,8 +103,8 @@ def cadastrar_usuario():
 @app.route("/adm")
 def pagina_adm():
     usuario = session.get('usuario')
-    if not usuario or usuario.get('cargo') != 'adm':
-        return redirect("/login")
+    # if not usuario or usuario.get('cargo') != 'adm':
+    #     return redirect("/login")
 
     nome = usuario.get('nome')
     return render_template("/adm/admin_item_register.html", nome_usuario=nome)
@@ -368,9 +368,9 @@ def pagina_dashboard():
     dados = recuperar_dados_dashboard()
 
 
-    nome_usuario = session.get("usuario", "Nutricionista")
+    nome_usuario = session.get("usuario_nome", "Nutricionista")
        
-    if dados.get("sucesso"):
+    if dados and dados.get("sucesso"):
         # Renderiza o HTML passando todas as variáveis necessárias
         return render_template(
             "nutri/nutritionist_dashboard.html",
@@ -378,11 +378,8 @@ def pagina_dashboard():
             turmas=dados.get("turmas", []),          
             total_lanches=dados.get("total_lanches", 0),
             total_almocos=dados.get("total_almocos", 0),
-            todas_concluidas=dados.get("todas_concluidas", False))
-    else:
-        return render_template(
-            "nutri/nutritionist_dashboard.html",
-            erro=dados.get("mensagem"))
+            todas_concluidas=dados.get("todas_concluidas", False),
+            erro=dados.get("mensagem") if dados else "Erro ao conectar ao banco de dados")
     
     
 # Rota que exibe o dashboard de pessoas que vão ficar para o almoço
@@ -429,11 +426,12 @@ def pagina_prof_selecionar_sala():
 
    usuario = session.get('usuario')
    
-   if not usuario or usuario.get('cargo') != 'prof':
-        return redirect("/login")
+#    if not usuario or usuario.get('cargo') != 'prof':
+#         return redirect("/login")
     
    turmas = buscar_turmas()
-    # Recupera turmas cadastradas e guarda em uma variável
+   # Recupera turmas cadastradas e guarda em uma variável
+   turmas = buscar_turmas()
 
    if turmas.get("sucesso"):
     # verifica se a "Recuperação foi bem sucedida"
@@ -449,8 +447,8 @@ def pagina_prof_registro(id_turma):
 
     usuario = session.get('usuario')
        
-    if not usuario or usuario.get('cargo') != 'prof':
-        return redirect("/login")
+    # if not usuario or usuario.get('cargo') != 'prof':
+    #     return redirect("/login")
         
 
 

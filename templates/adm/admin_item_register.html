@@ -60,12 +60,36 @@
 
             <hr class="admin-panel__divider" aria-hidden="true">
 
-            <a href="/adm/conf_panel">
-                <button type="button" class="admin-panel__button admin-panel__button--access">
+                <button id="abrirModal" type="button" class="admin-panel__button admin-panel__button--access">
                     <span class="admin-panel__button-text">Controle de Acesso</span>
                 </button>
-            </a>
         </section>
+
     </main>
+    <section class="admin-confirm {% if erro %} ativo {% endif %}" id="modal">
+            <section class="admin-confirm__card">
+                <button class="modal-backbutton" id="fecharBtn"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                <h2 class="admin-confirm__title">Confirme que você é o administrador:</h2>
+
+                <form action="/adm/conf_panel/post" method="POST" class="admin-confirm__form">
+                    <div class="admin-confirm__field admin-confirm__field--password">
+                        <label for="admin-password" class="admin-confirm__label admin-confirm__label--password">Insira a sua
+                            senha:</label>
+                        <input type="password" id="admin-password" name="password"
+                            class="admin-confirm__input admin-confirm__input--password" placeholder="••••••••" required>
+                    </div>
+
+                    {% if erro %}
+                    <span class="admin__message-error">{{ erro }}</span>
+                    {% endif %}
+
+                    <div class="admin-confirm__actions">
+                        <button type="submit" class="admin-confirm__button admin-confirm__button--submit">Confirmar</button>
+                    </div>
+                </form>
+            </section>
+        </section>
+
+        <script src="/static/js/modal_painel_adm.js"></script>
 
 {% endblock %}

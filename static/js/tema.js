@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para aplicar o tema e atualizar o ícone
     function applyTheme(theme) {
         htmlElement.setAttribute('data-theme', theme);
+        htmlElement.style.colorScheme = theme;
         localStorage.setItem('app-theme', theme);
 
         if (theme === 'dark') {

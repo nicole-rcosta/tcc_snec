@@ -1,10 +1,18 @@
 @import url(/static/styles/global.css);
 
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
   overflow-y: auto;
   scrollbar-width: none; 
 }
-
 
 body {
   background-color: var(--bg-dot-color-main);
@@ -15,22 +23,22 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+
 .dashboard {
   max-width: 800px;
+  width: 100%;
   margin: 2rem auto;
-  padding: 0 1rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 
   background-color: var(--bg-card);
-  padding: 30px;
   border-radius: 20px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  width: 100vw;
 }
 
-/* Card Totalizador */
+
 .dashboard__total-card {
   background-color: rgba(90, 175, 144, 0.15);
   border-radius: 16px;
@@ -42,7 +50,6 @@ body {
   border: 1px solid rgba(120, 130, 140, 0.12);
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
 
 .dashboard__total-label {
   color: var(--color-blue);
@@ -65,7 +72,7 @@ body {
   margin: 0;
 }
 
-/* Seção de Listagem (Verde no modo claro, fundo escuro limpo no modo escuro) */
+
 .dashboard__list-section {
   background-color: rgba(90, 175, 144, 0.15);
   border-radius: 16px;
@@ -91,7 +98,7 @@ body {
   font-family: var(--font-primary);
 }
 
-/* Tabela */
+
 .dashboard__table {
   width: 100%;
   border-collapse: collapse;
@@ -142,7 +149,7 @@ body {
   background-color: color-mix(in srgb, var(--text-main) 3%, var(--bg-card));
 }
 
-/* Checkbox Personalizado */
+
 .dashboard__checkbox-label {
   display: inline-flex;
   align-items: center;
@@ -201,11 +208,11 @@ body {
   transform: translateX(-4px);
 }
 
-/* Responsividade */
-@media (max-width: 600px) {
-  main {
+
+@media (max-width: 768px) {
+  .dashboard {
     margin: 1rem auto;
-    padding: 0 0.5rem;
+    padding: 1rem;
   }
 
   .dashboard__total-card {
@@ -233,7 +240,6 @@ body {
   .dashboard__table-body td {
     display: block;
     width: 100%;
-    box-sizing: border-box;
   }
 
   .dashboard__table-body .dashboard__table-row {

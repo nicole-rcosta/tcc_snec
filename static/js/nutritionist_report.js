@@ -17,7 +17,7 @@ async function carregarAlunosAlmoco() {
         const dataElement = document.getElementById('data-hoje');
 
         if (totalElement) totalElement.innerText = dados.total_dia;
-        if (dataElement) dataElement.innerText = `Data Referente ao dia: ${dados.data_hoje}`;
+        if (dataElement) dataElement.innerText = `Informação Referente ao dia: ${dados.data_hoje}`;
 
         const tbody = document.getElementById('tabela-alunos-body');
         if (!tbody) return;

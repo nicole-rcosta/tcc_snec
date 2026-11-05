@@ -82,7 +82,7 @@ body {
 
 .classes__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 30px;
     justify-content: center;
 }
@@ -91,6 +91,7 @@ body {
     width: 160px;
     height: 160px;
     aspect-ratio: 1 / 1; 
+    margin: 0 auto;
 }
 
 .class-card button {
@@ -135,7 +136,7 @@ body {
 }
 
 
-@media (min-width: 768px) {
+@media (min-width: 700px) {
     .classes {
         padding: 40px 32px;
     }

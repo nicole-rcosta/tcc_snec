@@ -28,12 +28,12 @@
 
       <div class="activities__field--students">
         <label class="activities__label--students" for="students-count">Quantos alunos vieram hoje?</label>
-        <input type="number" id="students-count" class="activities__input--students" value="{{ qnt_alunos }}" max="{{ qnt_alunos }}">
+        <input type="number" id="students-count" class="activities__input--students" value="{{ qnt_alunos }}" max="{{ qnt_alunos }}" min="0">
+        <span class="error" style="color:var(--color-red); text-align: center; margin: 5px;"></span>
       </div>
 
       <hr class="divider">
-
-
+      
       <section class="activities__section--counter-shift">
         <h2 class="activities__section-title">Contraturno</h2>
 
@@ -59,17 +59,23 @@
                   <td class="activities__table-cell--shift">{{aluno.periodo}}</td>
                   <td class="activities__table-cell--check">
                     <label class="activities__checkbox-label">
-                      <input type="checkbox" class="activities__checkbox-input" checked>
+                      <input type="checkbox" class="activities__checkbox-input" value="{{aluno. rm_aluno}}" checked>
                       <span class="activities__checkbox-custom"></span>
                     </label>
                   </td>
                 </tr>
               {% endfor %}
             </tbody>
+            {% if erro %}
+            <tfoot>
+              <tr class="activities__table-row">
+                <td colspan="6" style="color:var(--text-secondary); text-align: center;">{{ erro }}</td>
+              </tr>
+            </tfoot>
+            {% endif %}
           </table>
         </div>
       </section>
-
 
       <div class="activities__actions">
         <a href="/teacher"><button class="activities__button--back" type="button">Voltar</button></a>
@@ -92,7 +98,7 @@
       <!-- Cartão com resumo de presença -->
       <section class="confirmation__card">
         <h2 class="confirmation__card-title">Número de alunos presentes:</h2>
-        <span class="confirmation__card-number">32</span>
+        <span class="confirmation__card-number"></span>
         <hr class="confirmation__card-divider">
         <h3 class="confirmation__card-subtitle">Alunos do contraturno presentes:</h3>
         <ul class="confirmation__list">

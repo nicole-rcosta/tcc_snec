@@ -451,9 +451,11 @@ def pagina_prof_registro(id_turma):
         else:
             return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, erro=alunos.get("mensagem"))
 
+# Rota que confirma as atividades da turma de acordo com o ID
 @app.route("/teacher/class_info/confirm/<int:id_turma>", methods=['POST'])
 def pagina_confirmacao_prof(id_turma):
 
+    # Recupera informações já cadastradas
     qtd_alunos = request.form.get('quantidade_alunos')
     rms_contraturnos = request.form.getlist('rms_contraturnos')
 
@@ -462,12 +464,12 @@ def pagina_confirmacao_prof(id_turma):
                            qtd_alunos=qtd_alunos,
                            rms_contraturnos=rms_contraturnos)
 
+# Rota que envia os dados inserido pelo professor para o banco de dados
 @app.route("/teacher/class_info/save/<int:id_turma>", methods=['POST'])
 def salvar_registro_prof(id_turma):
+    # recupera os dados
     dados = request.get_json()
-    
     qtd_alunos = dados.get('quantidade_alunos')
-    
     rms_contraturnos = dados.get('rms_contraturno', [])  # Apenas os RMs marcados pelo professor
     id_usuario = session.get("usuario")["id"]
 

@@ -14,12 +14,10 @@ async function carregarAlunosAlmoco() {
 
         // Atualiza os contadores no HTML se os elementos existirem
         const totalElement = document.getElementById('total-almoco');
-        const totalElementDashboard = document.getElementById('total-almoco-dashboard');
         const dataElement = document.getElementById('data-hoje');
 
         if (totalElement) totalElement.innerText = dados.total_dia;
-        if (totalElementDashboard) totalElementDashboard.innerText = dados.total_dia;
-        if (dataElement) dataElement.innerText = `Data Referente ao dia: ${dados.data_hoje}`;
+        if (dataElement) dataElement.innerText = `Informação Referente ao dia: ${dados.data_hoje}`;
 
         const tbody = document.getElementById('tabela-alunos-body');
         if (!tbody) return;

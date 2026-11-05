@@ -3,6 +3,9 @@ from static.utils.cpf_validation import validar_cpf
 import bcrypt
 
 def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) -> bool:
+    """
+    Cadastra usuário com base no parâmetros passados.
+    """
     conexao = None
     cursor = None
     
@@ -60,6 +63,7 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
             conexao.close()
 
 def logar(cpf: str, senha: str) -> dict:
+    """Verifica CPF e senha cadastrados para a realização do login."""
     conexao = None
     cursor = None
 
@@ -122,9 +126,10 @@ def logar(cpf: str, senha: str) -> dict:
 
 # 
 def verificar_email(email: str) -> bool:
+    """Verifica a existência do E-Mail digitado"""
     conexao = None
     cursor = None
-    # procura o email digitado na tabela pra ver se eele existe
+    # procura o email digitado na tabela pra ver se ele existe
     try:
         conexao, cursor = conectar()
 
@@ -155,6 +160,7 @@ def verificar_email(email: str) -> bool:
             conexao.close()
 
 def atualizar_senha(email: str, nova_senha: str) -> bool:
+    """Atualiza senha com base no email"""
     conexao = None
     cursor = None
 

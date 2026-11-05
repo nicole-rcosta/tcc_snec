@@ -2,6 +2,9 @@ from database.conexao import conectar
 
 
 def recuperar_dados_dashboard():
+    """
+            Recupera dados e exibe no dashboard da Nurticionista.
+    """
     # Desestrutura a conexão e o cursor retornados por conectar()
     conn, cursor = conectar()
 

@@ -4,6 +4,9 @@ from datetime import date
 datas = {0: 'SEG', 1: 'TER', 2: 'QUA', 3: 'QUI', 4: 'SEX'}
 
 def buscar_turmas():
+    """
+        Recupera todas as turmas cadastradas.
+    """
     conexao, cursor = conectar()
     
     try:
@@ -29,6 +32,9 @@ def buscar_turmas():
             conexao.close()    
 
 def buscar_qntd_alunos(id_turma):
+    """
+    Recupera quantidade de alunos das turmas pelo ID
+    """
 
     conexao, cursor = conectar()
 
@@ -51,6 +57,9 @@ def buscar_qntd_alunos(id_turma):
             conexao.close()
 
 def buscar_alunos(id_turma):
+    """
+        Recuperam alunos pelo ID das turmas
+    """
 
     conexao, cursor = conectar()
 
@@ -91,6 +100,9 @@ def buscar_alunos(id_turma):
 
 
 def alunos_presentes(rms_atendidos):
+    """
+    Busca o RM e o nome dos alunos presentes no banco de dados com base em uma lista de RMs.
+    """
     if not rms_atendidos:
         return[]
 
@@ -108,6 +120,9 @@ def alunos_presentes(rms_atendidos):
 
 
 def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
+    """
+        Envia os dados informados do lanche para o banco de dados
+    """
     conexao, cursor = conectar()
 
     try:
@@ -131,7 +146,9 @@ def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
         conexao.close()
 
 def salvar_his_almoco(id_usuario, rms_contraturnos):
-
+    """
+            Envia os dados informados do almoço para o banco de dados
+    """
     print(rms_contraturnos)
 
     conexao, cursor = conectar()
@@ -159,6 +176,9 @@ def salvar_his_almoco(id_usuario, rms_contraturnos):
         conexao.close()
 
 def buscar_his_lanche(id_turma):
+    """
+        Recupera informações enviadas do lanche
+    """
     conexao, cursor = conectar()
 
     try:

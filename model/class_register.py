@@ -17,6 +17,9 @@ def adicionar_sala(turma:str,periodo:str,qnt_alunos:int) -> bool:
 
 
 def recuperar_salas():
+    """
+        Recupera salas já cadastradas 
+    """
     conexao,cursor = conectar()
     cursor.execute("""SELECT id_turma, turma, periodo, quantidade_alunos FROM db_snec.tb_turmas ORDER BY turma;""")
 
@@ -30,7 +33,9 @@ def recuperar_salas():
 
 
 def deletar_sala(cod:int) -> bool:
-
+    """
+        Deleta salas já cadastradas
+    """
     conexao,cursor = conectar()
 
     try:

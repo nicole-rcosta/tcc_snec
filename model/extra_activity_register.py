@@ -1,6 +1,9 @@
 from database.conexao import conectar
 
 def recuperar_atividade():
+    """
+                Recupera atividades já cadastradas.
+    """
     try: 
         conexao, cursor = conectar()
         cursor.execute("SELECT id_atividade, atividade, periodo FROM tb_atividades")
@@ -15,6 +18,10 @@ def recuperar_atividade():
 
 
 def cadastrar_atividade(atividade, periodo):
+    """
+            Cadastra atividades.
+    """
+    
     try:
         conexao, cursor = conectar()
         cursor.execute("INSERT INTO tb_atividades (atividade, periodo) VALUES (%s, %s);", (atividade, periodo))
@@ -28,6 +35,9 @@ def cadastrar_atividade(atividade, periodo):
 
 
 def excluir_atividade(id_atividade):
+    """
+        Exclui ativdades por ID
+    """
 
     conexao, cursor = conectar()
 

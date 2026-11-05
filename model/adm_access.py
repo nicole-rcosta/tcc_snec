@@ -2,6 +2,10 @@ from database.conexao import conectar
 import bcrypt
 
 def buscar_adm(id_usuario, senha):
+    """
+        Busca usuários com o cargo de administrador.
+    """
+    
     conexao, cursor = conectar()
 
     try:
@@ -46,6 +50,10 @@ def buscar_adm(id_usuario, senha):
 
 
 def buscar_usuario_pendente():
+    """
+            Busca usuários com a aprovação pendente.
+    """
+
     conexao, cursor = conectar()
 
     # Busca usuários com aprovação pendente
@@ -76,6 +84,9 @@ def buscar_usuario_pendente():
             conexao.close()
 
 def aprovar_usuario(id):
+    """
+            Atualiza usuários pendentes para aprovados.
+    """
     conexao, cursor = conectar()
 
     try:
@@ -104,6 +115,9 @@ def aprovar_usuario(id):
             conexao.close()
 
 def rejeitar_usuario(id):
+    """
+                Atualiza usuários pendentes para desaprovados.
+    """
     conexao, cursor = conectar()
     # Atualiza status do usuário para 'desaprovado' pelo id
     try:

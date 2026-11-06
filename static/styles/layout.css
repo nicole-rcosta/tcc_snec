@@ -48,15 +48,38 @@
 }
 
 
+
 .btn-theme {
+  transition: all 0.2s ease;
+}
+
+/* Modo Claro: Sol Amarelo */
+[data-theme="dark"] .btn-theme {
+  color: #f5d20b; 
+}
+
+[data-theme="dark"] .btn-theme:hover {
+background-color: rgba(245, 210, 11, 0.18);
+  color: #FFE033;                              
+  border-color: rgba(245, 210, 11, 0.4);
+}
+
+/* Modo Escuro: Lua Cinzenta */
+[data-theme="light"] .btn-theme {
   color: var(--text-secondary);
 }
 
-.btn-theme:hover {
-  background-color: var(--bg-main);
-  color: var(--text-main);
+[data-theme="light"] .btn-theme:hover {
+background-color: rgba(108, 117, 125, 0.15); 
+  color: #495057;                              
+  border-color: #495057;
 }
 
+
+.btn-theme svg {
+  fill: currentColor;
+  stroke: currentColor;
+}
 
 .btn-logout {
   color: var(--color-orange);

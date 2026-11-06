@@ -77,10 +77,10 @@ body {
   right: 18px;
 }
 
+
 .theme-toggle-btn {
   background: none;
   border: none;
-  color: var(--color-orange);
   font-size: 1.25rem;
   cursor: pointer;
   padding: 6px;
@@ -88,12 +88,35 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-.theme-toggle-btn:hover {
+
+[data-theme="light"] .theme-toggle-btn {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .theme-toggle-btn:hover {
+  background-color: rgba(108, 117, 125, 0.15);
+  color: #495057;
   transform: scale(1.1);
-  opacity: 0.85;
+}
+
+
+[data-theme="dark"] .theme-toggle-btn {
+  color: #f5d20b;
+}
+
+[data-theme="dark"] .theme-toggle-btn:hover {
+  background-color: rgba(245, 210, 11, 0.18);
+  color: #FFE033;
+  transform: scale(1.1);
+}
+
+
+.theme-toggle-btn svg {
+  fill: currentColor;
+  stroke: currentColor;
 }
 
 .logo_snec {

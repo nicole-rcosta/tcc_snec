@@ -157,32 +157,28 @@ def salvar_his_almoco(id_usuario:int, rms_contraturnos) -> bool:
         if conexao:
             conexao.close()
 
-def buscar_his_lanche(id_turma:int) -> dict:
-    """Recupera informações enviadas do lanche."""
-
+def existe_his_lanche(id_turma):
+    """
+    Retorna True se já existe registro de lanche da turma hoje, senão False.
+    """
     conexao, cursor = conectar()
 
     try:
-        sql = """
-            SELECT * FROM tb_his_lanche
+        cursor.execute("""
+            SELECT 1 FROM tb_his_lanche
             WHERE id_turma = %s
-            AND data = CURRENT_DATE();
-        """
+            AND data = CURRENT_DATE()
+            LIMIT 1;
+        """, (id_turma,))
 
-        cursor.execute(sql, (id_turma, ))
-        his = cursor.fetchone()
-
-        if his:
-            return {"sucesso": True, "mensagem": "O histórico dessa sala já foi salvo."}
-        else:
-            return {"sucesso": False, "mensagem": "O histórico do dia da turma já foi salvo."}
+        return cursor.fetchone() is not None
 
     except Exception as error:
-        if conexao:
-            conexao.rollback()
-        print(f"Erro ao cadastrar usuário: {error}")
-        return {"sucesso": False, "mensagem": "Erro interno no servidor"}
-
+            if conexao:
+                conexao.rollback()
+            print(f"Erro ao cadastrar usuário: {error}")
+            return False
+        
     finally:
         if cursor:
             cursor.close()

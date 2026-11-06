@@ -5,7 +5,7 @@ from model.class_register import recuperar_salas, adicionar_sala, deletar_sala
 from model.students_register import recuperar_alunos, adicionar_aluno, deletar_aluno
 from model.nutri_dashboard import recuperar_dados_dashboard, buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
 from model.students_extra_register import recuperar_alunos_atividade, adicionar_aluno_atividade, excluir_aluno_atividade
-from model.teacher_attendance_record import buscar_alunos, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos, existe_his_lanche 
+from model.teacher_attendance_record import buscar_alunos, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos, buscar_his_lanche
 from model.adm_access import buscar_adm, buscar_usuario_pendente, rejeitar_usuario, aprovar_usuario
 from model.inserts_csv import inserir_excel_bcd
 from static.utils.verification_password import verificar_senha_mestra as vsm
@@ -430,20 +430,18 @@ def api_atualizar_almoco():
 @app.route("/teacher")
 def pagina_prof_selecionar_sala():
 
-   usuario = session.get('usuario')
-   
-#    if not usuario or usuario.get('cargo') != 'prof':
-#         return redirect("/login")
-    
-   turmas = buscar_turmas()
-   # Recupera turmas cadastradas e guarda em uma variável
-   turmas = buscar_turmas()
+    usuario = session.get('usuario')
 
-   if turmas.get("sucesso"):
+    if not usuario or usuario.get('cargo') != 'prof':
+        return redirect("/login")
+        
+    # Recupera turmas cadastradas e guarda em uma variável
+    turmas = buscar_turmas()
+
     # verifica se a "Recuperação foi bem sucedida"
     if turmas.get("sucesso"):
         return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"))
-   else:
+    else:
         return render_template("teacher/teacher_class_select.html", erro = turmas.get("mensagem"))
 
 
@@ -456,7 +454,7 @@ def pagina_prof_registro(id_turma):
     alunos = buscar_alunos(id_turma) or {}
     
    # Verifica se o usuário já confirmou que deseja continuar mesmo existindo um registro anterior. se sim, a variavel ja_existe vira falsa
-    ja_existe = False if confirmado else existe_his_lanche(id_turma)
+    ja_existe = False if confirmado else buscar_his_lanche(id_turma)
 
     if alunos.get("sucesso"):
         return render_template("teacher/teacher_attendance_record.html",

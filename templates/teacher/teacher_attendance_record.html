@@ -127,7 +127,9 @@
       </p>
       <div class="modal-confirm__actions">
         <a href="{{ url_for('pagina_prof_selecionar_sala') }}" class="modal-confirm__btn modal-confirm__btn--cancel">Cancelar</a>
-        <button type="button" class="modal-confirm__btn modal-confirm__btn--ok" id="confirmarSobrescrever">Sim, continuar</button>
+        <a href="{{ url_for('pagina_prof_registro', id_turma=id_turma, confirmar=True) }}" class="modal-confirm__btn modal-confirm__btn--confirm">
+          <button type="button" id="btn-continuar-sobrescrever">Continuar</button>
+        </a>
       </div>
     </div>
   </div>

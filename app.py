@@ -449,9 +449,12 @@ def pagina_prof_selecionar_sala():
 # Rota que exibe informação da turma de acordo com o ID
 @app.route("/teacher/class_info/<int:id_turma>")
 def pagina_prof_registro(id_turma):
+    confirmado = request.args.get("confirmar", type=bool)
     qnt_alunos = buscar_qntd_alunos(id_turma).get("quantidade_alunos")
-    alunos = buscar_alunos(id_turma) or {}   # buscar_alunos devolve False em caso de erro
-    ja_existe = existe_his_lanche(id_turma)
+    alunos = buscar_alunos(id_turma) or {}
+    
+    # Se já foi confirmado pelo usuário clicando no modal, ja_existe passa a ser False
+    ja_existe = False if confirmado else existe_his_lanche(id_turma)
 
     if alunos.get("sucesso"):
         return render_template("teacher/teacher_attendance_record.html",

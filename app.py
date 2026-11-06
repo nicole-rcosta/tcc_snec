@@ -451,6 +451,7 @@ def pagina_prof_selecionar_sala():
 def pagina_prof_registro(id_turma):
     confirmado = request.args.get("confirmar", type=bool)
     qnt_alunos = buscar_qntd_alunos(id_turma).get("quantidade_alunos")
+    # garante que alunos nao recebe none
     alunos = buscar_alunos(id_turma) or {}
     
     # Se já foi confirmado pelo usuário clicando no modal, ja_existe passa a ser False

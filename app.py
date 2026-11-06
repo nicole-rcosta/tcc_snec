@@ -259,9 +259,16 @@ def pegar_excel_pag_student():
 
     # Pega o arquivo enviado pelo usuário e guarda dentro de uma variável
     arquivo = request.files.get('input_excel')
-
+    resultado = inserir_excel_bcd(arquivo)
     # Chama a função de cadastrar e verifica se deu certo
-    if inserir_excel_bcd(arquivo):
+    if resultado == True:
+        return redirect("/adm/reg_student")
+
+    elif type(resultado) == list:
+        lista = ', '.join(resultado)
+        flash(f"Erro: As seguintes salas não foram digitadas corretamente ou não existem no banco: {lista} ")
+        flash("Verifique se as turmas foram digitadas com o sinal ordinal 'º'")
+        
         return redirect("/adm/reg_student")
 
     # Exibe mensagem de erro caso não deu certo
@@ -275,9 +282,16 @@ def pegar_csv_pag_student():
 
     # Pega o arquivo enviado pelo usuário e guarda dentro de uma variável
     arquivo = request.files.get('input_csv')
-
+    resultado = inserir_excel_bcd(arquivo)
     # Chama a função de cadastrar e verifica se deu certo
-    if inserir_excel_bcd(arquivo):
+    if resultado == True:
+        return redirect("/adm/reg_student")
+
+    elif type(resultado) == list:
+        lista = ', '.join(resultado)
+        flash(f"Erro: As seguintes salas não foram digitadas corretamente ou não existem no banco: {lista} ")
+        flash("Verifique se as turmas foram digitadas com o sinal ordinal 'º'")
+        
         return redirect("/adm/reg_student")
 
     # Exibe mensagem de erro caso não deu certo

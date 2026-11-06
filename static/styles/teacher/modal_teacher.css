@@ -1,0 +1,24 @@
+.modal-confirm { max-width: 480px; }
+
+.modal-confirm__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-confirm__btn {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.modal-confirm__btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.modal-confirm__btn--cancel { background-color: var(--color-orange); }
+.modal-confirm__btn--ok { background-color: var(--color-green); }

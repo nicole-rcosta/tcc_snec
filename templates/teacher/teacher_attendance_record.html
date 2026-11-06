@@ -8,8 +8,9 @@
 
 {% block content %}
 
-
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/teacher/modal_teacher.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/teacher/teacher_attendance_record.css') }}">
+<script src="/static/js/modal_teacher_record.js"></script>
 
 <main class="activities">
 
@@ -112,7 +113,26 @@
     </main>
   </div>
 </div>
-
+{% if ja_existe %}
+<div class="modal-overlay ativo" id="modal-sobrescrever">
+  <div class="modal-import modal-confirm">
+    <div class="modal-header">
+      <h1 class="modal-import--title">Registro já existente</h1>
+    </div>
+    <div class="modal-import__box">
+      <p class="import__box--text">
+        Já existe um registro salvo para esta sala hoje.<br>
+        Se você continuar, ao salvar o registro atual será <strong>sobrescrito</strong>.
+        Deseja continuar?
+      </p>
+      <div class="modal-confirm__actions">
+        <a href="{{ url_for('pagina_prof_selecionar_sala') }}" class="modal-confirm__btn modal-confirm__btn--cancel">Cancelar</a>
+        <button type="button" class="modal-confirm__btn modal-confirm__btn--ok" id="confirmarSobrescrever">Sim, continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 <script src="/static/js/modal_teacher_confirm.js"></script>
 
 {% endblock %}

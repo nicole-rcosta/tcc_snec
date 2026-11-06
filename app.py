@@ -6,13 +6,14 @@ from model.class_register import recuperar_salas, adicionar_sala, deletar_sala
 from model.students_register import recuperar_alunos, adicionar_aluno, deletar_aluno
 from model.nutri_dashboard import recuperar_dados_dashboard, buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
 from model.students_extra_register import recuperar_alunos_atividade, adicionar_aluno_atividade, excluir_aluno_atividade
-from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos, buscar_his_lanche
+from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos, existe_his_lanche 
 from model.adm_access import buscar_adm, buscar_usuario_pendente, rejeitar_usuario, aprovar_usuario
 import secrets
 import time
 import pandas
 from static.utils.send_email import enviar_email
 from model.inserts_csv import inserir_excel_bcd
+
 
 app = Flask(__name__)
 app.secret_key = "snec_tcc_chave"
@@ -446,33 +447,24 @@ def pagina_prof_selecionar_sala():
 
 
 # Rota que exibe informação da turma de acordo com o ID
-@app.route("/teacher/class_info/<id_turma>")
+@app.route("/teacher/class_info/<int:id_turma>")
 def pagina_prof_registro(id_turma):
-
-    usuario = session.get('usuario')
-       
-    # if not usuario or usuario.get('cargo') != 'prof':
-    #     return redirect("/login")
-        
-
-
-    # Recupera quantidade de alunos da turma
-    qnt_alunos = buscar_qntd_alunos(id_turma)
     qnt_alunos = buscar_qntd_alunos(id_turma).get("quantidade_alunos")
+    alunos = buscar_alunos(id_turma) or {}   # buscar_alunos devolve False em caso de erro
+    ja_existe = existe_his_lanche(id_turma)
 
-    # Recupera dados já cadastrados
-    alunos = buscar_alunos(id_turma)
-    his_lanche = buscar_his_lanche(id_turma)
-    turmas = buscar_turmas()
+    if alunos.get("sucesso"):
+        return render_template("teacher/teacher_attendance_record.html",
+                               id_turma=id_turma,
+                               qnt_alunos=qnt_alunos,
+                               alunos=alunos.get("alunos"),
+                               ja_existe=ja_existe)
 
-    # Verifica se o processo foi bem sucedido para avançar para a próxima página
-    if his_lanche.get("sucesso"):
-        return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"), erro=his_lanche.get("mensagem"))
-    else:
-        if alunos.get("sucesso"):
-            return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))
-        else:
-            return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, erro=alunos.get("mensagem"))
+    return render_template("teacher/teacher_attendance_record.html",
+                           id_turma=id_turma,
+                           qnt_alunos=qnt_alunos,
+                           erro=alunos.get("mensagem", "Erro ao buscar alunos."),
+                           ja_existe=ja_existe)
 
 # Rota que confirma as atividades da turma de acordo com o ID
 @app.route("/teacher/class_info/confirm/<int:id_turma>", methods=['POST'])
@@ -490,26 +482,18 @@ def pagina_confirmacao_prof(id_turma):
 # Rota que envia os dados inserido pelo professor para o banco de dados
 @app.route("/teacher/class_info/save/<int:id_turma>", methods=['POST'])
 def salvar_registro_prof(id_turma):
-    # recupera os dados
     dados = request.get_json()
     qtd_alunos = dados.get('quantidade_alunos')
-    rms_contraturnos = dados.get('rms_contraturno', [])  # Apenas os RMs marcados pelo professor
+    rms_contraturnos = dados.get('rms_contraturno', [])
     id_usuario = session.get("usuario")["id"]
 
-    # Executa a gravação no banco de dados
-    sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario), salvar_his_almoco(id_usuario, rms_contraturnos)
+    sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario) and \
+              salvar_his_almoco(id_turma, id_usuario, rms_contraturnos)
 
     if sucesso:
-        return jsonify({
-            'sucesso': True, 
-            'redirect_url': url_for('pagina_prof_selecionar_sala')
-        }), 200
-    else:
-        return jsonify({
-            'sucesso': False, 
-            'erro': 'Não foi possível salvar o registro.'
-        }), 500
-
+        return jsonify({'sucesso': True,
+                        'redirect_url': url_for('pagina_prof_selecionar_sala')}), 200
+    return jsonify({'sucesso': False, 'erro': 'Não foi possível salvar o registro.'}), 500
 
 
 # =========================================================

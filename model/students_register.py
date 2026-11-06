@@ -31,8 +31,6 @@ def recuperar_alunos():
 
     return alunos
 
-
-
 def deletar_aluno(rm:str) -> bool:
     """
         Deleta o aluno com as informações passadas através dos parâmetros.

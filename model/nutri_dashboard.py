@@ -77,9 +77,6 @@ def recuperar_dados_dashboard():
         cursor.close()
         conexao.close()
 
-
-
-
 def buscar_alunos_almoco_hoje():
     """
     Busca SOMENTE os alunos previstos para o almoço no dia da semana atual 
@@ -139,7 +136,6 @@ def buscar_alunos_almoco_hoje():
         "data_hoje": datetime.date.today().strftime('%d/%m/%Y'),
         "alunos": alunos
     }
-
 
 def atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario=None):
     """

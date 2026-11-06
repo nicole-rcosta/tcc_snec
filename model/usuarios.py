@@ -124,7 +124,7 @@ def logar(cpf: str, senha: str) -> dict:
         if conexao:
             conexao.close()
 
-# 
+# RECUPERAÇÃO DE SENHA
 def verificar_email(email: str) -> bool:
     """Verifica a existência do E-Mail digitado"""
     conexao = None

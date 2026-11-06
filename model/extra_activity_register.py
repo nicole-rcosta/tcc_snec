@@ -15,8 +15,6 @@ def recuperar_atividade():
         print(erro)
         return False
 
-
-
 def cadastrar_atividade(atividade, periodo):
     """
             Cadastra atividades.
@@ -32,7 +30,6 @@ def cadastrar_atividade(atividade, periodo):
     except Exception as erro:
         print(erro)
         return False
-
 
 def excluir_atividade(id_atividade):
     """

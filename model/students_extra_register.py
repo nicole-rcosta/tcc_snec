@@ -1,7 +1,5 @@
 from database.conexao import conectar
 
-
-
 def adicionar_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:
     """
     Adicona o aluno com as informações passadas através dos parâmetros.
@@ -14,7 +12,6 @@ def adicionar_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:
     conexao.commit()
     conexao.close()
 
-
 def excluir_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:
     """
     Adicona o aluno com as informações passadas através dos parâmetros.
@@ -26,7 +23,6 @@ def excluir_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:
 
     conexao.commit()
     conexao.close()
-
 
 def recuperar_alunos_atividade():
     """
@@ -58,4 +54,3 @@ def recuperar_alunos_atividade():
     conexao.close()
 
     return alunos
-

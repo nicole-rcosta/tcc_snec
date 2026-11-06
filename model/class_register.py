@@ -14,20 +14,18 @@ def adicionar_sala(turma:str,periodo:str,qnt_alunos:int) -> bool:
         WHERE turma = %s;
     """
     cursor.execute(sql, (turma, ))
-    turma = cursor.fetchone()
+    turma_result = cursor.fetchone()
 
-    if turma:
-        return {"sucesso": True, "mensagem": "Esta turma já está cadastrada."}
+    if turma_result:
+        return {"sucesso": True, "erro": "Esta turma já está cadastrada."}
     else:
         cursor.execute("""INSERT INTO tb_turmas (turma, periodo, quantidade_alunos)
-                            VALUES (%s,%s,%s);""",(turma,periodo,qnt_alunos) )
-
+                            VALUES (%s,%s,%s);""",(turma, periodo, qnt_alunos) )
         conexao.commit()
+        return {"sucesso": True, "mensagem": "Turma cadastrada com sucesso."}
         
     cursor.close()
     conexao.close()
-
-
 
 def recuperar_salas():
     """
@@ -43,7 +41,6 @@ def recuperar_salas():
     conexao.close()
 
     return salas
-
 
 def deletar_sala(cod:int) -> bool:
     """

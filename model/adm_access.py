@@ -48,7 +48,6 @@ def buscar_adm(id_usuario, senha):
         if conexao:
             conexao.close()
 
-
 def buscar_usuario_pendente():
     """
             Busca usuários com a aprovação pendente.
@@ -143,4 +142,3 @@ def rejeitar_usuario(id):
         if conexao:
             conexao.commit()
             conexao.close()
-    

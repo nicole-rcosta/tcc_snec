@@ -98,27 +98,6 @@ def buscar_alunos(id_turma):
         if conexao:
             conexao.close()
 
-
-def alunos_presentes(rms_atendidos):
-    """
-    Busca o RM e o nome dos alunos presentes no banco de dados com base em uma lista de RMs.
-    """
-    if not rms_atendidos:
-        return[]
-
-    conexao, cursor = conectar()
-
-    try:
-        placeholder = ', '.join(['%s'] * len(rms_atendidos))
-        cursor.execute(f"SELECT rm_aluno, nome_aluno FROM tb_alunos WHERE rm_aluno IN ({placeholder})", tuple(rms_atendidos))
-        alunos_presentes = cursor.fetchall()
-        return alunos_presentes
-
-    finally:    
-        cursor.close()
-        conexao.close()
-
-
 def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
     """
         Envia os dados informados do lanche para o banco de dados

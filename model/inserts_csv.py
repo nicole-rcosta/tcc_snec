@@ -3,9 +3,10 @@ from database.conexao import conectar
 import mysql.connector
 
 def inserir_excel_bcd(arquivo):
-    """
-        Insere alunos por meio de uma planilha.
-    """
+    """Insere alunos por meio de uma planilha."""
+
+    conexao, cursor = conectar()
+
     try:
         extensao =  arquivo.filename.rsplit('.', 1)[1].lower()
 
@@ -21,7 +22,6 @@ def inserir_excel_bcd(arquivo):
         else:
             dados = pandas.read_excel(arquivo)
 
-
         dados = dados.dropna(how='all')  
 
         if dados.empty:
@@ -29,9 +29,6 @@ def inserir_excel_bcd(arquivo):
             return False
 
         alunos = dados.to_dict('records')
-        
-        conexao, cursor = conectar()
-
 
         sql = "INSERT INTO tb_alunos (rm_aluno, nome_aluno, id_turma) VALUES "
 
@@ -49,7 +46,6 @@ def inserir_excel_bcd(arquivo):
             cursor.close()
             conexao.close()
             return False
-
 
         sql = sql.rstrip(',') + ';'
 
@@ -84,6 +80,7 @@ def inserir_excel_bcd(arquivo):
     except (mysql.connector.errors.ProgrammingError, pandas.errors.EmptyDataError) as e:
         print(f"Erro ao processar planilha/banco: {e}")
         return False
+    
     except Exception as e:
         print(f"Erro inesperado: {e}")
         return False

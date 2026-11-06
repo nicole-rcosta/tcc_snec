@@ -1,28 +1,32 @@
 from database.conexao import conectar
 
 def recuperar_atividade():
-    """
-                Recupera atividades já cadastradas.
-    """
+    """Recupera atividades já cadastradas."""
+
+    conexao, cursor = conectar()
+
     try: 
-        conexao, cursor = conectar()
-        cursor.execute("SELECT id_atividade, atividade, periodo FROM tb_atividades")
+        sql = """SELECT id_atividade, atividade, periodo FROM tb_atividades;"""
+        cursor.execute(sql)
         atividades = cursor.fetchall()
-        conexao.close()
         return atividades
   
     except Exception as erro:
         print(erro)
         return False
 
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()
 
+def cadastrar_atividade(atividade:str, periodo:str) -> bool:
+    """Cadastra atividades."""
 
-def cadastrar_atividade(atividade, periodo):
-    """
-            Cadastra atividades.
-    """
+    conexao, cursor = conectar()
     try:
-        conexao, cursor = conectar()
+
 
 
         sql = """
@@ -46,16 +50,20 @@ def cadastrar_atividade(atividade, periodo):
         print(erro)
         return False
 
-
-def excluir_atividade(id_atividade):
-    """
-        Exclui ativdades por ID
-    """
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()
+    
+def excluir_atividade(id_atividade:int) -> dict:
+    """Exclui ativdades por ID."""
 
     conexao, cursor = conectar()
 
     try:
-        cursor.execute("""DELETE FROM tb_atividades WHERE id_atividade = %s;""", (id_atividade, ) )
+        sql = """DELETE FROM tb_atividades WHERE id_atividade = %s;"""
+        cursor.execute(sql, (id_atividade, ) )
         conexao.commit()
         return {"sucesso": True, "mensagem": "Atividade deletada!"}
 

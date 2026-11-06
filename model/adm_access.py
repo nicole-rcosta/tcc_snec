@@ -1,11 +1,9 @@
 from database.conexao import conectar
 import bcrypt
 
-def buscar_adm(id_usuario, senha):
-    """
-        Busca usuários com o cargo de administrador.
-    """
-    
+def buscar_adm(id_usuario:int, senha:str) -> dict:
+    """Busca usuários com o cargo de administrador."""
+
     conexao, cursor = conectar()
 
     try:
@@ -48,11 +46,8 @@ def buscar_adm(id_usuario, senha):
         if conexao:
             conexao.close()
 
-
 def buscar_usuario_pendente():
-    """
-            Busca usuários com a aprovação pendente.
-    """
+    """Busca usuários com a aprovação pendente."""
 
     conexao, cursor = conectar()
 
@@ -83,10 +78,9 @@ def buscar_usuario_pendente():
         if conexao:
             conexao.close()
 
-def aprovar_usuario(id):
-    """
-            Atualiza usuários pendentes para aprovados.
-    """
+def aprovar_usuario(id:int) -> dict:
+    """Atualiza usuários pendentes para aprovados."""
+
     conexao, cursor = conectar()
 
     try:
@@ -98,6 +92,8 @@ def aprovar_usuario(id):
         """
 
         aprovar = cursor.execute(sql, (id, ))
+        conexao.commit()
+
         if aprovar:
             return {"sucesso": True, "mensagem": "Usuário Aprovado!"}
         else:
@@ -111,14 +107,13 @@ def aprovar_usuario(id):
         if cursor:
             cursor.close()
         if conexao:
-            conexao.commit()
             conexao.close()
 
-def rejeitar_usuario(id):
-    """
-                Atualiza usuários pendentes para desaprovados.
-    """
+def rejeitar_usuario(id:int) -> dict:
+    """Atualiza usuários pendentes para desaprovados."""
+
     conexao, cursor = conectar()
+
     # Atualiza status do usuário para 'desaprovado' pelo id
     try:
         sql = """
@@ -128,6 +123,8 @@ def rejeitar_usuario(id):
         """
 
         aprovar = cursor.execute(sql, (id, ))
+        conexao.commit()
+
         if aprovar:
             return {"sucesso": True, "mensagem": "Acesso negado ao usuário!"}
         else:
@@ -141,6 +138,4 @@ def rejeitar_usuario(id):
         if cursor:
             cursor.close()
         if conexao:
-            conexao.commit()
             conexao.close()
-    

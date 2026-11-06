@@ -3,7 +3,6 @@ from database.conexao import conectar
 def adicionar_aluno(rm:int, nome_aluno:str, id_turma:int) -> bool:
     """Adicona o aluno com as informações passadas através dos parâmetros."""
 
-    cursor, conexao = None
     conexao,cursor = conectar()
 
     try:
@@ -30,7 +29,6 @@ def adicionar_aluno(rm:int, nome_aluno:str, id_turma:int) -> bool:
 def recuperar_alunos():
     """Função que busca os alunos cadastrados."""
 
-    cursor, conexao = None
     conexao,cursor = conectar()
 
     try:
@@ -61,7 +59,6 @@ def recuperar_alunos():
 def deletar_aluno(rm:str) -> bool:
     """Deleta o aluno com as informações passadas através dos parâmetros."""
 
-    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:

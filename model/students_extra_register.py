@@ -3,7 +3,6 @@ from database.conexao import conectar
 def adicionar_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:
     """Adicona o aluno com as informações passadas através dos parâmetros."""
 
-    cursor, conexao = None
     conexao,cursor = conectar()
 
     try:
@@ -30,7 +29,6 @@ def adicionar_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:
 def recuperar_alunos_atividade():
     """Recupera alunos cadastrados em atividades-extracurriculares."""
 
-    cursor, conexao = None
     conexao,cursor = conectar()
 
     try:
@@ -72,7 +70,6 @@ def recuperar_alunos_atividade():
 def excluir_aluno_atividade(rm:int,atividade:str,dia_semana:int) -> bool:
     """Adicona o aluno com as informações passadas através dos parâmetros."""
 
-    cursor, conexao = None
     conexao,cursor = conectar()
 
     try:

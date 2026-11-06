@@ -5,8 +5,6 @@ import bcrypt
 def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) -> bool:
     """Cadastra usuário com base no parâmetros passados."""
 
-    cursor, conexao = None
-
     conexao, cursor = conectar()
     
     try:
@@ -63,8 +61,6 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
 def logar(cpf: str, senha: str) -> dict:
     """Verifica CPF e senha cadastrados para a realização do login."""
 
-    cursor, conexao = None
-    
     conexao, cursor = conectar()
 
     try:
@@ -123,8 +119,6 @@ def logar(cpf: str, senha: str) -> dict:
 def verificar_email(email: str) -> bool:
     """Verifica a existência do E-Mail digitado."""
 
-    cursor, conexao = None
-    
     conexao, cursor = conectar()
 
     # procura o email digitado na tabela pra ver se ele existe
@@ -156,8 +150,6 @@ def verificar_email(email: str) -> bool:
 
 def atualizar_senha(email: str, nova_senha: str) -> bool:
     """Atualiza senha com base no email."""
-
-    cursor, conexao = None
 
     conexao, cursor = conectar()
 

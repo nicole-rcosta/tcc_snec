@@ -6,8 +6,6 @@ datas = {0: 'SEG', 1: 'TER', 2: 'QUA', 3: 'QUI', 4: 'SEX'}
 def buscar_turmas():
     """Recupera todas as turmas cadastradas."""
 
-    cursor, conexao = None
-
     conexao, cursor = conectar()
     
     try:
@@ -37,8 +35,6 @@ def buscar_turmas():
 
 def buscar_qntd_alunos(id_turma):
     """Recupera quantidade de alunos das turmas pelo ID."""
-
-    cursor, conexao = None
     
     conexao, cursor = conectar()
 
@@ -68,7 +64,6 @@ def buscar_qntd_alunos(id_turma):
 def buscar_alunos(id_turma):
     """Recuperam alunos pelo ID das turmas."""
 
-    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:
@@ -111,7 +106,6 @@ def buscar_alunos(id_turma):
 def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
     """Envia os dados informados do lanche para o banco de dados."""
 
-    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:
@@ -139,7 +133,6 @@ def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
 def salvar_his_almoco(id_usuario, rms_contraturnos):
     """Envia os dados informados do almoço para o banco de dados."""
 
-    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:
@@ -170,7 +163,6 @@ def salvar_his_almoco(id_usuario, rms_contraturnos):
 def buscar_his_lanche(id_turma):
     """Recupera informações enviadas do lanche."""
 
-    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:

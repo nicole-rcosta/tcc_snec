@@ -3,7 +3,6 @@ from database.conexao import conectar
 def adicionar_sala(turma:str, periodo:str, qnt_alunos:int) -> bool:
     """Adicona a sala com as informações passadas através dos parâmetros."""
 
-    cursor, conexao = None
     conexao,cursor = conectar()
 
     try:
@@ -38,7 +37,6 @@ def adicionar_sala(turma:str, periodo:str, qnt_alunos:int) -> bool:
 def recuperar_salas():
     """Recupera salas já cadastradas."""
 
-    cursor, conexao = None
     conexao,cursor = conectar()
 
     try:
@@ -62,7 +60,6 @@ def recuperar_salas():
 def deletar_sala(cod:int) -> bool:
     """Deleta salas já cadastradas."""
 
-    cursor, conexao = None
     conexao,cursor = conectar()
 
     try:

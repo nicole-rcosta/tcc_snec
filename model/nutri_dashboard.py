@@ -4,8 +4,6 @@ import datetime
 def recuperar_dados_dashboard():
     """Recupera dados e exibe no dashboard da Nurticionista."""
 
-    cursor, conexao = None
-
     # Desestrutura a conexão e o cursor retornados por conectar()
     conexao, cursor = conectar()
 
@@ -92,7 +90,6 @@ def buscar_alunos_almoco_hoje():
     (com base nas atividades do contraturno cadastradas em tb_aluno_atividade).
     """
 
-    cursor, conexao = None
     conexao, cursor = conectar()
 
     dias_map = {0: 'SEG', 1: 'TER', 2: 'QUA', 3: 'QUI', 4: 'SEX'}
@@ -150,8 +147,7 @@ def buscar_alunos_almoco_hoje():
 
 def atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario=None):
     """Registra ou altera o atendimento do almoço (True/False) na tabela tb_his_almoco."""
-
-    cursor, conexao = None
+    
     conexao, cursor = conectar()
 
     try:

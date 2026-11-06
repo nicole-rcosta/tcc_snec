@@ -3,7 +3,6 @@ from database.conexao import conectar
 def recuperar_atividade():
     """Recupera atividades já cadastradas."""
 
-    cursor, conexao = None
     conexao, cursor = conectar()
 
     try: 
@@ -25,7 +24,6 @@ def recuperar_atividade():
 def cadastrar_atividade(atividade, periodo):
     """Cadastra atividades."""
 
-    cursor, conexao = None
     conexao, cursor = conectar()
     
     try:
@@ -47,7 +45,6 @@ def cadastrar_atividade(atividade, periodo):
 def excluir_atividade(id_atividade):
     """Exclui ativdades por ID."""
 
-    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:

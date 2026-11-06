@@ -5,7 +5,6 @@ import mysql.connector
 def inserir_excel_bcd(arquivo):
     """Insere alunos por meio de uma planilha."""
 
-    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:

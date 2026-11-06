@@ -65,6 +65,11 @@ def logar_usuario():
         else:
             pass
 
+@app.route("/logout")
+def sair():
+    session.clear()
+    return redirect("/login")
+
 #Rota que exibe a página de cadastro
 @app.route("/cadastro")
 def pagina_cadastro():

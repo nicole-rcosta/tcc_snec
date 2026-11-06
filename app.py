@@ -43,8 +43,8 @@ def logar_usuario():
     resultado = logar(cpf, senha)
 
     # Verifica se o login foi bem sucedido e guarda o usuário na session
-    if resultado['sucesso']:
-        session['usuario'] = resultado['usuario']
+    if resultado.get('sucesso'):
+        session['usuario'] = resultado.get('usuario')
         cargo = resultado['usuario']['cargo']
         # Redireciona o usuário à tela inicial do seu respectivo cargo
         if cargo == 'prof':
@@ -57,18 +57,13 @@ def logar_usuario():
     # Caso a função de logar não tenha sido bem sucedida
     else:
         # Exibe mensagem de erro caso o CPF ou SENHA sejam inválidos
-        if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.':
-            return render_template("login/auth_login.html", erro = resultado['mensagem'])
+        if resultado.get('mensagem') == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado.get('mensagem') == 'CPF ou senha incorretos.':
+            return render_template("login/auth_login.html", erro = resultado.get('mensagem'))
         # Exibe mensagem de erro caso o usuário não exista
-        elif resultado['mensagem'] == "Usuário não encontrado. Cadastre-se!":
+        elif resultado.get('mensagem') == "Usuário não encontrado. Cadastre-se!":
             return redirect("/cadastro")
         else:
             pass
-
-@app.route("/logout")
-def sair():
-    session.clear()
-    return redirect("/login")
 
 #Rota que exibe a página de cadastro
 @app.route("/cadastro")
@@ -91,12 +86,12 @@ def cadastrar_usuario():
     cadastro_resp = cadastrar(nome, email, cargo, senha, cpf, status)
 
     # Verifica se o cadastro foi bem sucedido e redireciona o usuário pra página de login
-    if cadastro_resp['sucesso']:
+    if cadastro_resp.get('sucesso'):
         return render_template("/login/auth_login.html")
     else:
     # Caso tenha erros no cadastro, exibe uma mensagem de erro  
-        if cadastro_resp['mensagem'] == "CPF inválido." or cadastro_resp['mensagem'] == "CPF já cadastrado." or cadastro_resp["mensagem"] == "Este email já pertence a um usuario.":
-            return render_template("/register/auth_register.html", erro = cadastro_resp['mensagem'])
+        if cadastro_resp.get('mensagem') == "CPF inválido." or cadastro_resp.get('mensagem') == "CPF já cadastrado." or cadastro_resp.get('mensagem') == "Este email já pertence a um usuario.":
+            return render_template("/register/auth_register.html", erro = cadastro_resp.get('mensagem'))
         else:
             return redirect("/cadastro")
     
@@ -113,8 +108,6 @@ def pagina_adm():
 
     nome = usuario.get('nome')
     return render_template("/adm/admin_item_register.html", nome_usuario=nome)
-
-
 
 @app.route("/adm_register")
 def pagina_adm_register():
@@ -171,15 +164,14 @@ def excluir_atividades(id_atividade):
 
     # deleta atividade
     delete = ea(id_atividade)
-    if delete['sucesso']:
+    if delete.get('sucesso'):
         return redirect("/adm/reg_activity")
     else:
 
         # em caso de erros, exibe a mensagem de erro no terminal
-        erro = delete['mensagem']
+        erro = delete.get('mensagem')
         flash(erro)
         return redirect("/adm/reg_activity")
-
 
 #Rota que exibe a página de cadastrar sala
 @app.route("/adm/reg_class")
@@ -212,15 +204,14 @@ def pagina_cad_sala_del(id):
 
     # deleta sala
     delete = deletar_sala(id)
-    if delete['sucesso']:
+    if delete.get('sucesso'):
         return redirect("/adm/reg_class")
 
     # em caso de erros, exibe a mensagem de erro no terminal
     else:
-        erro = delete['mensagem']
+        erro = delete.get('mensagem')
         flash(erro)
         return redirect("/adm/reg_class")
-
 
 #Rota que exibe a página de cadastrar aluno
 @app.route("/adm/reg_student")
@@ -253,12 +244,12 @@ def pagina_cad_aluno_delete(id):
 
     # deleta sala
     delete = deletar_aluno(id)
-    if delete['sucesso']:
+    if delete.get('sucesso'):
         return redirect("/adm/reg_student")
 
     # em caso de erros, exibe a mensagem de erro no terminal
     else:
-        erro = delete['mensagem']
+        erro = delete.get('mensagem')
         flash(erro)
         return redirect("/adm/reg_student")
 
@@ -293,8 +284,6 @@ def pegar_csv_pag_student():
     else:
         flash("Dados Inválidos! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
-
-
 
 # Rota que exibe a tela de cadastro dos alunos nas atividades
 @app.route("/adm/reg_student_extra")
@@ -393,7 +382,6 @@ def pagina_dashboard():
             "nutri/nutritionist_dashboard.html",
             erro=dados.get("mensagem"))
     
-    
 # Rota que exibe o dashboard de pessoas que vão ficar para o almoço
 @app.route("/nutri_dashboard/report")
 def pagina_dashboard_report():
@@ -436,21 +424,19 @@ def api_atualizar_almoco():
 @app.route("/teacher")
 def pagina_prof_selecionar_sala():
 
-   usuario = session.get('usuario')
+    usuario = session.get('usuario')
    
-   if not usuario or usuario.get('cargo') != 'prof':
+    if not usuario or usuario.get('cargo') != 'prof':
         return redirect("/login")
     
-   turmas = buscar_turmas()
+    turmas = buscar_turmas()
     # Recupera turmas cadastradas e guarda em uma variável
 
-   if turmas.get("sucesso"):
     # verifica se a "Recuperação foi bem sucedida"
     if turmas.get("sucesso"):
         return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"))
-   else:
+    else:
         return render_template("teacher/teacher_class_select.html", erro = turmas.get("mensagem"))
-
 
 # Rota que exibe informação da turma de acordo com o ID
 @app.route("/teacher/class_info/<id_turma>")
@@ -460,11 +446,8 @@ def pagina_prof_registro(id_turma):
        
     if not usuario or usuario.get('cargo') != 'prof':
         return redirect("/login")
-        
-
 
     # Recupera quantidade de alunos da turma
-    qnt_alunos = buscar_qntd_alunos(id_turma)
     qnt_alunos = buscar_qntd_alunos(id_turma).get("quantidade_alunos")
 
     # Recupera dados já cadastrados
@@ -518,7 +501,6 @@ def salvar_registro_prof(id_turma):
         }), 500
 
 
-
 # =========================================================
 # RECUPERAÇÃO DE SENHA
 # =========================================================
@@ -530,7 +512,6 @@ def pagina_recuperar_senha():
     return render_template(
         "password/auth_password_recover.html"
     )
-
 
 # POST
 # Recebe o e-mail, verifica, gera o código e envia
@@ -567,11 +548,10 @@ def pagina_recuperar_senha_codigo():
         "password/auth_password_insert.html"
     )
 
-
-
 # recebe e valida o código
 @app.route("/password_recover/code", methods=["POST"])
 def verificar_codigo():
+
 
     codigo = session.get("codigo_recuperacao")
     expiracao = session.get("expiracao_codigo", 0)
@@ -602,7 +582,6 @@ def verificar_codigo():
                         "password/auth_password_insert.html",
                         erro_codigo=True
                     )
-    
 
 # mostra a página para criar a nova senha
 @app.route(
@@ -620,7 +599,6 @@ def pagina_recuperar_senha_redefinicao():
     return render_template(
         "password/auth_password_reset.html"
     )
-
 
 # POST
 # Recebe a nova senha e atualiza no banco
@@ -680,8 +658,6 @@ def redefinir_senha():
         erro_atualizacao=True
     )
 
-
-
 @app.route(
     "/password_recover/success",
     methods=["GET"]
@@ -692,6 +668,11 @@ def pagina_recuperacao_sucesso():
         "password/auth_password_reset.html",
         senha_atualizada=True
     )
+
+@app.route("/logout")
+def sair():
+    session.clear()
+    return redirect("/login")
 
 
 if __name__ == '__main__':

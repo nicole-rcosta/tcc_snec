@@ -43,8 +43,8 @@ def logar_usuario():
     resultado = logar(cpf, senha)
 
     # Verifica se o login foi bem sucedido e guarda o usuário na session
-    if resultado['sucesso']:
-        session['usuario'] = resultado['usuario']
+    if resultado.get('sucesso'):
+        session['usuario'] = resultado.get('usuario')
         cargo = resultado['usuario']['cargo']
         # Redireciona o usuário à tela inicial do seu respectivo cargo
         if cargo == 'prof':
@@ -57,10 +57,10 @@ def logar_usuario():
     # Caso a função de logar não tenha sido bem sucedida
     else:
         # Exibe mensagem de erro caso o CPF ou SENHA sejam inválidos
-        if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.':
-            return render_template("login/auth_login.html", erro = resultado['mensagem'])
+        if resultado.get('mensagem') == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado.get('mensagem') == 'CPF ou senha incorretos.':
+            return render_template("login/auth_login.html", erro = resultado.get('mensagem'))
         # Exibe mensagem de erro caso o usuário não exista
-        elif resultado['mensagem'] == "Usuário não encontrado. Cadastre-se!":
+        elif resultado.get('mensagem') == "Usuário não encontrado. Cadastre-se!":
             return redirect("/cadastro")
         else:
             pass
@@ -86,12 +86,12 @@ def cadastrar_usuario():
     cadastro_resp = cadastrar(nome, email, cargo, senha, cpf, status)
 
     # Verifica se o cadastro foi bem sucedido e redireciona o usuário pra página de login
-    if cadastro_resp['sucesso']:
+    if cadastro_resp.get('sucesso'):
         return render_template("/login/auth_login.html")
     else:
     # Caso tenha erros no cadastro, exibe uma mensagem de erro  
-        if cadastro_resp['mensagem'] == "CPF inválido." or cadastro_resp['mensagem'] == "CPF já cadastrado." or cadastro_resp["mensagem"] == "Este email já pertence a um usuario.":
-            return render_template("/register/auth_register.html", erro = cadastro_resp['mensagem'])
+        if cadastro_resp.get('mensagem') == "CPF inválido." or cadastro_resp.get('mensagem') == "CPF já cadastrado." or cadastro_resp.get('mensagem') == "Este email já pertence a um usuario.":
+            return render_template("/register/auth_register.html", erro = cadastro_resp.get('mensagem'))
         else:
             return redirect("/cadastro")
     
@@ -108,8 +108,6 @@ def pagina_adm():
 
     nome = usuario.get('nome')
     return render_template("/adm/admin_item_register.html", nome_usuario=nome)
-
-
 
 @app.route("/adm_register")
 def pagina_adm_register():
@@ -171,15 +169,14 @@ def excluir_atividades(id_atividade):
 
     # deleta atividade
     delete = ea(id_atividade)
-    if delete['sucesso']:
+    if delete.get('sucesso'):
         return redirect("/adm/reg_activity")
     else:
 
         # em caso de erros, exibe a mensagem de erro no terminal
-        erro = delete['mensagem']
+        erro = delete.get('mensagem')
         flash(erro)
         return redirect("/adm/reg_activity")
-
 
 #Rota que exibe a página de cadastrar sala
 @app.route("/adm/reg_class")
@@ -214,15 +211,14 @@ def pagina_cad_sala_del(id):
 
     # deleta sala
     delete = deletar_sala(id)
-    if delete['sucesso']:
+    if delete.get('sucesso'):
         return redirect("/adm/reg_class")
 
     # em caso de erros, exibe a mensagem de erro no terminal
     else:
-        erro = delete['mensagem']
+        erro = delete.get('mensagem')
         flash(erro)
         return redirect("/adm/reg_class")
-
 
 #Rota que exibe a página de cadastrar aluno
 @app.route("/adm/reg_student")
@@ -255,12 +251,12 @@ def pagina_cad_aluno_delete(id):
 
     # deleta sala
     delete = deletar_aluno(id)
-    if delete['sucesso']:
+    if delete.get('sucesso'):
         return redirect("/adm/reg_student")
 
     # em caso de erros, exibe a mensagem de erro no terminal
     else:
-        erro = delete['mensagem']
+        erro = delete.get('mensagem')
         flash(erro)
         return redirect("/adm/reg_student")
 
@@ -309,8 +305,6 @@ def pegar_csv_pag_student():
     else:
         flash("Dados Inválidos! Verifique se elas existem ou se foram digitadas corretamente.")
         return redirect("/adm/reg_student")
-
-
 
 # Rota que exibe a tela de cadastro dos alunos nas atividades
 @app.route("/adm/reg_student_extra")
@@ -381,66 +375,6 @@ def pagina_painel_adm_rejeitar(id):
     rejeitar_usuario(id)
     return redirect("/adm/adm_panel")
 
-
-# ---------------------------
-# Paginas de Nutricionista
-# ---------------------------
-
-# Rota que exibe o dashboard da nutricionista
-@app.route("/nutri_dashboard")
-def pagina_dashboard():
-    # Chama a função que busca e processa os dados do MySQL
-    dados = recuperar_dados_dashboard()
-
-
-    nome_usuario = session.get("usuario_nome", "Nutricionista")
-       
-    if dados and dados.get("sucesso"):
-        # Renderiza o HTML passando todas as variáveis necessárias
-        return render_template(
-            "nutri/nutritionist_dashboard.html",
-            usuario=nome_usuario,
-            turmas=dados.get("turmas", []),          
-            total_lanches=dados.get("total_lanches", 0),
-            total_almocos=dados.get("total_almocos", 0),
-            todas_concluidas=dados.get("todas_concluidas", False),
-            erro=dados.get("mensagem") if dados else "Erro ao conectar ao banco de dados")
-    
-    
-# Rota que exibe o dashboard de pessoas que vão ficar para o almoço
-@app.route("/nutri_dashboard/report")
-def pagina_dashboard_report():
-    return render_template("nutri/nutritionist_report.html")
-
-# ---------------------------
-# ENDPOINTS REST API (Usados pelo arquivo nutritionist_report.js)
-# ---------------------------
-
-# json para renderizar os alunos para o almoço
-@app.route("/api/nutri/alunos-almoco", methods=["GET"])
-def api_alunos_almoco():
-    """Retorna a lista de alunos do dia em formato JSON para o JS renderizar a tabela."""
-    dados = buscar_alunos_almoco_hoje()
-    return jsonify(dados)
-
-@app.route("/api/nutri/atualizar-almoco", methods=["POST"])
-def api_atualizar_almoco():
-    """Recebe o clique no checkbox da tabela e atualiza a presenca no MySQL."""
-    dados = request.get_json()
-
-    if not dados or "rm" not in dados or "atendido" not in dados:
-        return jsonify({"sucesso": False, "mensagem": "Dados incompletos"}), 400
-
-    rm_aluno = dados.get("rm")
-    atendido = dados.get("atendido")
-
-    # Obtém o ID do usuário conectado na sessão (se houver login)
-    usuario_sessao = session.get("usuario", {})
-    id_usuario = session.get("usuario")["id"]
-
-    resultado = atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario)
-    return jsonify(resultado)
-
 # ---------------------------
 # Paginas de Professor
 # ---------------------------
@@ -449,27 +383,31 @@ def api_atualizar_almoco():
 @app.route("/teacher")
 def pagina_prof_selecionar_sala():
 
-   usuario = session.get('usuario')
+    usuario = session.get('usuario')
    
-#    if not usuario or usuario.get('cargo') != 'prof':
-#         return redirect("/login")
+    if not usuario or usuario.get('cargo') != 'prof':
+        return redirect("/login")
     
-   turmas = buscar_turmas()
-   # Recupera turmas cadastradas e guarda em uma variável
-   turmas = buscar_turmas()
+    turmas = buscar_turmas()
+    # Recupera turmas cadastradas e guarda em uma variável
 
-   if turmas.get("sucesso"):
     # verifica se a "Recuperação foi bem sucedida"
     if turmas.get("sucesso"):
         return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"))
-   else:
+    else:
         return render_template("teacher/teacher_class_select.html", erro = turmas.get("mensagem"))
-
 
 # Rota que exibe informação da turma de acordo com o ID
 @app.route("/teacher/class_info/<int:id_turma>")
 def pagina_prof_registro(id_turma):
     confirmado = request.args.get("confirmar", type=bool)
+
+    usuario = session.get('usuario')
+       
+    if not usuario or usuario.get('cargo') != 'prof':
+        return redirect("/login")
+
+    # Recupera quantidade de alunos da turma
     qnt_alunos = buscar_qntd_alunos(id_turma).get("quantidade_alunos")
     # garante que alunos nao recebe none
     alunos = buscar_alunos(id_turma) or {}
@@ -516,9 +454,76 @@ def salvar_registro_prof(id_turma):
               salvar_his_almoco(id_turma, id_usuario, rms_contraturnos)
 
     if sucesso:
-        return jsonify({'sucesso': True,
-                        'redirect_url': url_for('pagina_prof_selecionar_sala')}), 200
-    return jsonify({'sucesso': False, 'erro': 'Não foi possível salvar o registro.'}), 500
+        return jsonify({
+            'sucesso': True, 
+            'redirect_url': url_for('pagina_prof_selecionar_sala')
+        }), 200
+    else:
+        return jsonify({
+            'sucesso': False, 
+            'erro': 'Não foi possível salvar o registro.'
+        }), 500
+
+# ---------------------------
+# Paginas de Nutricionista
+# ---------------------------
+
+# Rota que exibe o dashboard da nutricionista
+@app.route("/nutri_dashboard")
+def pagina_dashboard():
+    # Chama a função que busca e processa os dados do MySQL
+    dados = recuperar_dados_dashboard()
+
+
+    nome_usuario = session.get("usuario_nome", "Nutricionista")
+       
+    if dados and dados.get("sucesso"):
+        # Renderiza o HTML passando todas as variáveis necessárias
+        return render_template(
+            "nutri/nutritionist_dashboard.html",
+            usuario=nome_usuario,
+            turmas=dados.get("turmas", []),          
+            total_lanches=dados.get("total_lanches", 0),
+            total_almocos=dados.get("total_almocos", 0),
+            todas_concluidas=dados.get("todas_concluidas", False))
+    else:
+        return render_template(
+            "nutri/nutritionist_dashboard.html",
+            erro=dados.get("mensagem"))
+    
+# Rota que exibe o dashboard de pessoas que vão ficar para o almoço
+@app.route("/nutri_dashboard/report")
+def pagina_dashboard_report():
+    return render_template("nutri/nutritionist_report.html")
+
+# ---------------------------
+# ENDPOINTS REST API (Usados pelo arquivo nutritionist_report.js)
+# ---------------------------
+
+# json para renderizar os alunos para o almoço
+@app.route("/api/nutri/alunos-almoco", methods=["GET"])
+def api_alunos_almoco():
+    """Retorna a lista de alunos do dia em formato JSON para o JS renderizar a tabela."""
+    dados = buscar_alunos_almoco_hoje()
+    return jsonify(dados)
+
+@app.route("/api/nutri/atualizar-almoco", methods=["POST"])
+def api_atualizar_almoco():
+    """Recebe o clique no checkbox da tabela e atualiza a presenca no MySQL."""
+    dados = request.get_json()
+
+    if not dados or "rm" not in dados or "atendido" not in dados:
+        return jsonify({"sucesso": False, "mensagem": "Dados incompletos"}), 400
+
+    rm_aluno = dados.get("rm")
+    atendido = dados.get("atendido")
+
+    # Obtém o ID do usuário conectado na sessão (se houver login)
+    usuario_sessao = session.get("usuario", {})
+    id_usuario = session.get("usuario")["id"]
+
+    resultado = atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario)
+    return jsonify(resultado)
 
 
 # =========================================================
@@ -532,7 +537,6 @@ def pagina_recuperar_senha():
     return render_template(
         "password/auth_password_recover.html"
     )
-
 
 # POST
 # Recebe o e-mail, verifica, gera o código e envia
@@ -569,11 +573,10 @@ def pagina_recuperar_senha_codigo():
         "password/auth_password_insert.html"
     )
 
-
-
 # recebe e valida o código
 @app.route("/password_recover/code", methods=["POST"])
 def verificar_codigo():
+
 
     codigo = session.get("codigo_recuperacao")
     expiracao = session.get("expiracao_codigo", 0)
@@ -604,7 +607,6 @@ def verificar_codigo():
                         "password/auth_password_insert.html",
                         erro_codigo=True
                     )
-    
 
 # mostra a página para criar a nova senha
 @app.route(
@@ -622,7 +624,6 @@ def pagina_recuperar_senha_redefinicao():
     return render_template(
         "password/auth_password_reset.html"
     )
-
 
 # POST
 # Recebe a nova senha e atualiza no banco
@@ -682,8 +683,6 @@ def redefinir_senha():
         erro_atualizacao=True
     )
 
-
-
 @app.route(
     "/password_recover/success",
     methods=["GET"]
@@ -694,6 +693,11 @@ def pagina_recuperacao_sucesso():
         "password/auth_password_reset.html",
         senha_atualizada=True
     )
+
+@app.route("/logout")
+def sair():
+    session.clear()
+    return redirect("/login")
 
 
 if __name__ == '__main__':

@@ -99,9 +99,9 @@ def aprovar_usuario(id):
 
         aprovar = cursor.execute(sql, (id, ))
         if aprovar:
-            return {"sucesso": True, "mensagem": "Usuário Aprovado!"}
+            return {"sucesso": True, "mensagem": "Usuário aprovado!"}
         else:
-            return {"sucesso": False, "mensagem": "Erro. Tente Novamente!"}
+            return {"sucesso": False, "mensagem": "Erro. Tente novamente!"}
 
     except Exception as erro:
         print(f"Erro ao processar login: {erro}")
@@ -129,9 +129,9 @@ def rejeitar_usuario(id):
 
         aprovar = cursor.execute(sql, (id, ))
         if aprovar:
-            return {"sucesso": True, "mensagem": "Acesso Negado ao Usuário!"}
+            return {"sucesso": True, "mensagem": "Acesso negado ao usuário!"}
         else:
-            return {"sucesso": False, "mensagem": "Erro. Tente Novamente!"}
+            return {"sucesso": False, "mensagem": "Erro. Tente novamente!"}
 
     except Exception as erro:
         print(f"Erro ao processar login: {erro}")

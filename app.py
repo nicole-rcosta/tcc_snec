@@ -158,7 +158,7 @@ def pagina_cad_atividades():
             return redirect(url_for("pagina_cad_atividade"))
         else:
             atividades = ra()
-            flash("Atividade Já cadastrada.")
+            flash("Atividade já cadastrada.")
             return render_template("adm/admin_extra_activity_register.html", atividades=atividades)
 
     
@@ -451,7 +451,7 @@ def salvar_registro_prof(id_turma):
 
     # só funciona se logado
     sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario) and \
-              salvar_his_almoco(id_turma, id_usuario, rms_contraturnos)
+              salvar_his_almoco(id_usuario, rms_contraturnos)
 
     if sucesso:
         return jsonify({

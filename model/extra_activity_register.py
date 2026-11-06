@@ -25,12 +25,26 @@ def cadastrar_atividade(atividade:str, periodo:str) -> bool:
     """Cadastra atividades."""
 
     conexao, cursor = conectar()
-    
     try:
-        sql = """INSERT INTO tb_atividades (atividade, periodo) VALUES (%s, %s);"""
-        cursor.execute(sql, (atividade, periodo))
-        conexao.commit()
-        return True
+
+
+
+        sql = """
+                SELECT atividade, periodo FROM db_snec.tb_atividades
+                WHERE atividade = %s AND periodo = %s;
+            """
+        cursor.execute(sql, (atividade, periodo ))
+        existe = cursor.fetchone()
+        
+        if existe:
+            conexao.close()
+            return False
+        else:
+            
+            cursor.execute("INSERT INTO tb_atividades (atividade, periodo) VALUES (%s, %s);", (atividade, periodo))
+            conexao.commit()
+            conexao.close()
+            return True
 
     except Exception as erro:
         print(erro)

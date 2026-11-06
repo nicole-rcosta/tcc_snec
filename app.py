@@ -158,7 +158,7 @@ def pagina_cad_atividades():
             return redirect(url_for("pagina_cad_atividade"))
         else:
             atividades = ra()
-            flash("Atividade Já cadastrada.")
+            flash("Atividade já cadastrada.")
             return render_template("adm/admin_extra_activity_register.html", atividades=atividades)
 
     

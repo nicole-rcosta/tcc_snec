@@ -194,8 +194,12 @@ def pagina_cad_sala_post():
     qnt_aluno= request.form.get("class_quantity")
 
     # Cadastra salas
-    adicionar_sala(turma=turma,periodo=periodo,qnt_alunos=qnt_aluno)
-    return redirect("/adm/reg_class")
+    add_sala = adicionar_sala(turma=turma,periodo=periodo,qnt_alunos=qnt_aluno)
+
+    if add_sala.get("sucesso"):
+        return render_template("adm/admin_room_register.html", erro = add_sala.get("mensagem"))
+    else:
+        return redirect("/adm/reg_class")
 
 # Rota que deleta uma sala de acordo com ID enviado
 @app.route("/adm/reg_class/delete/<int:id>")

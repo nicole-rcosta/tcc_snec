@@ -1,45 +1,58 @@
 from database.conexao import conectar
 
 def recuperar_atividade():
-    """
-                Recupera atividades já cadastradas.
-    """
+    """Recupera atividades já cadastradas."""
+
+    cursor, conexao = None
+    conexao, cursor = conectar()
+
     try: 
-        conexao, cursor = conectar()
-        cursor.execute("SELECT id_atividade, atividade, periodo FROM tb_atividades")
+        sql = """SELECT id_atividade, atividade, periodo FROM tb_atividades;"""
+        cursor.execute(sql)
         atividades = cursor.fetchall()
-        conexao.close()
         return atividades
   
     except Exception as erro:
         print(erro)
         return False
 
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()
+
 def cadastrar_atividade(atividade, periodo):
-    """
-            Cadastra atividades.
-    """
+    """Cadastra atividades."""
+
+    cursor, conexao = None
+    conexao, cursor = conectar()
     
     try:
-        conexao, cursor = conectar()
-        cursor.execute("INSERT INTO tb_atividades (atividade, periodo) VALUES (%s, %s);", (atividade, periodo))
+        sql = """INSERT INTO tb_atividades (atividade, periodo) VALUES (%s, %s);"""
+        cursor.execute(sql, (atividade, periodo))
         conexao.commit()
-        conexao.close()
         return True
 
     except Exception as erro:
         print(erro)
         return False
 
+    finally:
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()
+    
 def excluir_atividade(id_atividade):
-    """
-        Exclui ativdades por ID
-    """
+    """Exclui ativdades por ID."""
 
+    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:
-        cursor.execute("""DELETE FROM tb_atividades WHERE id_atividade = %s;""", (id_atividade, ) )
+        sql = """DELETE FROM tb_atividades WHERE id_atividade = %s;"""
+        cursor.execute(sql, (id_atividade, ) )
         conexao.commit()
         return {"sucesso": True, "mensagem": "Atividade deletada!"}
 

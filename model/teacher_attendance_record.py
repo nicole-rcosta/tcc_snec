@@ -6,8 +6,7 @@ datas = {0: 'SEG', 1: 'TER', 2: 'QUA', 3: 'QUI', 4: 'SEX'}
 def buscar_turmas():
     """Recupera todas as turmas cadastradas."""
 
-    conexao = None
-    cursor = None
+    cursor, conexao = None
 
     conexao, cursor = conectar()
     
@@ -37,11 +36,10 @@ def buscar_turmas():
             conexao.close()    
 
 def buscar_qntd_alunos(id_turma):
-    """Recupera quantidade de alunos das turmas pelo ID"""
+    """Recupera quantidade de alunos das turmas pelo ID."""
 
-    conexao = None
-    cursor = None
-
+    cursor, conexao = None
+    
     conexao, cursor = conectar()
 
     try:
@@ -68,11 +66,9 @@ def buscar_qntd_alunos(id_turma):
             conexao.close()
 
 def buscar_alunos(id_turma):
-    """Recuperam alunos pelo ID das turmas"""
+    """Recuperam alunos pelo ID das turmas."""
 
-    conexao = None
-    cursor = None
-
+    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:
@@ -113,11 +109,9 @@ def buscar_alunos(id_turma):
             conexao.close()
 
 def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
-    """Envia os dados informados do lanche para o banco de dados"""
+    """Envia os dados informados do lanche para o banco de dados."""
 
-    conexao = None
-    cursor = None
-    
+    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:
@@ -143,11 +137,9 @@ def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
             conexao.close()
 
 def salvar_his_almoco(id_usuario, rms_contraturnos):
-    """Envia os dados informados do almoço para o banco de dados"""
+    """Envia os dados informados do almoço para o banco de dados."""
 
-    conexao = None
-    cursor = None
-
+    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:
@@ -176,11 +168,9 @@ def salvar_his_almoco(id_usuario, rms_contraturnos):
             conexao.close()
 
 def buscar_his_lanche(id_turma):
-    """Recupera informações enviadas do lanche"""
+    """Recupera informações enviadas do lanche."""
 
-    conexao = None
-    cursor = None
-
+    cursor, conexao = None
     conexao, cursor = conectar()
 
     try:

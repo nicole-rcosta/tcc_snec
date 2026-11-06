@@ -5,8 +5,7 @@ import bcrypt
 def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) -> bool:
     """Cadastra usuário com base no parâmetros passados."""
 
-    conexao = None
-    cursor = None
+    cursor, conexao = None
 
     conexao, cursor = conectar()
     
@@ -64,9 +63,8 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
 def logar(cpf: str, senha: str) -> dict:
     """Verifica CPF e senha cadastrados para a realização do login."""
 
-    conexao = None
-    cursor = None
-
+    cursor, conexao = None
+    
     conexao, cursor = conectar()
 
     try:
@@ -76,7 +74,7 @@ def logar(cpf: str, senha: str) -> dict:
             WHERE cpf = %s;
         """
 
-        cursor.execute(sql, (cpf,))
+        cursor.execute(sql, (cpf, ))
         usuario = cursor.fetchone()
 
         if not usuario:
@@ -91,10 +89,7 @@ def logar(cpf: str, senha: str) -> dict:
 
         if status_result != "aprovado":
             print("Cadastro ainda pendente de aprovação pelo Administrador.")
-            return {
-                "sucesso": False, 
-                "mensagem": "Aguarde a aprovação do administrador para efetivar o seu cadastro."
-            }
+            return {"sucesso": False, "mensagem": "Aguarde a aprovação do administrador para efetivar o seu cadastro."}
 
         senha_bytes = senha.encode('utf-8')
         hash_banco_bytes = senha_hash_banco.encode('utf-8')
@@ -126,19 +121,20 @@ def logar(cpf: str, senha: str) -> dict:
 
 # RECUPERAÇÃO DE SENHA
 def verificar_email(email: str) -> bool:
-    """Verifica a existência do E-Mail digitado"""
-    conexao = None
-    cursor = None
+    """Verifica a existência do E-Mail digitado."""
+
+    cursor, conexao = None
+    
+    conexao, cursor = conectar()
 
     # procura o email digitado na tabela pra ver se ele existe
     try:
-        conexao, cursor = conectar()
         sql = """
             SELECT email
             FROM tb_usuarios
             WHERE email = %s;
         """
-        cursor.execute(sql, (email,))
+        cursor.execute(sql, (email, ))
 
         usuario = cursor.fetchone()
         # se ele exitir a função retorna true
@@ -159,32 +155,29 @@ def verificar_email(email: str) -> bool:
             conexao.close()
 
 def atualizar_senha(email: str, nova_senha: str) -> bool:
-    """Atualiza senha com base no email"""
-    conexao = None
-    cursor = None
+    """Atualiza senha com base no email."""
+
+    cursor, conexao = None
+
+    conexao, cursor = conectar()
 
     try:
        senha_bytes = nova_senha.encode('utf-8')
        salt = bcrypt.gensalt()
        senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
        
-       conexao, cursor = conectar()
-
        # Atualiza a senha do usuário
        sql = """
            UPDATE tb_usuarios
            SET senha = %s
            WHERE email = %s;
        """
-       cursor.execute(
-           sql,
-           (senha_hash, email)
-       )
+
+       cursor.execute(sql, (senha_hash, email))
        conexao.commit()
        return True
 
     except Exception as erro:
-
         print(f"Erro ao atualizar senha: {erro}")
         if conexao:
             conexao.rollback()

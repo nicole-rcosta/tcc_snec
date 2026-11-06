@@ -158,26 +158,25 @@ def salvar_his_almoco(id_usuario:int, rms_contraturnos) -> bool:
             conexao.close()
 
 def existe_his_lanche(id_turma):
-    """
-    Retorna True se já existe registro de lanche da turma hoje, senão False.
-    """
+    """Retorna True se já existe registro de lanche da turma hoje, senão False."""
+
     conexao, cursor = conectar()
 
     try:
-        cursor.execute("""
+        sql = """
             SELECT 1 FROM tb_his_lanche
             WHERE id_turma = %s
             AND data = CURRENT_DATE()
             LIMIT 1;
-        """, (id_turma,))
-
+        """
+        cursor.execute(sql, (id_turma, ))
         return cursor.fetchone() is not None
 
     except Exception as error:
-            if conexao:
-                conexao.rollback()
-            print(f"Erro ao cadastrar usuário: {error}")
-            return False
+        if conexao:
+            conexao.rollback()
+        print(f"Erro ao cadastrar usuário: {error}")
+        return False
         
     finally:
         if cursor:

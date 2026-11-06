@@ -8,15 +8,17 @@
 
 {% block content %}
 
-
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/teacher/modal_teacher.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/teacher/teacher_attendance_record.css') }}">
+<script src="/static/js/modal_teacher_record.js"></script>
 
 <main class="activities">
 
 
   <div class="user-greeting">
     <div>
-      <h1 class="classes__title">Olá, {{ session['usuario']['nome'] if session.get('usuario') and session['usuario'].get('nome') else 'Administrador(a)' }}!</h1>
+      <h1 class="classes__title">Olá, {{ session['usuario']['nome'] if session.get('usuario') and
+        session['usuario'].get('nome') else 'Administrador(a)' }}!</h1>
       <div class="progress-container">
         <div class="progress-bar">
           <div class="progress--step-2"></div>
@@ -28,12 +30,13 @@
 
       <div class="activities__field--students">
         <label class="activities__label--students" for="students-count">Quantos alunos vieram hoje?</label>
-        <input type="number" id="students-count" class="activities__input--students" value="{{ qnt_alunos }}" max="{{ qnt_alunos }}" min="0">
+        <input type="number" id="students-count" class="activities__input--students" value="{{ qnt_alunos }}"
+          max="{{ qnt_alunos }}" min="0">
         <span class="error" style="color:var(--color-red); text-align: center; margin: 5px;"></span>
       </div>
 
       <hr class="divider">
-      
+
       <section class="activities__section--counter-shift">
         <h2 class="activities__section-title">Contraturno</h2>
 
@@ -51,19 +54,19 @@
             </thead>
             <tbody>
               {% for aluno in alunos %}
-                <tr class="activities__table-row">
-                  <td class="activities__table-cell--rm">{{aluno.rm_aluno}}</td>
-                  <td class="activities__table-cell--student">{{aluno.nome_aluno}}</td>
-                  <td class="activities__table-cell--year">{{aluno.turma}}</td>
-                  <td class="activities__table-cell--activity"><span class="badge">{{aluno.atividade}}</span></td>
-                  <td class="activities__table-cell--shift">{{aluno.periodo}}</td>
-                  <td class="activities__table-cell--check">
-                    <label class="activities__checkbox-label">
-                      <input type="checkbox" class="activities__checkbox-input" value="{{aluno. rm_aluno}}" checked>
-                      <span class="activities__checkbox-custom"></span>
-                    </label>
-                  </td>
-                </tr>
+              <tr class="activities__table-row">
+                <td class="activities__table-cell--rm">{{aluno.rm_aluno}}</td>
+                <td class="activities__table-cell--student">{{aluno.nome_aluno}}</td>
+                <td class="activities__table-cell--year">{{aluno.turma}}</td>
+                <td class="activities__table-cell--activity"><span class="badge">{{aluno.atividade}}</span></td>
+                <td class="activities__table-cell--shift">{{aluno.periodo}}</td>
+                <td class="activities__table-cell--check">
+                  <label class="activities__checkbox-label">
+                    <input type="checkbox" class="activities__checkbox-input" value="{{aluno. rm_aluno}}" checked>
+                    <span class="activities__checkbox-custom"></span>
+                  </label>
+                </td>
+              </tr>
               {% endfor %}
             </tbody>
             {% if erro %}
@@ -112,7 +115,30 @@
     </main>
   </div>
 </div>
-
+{% if ja_existe %}
+<div class="modal-overlay ativo" id="modal-sobrescrever">
+  <div class="modal-import modal-confirm">
+    <div class="modal-header">
+      <h1 class="modal-import--title">Registro já existente</h1>
+    </div>
+    <div class="modal-import__box">
+      <p class="import__box--text">
+        Já existe um registro salvo para esta sala hoje.<br>
+        Se você continuar, ao salvar o registro atual será <strong>sobrescrito</strong>.
+        Deseja continuar?
+      </p>
+      <div class="modal-confirm__actions">
+        <a href="{{ url_for('pagina_prof_selecionar_sala') }}"
+          class="modal-confirm__btn modal-confirm__btn--cancel">Cancelar</a>
+        <a href="{{ url_for('pagina_prof_registro', id_turma=id_turma, confirmar=True) }}"
+          class="modal-confirm__btn modal-confirm__btn--confirm">
+          Continuar
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 <script src="/static/js/modal_teacher_confirm.js"></script>
 
 {% endblock %}

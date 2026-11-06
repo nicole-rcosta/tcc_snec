@@ -451,7 +451,7 @@ def salvar_registro_prof(id_turma):
 
     # só funciona se logado
     sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario) and \
-              salvar_his_almoco(id_turma, id_usuario, rms_contraturnos)
+              salvar_his_almoco(id_usuario, rms_contraturnos)
 
     if sucesso:
         return jsonify({

@@ -1,18 +1,17 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, url_for, flash
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
 from model.usuarios import cadastrar, logar, verificar_email, atualizar_senha, cadastrar
-from static.utils.verification_password import verificar_senha_mestra as vsm
 from model.class_register import recuperar_salas, adicionar_sala, deletar_sala
 from model.students_register import recuperar_alunos, adicionar_aluno, deletar_aluno
 from model.nutri_dashboard import recuperar_dados_dashboard, buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
 from model.students_extra_register import recuperar_alunos_atividade, adicionar_aluno_atividade, excluir_aluno_atividade
-from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos, existe_his_lanche 
+from model.teacher_attendance_record import buscar_alunos, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos, existe_his_lanche
 from model.adm_access import buscar_adm, buscar_usuario_pendente, rejeitar_usuario, aprovar_usuario
+from model.inserts_csv import inserir_excel_bcd
+from static.utils.verification_password import verificar_senha_mestra as vsm
+from static.utils.send_email import enviar_email
 import secrets
 import time
-import pandas
-from static.utils.send_email import enviar_email
-from model.inserts_csv import inserir_excel_bcd
 
 
 app = Flask(__name__)
@@ -198,9 +197,11 @@ def pagina_cad_sala_post():
     add_sala = adicionar_sala(turma=turma,periodo=periodo,qnt_alunos=qnt_aluno)
 
     if add_sala.get("sucesso"):
-        return render_template("adm/admin_room_register.html", erro = add_sala.get("mensagem"))
+        salas = recuperar_salas()
+        return render_template("adm/admin_room_register.html", erro = add_sala.get("erro"), salas = salas)
     else:
-        return redirect("/adm/reg_class")
+        salas = recuperar_salas()
+        return render_template("adm/admin_room_register.html", salas = salas)
 
 # Rota que deleta uma sala de acordo com ID enviado
 @app.route("/adm/reg_class/delete/<int:id>")

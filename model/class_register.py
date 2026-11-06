@@ -13,7 +13,7 @@ def adicionar_sala(turma:str,periodo:str,qnt_alunos:int) -> bool:
         SELECT turma FROM tb_turmas
         WHERE turma = %s;
     """
-    cursor.execute(sql, turma)
+    cursor.execute(sql, (turma, ))
     turma = cursor.fetchone()
 
     if turma:

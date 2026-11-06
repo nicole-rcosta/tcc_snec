@@ -272,6 +272,13 @@ body {
   padding-left: 1.25rem;
 }
 
+.erro{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+}
+
 /* Responsividade Tabela */
 @media (max-width: 1024px) and (min-width: 651px) {
   .admin-student {
@@ -363,6 +370,15 @@ body {
    ESTILOS DO MODAL (Refatorado para Variáveis de Tema)
    ========================================================================== */
 
+
+.modal__alert{
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -447,7 +463,6 @@ body {
   color: var(--text-main);
   font-size: 16px;
   line-height: 1.6;
-  margin: 0 0 25px 0;
 }
 
 .import__box--text a {

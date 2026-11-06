@@ -58,7 +58,7 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
         if conexao:
             conexao.close()
 
-def logar(cpf: str, senha: str) -> dict:
+def logar(cpf:str, senha:str) -> dict:
     """Verifica CPF e senha cadastrados para a realização do login."""
 
     conexao, cursor = conectar()
@@ -116,7 +116,7 @@ def logar(cpf: str, senha: str) -> dict:
             conexao.close()
 
 # RECUPERAÇÃO DE SENHA
-def verificar_email(email: str) -> bool:
+def verificar_email(email:str) -> bool:
     """Verifica a existência do E-Mail digitado."""
 
     conexao, cursor = conectar()
@@ -148,7 +148,7 @@ def verificar_email(email: str) -> bool:
         if conexao:
             conexao.close()
 
-def atualizar_senha(email: str, nova_senha: str) -> bool:
+def atualizar_senha(email:str, nova_senha:str) -> bool:
     """Atualiza senha com base no email."""
 
     conexao, cursor = conectar()

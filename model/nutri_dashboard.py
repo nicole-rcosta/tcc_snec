@@ -145,7 +145,7 @@ def buscar_alunos_almoco_hoje():
         "alunos": alunos
     }
 
-def atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario=None):
+def atualizar_status_almoco_aluno(rm_aluno:str, atendido:bool, id_usuario=None) -> dict:
     """Registra ou altera o atendimento do almoço (True/False) na tabela tb_his_almoco."""
     
     conexao, cursor = conectar()

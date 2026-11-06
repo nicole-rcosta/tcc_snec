@@ -21,7 +21,7 @@ def recuperar_atividade():
         if conexao:
             conexao.close()
 
-def cadastrar_atividade(atividade, periodo):
+def cadastrar_atividade(atividade:str, periodo:str) -> bool:
     """Cadastra atividades."""
 
     conexao, cursor = conectar()
@@ -42,7 +42,7 @@ def cadastrar_atividade(atividade, periodo):
         if conexao:
             conexao.close()
     
-def excluir_atividade(id_atividade):
+def excluir_atividade(id_atividade:int) -> dict:
     """Exclui ativdades por ID."""
 
     conexao, cursor = conectar()

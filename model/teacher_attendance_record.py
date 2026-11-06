@@ -33,7 +33,7 @@ def buscar_turmas():
         if conexao:
             conexao.close()    
 
-def buscar_qntd_alunos(id_turma):
+def buscar_qntd_alunos(id_turma:int) -> bool:
     """Recupera quantidade de alunos das turmas pelo ID."""
     
     conexao, cursor = conectar()
@@ -61,7 +61,7 @@ def buscar_qntd_alunos(id_turma):
         if conexao:
             conexao.close()
 
-def buscar_alunos(id_turma):
+def buscar_alunos(id_turma:int) -> dict:
     """Recuperam alunos pelo ID das turmas."""
 
     conexao, cursor = conectar()
@@ -103,7 +103,7 @@ def buscar_alunos(id_turma):
         if conexao:
             conexao.close()
 
-def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
+def salvar_his_lanche(id_turma:int, quantidade_alunos:int, id_usuario:int) -> bool:
     """Envia os dados informados do lanche para o banco de dados."""
 
     conexao, cursor = conectar()
@@ -130,7 +130,7 @@ def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
         if conexao:
             conexao.close()
 
-def salvar_his_almoco(id_usuario, rms_contraturnos):
+def salvar_his_almoco(id_usuario:int, rms_contraturnos) -> bool:
     """Envia os dados informados do almoço para o banco de dados."""
 
     conexao, cursor = conectar()
@@ -160,7 +160,7 @@ def salvar_his_almoco(id_usuario, rms_contraturnos):
         if conexao:
             conexao.close()
 
-def buscar_his_lanche(id_turma):
+def buscar_his_lanche(id_turma:int) -> dict:
     """Recupera informações enviadas do lanche."""
 
     conexao, cursor = conectar()

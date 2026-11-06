@@ -1,7 +1,7 @@
 from database.conexao import conectar
 import bcrypt
 
-def buscar_adm(id_usuario, senha):
+def buscar_adm(id_usuario:int, senha:str) -> dict:
     """Busca usuários com o cargo de administrador."""
 
     conexao, cursor = conectar()
@@ -78,7 +78,7 @@ def buscar_usuario_pendente():
         if conexao:
             conexao.close()
 
-def aprovar_usuario(id):
+def aprovar_usuario(id:int) -> dict:
     """Atualiza usuários pendentes para aprovados."""
 
     conexao, cursor = conectar()
@@ -109,7 +109,7 @@ def aprovar_usuario(id):
         if conexao:
             conexao.close()
 
-def rejeitar_usuario(id):
+def rejeitar_usuario(id:int) -> dict:
     """Atualiza usuários pendentes para desaprovados."""
 
     conexao, cursor = conectar()

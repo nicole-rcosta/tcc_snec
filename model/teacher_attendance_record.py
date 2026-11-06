@@ -120,88 +120,72 @@ def alunos_presentes(rms_atendidos):
 
 
 def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
-    """
-        Envia os dados informados do lanche para o banco de dados
-    """
     conexao, cursor = conectar()
-
     try:
-
-        query_lanche = """
-                        INSERT INTO tb_his_lanche (id_turma, data, id_usuario, quantidade_alunos)
-                        VALUES (%s, CURRENT_DATE(), %s, %s);
-                    """
-        cursor.execute(query_lanche, (id_turma, id_usuario, quantidade_alunos))
-
+        # Remove o registro do dia (se existir) antes de inserir o novo
+        cursor.execute(
+            "DELETE FROM tb_his_lanche WHERE id_turma = %s AND data = CURRENT_DATE();",
+            (id_turma,)
+        )
+        # insere de novo
+        cursor.execute("""
+            INSERT INTO tb_his_lanche (id_turma, data, id_usuario, quantidade_alunos)
+            VALUES (%s, CURRENT_DATE(), %s, %s);
+        """, (id_turma, id_usuario, quantidade_alunos))
         conexao.commit()
         return True
-
     except Exception as error:
         conexao.rollback()
         print(error)
         return False
-
     finally:
         cursor.close()
         conexao.close()
 
-def salvar_his_almoco(id_usuario, rms_contraturnos):
-    """
-            Envia os dados informados do almoço para o banco de dados
-    """
-    print(rms_contraturnos)
 
+def salvar_his_almoco(id_turma, id_usuario, rms_contraturnos):
     conexao, cursor = conectar()
-
     try:
-        
-        query_almoco = """
-                        INSERT INTO tb_his_almoco (rm_aluno, id_usuario, atendido)
-                        VALUES(%s, %s, %s);
-                    """
-        # Itera diretamente pelos RMs selecionados e define atendido como False
+        # Apaga os registros de almoço de hoje dos alunos dessa turma
+        cursor.execute("""
+            DELETE tb_his_almoco FROM tb_his_almoco
+            INNER JOIN tb_alunos ON tb_alunos.rm_aluno = tb_his_almoco.rm_aluno
+            WHERE tb_alunos.id_turma = %s
+            AND tb_his_almoco.data = CURRENT_DATE();
+        """, (id_turma,))
+        # insere de novo
         for rm in rms_contraturnos:
-            cursor.execute(query_almoco, (rm, id_usuario, False))
-
+            cursor.execute(
+                "INSERT INTO tb_his_almoco (rm_aluno, id_usuario, atendido) VALUES (%s, %s, %s);",
+                (rm, id_usuario, False)
+            )
         conexao.commit()
         return True
-
     except Exception as error:
         conexao.rollback()
         print(error)
         return False
-
     finally:
         cursor.close()
         conexao.close()
 
-def buscar_his_lanche(id_turma):
+def existe_his_lanche(id_turma):
     """
-        Recupera informações enviadas do lanche
+    Retorna True se já existe registro de lanche da turma hoje, senão False.
     """
     conexao, cursor = conectar()
 
     try:
-
-        sql = """
-            SELECT * FROM tb_his_lanche
+        cursor.execute("""
+            SELECT 1 FROM tb_his_lanche
             WHERE id_turma = %s
-            AND data = CURRENT_DATE();
-        """
+            AND data = CURRENT_DATE()
+            LIMIT 1;
+        """, (id_turma,))
 
-        cursor.execute(sql, (id_turma, ))
-        his = cursor.fetchone()
-
-        if his:
-            return {"sucesso": True, "mensagem": "O histórico dessa sala já foi salvo."}
-        else:
-            return {"sucesso": False, "mensagem": "O histórico do dia da turma já foi salvo."}
-
-    except Exception as error:
-        conexao.rollback()
-        print(error)
-        return {"sucesso": False, "mensagem": "Erro interno no servidor"}
+        return cursor.fetchone() is not None
 
     finally:
         cursor.close()
         conexao.close()
+

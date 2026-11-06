@@ -11,7 +11,13 @@ def inserir_excel_bcd(arquivo):
 
         if extensao == 'csv':
             arquivo.seek(0)
-            dados = pandas.read_csv(arquivo, sep=';')
+            try:
+                # Tenta ler primeiro em UTF-8 auto-detectando o separador (, ; ou \t)
+                dados = pandas.read_csv(arquivo, sep=None, engine='python', encoding='utf-8')
+            except (UnicodeDecodeError, pandas.errors.ParserError):
+                # Se falhar a decodificação UTF-8 (como no caso do símbolo °), tenta latin1
+                arquivo.seek(0)
+                dados = pandas.read_csv(arquivo, sep=None, engine='python', encoding='latin1')
         else:
             dados = pandas.read_excel(arquivo)
 
@@ -57,7 +63,25 @@ def inserir_excel_bcd(arquivo):
 
         return True
 
-    except (mysql.connector.errors.IntegrityError, mysql.connector.errors.ProgrammingError, pandas.errors.EmptyDataError) as e:
+    except mysql.connector.errors.IntegrityError as e :
+        conexao, cursor = conectar()
+        # Pega as salas que vieram na planilha
+        salas_planilha = dados['turma'].dropna().unique().tolist()
+        
+        # Busca no banco quais salas existem de fato
+        cursor.execute("SELECT turma FROM tb_turmas")
+        salas_banco = [row['turma'] for row in cursor.fetchall()]
+        
+        # Filtra quais salas da planilha NÃO estão na lista do banco
+        salas_invalidas = [sala for sala in salas_planilha if sala not in salas_banco]
+        
+        print(f"Erro: As seguintes salas não existem no banco: {salas_invalidas}")
+        cursor.close()
+        conexao.close()
+        return salas_invalidas
+        
+
+    except (mysql.connector.errors.ProgrammingError, pandas.errors.EmptyDataError) as e:
         print(f"Erro ao processar planilha/banco: {e}")
         return False
     except Exception as e:

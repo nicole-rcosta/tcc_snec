@@ -129,7 +129,7 @@ def rejeitar_usuario(id):
 
         aprovar = cursor.execute(sql, (id, ))
         if aprovar:
-            return {"sucesso": True, "mensagem": "Acesso negado ao usuário!"}
+            return {"sucesso": True, "mensagem": "Acesso Negado ao Usuário!"}
         else:
             return {"sucesso": False, "mensagem": "Erro. Tente Novamente!"}
 

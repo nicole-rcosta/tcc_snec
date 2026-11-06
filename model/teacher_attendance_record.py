@@ -117,13 +117,11 @@ def salvar_his_lanche(id_turma:int, quantidade_alunos:int, id_usuario:int) -> bo
 
         conexao.commit()
         return True
-
     except Exception as error:
         if conexao:
             conexao.rollback()
         print(f"Erro ao cadastrar usuário: {error}")
         return False
-
     finally:
         if cursor:
             cursor.close()
@@ -144,16 +142,15 @@ def salvar_his_almoco(id_usuario:int, rms_contraturnos) -> bool:
         # Itera diretamente pelos RMs selecionados e define atendido como False
         for rm in rms_contraturnos:
             cursor.execute(query_almoco, (rm, id_usuario, False))
-
         conexao.commit()
         return True
-
+    
     except Exception as error:
         if conexao:
             conexao.rollback()
         print(f"Erro ao cadastrar usuário: {error}")
         return False
-
+    
     finally:
         if cursor:
             cursor.close()

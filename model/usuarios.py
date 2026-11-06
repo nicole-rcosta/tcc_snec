@@ -3,19 +3,18 @@ from static.utils.cpf_validation import validar_cpf
 import bcrypt
 
 def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) -> bool:
-    """
-    Cadastra usuário com base no parâmetros passados.
-    """
+    """Cadastra usuário com base no parâmetros passados."""
+
     conexao = None
     cursor = None
+
+    conexao, cursor = conectar()
     
     try:
-        conexao, cursor = conectar()
-
         sql = """
-                SELECT * FROM tb_usuarios
-                WHERE cpf = %s;
-            """
+            SELECT * FROM tb_usuarios
+            WHERE cpf = %s;
+        """
         cursor.execute(sql, (cpf, ))
         ver_cpf = cursor.fetchone()
 
@@ -64,12 +63,13 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
 
 def logar(cpf: str, senha: str) -> dict:
     """Verifica CPF e senha cadastrados para a realização do login."""
+
     conexao = None
     cursor = None
 
-    try:
-        conexao, cursor = conectar()
+    conexao, cursor = conectar()
 
+    try:
         sql = """
             SELECT id_usuario, nome_usuario, cargo, senha, status 
             FROM tb_usuarios 
@@ -129,33 +129,32 @@ def verificar_email(email: str) -> bool:
     """Verifica a existência do E-Mail digitado"""
     conexao = None
     cursor = None
+
     # procura o email digitado na tabela pra ver se ele existe
     try:
         conexao, cursor = conectar()
-
         sql = """
             SELECT email
             FROM tb_usuarios
             WHERE email = %s;
         """
-
         cursor.execute(sql, (email,))
 
         usuario = cursor.fetchone()
         # se ele exitir a função retorna true
         if usuario:
             return True
-
         return False
+    
     # trata o erro
     except Exception as erro:
         print(f"Erro ao verificar e-mail: {erro}")
         return False
+    
     # fecha o cursor
     finally:
         if cursor:
             cursor.close()
-
         if conexao:
             conexao.close()
 
@@ -177,29 +176,22 @@ def atualizar_senha(email: str, nova_senha: str) -> bool:
            SET senha = %s
            WHERE email = %s;
        """
-
        cursor.execute(
            sql,
            (senha_hash, email)
        )
-
        conexao.commit()
-
        return True
 
     except Exception as erro:
 
         print(f"Erro ao atualizar senha: {erro}")
-
         if conexao:
             conexao.rollback()
-
         return False
 
     finally:
-
         if cursor:
             cursor.close()
-
         if conexao:
             conexao.close()

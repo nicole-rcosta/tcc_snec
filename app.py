@@ -58,7 +58,7 @@ def logar_usuario():
     # Caso a função de logar não tenha sido bem sucedida
     else:
         # Exibe mensagem de erro caso o CPF ou SENHA sejam inválidos
-        if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.':
+        if resultado['mensagem'] == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado['mensagem'] == 'CPF ou senha incorretos.' or resultado['mensagem'] == 'Cadastro rejeitado pelo administrador.':
             return render_template("login/auth_login.html", erro = resultado['mensagem'])
         # Exibe mensagem de erro caso o usuário não exista
         elif resultado['mensagem'] == "Usuário não encontrado. Cadastre-se!":

@@ -2,9 +2,8 @@ from database.conexao import conectar
 import datetime
 
 def recuperar_dados_dashboard():
-    """
-            Recupera dados e exibe no dashboard da Nurticionista.
-    """
+    """Recupera dados e exibe no dashboard da Nurticionista."""
+
     # Desestrutura a conexão e o cursor retornados por conectar()
     conexao, cursor = conectar()
 
@@ -73,18 +72,24 @@ def recuperar_dados_dashboard():
             "todas_concluidas": todas_concluidas
         }
 
+    except Exception as erro:
+        print(f"Erro ao atualizar senha: {erro}")
+        if conexao:
+            conexao.rollback()
+        return False
+
     finally:
-        cursor.close()
-        conexao.close()
-
-
-
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()
 
 def buscar_alunos_almoco_hoje():
     """
     Busca SOMENTE os alunos previstos para o almoço no dia da semana atual 
     (com base nas atividades do contraturno cadastradas em tb_aluno_atividade).
     """
+
     conexao, cursor = conectar()
 
     dias_map = {0: 'SEG', 1: 'TER', 2: 'QUA', 3: 'QUI', 4: 'SEX'}
@@ -140,11 +145,9 @@ def buscar_alunos_almoco_hoje():
         "alunos": alunos
     }
 
-
-def atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario=None):
-    """
-    Registra ou altera o atendimento do almoço (True/False) na tabela tb_his_almoco.
-    """
+def atualizar_status_almoco_aluno(rm_aluno:str, atendido:bool, id_usuario=None) -> dict:
+    """Registra ou altera o atendimento do almoço (True/False) na tabela tb_his_almoco."""
+    
     conexao, cursor = conectar()
 
     try:
@@ -165,5 +168,7 @@ def atualizar_status_almoco_aluno(rm_aluno, atendido, id_usuario=None):
         return {"sucesso": False, "mensagem": f"Erro no banco de dados: {err}"}
 
     finally:
-        cursor.close()
-        conexao.close()
+        if cursor:
+            cursor.close()
+        if conexao:
+            conexao.close()

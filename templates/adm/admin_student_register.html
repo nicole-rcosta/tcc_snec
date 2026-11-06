@@ -48,11 +48,13 @@
             </div>
 
         <button type="submit" class="admin-student__button admin-student__button--submit">Cadastrar</button>
+        <div class="erro">
         {% with messages = get_flashed_messages() %}
             {% for message in messages %}
             <span style="color:red; display: inline; width: 100%; text-align: center;">{{message}}</span>
             {% endfor %}
         {% endwith %}
+        </div>
     </form>
 
         <section class="admin-student__list-section">
@@ -100,7 +102,9 @@
                     Modelo para Excel: <strong><a href="/static/modelos/modelo-alunos-excel.xls">Baixe Aqui</a></strong> <br>
                     Modelo para CSV: <strong><a href="/static/modelos/modelo-alunos-csv.csv">Baixe Aqui</a></strong>
                     <br>
-                    preencha com as informações dos alunos e faça o envio do arquivo.</p>
+                    preencha com as informações dos alunos e faça o envio do arquivo.<br>
+                    </p>
+                    <div class="modal__alert">*Obs: Digite a turma com o sinal ordinal "º".</div>
 
                 <div class="modal__import--button-container">
 

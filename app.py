@@ -1,18 +1,18 @@
 from flask import Flask, render_template, request, redirect, session, jsonify, url_for, flash
 from model.extra_activity_register import cadastrar_atividade as ca, recuperar_atividade as ra, excluir_atividade as ea
 from model.usuarios import cadastrar, logar, verificar_email, atualizar_senha, cadastrar
-from static.utils.verification_password import verificar_senha_mestra as vsm
 from model.class_register import recuperar_salas, adicionar_sala, deletar_sala
 from model.students_register import recuperar_alunos, adicionar_aluno, deletar_aluno
 from model.nutri_dashboard import recuperar_dados_dashboard, buscar_alunos_almoco_hoje, atualizar_status_almoco_aluno
 from model.students_extra_register import recuperar_alunos_atividade, adicionar_aluno_atividade, excluir_aluno_atividade
-from model.teacher_attendance_record import buscar_alunos, alunos_presentes, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos, buscar_his_lanche
+from model.teacher_attendance_record import buscar_alunos, salvar_his_lanche, salvar_his_almoco, buscar_turmas, buscar_qntd_alunos, existe_his_lanche
 from model.adm_access import buscar_adm, buscar_usuario_pendente, rejeitar_usuario, aprovar_usuario
+from model.inserts_csv import inserir_excel_bcd
+from static.utils.verification_password import verificar_senha_mestra as vsm
+from static.utils.send_email import enviar_email
 import secrets
 import time
-import pandas
-from static.utils.send_email import enviar_email
-from model.inserts_csv import inserir_excel_bcd
+
 
 app = Flask(__name__)
 app.secret_key = "snec_tcc_chave"
@@ -103,8 +103,8 @@ def cadastrar_usuario():
 @app.route("/adm")
 def pagina_adm():
     usuario = session.get('usuario')
-    if not usuario or usuario.get('cargo') != 'adm':
-        return redirect("/login")
+    # if not usuario or usuario.get('cargo') != 'adm':
+    #     return redirect("/login")
 
     nome = usuario.get('nome')
     return render_template("/adm/admin_item_register.html", nome_usuario=nome)
@@ -154,9 +154,14 @@ def pagina_cad_atividades():
     if ativid and periodo:
 
         # cadastra atividade
-        ca(ativid, periodo)
+        if ca(ativid, periodo):
+            return redirect(url_for("pagina_cad_atividade"))
+        else:
+            atividades = ra()
+            flash("Atividade Já cadastrada.")
+            return render_template("adm/admin_extra_activity_register.html", atividades=atividades)
 
-    return redirect(url_for("pagina_cad_atividade"))
+    
         
 # Rota que deleta uma atividade de acordo com ID enviado
 @app.route("/adm/exc_activity/<id_atividade>", methods=["POST"])
@@ -194,9 +199,11 @@ def pagina_cad_sala_post():
     add_sala = adicionar_sala(turma=turma,periodo=periodo,qnt_alunos=qnt_aluno)
 
     if add_sala.get("sucesso"):
-        return render_template("adm/admin_room_register.html", erro = add_sala.get("mensagem"))
+        salas = recuperar_salas()
+        return render_template("adm/admin_room_register.html", erro = add_sala.get("erro"), salas = salas)
     else:
-        return redirect("/adm/reg_class")
+        salas = recuperar_salas()
+        return render_template("adm/admin_room_register.html", salas = salas)
 
 # Rota que deleta uma sala de acordo com ID enviado
 @app.route("/adm/reg_class/delete/<int:id>")
@@ -259,9 +266,16 @@ def pegar_excel_pag_student():
 
     # Pega o arquivo enviado pelo usuário e guarda dentro de uma variável
     arquivo = request.files.get('input_excel')
-
+    resultado = inserir_excel_bcd(arquivo)
     # Chama a função de cadastrar e verifica se deu certo
-    if inserir_excel_bcd(arquivo):
+    if resultado == True:
+        return redirect("/adm/reg_student")
+
+    elif type(resultado) == list:
+        lista = ', '.join(resultado)
+        flash(f"Erro: As seguintes salas não foram digitadas corretamente ou não existem no banco: {lista} ")
+        flash("Verifique se as turmas foram digitadas com o sinal ordinal 'º'")
+        
         return redirect("/adm/reg_student")
 
     # Exibe mensagem de erro caso não deu certo
@@ -275,9 +289,16 @@ def pegar_csv_pag_student():
 
     # Pega o arquivo enviado pelo usuário e guarda dentro de uma variável
     arquivo = request.files.get('input_csv')
-
+    resultado = inserir_excel_bcd(arquivo)
     # Chama a função de cadastrar e verifica se deu certo
-    if inserir_excel_bcd(arquivo):
+    if resultado == True:
+        return redirect("/adm/reg_student")
+
+    elif type(resultado) == list:
+        lista = ', '.join(resultado)
+        flash(f"Erro: As seguintes salas não foram digitadas corretamente ou não existem no banco: {lista} ")
+        flash("Verifique se as turmas foram digitadas com o sinal ordinal 'º'")
+        
         return redirect("/adm/reg_student")
 
     # Exibe mensagem de erro caso não deu certo
@@ -366,9 +387,9 @@ def pagina_dashboard():
     dados = recuperar_dados_dashboard()
 
 
-    nome_usuario = session.get("usuario", "Nutricionista")
+    nome_usuario = session.get("usuario_nome", "Nutricionista")
        
-    if dados.get("sucesso"):
+    if dados and dados.get("sucesso"):
         # Renderiza o HTML passando todas as variáveis necessárias
         return render_template(
             "nutri/nutritionist_dashboard.html",
@@ -439,8 +460,9 @@ def pagina_prof_selecionar_sala():
         return render_template("teacher/teacher_class_select.html", erro = turmas.get("mensagem"))
 
 # Rota que exibe informação da turma de acordo com o ID
-@app.route("/teacher/class_info/<id_turma>")
+@app.route("/teacher/class_info/<int:id_turma>")
 def pagina_prof_registro(id_turma):
+    confirmado = request.args.get("confirmar", type=bool)
 
     usuario = session.get('usuario')
        
@@ -449,20 +471,24 @@ def pagina_prof_registro(id_turma):
 
     # Recupera quantidade de alunos da turma
     qnt_alunos = buscar_qntd_alunos(id_turma).get("quantidade_alunos")
+    # garante que alunos nao recebe none
+    alunos = buscar_alunos(id_turma) or {}
+    
+   # Verifica se o usuário já confirmou que deseja continuar mesmo existindo um registro anterior. se sim, a variavel ja_existe vira falsa
+    ja_existe = False if confirmado else existe_his_lanche(id_turma)
 
-    # Recupera dados já cadastrados
-    alunos = buscar_alunos(id_turma)
-    his_lanche = buscar_his_lanche(id_turma)
-    turmas = buscar_turmas()
+    if alunos.get("sucesso"):
+        return render_template("teacher/teacher_attendance_record.html",
+                               id_turma=id_turma,
+                               qnt_alunos=qnt_alunos,
+                               alunos=alunos.get("alunos"),
+                               ja_existe=ja_existe)
 
-    # Verifica se o processo foi bem sucedido para avançar para a próxima página
-    if his_lanche.get("sucesso"):
-        return render_template("teacher/teacher_class_select.html", turmas = turmas.get("turmas"), erro=his_lanche.get("mensagem"))
-    else:
-        if alunos.get("sucesso"):
-            return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, alunos=alunos.get("alunos"))
-        else:
-            return render_template("teacher/teacher_attendance_record.html", id_turma=id_turma, qnt_alunos=qnt_alunos, erro=alunos.get("mensagem"))
+    return render_template("teacher/teacher_attendance_record.html",
+                           id_turma=id_turma,
+                           qnt_alunos=qnt_alunos,
+                           erro=alunos.get("mensagem", "Erro ao buscar alunos."),
+                           ja_existe=ja_existe)
 
 # Rota que confirma as atividades da turma de acordo com o ID
 @app.route("/teacher/class_info/confirm/<int:id_turma>", methods=['POST'])
@@ -480,14 +506,14 @@ def pagina_confirmacao_prof(id_turma):
 # Rota que envia os dados inserido pelo professor para o banco de dados
 @app.route("/teacher/class_info/save/<int:id_turma>", methods=['POST'])
 def salvar_registro_prof(id_turma):
-    # recupera os dados
     dados = request.get_json()
     qtd_alunos = dados.get('quantidade_alunos')
-    rms_contraturnos = dados.get('rms_contraturno', [])  # Apenas os RMs marcados pelo professor
+    rms_contraturnos = dados.get('rms_contraturno', [])
     id_usuario = session.get("usuario")["id"]
 
-    # Executa a gravação no banco de dados
-    sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario), salvar_his_almoco(id_usuario, rms_contraturnos)
+    # só funciona se logado
+    sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario) and \
+              salvar_his_almoco(id_turma, id_usuario, rms_contraturnos)
 
     if sucesso:
         return jsonify({

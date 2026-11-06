@@ -127,6 +127,7 @@ def salvar_his_lanche(id_turma, quantidade_alunos, id_usuario):
             "DELETE FROM tb_his_lanche WHERE id_turma = %s AND data = CURRENT_DATE();",
             (id_turma,)
         )
+        # insere de novo
         cursor.execute("""
             INSERT INTO tb_his_lanche (id_turma, data, id_usuario, quantidade_alunos)
             VALUES (%s, CURRENT_DATE(), %s, %s);
@@ -152,7 +153,7 @@ def salvar_his_almoco(id_turma, id_usuario, rms_contraturnos):
             WHERE tb_alunos.id_turma = %s
             AND tb_his_almoco.data = CURRENT_DATE();
         """, (id_turma,))
-
+        # insere de novo
         for rm in rms_contraturnos:
             cursor.execute(
                 "INSERT INTO tb_his_almoco (rm_aluno, id_usuario, atendido) VALUES (%s, %s, %s);",

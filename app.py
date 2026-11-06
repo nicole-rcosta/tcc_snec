@@ -454,7 +454,7 @@ def pagina_prof_registro(id_turma):
     # garante que alunos nao recebe none
     alunos = buscar_alunos(id_turma) or {}
     
-    # Se já foi confirmado pelo usuário clicando no modal, ja_existe passa a ser False
+   # Verifica se o usuário já confirmou que deseja continuar mesmo existindo um registro anterior. se sim, a variavel ja_existe vira falsa
     ja_existe = False if confirmado else existe_his_lanche(id_turma)
 
     if alunos.get("sucesso"):
@@ -491,6 +491,7 @@ def salvar_registro_prof(id_turma):
     rms_contraturnos = dados.get('rms_contraturno', [])
     id_usuario = session.get("usuario")["id"]
 
+    # só funciona se logado
     sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario) and \
               salvar_his_almoco(id_turma, id_usuario, rms_contraturnos)
 

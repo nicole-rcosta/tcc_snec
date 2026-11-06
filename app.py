@@ -156,9 +156,14 @@ def pagina_cad_atividades():
     if ativid and periodo:
 
         # cadastra atividade
-        ca(ativid, periodo)
+        if ca(ativid, periodo):
+            return redirect(url_for("pagina_cad_atividade"))
+        else:
+            atividades = ra()
+            flash("Atividade Já cadastrada.")
+            return render_template("adm/admin_extra_activity_register.html", atividades=atividades)
 
-    return redirect(url_for("pagina_cad_atividade"))
+    
         
 # Rota que deleta uma atividade de acordo com ID enviado
 @app.route("/adm/exc_activity/<id_atividade>", methods=["POST"])

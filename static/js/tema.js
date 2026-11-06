@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('app-theme', theme);
 
         if (theme === 'dark') {
-            themeIcon.className = 'fa-solid fa-sun';
+            themeIcon.className = 'bi bi-sun-fill';
         } else {
-            themeIcon.className = 'fa-solid fa-moon';
+            themeIcon.className = 'bi bi-moon-fill';
         }
     }
 

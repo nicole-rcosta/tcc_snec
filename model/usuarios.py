@@ -3,19 +3,15 @@ from static.utils.cpf_validation import validar_cpf
 import bcrypt
 
 def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) -> bool:
-    """
-    Cadastra usuário com base no parâmetros passados.
-    """
-    conexao = None
-    cursor = None
+    """Cadastra usuário com base no parâmetros passados."""
+
+    conexao, cursor = conectar()
     
     try:
-        conexao, cursor = conectar()
-
         sql = """
-                SELECT * FROM tb_usuarios
-                WHERE cpf = %s;
-            """
+            SELECT * FROM tb_usuarios
+            WHERE cpf = %s;
+        """
         cursor.execute(sql, (cpf, ))
         ver_cpf = cursor.fetchone()
 
@@ -62,21 +58,19 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
         if conexao:
             conexao.close()
 
-def logar(cpf: str, senha: str) -> dict:
+def logar(cpf:str, senha:str) -> dict:
     """Verifica CPF e senha cadastrados para a realização do login."""
-    conexao = None
-    cursor = None
+
+    conexao, cursor = conectar()
 
     try:
-        conexao, cursor = conectar()
-
         sql = """
             SELECT id_usuario, nome_usuario, cargo, senha, status 
             FROM tb_usuarios 
             WHERE cpf = %s;
         """
 
-        cursor.execute(sql, (cpf,))
+        cursor.execute(sql, (cpf, ))
         usuario = cursor.fetchone()
 
         if not usuario:
@@ -91,10 +85,7 @@ def logar(cpf: str, senha: str) -> dict:
 
         if status_result == "aprovado":
             print("Cadastro ainda pendente de aprovação pelo Administrador.")
-            return {
-                "sucesso": False, 
-                "mensagem": "Aguarde a aprovação do administrador para efetivar o seu cadastro."
-            }
+            return {"sucesso": False, "mensagem": "Aguarde a aprovação do administrador para efetivar o seu cadastro."}
 
         elif status_result == "pendente":
             print("Cadastro ainda pendente de aprovação pelo Administrador.")
@@ -138,53 +129,49 @@ def logar(cpf: str, senha: str) -> dict:
         if conexao:
             conexao.close()
 
-# 
-def verificar_email(email: str) -> bool:
-    """Verifica a existência do E-Mail digitado"""
-    conexao = None
-    cursor = None
+# RECUPERAÇÃO DE SENHA
+def verificar_email(email:str) -> bool:
+    """Verifica a existência do E-Mail digitado."""
+
+    conexao, cursor = conectar()
+
     # procura o email digitado na tabela pra ver se ele existe
     try:
-        conexao, cursor = conectar()
-
         sql = """
             SELECT email
             FROM tb_usuarios
             WHERE email = %s;
         """
-
-        cursor.execute(sql, (email,))
+        cursor.execute(sql, (email, ))
 
         usuario = cursor.fetchone()
         # se ele exitir a função retorna true
         if usuario:
             return True
-
         return False
+    
     # trata o erro
     except Exception as erro:
         print(f"Erro ao verificar e-mail: {erro}")
         return False
+    
     # fecha o cursor
     finally:
         if cursor:
             cursor.close()
-
         if conexao:
             conexao.close()
 
-def atualizar_senha(email: str, nova_senha: str) -> bool:
-    """Atualiza senha com base no email"""
-    conexao = None
-    cursor = None
+def atualizar_senha(email:str, nova_senha:str) -> bool:
+    """Atualiza senha com base no email."""
+
+    conexao, cursor = conectar()
 
     try:
        senha_bytes = nova_senha.encode('utf-8')
        salt = bcrypt.gensalt()
        senha_hash = bcrypt.hashpw(senha_bytes, salt).decode('utf-8')
        
-       conexao, cursor = conectar()
-
        # Atualiza a senha do usuário
        sql = """
            UPDATE tb_usuarios
@@ -192,28 +179,18 @@ def atualizar_senha(email: str, nova_senha: str) -> bool:
            WHERE email = %s;
        """
 
-       cursor.execute(
-           sql,
-           (senha_hash, email)
-       )
-
+       cursor.execute(sql, (senha_hash, email))
        conexao.commit()
-
        return True
 
     except Exception as erro:
-
         print(f"Erro ao atualizar senha: {erro}")
-
         if conexao:
             conexao.rollback()
-
         return False
 
     finally:
-
         if cursor:
             cursor.close()
-
         if conexao:
             conexao.close()

@@ -7,11 +7,24 @@ def adicionar_sala(turma:str,periodo:str,qnt_alunos:int) -> bool:
     """
 
     conexao,cursor = conectar()
-     
-    cursor.execute("""INSERT INTO tb_turmas (turma, periodo, quantidade_alunos)
-                        VALUES (%s,%s,%s);""",(turma,periodo,qnt_alunos) )
 
-    conexao.commit()
+
+    sql = """
+        SELECT turma FROM tb_turmas
+        WHERE turma = %s;
+    """
+    cursor.execute(sql, (turma, ))
+    turma = cursor.fetchone()
+
+    if turma:
+        return {"sucesso": True, "mensagem": "Esta turma já está cadastrada."}
+    else:
+        cursor.execute("""INSERT INTO tb_turmas (turma, periodo, quantidade_alunos)
+                            VALUES (%s,%s,%s);""",(turma,periodo,qnt_alunos) )
+
+        conexao.commit()
+        
+    cursor.close()
     conexao.close()
 
 

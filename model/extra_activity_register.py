@@ -21,13 +21,26 @@ def cadastrar_atividade(atividade, periodo):
     """
             Cadastra atividades.
     """
-    
     try:
         conexao, cursor = conectar()
-        cursor.execute("INSERT INTO tb_atividades (atividade, periodo) VALUES (%s, %s);", (atividade, periodo))
-        conexao.commit()
-        conexao.close()
-        return True
+
+
+        sql = """
+                SELECT atividade, periodo FROM db_snec.tb_atividades
+                WHERE atividade = %s AND periodo = %s;
+            """
+        cursor.execute(sql, (atividade, periodo ))
+        existe = cursor.fetchone()
+        
+        if existe:
+            conexao.close()
+            return False
+        else:
+            
+            cursor.execute("INSERT INTO tb_atividades (atividade, periodo) VALUES (%s, %s);", (atividade, periodo))
+            conexao.commit()
+            conexao.close()
+            return True
 
     except Exception as erro:
         print(erro)

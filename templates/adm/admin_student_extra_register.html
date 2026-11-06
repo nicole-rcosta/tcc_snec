@@ -47,7 +47,7 @@
                         name="student_activity" required>
                         <option value="" selected disabled>Selecione uma atividade:</option>
                             {% for atividade in atividades %}
-                                <option value="{{atividade.id_atividade}}" data-periodo="{{atividade.periodo}}">{{atividade.atividade}}</option>
+                                <option value="{{atividade.id_atividade}}" data-periodo="{{atividade.periodo}}">{{atividade.atividade}}    |     {{atividade.periodo}}</option>
                             {% endfor %}
                     </select>
                 </div>

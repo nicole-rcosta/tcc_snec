@@ -126,7 +126,7 @@ def rejeitar_usuario(id:int) -> dict:
         conexao.commit()
 
         if aprovar:
-            return {"sucesso": True, "mensagem": "Acesso negado ao usuário!"}
+            return {"sucesso": True, "mensagem": "Cadastro rejeitado pelo administrador."}
         else:
             return {"sucesso": False, "mensagem": "Erro. Tente Novamente!"}
 

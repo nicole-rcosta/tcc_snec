@@ -90,7 +90,7 @@ def cadastrar_usuario():
         return render_template("/login/auth_login.html")
     else:
     # Caso tenha erros no cadastro, exibe uma mensagem de erro  
-        if cadastro_resp.get('mensagem') == "CPF inválido." or cadastro_resp.get('mensagem') == "CPF já cadastrado." or cadastro_resp.get('mensagem') == "Este email já pertence a um usuario.":
+        if cadastro_resp.get('mensagem') == "CPF inválido." or cadastro_resp.get('mensagem') == "CPF já cadastrado." or cadastro_resp.get('mensagem') == "Este e-mail já pertence a um usuário.":
             return render_template("/register/auth_register.html", erro = cadastro_resp.get('mensagem'))
         else:
             return redirect("/cadastro")
@@ -125,15 +125,19 @@ def cadastrar_adm():
     cargo = "adm"
     status = "aprovado"
 
-    # Verifica se as senhas digitadas correspondem
-    if senha == confirmar_senha:
-        if cadastrar(nome, email, cargo, senha, cpf, status):
-            return render_template("/login/auth_login.html")
+    cadastro_resp = cadastrar(nome, email, cargo, senha, cpf, status)
+
+    # Verifica se o cadastro foi bem sucedido e redireciona o usuário pra página de login
+    if cadastro_resp.get('sucesso'):
+        return render_template("/login/auth_login.html")
+    else:
+    # Caso tenha erros no cadastro, exibe uma mensagem de erro  
+        if cadastro_resp.get('mensagem') == "CPF já cadastrado." or cadastro_resp.get('mensagem') == "Este e-mail já pertence a um usuário.":
+            flash(cadastro_resp.get('mensagem'))
+            return render_template("/adm/admin_register.html")
         else:
             return redirect("/adm_register")
-    else:
-        flash("Digite a mesma senha para confirmar.")
-        return redirect("/adm_register")
+
     
 # Rota que exibe a página de cadastro de atividades
 @app.route("/adm/reg_activity")

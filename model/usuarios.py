@@ -27,7 +27,7 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
             return {"sucesso": False, "mensagem": "CPF já cadastrado."}
         elif ver_email:
             print("Este email ja pertence a um usuario.")
-            return {"sucesso": False, "mensagem": "Este email já pertence a um usuario."}
+            return {"sucesso": False, "mensagem": "Este e-mail já pertence a um usuário."}
         else:
             senha_bytes = senha.encode('utf-8')
             salt = bcrypt.gensalt()

@@ -3,21 +3,34 @@ from database.conexao import conectar
 def adicionar_aluno(rm:int, nome_aluno:str, id_turma:int) -> bool:
     """Adicona o aluno com as informações passadas através dos parâmetros."""
 
-    conexao,cursor = conectar()
-
+    conexao, cursor = conectar()
     try:
+
         sql = """
-            INSERT INTO tb_alunos (rm_aluno, nome_aluno, id_turma)
-            VALUES (%s,%s, %s);
-        """
-     
-        cursor.execute(sql, (rm, nome_aluno, id_turma))
-        conexao.commit()
+                SELECT rm_aluno, nome_aluno FROM db_snec.tb_alunos
+                WHERE rm_aluno = %s AND nome_aluno = %s;
+            """
+        cursor.execute(sql, (rm, nome_aluno ))
+        existe = cursor.fetchone()
+        
+        if existe:
+            conexao.close()
+            return False
+        else:
+            
+            sql = """
+                        INSERT INTO tb_alunos (rm_aluno, nome_aluno, id_turma)
+                        VALUES (%s,%s, %s);
+                    """
+                 
+            cursor.execute(sql, (rm, nome_aluno, id_turma))
+                    
+            conexao.commit()
+            conexao.close()
+            return True
 
     except Exception as erro:
-        print(f"Erro ao atualizar senha: {erro}")
-        if conexao:
-            conexao.rollback()
+        print(erro)
         return False
 
     finally:
@@ -25,7 +38,7 @@ def adicionar_aluno(rm:int, nome_aluno:str, id_turma:int) -> bool:
             cursor.close()
         if conexao:
             conexao.close()
-
+            
 def recuperar_alunos():
     """Função que busca os alunos cadastrados."""
 

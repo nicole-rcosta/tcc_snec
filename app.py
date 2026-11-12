@@ -90,7 +90,7 @@ def cadastrar_usuario():
         return render_template("/login/auth_login.html")
     else:
     # Caso tenha erros no cadastro, exibe uma mensagem de erro  
-        if cadastro_resp.get('mensagem') == "CPF inválido." or cadastro_resp.get('mensagem') == "CPF já cadastrado." or cadastro_resp.get('mensagem') == "Este e-mail já pertence a um usuário.":
+        if cadastro_resp.get('mensagem') == "CPF inválido." or cadastro_resp.get('mensagem') == "CPF já cadastrado." or cadastro_resp.get('mensagem') == "Este e-mail já pertence a um usuário." or cadastro_resp.get('mensagem') == "Selecione o cargo.":
             return render_template("/register/auth_register.html", erro = cadastro_resp.get('mensagem'))
         else:
             return redirect("/cadastro")
@@ -245,7 +245,21 @@ def pagina_cad_aluno_post():
     id_turma = request.form.get("student_class")
 
     # Cadastra o aluno
-    adicionar_aluno(rm,nome_aluno,id_turma)
+    
+    if rm and nome_aluno and id_turma:
+
+        # cadastra atividade
+        if adicionar_aluno(rm,nome_aluno,id_turma):
+            return redirect(url_for("admin_student_register"))
+        else:
+            # Recupera alunos cadastrados e guarda em uma variável
+            alunos = recuperar_alunos()
+        
+            # Recupera salas cadastradas e guarda em uma variável
+            salas = recuperar_salas()
+            flash("Aluno Já cadastrado.")
+            return render_template("adm/admin_student_register.html", alunos=alunos,salas=salas)
+
 
     return redirect("/adm/reg_student")
 

@@ -68,7 +68,6 @@ def excluir_atividade(id_atividade:int) -> dict:
         return {"sucesso": True, "mensagem": "Atividade deletada!"}
 
     except Exception as erro:
-        print(f"Erro ao cadastrar usuário: {erro}")
         
         if conexao:
             conexao.rollback()

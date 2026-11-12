@@ -57,7 +57,7 @@ def logar_usuario():
     # Caso a função de logar não tenha sido bem sucedida
     else:
         # Exibe mensagem de erro caso o CPF ou SENHA sejam inválidos
-        if resultado.get('mensagem') == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado.get('mensagem') == 'CPF ou senha incorretos.':
+        if resultado.get('mensagem') == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado.get('mensagem') == 'CPF ou senha incorretos.' or resultado.get('mensagem') == 'Cadastro rejeitado pelo administrador.':
             return render_template("login/auth_login.html", erro = resultado.get('mensagem'))
         # Exibe mensagem de erro caso o usuário não exista
         elif resultado.get('mensagem') == "Usuário não encontrado. Cadastre-se!":
@@ -245,7 +245,21 @@ def pagina_cad_aluno_post():
     id_turma = request.form.get("student_class")
 
     # Cadastra o aluno
-    adicionar_aluno(rm,nome_aluno,id_turma)
+    
+    if rm and nome_aluno and id_turma:
+
+        # cadastra atividade
+        if adicionar_aluno(rm,nome_aluno,id_turma):
+            return redirect(url_for("admin_student_register"))
+        else:
+            # Recupera alunos cadastrados e guarda em uma variável
+            alunos = recuperar_alunos()
+        
+            # Recupera salas cadastradas e guarda em uma variável
+            salas = recuperar_salas()
+            flash("Aluno Já cadastrado.")
+            return render_template("adm/admin_student_register.html", alunos=alunos,salas=salas)
+
 
     return redirect("/adm/reg_student")
 

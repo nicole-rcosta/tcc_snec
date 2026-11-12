@@ -90,14 +90,24 @@ def logar(cpf:str, senha:str) -> dict:
         senha_hash_banco = usuario['senha']
         status_result = usuario['status']
 
-        if status_result != "aprovado":
+        if status_result == "pendente":
             print("Cadastro ainda pendente de aprovação pelo Administrador.")
-            return {"sucesso": False, "mensagem": "Aguarde a aprovação do administrador para efetivar o seu cadastro."}
+            return {
+                "sucesso": False, 
+                "mensagem": "Aguarde a aprovação do administrador para efetivar o seu cadastro."
+            }
+
+        if status_result == "desaprovado":
+            print("Cadastro rejeitado pelo administrador.")
+            return {
+                "sucesso": False, 
+                "mensagem": "Cadastro rejeitado pelo administrador."
+            }
 
         senha_bytes = senha.encode('utf-8')
         hash_banco_bytes = senha_hash_banco.encode('utf-8')
 
-        if bcrypt.checkpw(senha_bytes, hash_banco_bytes):
+        if bcrypt.checkpw(senha_bytes, hash_banco_bytes) and status_result == "aprovado":
             print(f"Login aprovado para {nome_usuario} ({cargo})!")
             return {
                 "sucesso": True,

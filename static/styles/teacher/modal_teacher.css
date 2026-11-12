@@ -134,10 +134,16 @@
   cursor: pointer;
 }
 
+
+
 /* Responsividade */
 @media (max-width: 580px) {
   .modal-import {
     padding: 22px;
+
+  }
+  .modal-content{
+    width: 80%;
   }
 
   .modal-import__box {
@@ -154,4 +160,5 @@
     box-sizing: border-box;
     min-height: 42px;
   }
+  
 }

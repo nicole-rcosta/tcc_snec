@@ -1,6 +1,7 @@
 from database.conexao import conectar
 from static.utils.cpf_validation import validar_cpf
 import bcrypt
+import mysql.connector
 
 def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) -> bool:
     """Cadastra usuário com base no parâmetros passados."""
@@ -45,6 +46,12 @@ def cadastrar(nome:str, email:str, cargo:str, senha:str, cpf:str, status:str) ->
             cursor.execute(sql, (nome, email, cargo, senha_hash, cpf, status))
             conexao.commit()
             return {"sucesso": True, "mensagem": "Usuário cadastrado."}
+        
+    except mysql.connector.errors.IntegrityError as erro:
+        print(f"Erro ao cadastrar usuário: {erro}")
+        if conexao:
+            conexao.rollback()
+        return {"sucesso": False, "mensagem": "Selecione o cargo."}
 
     except Exception as erro:
         print(f"Erro ao cadastrar usuário: {erro}")

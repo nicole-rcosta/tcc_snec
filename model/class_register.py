@@ -69,7 +69,6 @@ def deletar_sala(cod:int) -> bool:
         return {"sucesso": True, "mensagem": "Sala deletada!"}
 
     except Exception as erro:
-        print(f"Erro ao cadastrar usuário: {erro}")
         
         if conexao:
             conexao.rollback()

@@ -290,6 +290,10 @@ body {
     margin: 1rem auto;
   }
 
+  .admin-student-extra__field--week-day{
+    grid-column: span 1;
+  }
+
   .admin-student-extra__form-group {
     grid-template-columns: 1fr;
   }

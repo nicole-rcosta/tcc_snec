@@ -250,7 +250,7 @@ def pagina_cad_aluno_post():
 
         # cadastra atividade
         if adicionar_aluno(rm,nome_aluno,id_turma):
-            return redirect(url_for("admin_student_register"))
+            return redirect("/adm/reg_student")
         else:
             # Recupera alunos cadastrados e guarda em uma variável
             alunos = recuperar_alunos()

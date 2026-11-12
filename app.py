@@ -57,7 +57,7 @@ def logar_usuario():
     # Caso a função de logar não tenha sido bem sucedida
     else:
         # Exibe mensagem de erro caso o CPF ou SENHA sejam inválidos
-        if resultado.get('mensagem') == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado.get('mensagem') == 'CPF ou senha incorretos.':
+        if resultado.get('mensagem') == 'Aguarde a aprovação do administrador para efetivar o seu cadastro.' or resultado.get('mensagem') == 'CPF ou senha incorretos.' or resultado.get('mensagem') == 'Cadastro rejeitado pelo administrador.':
             return render_template("login/auth_login.html", erro = resultado.get('mensagem'))
         # Exibe mensagem de erro caso o usuário não exista
         elif resultado.get('mensagem') == "Usuário não encontrado. Cadastre-se!":
@@ -90,7 +90,7 @@ def cadastrar_usuario():
         return render_template("/login/auth_login.html")
     else:
     # Caso tenha erros no cadastro, exibe uma mensagem de erro  
-        if cadastro_resp.get('mensagem') == "CPF inválido." or cadastro_resp.get('mensagem') == "CPF já cadastrado." or cadastro_resp.get('mensagem') == "Este email já pertence a um usuario.":
+        if cadastro_resp.get('mensagem') == "CPF inválido." or cadastro_resp.get('mensagem') == "CPF já cadastrado." or cadastro_resp.get('mensagem') == "Este e-mail já pertence a um usuário.":
             return render_template("/register/auth_register.html", erro = cadastro_resp.get('mensagem'))
         else:
             return redirect("/cadastro")
@@ -125,15 +125,19 @@ def cadastrar_adm():
     cargo = "adm"
     status = "aprovado"
 
-    # Verifica se as senhas digitadas correspondem
-    if senha == confirmar_senha:
-        if cadastrar(nome, email, cargo, senha, cpf, status):
-            return render_template("/login/auth_login.html")
+    cadastro_resp = cadastrar(nome, email, cargo, senha, cpf, status)
+
+    # Verifica se o cadastro foi bem sucedido e redireciona o usuário pra página de login
+    if cadastro_resp.get('sucesso'):
+        return render_template("/login/auth_login.html")
+    else:
+    # Caso tenha erros no cadastro, exibe uma mensagem de erro  
+        if cadastro_resp.get('mensagem') == "CPF já cadastrado." or cadastro_resp.get('mensagem') == "Este e-mail já pertence a um usuário.":
+            flash(cadastro_resp.get('mensagem'))
+            return render_template("/adm/admin_register.html")
         else:
             return redirect("/adm_register")
-    else:
-        flash("Digite a mesma senha para confirmar.")
-        return redirect("/adm_register")
+
     
 # Rota que exibe a página de cadastro de atividades
 @app.route("/adm/reg_activity")
@@ -158,7 +162,7 @@ def pagina_cad_atividades():
             return redirect(url_for("pagina_cad_atividade"))
         else:
             atividades = ra()
-            flash("Atividade Já cadastrada.")
+            flash("Atividade já cadastrada.")
             return render_template("adm/admin_extra_activity_register.html", atividades=atividades)
 
     
@@ -465,7 +469,7 @@ def salvar_registro_prof(id_turma):
 
     # só funciona se logado
     sucesso = salvar_his_lanche(id_turma, qtd_alunos, id_usuario) and \
-              salvar_his_almoco(id_turma, id_usuario, rms_contraturnos)
+              salvar_his_almoco(id_usuario, rms_contraturnos)
 
     if sucesso:
         return jsonify({

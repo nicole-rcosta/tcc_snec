@@ -1,6 +1,6 @@
 INSERT INTO tb_usuarios(nome_usuario, email, cargo, senha, cpf, status)
-VALUES ('Professor', 'professor@gmail.com', 'prof', '$2b$12$sxkR.J6H3cbMONJTvxVEOeKPoYfEEwYE4zmIZsb0phqe7csFfgZpa', '11111111111', 'aprovado'),
-	   ('Nutricionista', 'nutricionista@gmail.com', 'nutri', '$2b$12$sxkR.J6H3cbMONJTvxVEOeKPoYfEEwYE4zmIZsb0phqe7csFfgZpa', '22222222222', 'aprovado');
+VALUES ('Manuely', 'm@gmail.com', 'prof', '$12$oosJifQ5pCi3iM4gz9FAg.Wykn9r4xp0aYH97Z4FM5Z7Jca0KXnui', '49221826830', 'pendente'),
+	   ('Pablo', 'pablo.moralez@gmail.com', 'nutri', '$12$oosJifQ5pCi3iM4gz9FAg.Wykn9r4xp0aYH97Z4FM5Z7Jca0KXnui', '44488705880', 'pendente');
 
 INSERT INTO tb_turmas (turma, periodo, quantidade_alunos) VALUES
 ('1ºA', 'Manhã', 32),

@@ -107,26 +107,26 @@ def salvar_his_lanche(id_turma:int, quantidade_alunos:int, id_usuario:int) -> bo
     """Envia os dados informados do lanche para o banco de dados."""
 
     conexao, cursor = conectar()
-
     try:
-        query_lanche = """
+        # Remove o registro do dia (se existir) antes de inserir o novo
+        cursor.execute(
+            "DELETE FROM tb_his_lanche WHERE id_turma = %s AND data = CURRENT_DATE();",
+            (id_turma,)
+        )
+        # insere de novo
+        cursor.execute("""
             INSERT INTO tb_his_lanche (id_turma, data, id_usuario, quantidade_alunos)
             VALUES (%s, CURRENT_DATE(), %s, %s);
-        """
-        cursor.execute(query_lanche, (id_turma, id_usuario, quantidade_alunos))
-
+        """, (id_turma, id_usuario, quantidade_alunos))
         conexao.commit()
         return True
     except Exception as error:
-        if conexao:
-            conexao.rollback()
-        print(f"Erro ao cadastrar usuário: {error}")
+        conexao.rollback()
+        print(error)
         return False
     finally:
-        if cursor:
-            cursor.close()
-        if conexao:
-            conexao.close()
+        cursor.close()
+        conexao.close()
 
 def salvar_his_almoco(id_usuario:int, rms_contraturnos) -> bool:
     """Envia os dados informados do almoço para o banco de dados."""

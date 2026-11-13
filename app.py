@@ -613,7 +613,7 @@ def verificar_codigo():
                     codigo_expirado=True
                 )
 
-    
+        
     codigo_digitado = request.form.get("codigo-completo")
     # ve se o código está correto
     if codigo_digitado == codigo or codigo_digitado == codigo_teste:

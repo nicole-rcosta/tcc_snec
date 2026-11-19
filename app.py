@@ -103,14 +103,18 @@ def cadastrar_usuario():
 @app.route("/adm")
 def pagina_adm():
     usuario = session.get('usuario')
-    # if not usuario or usuario.get('cargo') != 'adm':
-    #     return redirect("/login")
+    if not usuario or usuario.get('cargo') != 'adm':
+        return redirect("/login")
 
     nome = usuario.get('nome')
     return render_template("/adm/admin_item_register.html", nome_usuario=nome)
 
 @app.route("/adm_register")
 def pagina_adm_register():
+    usuario = session.get('usuario')
+    if not usuario or usuario.get('cargo') != 'adm':
+        return redirect("/login")
+    
     return render_template("/adm/admin_register.html")
 
 # Rota que envia os dados do formulário para fazer o cadastro de primeiro acesso 
@@ -129,7 +133,7 @@ def cadastrar_adm():
 
     # Verifica se o cadastro foi bem sucedido e redireciona o usuário pra página de login
     if cadastro_resp.get('sucesso'):
-        return render_template("/login/auth_login.html")
+        return redirect("/adm")
     else:
     # Caso tenha erros no cadastro, exibe uma mensagem de erro  
         if cadastro_resp.get('mensagem') == "CPF já cadastrado." or cadastro_resp.get('mensagem') == "Este e-mail já pertence a um usuário.":
@@ -142,6 +146,10 @@ def cadastrar_adm():
 # Rota que exibe a página de cadastro de atividades
 @app.route("/adm/reg_activity")
 def pagina_cad_atividade():
+    usuario = session.get('usuario')
+    if not usuario or usuario.get('cargo') != 'adm':
+        return redirect("/login")
+    
     # Recupera as atividades e guarda em uma varíavel
     atividades = ra()
     return render_template("adm/admin_extra_activity_register.html", atividades=atividades)
@@ -185,7 +193,10 @@ def excluir_atividades(id_atividade):
 #Rota que exibe a página de cadastrar sala
 @app.route("/adm/reg_class")
 def pagina_cad_sala():
-
+    usuario = session.get('usuario')
+    if not usuario or usuario.get('cargo') != 'adm':
+        return redirect("/login")
+    
     # Recupera salas cadastradas e guarda em uma variável
     salas = recuperar_salas()
     return render_template("adm/admin_room_register.html", salas = salas)
@@ -227,7 +238,10 @@ def pagina_cad_sala_del(id):
 #Rota que exibe a página de cadastrar aluno
 @app.route("/adm/reg_student")
 def pagina_cad_aluno():
-
+    usuario = session.get('usuario')
+    if not usuario or usuario.get('cargo') != 'adm':
+        return redirect("/login")
+    
     # Recupera alunos cadastrados e guarda em uma variável
     alunos = recuperar_alunos()
 
@@ -327,7 +341,10 @@ def pegar_csv_pag_student():
 # Rota que exibe a tela de cadastro dos alunos nas atividades
 @app.route("/adm/reg_student_extra")
 def pagina_cad_aluno_ativ():
-
+    usuario = session.get('usuario')
+    if not usuario or usuario.get('cargo') != 'adm':
+        return redirect("/login")
+    
     # Recupera os dados já cadastrados e guardam em uma variável
     alunos = recuperar_alunos()
     atividades= ra()
@@ -377,6 +394,10 @@ def verificar_adm():
 # Rota que exibe a tela de aprovação de usuário
 @app.route("/adm/adm_panel")
 def pagina_painel_adm():
+    usuario = session.get('usuario')
+    if not usuario or usuario.get('cargo') != 'adm':
+        return redirect("/login")
+    
     # Recupera usuários que ainda estão pendentes
     usuarios_pendentes = buscar_usuario_pendente().get("mensagem")
     return render_template("adm/admin_access.html", usuarios_pendentes = usuarios_pendentes)
@@ -418,6 +439,7 @@ def pagina_prof_selecionar_sala():
 # Rota que exibe informação da turma de acordo com o ID
 @app.route("/teacher/class_info/<int:id_turma>")
 def pagina_prof_registro(id_turma):
+    
     confirmado = request.args.get("confirmar", type=bool)
 
     usuario = session.get('usuario')
@@ -489,6 +511,10 @@ def salvar_registro_prof(id_turma):
 # Rota que exibe o dashboard da nutricionista
 @app.route("/nutri_dashboard")
 def pagina_dashboard():
+    usuario = session.get('usuario')
+   
+    if not usuario or usuario.get('cargo') != 'nutri':
+        return redirect("/login")
     # Chama a função que busca e processa os dados do MySQL
     dados = recuperar_dados_dashboard()
 
@@ -512,6 +538,10 @@ def pagina_dashboard():
 # Rota que exibe o dashboard de pessoas que vão ficar para o almoço
 @app.route("/nutri_dashboard/report")
 def pagina_dashboard_report():
+    usuario = session.get('usuario')
+   
+    if not usuario or usuario.get('cargo') != 'nutri':
+        return redirect("/login")
     return render_template("nutri/nutritionist_report.html")
 
 # ---------------------------

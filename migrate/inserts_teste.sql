@@ -10,7 +10,8 @@ INSERT INTO tb_turmas (turma, periodo, quantidade_alunos) VALUES
 ('2ºA', 'Manhã', 32),
 ('2ºB', 'Manhã', 32),
 ('3ºA', 'Manhã', 32),
-('3ºB', 'Manhã', 32);
+('3ºB', 'Manhã', 32),
+('3ºC', 'Manhã', 32);
 
 INSERT INTO tb_alunos (rm_aluno, nome_aluno, id_turma) VALUES
 ('1001', 'João Pedro Silva', 1),

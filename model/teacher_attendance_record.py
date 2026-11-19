@@ -109,11 +109,16 @@ def salvar_his_lanche(id_turma:int, quantidade_alunos:int, id_usuario:int) -> bo
     conexao, cursor = conectar()
 
     try:
-        query_lanche = """
+        # Remove o registro do dia (se existir) antes de inserir o novo
+        cursor.execute(
+            "DELETE FROM tb_his_lanche WHERE id_turma = %s AND data = CURRENT_DATE();",
+            (id_turma,)
+        )
+        # insere de novo
+        cursor.execute("""
             INSERT INTO tb_his_lanche (id_turma, data, id_usuario, quantidade_alunos)
-            VALUES (%s, CURRENT_DATE(), %s, %s);
-        """
-        cursor.execute(query_lanche, (id_turma, id_usuario, quantidade_alunos))
+            VALUES (%s, CURRENT_DATE(), %s, %s);""",(id_turma, id_usuario, quantidade_alunos))
+        
 
         conexao.commit()
         return True

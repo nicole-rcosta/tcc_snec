@@ -1,6 +1,6 @@
 INSERT INTO tb_usuarios(nome_usuario, email, cargo, senha, cpf, status)
-VALUES ('Manuely', 'm@gmail.com', 'prof', '$12$oosJifQ5pCi3iM4gz9FAg.Wykn9r4xp0aYH97Z4FM5Z7Jca0KXnui', '49221826830', 'pendente'),
-	   ('Pablo', 'pablo@gmail.com', 'nutri', '$12$oosJifQ5pCi3iM4gz9FAg.Wykn9r4xp0aYH97Z4FM5Z7Jca0KXnui', '44488705880', 'pendente');
+VALUES ('Manuely', 'manuelly@gmail.com', 'prof', '$2b$12$buWYPhZS4F1n3NQ8eWa6ZOCES1o9dQhiwhJL2sEwBn6yuag1GsX2y', '49221826830', 'pendente'),
+	   ('Pablo', 'pablo.moralez@gmail.com', 'nutri', '$2b$12$buWYPhZS4F1n3NQ8eWa6ZOCES1o9dQhiwhJL2sEwBn6yuag1GsX2y', '44488705880', 'pendente');
 
 
 

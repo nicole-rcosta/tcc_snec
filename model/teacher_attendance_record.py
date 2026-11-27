@@ -141,21 +141,28 @@ def salvar_his_almoco(id_usuario:int, rms_contraturnos) -> bool:
     try:
         query_almoco = """
             INSERT INTO tb_his_almoco (rm_aluno, id_usuario, atendido)
-            VALUES(%s, %s, %s);
+            VALUES (%s, %s, %s);
         """
 
-        # Itera diretamente pelos RMs selecionados e define atendido como False
         for rm in rms_contraturnos:
+            # Remove o registro do aluno no dia (se existir)
+            cursor.execute(
+                "DELETE FROM tb_his_almoco WHERE rm_aluno = %s AND data = CURRENT_DATE();",
+                (rm,)
+            )
+
+            # Insere novamente
             cursor.execute(query_almoco, (rm, id_usuario, False))
+
         conexao.commit()
         return True
-    
+
     except Exception as error:
         if conexao:
             conexao.rollback()
         print(f"Erro ao cadastrar usuário: {error}")
         return False
-    
+
     finally:
         if cursor:
             cursor.close()

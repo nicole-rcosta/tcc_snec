@@ -382,6 +382,8 @@ def verificar_adm():
     id_usuario = session.get("usuario")["id"]
     senha = request.form.get("password")
     busca_adm_resp = buscar_adm(id_usuario, senha)
+    print(id_usuario)
+    print(senha)
     if busca_adm_resp.get("sucesso"):
         return redirect("/adm/adm_panel")
 
